@@ -76,7 +76,7 @@ def fizzbuzz_threading():
         while th.isAlive():
             pass
 
-#fizzbuzz_thrading()
+#fizzbuzz_threading()
 
 # Kata 4 - mit einer anderen IDE
 """
@@ -146,18 +146,21 @@ def fizzbuzz_client_server():
 # Kata 7 - mit einer grafischen Oberfläche (GUI)
 import tkinter
 
-class App:
+class GUI:
     def __init__(self):
         self.i = 0
+
         root = tkinter.Tk()
         btn = tkinter.Button(root, text="next", command=self.button_click)
         btn.pack()
         self.ent = tkinter.Entry(root)
         self.ent.pack()
+        # entering main event loop
         root.mainloop()
 
     def button_click(self):
         i = self.i
+        # clear the entry field
         self.ent.delete(0, tkinter.END)
 
         if i % 3 == 0 and i % 5 == 0:
@@ -171,11 +174,11 @@ class App:
 
         self.i += 1
 
-#App()
+#GUI()
 
 
 
-# Kata 8 - Objekt-Orientiert
+# Kata 8 - Objekt-Orientiert: Klassen und Objekte verwenden
 class Fizzer:
     def __init__(self, n):
         pass
@@ -229,7 +232,7 @@ class Numbering:
 
 class Buzzer2(Numbering):
     def printit(self, i):
-        if i & 5 == 0:
+        if i % 5 == 0:
             print("buzz")
         else:
             super().printit(i)
@@ -261,7 +264,9 @@ import functools
 def by(number):
     """Return a function to prove divisibility by number."""
     return (lambda i: i % number == 0)
+
 def fizzbuzz_func(i):
+    # create to fundtions to test for divisibility
     by5 = by(5)
     by3 = by(3)
 
@@ -292,7 +297,7 @@ def fizzbuzz_funktional():
 import bottle
 
 @bottle.route("/fizzbuzz/<number:int>")
-def fizzbuzz_web_route(number):
+def fizzbuzz_web_route(number):    
     res = []
     for i in range(number):
         if i % 3 == 0 and i % 5 == 0:
@@ -304,19 +309,21 @@ def fizzbuzz_web_route(number):
         else:
             res.append(i)
 
-    return bottle.template("""
-    <!DOCTYPE html>
-    <html>
-    <body>
-    <h1>FizzBuzz Numbers up to {{max}}</h1>
-    <table>
-    % for r in res:
-    <tr><td> {{r}} </td></tr>
-    %end
-    </table>
-    </body>
-    </html>
-    """, max=number, res=res)
+    html = """
+        <!DOCTYPE html>
+        <html>
+          <body>
+            <h1>FizzBuzz Numbers up to {{max}}</h1>
+            <table>
+            % for r in res:
+              <tr><td> {{r}} </td></tr>
+            %end
+            </table>
+          </body>
+        </html>
+        """
+
+    return bottle.template(html, max=number, res=res)
 
 def fizzbuzz_web():
     bottle.run(host="127.0.0.1", port=8081)
@@ -335,12 +342,15 @@ $ git add fizzbuzz.py
 
 # Dateien in Repo einchecken
 $ git commit -a
+
+# Logfile anschauen
+$ git log
 """
 
 # Kata 13 - als installierbares Programm
 # s. setup.py
 
-# Kata 14 - als getestetes Programm
+# Kata 14 - als getestetes Programm (mit unittest und dcotests)
 
 import unittest
 
@@ -409,7 +419,7 @@ class FizzBuzzEAModul:
         self.i = 0
 
         eam = eamodul.hw.EAModul()
-        # switching on green only
+        # switching on green LED only
         eam.schalte_leds(False, False, True)
         # register for events when button0 pressed
         eam.taster_event_registrieren(0, self.taster0_gedrueckt)
