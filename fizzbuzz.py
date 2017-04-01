@@ -79,8 +79,29 @@ def fizzbuzz_threading():
 #fizzbuzz_thrading()
 
 # Kata 4 - mit einer anderen IDE
+"""
+Mögliche Kandiaten wären:
+
+- IDLE
+- PyCharm
+- Emacs
+- vim
+- Atom
+
+"""
 
 # Kata 5 - in einer anderen Programmiersprache
+"""
+Mögliche Sprachen wären:
+
+- Java
+- Javascript
+- C#
+- C
+- C++
+- Bash
+
+"""
 
 # Kata 6 - als Client-Server Anwendung
 import socketserver
