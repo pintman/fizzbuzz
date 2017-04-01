@@ -301,3 +301,17 @@ def fizzbuzz_web():
     bottle.run(host="127.0.0.1", port=8081)
 
 #fizzbuzz_web()
+
+# Kata 12 - in git-repo einchecken
+"""
+$ cd fizzbuzz
+
+# Repo initialisieren
+$ git init
+
+# Dateien für commit vormerken
+$ git add fizzbuzz.py
+
+# Dateien in Repo einchecken
+$ git commit -a
+"""
