@@ -352,8 +352,10 @@ def fizzbuzz_getestet():
 
 # Kata 15 - mit einem EA-Modul ansteuern
 # https://github.com/pintman/ea_rpi_modul
-
-import eamodul.hw
+try:
+    import eamodul.hw
+except:
+    pass
 
 class FizzBuzzEAModul:
     def __init__(self):
@@ -388,3 +390,45 @@ def fizzbuzz_eamodul():
 #fizzbuzz_eamodul()
 
 
+# Kata 16 - mit Anbindung an eine Datenbank
+
+import sqlite3
+
+def fizzbuzz_insert_into_db():
+    conn = sqlite3.connect("fizzbuzz.db")
+    c = conn.cursor()
+    c.execute("CREATE TABLE IF NOT EXISTS fizzbuzz(nr int, ergebnis text)")
+
+    for i in range(20):
+        erg = ""
+        if i % 3 == 0 and i % 5 == 0:
+            erg = "fizzbuzz"
+        elif i % 3 == 0:
+            erg = "fizz"
+        elif i % 5 == 0:
+            erg = "buzz"
+        else:
+            erg = i
+
+        c.execute("INSERT INTO fizzbuzz VALUES(?,?)", (i,erg))
+
+    conn.commit()
+    conn.close()
+
+def fizzbuzz_select_from_db():
+    conn = sqlite3.connect("fizzbuzz.db")
+    c = conn.cursor()
+    rows = c.execute("SELECT nr, ergebnis FROM fizzbuzz")
+
+    print("Nr.\tErgebnis")
+    for i,erg in rows:
+        print(i, "\t", erg)
+
+    conn.close()
+
+def fizzbuzz_db():
+    fizzbuzz_insert_into_db()
+    fizzbuzz_select_from_db()
+    
+
+#fizzbuzz_db()
