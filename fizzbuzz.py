@@ -152,7 +152,7 @@ class App:
 
 
 
-# Kata 8 - Objekt-Orientiert.
+# Kata 8 - Objekt-Orientiert
 class Fizzer:
     def __init__(self, n):     
         pass
@@ -199,4 +199,35 @@ def fizzbuzz_objektorientiert():
 #fizzbuzz_objektorientiert()
 
 # Kata 9 - objekt-orientiert mit Vererbung
-# TODO
+
+class Numbering:
+    def printit(self, i):
+        print(i)
+
+class Buzzer2(Numbering):
+    def printit(self, i):
+        if i & 5 == 0:
+            print("buzz")
+        else:
+            super().printit(i)
+
+class Fizzer2(Buzzer2):
+    def printit(self, i):
+        if i % 3 == 0:
+            print("fizz")
+        else:
+            super().printit(i)
+
+class FizzerBuzzer2(Fizzer2):
+    def printit(self, i):
+        if i % 3 == 0 and  i % 5 == 0:
+            print("fizzbuzz")
+        else:
+            super().printit(i)
+
+def fizzbuzz_objektorientiert2():
+    for i in range(20):
+        fb = FizzerBuzzer2()
+        fb.printit(i)
+
+fizzbuzz_objektorientiert2()
