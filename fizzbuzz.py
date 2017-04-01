@@ -135,7 +135,7 @@ class App:
 
     def button_click(self):
         i = self.i
-        # TODO löschen
+        self.ent.delete(0, tkinter.END)        
         
         if i % 3 == 0 and i % 5 == 0:
             self.ent.insert(0, "fizzbuzz")
@@ -145,8 +145,10 @@ class App:
             self.ent.insert(0, "buzz")
         else:
             self.ent.insert(0, i)
+            
+        self.i += 1
         
-#App()
+App()
 
 
 
