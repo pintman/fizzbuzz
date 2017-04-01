@@ -233,24 +233,37 @@ def fizzbuzz_objektorientiert2():
 #fizzbuzz_objektorientiert2()
 
 # Kata 10 - funktional
+import functools
 
 def by(number):
     """Return a function to prove divisibility by number."""
     return (lambda i: i % number == 0)
-def fizz_func(i):
-    if by(5)(i) and by(3)(i):
+def fizzbuzz_func(i):
+    by5 = by(5)
+    by3 = by(3)
+    
+    if by5(i) and by3(i):
         return "fizzbuzz"
-    elif by(3)(i):
+    elif by3(i):
         return "fizz"
-    elif by(5)(i):
+    elif by5(i):
         return "buzz"
     else:
         return i
 
-def fizzbuzz_func():
-    print(list(map(fizz_func, range(20))))
+def fizzbuzz_funktional():
+    # apply fizzbuzz_func to numbers
+    res = map(fizzbuzz_func, range(20))
 
-#fizzbuzz_func()
+    # reduce the result into a string
+    s = functools.reduce(
+        lambda acc, i: acc + str(i) + "\n", # updating function
+        res, # values to be reduced
+        "") # initial value
+
+    print(s)
+
+#fizzbuzz_funktional()
 
 # Kata 11 - als Webanwendung (mit bottle)
 import bottle
