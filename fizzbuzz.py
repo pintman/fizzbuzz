@@ -347,7 +347,44 @@ class FizzBuzzClassTest(unittest.TestCase):
 def fizzbuzz_getestet():
     unittest.main()
 
-fizzbuzz_getestet()
+#fizzbuzz_getestet()
 
+
+# Kata 15 - mit einem EA-Modul ansteuern
+# https://github.com/pintman/ea_rpi_modul
+
+import eamodul.hw
+
+class FizzBuzzEAModul:
+    def __init__(self):
+        self.i = 0
+
+        eam = eamodul.hw.EAModul()
+        # switching on green only
+        eam.schalte_leds(False, False, True)
+        # register for events when button0 pressed
+        eam.taster_event_registrieren(0, self.taster0_gedrueckt)
+
+        # wait for taster event
+        while True:
+            pass
+
+    def taster0_gedrueckt(self, pin):
+        if self.i % 3 == 0 and self.i % 5 == 0:
+            print("fizzbuzz")
+        elif self.i % 3 == 0:
+            print("fizz")
+        elif self.i % 5 == 0:
+            print("buzz")
+        else:
+            print(self.i)
+
+        self.i += 1
+
+def fizzbuzz_eamodul():
+    FizzBuzzEAModul()
+
+
+#fizzbuzz_eamodul()
 
 
