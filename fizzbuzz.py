@@ -68,13 +68,15 @@ def fizzbuzz_thread(i):
         print("buzz")
     else:
         print(i)
-    
-for i in range(20):
-    th = threading.Thread(target=fizzbuzz_thread, args=(i,))
-    #th.start()
-    while th.isAlive():
-        pass
-    
+
+def fizzbuzz_threading():
+    for i in range(20):
+        th = threading.Thread(target=fizzbuzz_thread, args=(i,))
+        #th.start()
+        while th.isAlive():
+            pass
+
+#fizzbuzz_thrading()
 
 # Kata 4 - mit einer anderen IDE
 
@@ -100,14 +102,14 @@ class FizzBuzzHandler(socketserver.BaseRequestHandler):
 class FizzBuzzClient:
     def __init__(self, ip, port):
         self.socket = (ip, port)
-        
+
     def send(self, i):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect(self.socket)
             #print("sending", i)
             sock.sendall(bytes([i]))
 
-def fizzbuzz_client_server():            
+def fizzbuzz_client_server():
     # Starting the server in a separate thread
     server_socket = ("127.0.0.1", 8081)
     server = socketserver.TCPServer(server_socket, FizzBuzzHandler)
@@ -135,8 +137,8 @@ class App:
 
     def button_click(self):
         i = self.i
-        self.ent.delete(0, tkinter.END)        
-        
+        self.ent.delete(0, tkinter.END)
+
         if i % 3 == 0 and i % 5 == 0:
             self.ent.insert(0, "fizzbuzz")
         elif i % 3 == 0:
@@ -145,16 +147,16 @@ class App:
             self.ent.insert(0, "buzz")
         else:
             self.ent.insert(0, i)
-            
+
         self.i += 1
-        
+
 #App()
 
 
 
 # Kata 8 - Objekt-Orientiert
 class Fizzer:
-    def __init__(self, n):     
+    def __init__(self, n):
         pass
     def print(self):
         print("Fizz")
@@ -187,10 +189,10 @@ class FizzBuzzNumber:
             self.printer = Buzzer(i)
         else:
             self.printer = Number(i)
-        
+
     def print(self):
         self.printer.print()
-    
+
 def fizzbuzz_objektorientiert():
     for i in range(20):
         f = FizzBuzzNumber(i)
@@ -241,7 +243,7 @@ def by(number):
 def fizzbuzz_func(i):
     by5 = by(5)
     by3 = by(3)
-    
+
     if by5(i) and by3(i):
         return "fizzbuzz"
     elif by3(i):
@@ -280,7 +282,7 @@ def fizzbuzz_web_route(number):
             res.append("buzz")
         else:
             res.append(i)
-    
+
     return bottle.template("""
     <!DOCTYPE html>
     <html>
@@ -299,4 +301,3 @@ def fizzbuzz_web():
     bottle.run(host="127.0.0.1", port=8081)
 
 #fizzbuzz_web()
-
