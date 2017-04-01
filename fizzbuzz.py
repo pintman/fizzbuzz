@@ -247,4 +247,43 @@ def fizz_func(i):
     else:
         return i
 
-print(list(map(fizz_func, range(20))))
+def fizzbuzz_func():
+    print(list(map(fizz_func, range(20))))
+
+#fizzbuzz_func()
+
+# Kata 11 - als Webanwendung (mit bottle)
+import bottle
+
+@bottle.route("/fizzbuzz/<number:int>")
+def fizzbuzz_web(number):
+    res = []
+    for i in range(number):
+        if i % 3 == 0 and i % 5 == 0:
+            res.append("fizzbuzz")
+        elif i % 3 == 0:
+            res.append("fizz")
+        elif i % 5 == 0:
+            res.append("buzz")
+        else:
+            res.append(i)
+    
+    return bottle.template("""
+    <!DOCTYPE html>
+    <html>
+    <body>
+    <h1>FizzBuzz Numbers up to {{max}}</h1>
+    <table>
+    % for r in res:
+    <tr><td> {{r}} </td></tr>
+    %end
+    </table>
+    </body>
+    </html>
+    """, max=number, res=res)
+
+def fizzbuzz_web():
+    bottle.run(host="127.0.0.1", port=8081)
+
+#fizzbuzz_web()
+
