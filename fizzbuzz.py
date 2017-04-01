@@ -36,7 +36,7 @@ def fizzbuzz():
 
 #fizzbuzz()
 
-# Kata 2 - ohne Schleife (rekursiv)
+# Kata 2 - ohne Verwendung einer Schleife (rekursiv)
 
 def fizzbuzz_rekursiv(i):
     if i == 0:
@@ -56,7 +56,7 @@ def fizzbuzz_rekursiv(i):
 
 #fizzbuzz_rekursiv(20)
 
-# Kata 3 - Nebenläufig
+# Kata 3 - mit Hilfe von nebenläufigen Threads
 import threading
 
 def fizzbuzz_thread(i):
@@ -81,8 +81,46 @@ for i in range(20):
 # Kata 5 - in einer anderen Programmiersprache
 
 # Kata 6 - als Client-Server Anwendung
+import socketserver
+import socket
 
-# Kata 7 - mit GUI
+class FizzBuzzHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        # received bytes from request and take the first one
+        i = self.request.recv(1)[0]
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        elif i % 3 == 0:
+            print("fizz")
+        elif i % 5 == 0:
+            print("buzz")
+        else:
+            print(i)
+
+class FizzBuzzClient:
+    def __init__(self, ip, port):
+        self.socket = (ip, port)
+        
+    def send(self, i):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect(self.socket)
+            #print("sending", i)
+            sock.sendall(bytes([i]))
+
+def fizzbuzz_client_server():            
+    # Starting the server in a separate thread
+    server_socket = ("127.0.0.1", 8081)
+    server = socketserver.TCPServer(server_socket, FizzBuzzHandler)
+    th = threading.Thread(target=server.serve_forever)
+    th.start()
+    # starting the client
+    cl = FizzBuzzClient(*server_socket)
+    for i in range(20):
+        cl.send(i)
+
+#fizzbuzz_client_server()
+
+# Kata 7 - mit einer grafischen Oberfläche (GUI)
 import tkinter
 
 class App:
@@ -108,7 +146,7 @@ class App:
         else:
             self.ent.insert(0, i)
         
-App()
+#App()
 
 
 
