@@ -319,12 +319,33 @@ $ git commit -a
 # Kata 13 - als installierbares Programm
 # s. setup.py
 
-# Kata 14 - als getestets Programm
+# Kata 14 - als getestetes Programm
 
 import unittest
 
 class FizzBuzzClass:
     def fizzbuzz(self, i):
+        """Die ist ein Kommentar,der einen Test enthält:
+
+        Kommentare von Methoden lassen sich auch testen. Der folgende
+        Quelltext wird hierfür ausgeführt, sobald das doctext-Modul aufgerufen
+        wird:
+
+        $ python3 -m doctest fizzbuzz.py
+
+        Hier kommt der Test:
+
+        >>> fbc = FizzBuzzClass()
+        >>> fbc.fizzbuzz(3)
+        'fizz'
+        >>> fbc.fizzbuzz(5)
+        'buzz'
+        >>> fbc.fizzbuzz(10)
+        'buzz'
+        >>> fbc.fizzbuzz(11)
+        11
+
+        """
         if i % 3 == 0 and i % 5 == 0:
             return "fizzbuzz"
         elif i % 3 == 0:
@@ -335,6 +356,10 @@ class FizzBuzzClass:
             return i
 
 class FizzBuzzClassTest(unittest.TestCase):
+    """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
+
+    Hierfür testet die Klasse mögliche Eingaben und Ausgaben."""
+
     def test_fizzbuzz(self):
         fb = FizzBuzzClass()
 
@@ -345,6 +370,7 @@ class FizzBuzzClassTest(unittest.TestCase):
 
 
 def fizzbuzz_getestet():
+    # Alle Tests ausführen.
     unittest.main()
 
 #fizzbuzz_getestet()
