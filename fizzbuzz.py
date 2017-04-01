@@ -269,7 +269,7 @@ def fizzbuzz_funktional():
 import bottle
 
 @bottle.route("/fizzbuzz/<number:int>")
-def fizzbuzz_web(number):
+def fizzbuzz_web_route(number):
     res = []
     for i in range(number):
         if i % 3 == 0 and i % 5 == 0:
