@@ -317,7 +317,7 @@ $ git commit -a
 """
 
 # Kata 13 - als installierbares Programm
-# TODO
+# s. setup.py
 
 # Kata 14 - als getestets Programm
 
