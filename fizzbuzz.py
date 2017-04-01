@@ -230,4 +230,21 @@ def fizzbuzz_objektorientiert2():
         fb = FizzerBuzzer2()
         fb.printit(i)
 
-fizzbuzz_objektorientiert2()
+#fizzbuzz_objektorientiert2()
+
+# Kata 10 - funktional
+
+def by(number):
+    """Return a function to prove divisibility by number."""
+    return (lambda i: i % number == 0)
+def fizz_func(i):
+    if by(5)(i) and by(3)(i):
+        return "fizzbuzz"
+    elif by(3)(i):
+        return "fizz"
+    elif by(5)(i):
+        return "buzz"
+    else:
+        return i
+
+print(list(map(fizz_func, range(20))))
