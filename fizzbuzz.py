@@ -315,3 +315,39 @@ $ git add fizzbuzz.py
 # Dateien in Repo einchecken
 $ git commit -a
 """
+
+# Kata 13 - als installierbares Programm
+# TODO
+
+# Kata 14 - als getestets Programm
+
+import unittest
+
+class FizzBuzzClass:
+    def fizzbuzz(self, i):
+        if i % 3 == 0 and i % 5 == 0:
+            return "fizzbuzz"
+        elif i % 3 == 0:
+            return "fizz"
+        elif i % 5 == 0:
+            return "buzz"
+        else:
+            return i
+
+class FizzBuzzClassTest(unittest.TestCase):
+    def test_fizzbuzz(self):
+        fb = FizzBuzzClass()
+
+        self.assertEqual(fb.fizzbuzz(3), "fizz")
+        self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
+        self.assertEqual(fb.fizzbuzz(9), "fizz")
+        self.assertEqual(fb.fizzbuzz(10), "buzz")
+
+
+def fizzbuzz_getestet():
+    unittest.main()
+
+fizzbuzz_getestet()
+
+
+
