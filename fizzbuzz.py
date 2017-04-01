@@ -21,7 +21,7 @@ fizz
 19
 """
 
-# Kata 1
+# Kata 1 - mit einer Methode
 
 def fizzbuzz():
     for i in range(20):
@@ -148,24 +148,24 @@ class App:
             
         self.i += 1
         
-App()
+#App()
 
 
 
 # Kata 8 - Objekt-Orientiert.
-class Fizz:
+class Fizzer:
     def __init__(self, n):     
         pass
     def print(self):
         print("Fizz")
 
-class Buzz:
+class Buzzer:
     def __init__(self, n):
         pass
     def print(self):
         print("Buzz")
 
-class FizzBuzz:
+class FizzBuzzer:
     def __init__(self, n):
         pass
     def print(self):
@@ -180,19 +180,23 @@ class Number:
 class FizzBuzzNumber:
     def __init__(self, i):
         if i % 3 == 0 and i % 5 == 0:
-            self.printer = FizzBuzz(i)
+            self.printer = FizzBuzzer(i)
         elif i % 3 == 0:
-            self.printer = Fizz(i)
+            self.printer = Fizzer(i)
         elif i % 5 == 0:
-            self.printer = Buzz(i)
+            self.printer = Buzzer(i)
         else:
             self.printer = Number(i)
         
     def print(self):
         self.printer.print()
     
+def fizzbuzz_objektorientiert():
+    for i in range(20):
+        f = FizzBuzzNumber(i)
+        f.print()
 
-for i in range(20):
-    f = FizzBuzzNumber(i)
-    #f.print()
-    
+#fizzbuzz_objektorientiert()
+
+# Kata 9 - objekt-orientiert mit Vererbung
+# TODO
