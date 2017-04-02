@@ -1,5 +1,11 @@
+"""Bei FizzBuzz handelt es sich um ein Zählspiel, bei dem die Zahlen bis 100
+aufgezählt werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
+durch 5 teilbar, wird "buzz" gesagt. Ist sie durch 3 und 5 teilbar, wird
+"fizzbuzz" gesagt. Ansonsten wird die Zahl selbst gesagt.
+
+Wir versuchen und auf dem Blatt mit einer Aufwärmübung (Kata).
+
 # Kata 0 - auf Papier
-"""
 1
 2
 fizz
@@ -19,7 +25,9 @@ fizzbuzz
 17
 fizz
 19
+
 """
+
 
 # Kata 1 - mit einer Methode
 
@@ -35,6 +43,7 @@ def fizzbuzz(n):
             print(i)
 
 #fizzbuzz(20)
+
 
 # Kata 2 - ohne Verwendung einer Schleife (rekursiv)
 
@@ -55,6 +64,7 @@ def fizzbuzz_rekursiv(i):
 
 
 #fizzbuzz_rekursiv(20)
+
 
 # Kata 3 - mit Hilfe von nebenläufigen Threads
 import threading
@@ -78,6 +88,7 @@ def fizzbuzz_threading():
 
 #fizzbuzz_threading()
 
+
 # Kata 4 - mit einer anderen IDE
 """
 Mögliche Kandiaten wären:
@@ -89,6 +100,7 @@ Mögliche Kandiaten wären:
 - Atom
 
 """
+
 
 # Kata 5 - in einer anderen Programmiersprache
 """
@@ -102,6 +114,7 @@ Mögliche Sprachen wären:
 - Bash
 
 """
+
 
 # Kata 6 - als Client-Server Anwendung
 import socketserver
@@ -143,6 +156,7 @@ def fizzbuzz_client_server():
 
 #fizzbuzz_client_server()
 
+
 # Kata 7 - mit einer grafischen Oberfläche (GUI)
 import tkinter
 
@@ -175,7 +189,6 @@ class GUI:
         self.i += 1
 
 #GUI()
-
 
 
 # Kata 8 - Objekt-Orientiert: Klassen und Objekte verwenden
@@ -224,8 +237,8 @@ def fizzbuzz_objektorientiert():
 
 #fizzbuzz_objektorientiert()
 
-# Kata 9 - objekt-orientiert mit Vererbung
 
+# Kata 9 - objekt-orientiert mit Vererbung
 class Numbering:
     def printit(self, i):
         print(i)
@@ -257,6 +270,7 @@ def fizzbuzz_objektorientiert2():
         fb.printit(i)
 
 #fizzbuzz_objektorientiert2()
+
 
 # Kata 10 - funktional
 import functools
@@ -292,6 +306,7 @@ def fizzbuzz_funktional():
     print(s)
 
 #fizzbuzz_funktional()
+
 
 # Kata 11 - als Webanwendung (mit bottle)
 import bottle
@@ -330,6 +345,7 @@ def fizzbuzz_web():
 
 #fizzbuzz_web()
 
+
 # Kata 12 - in git-repo einchecken
 """
 $ cd fizzbuzz
@@ -347,16 +363,18 @@ $ git commit -a
 $ git log
 """
 
+
 # Kata 13 - als installierbares Programm
 # s. setup.py
 
-# Kata 14 - als getestetes Programm (mit unittest und dcotests)
 
+# Kata 14 - als getestetes Programm (mit unittest und dcotests)
 import unittest
 
 class FizzBuzzClass:
     def fizzbuzz(self, i):
-        """Die ist ein Kommentar,der einen Test enthält:
+        """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
+        einen doctest.
 
         Kommentare von Methoden lassen sich auch testen. Der folgende
         Quelltext wird hierfür ausgeführt, sobald das doctext-Modul aufgerufen
@@ -389,7 +407,7 @@ class FizzBuzzClass:
 class FizzBuzzClassTest(unittest.TestCase):
     """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
 
-    Hierfür testet die Klasse mögliche Eingaben und Ausgaben."""
+    Hierfür testet sie mögliche Eingaben und Ausgaben."""
 
     def test_fizzbuzz(self):
         fb = FizzBuzzClass()
@@ -410,7 +428,8 @@ def fizzbuzz_getestet():
 # Kata 15 - mit einem EA-Modul ansteuern
 # https://github.com/pintman/ea_rpi_modul
 try:
-    import eamodul.hw
+    # Um die Bibliothek zu installieren: pip install eapi
+    import eamodul.hw 
 except:
     pass
 
@@ -448,7 +467,6 @@ def fizzbuzz_eamodul():
 
 
 # Kata 16 - mit Anbindung an eine Datenbank
-
 import sqlite3
 
 def fizzbuzz_insert_into_db():
