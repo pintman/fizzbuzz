@@ -72,7 +72,7 @@ def fizzbuzz_thread(i):
 def fizzbuzz_threading():
     for i in range(20):
         th = threading.Thread(target=fizzbuzz_thread, args=(i,))
-        #th.start()
+        th.start()
         while th.isAlive():
             pass
 
