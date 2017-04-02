@@ -23,8 +23,8 @@ fizz
 
 # Kata 1 - mit einer Methode
 
-def fizzbuzz():
-    for i in range(20):
+def fizzbuzz(n):
+    for i in range(n):
         if i % 3 == 0 and i % 5 == 0:
             print("fizzbuzz")
         elif i % 3 == 0:
@@ -34,7 +34,7 @@ def fizzbuzz():
         else:
             print(i)
 
-#fizzbuzz()
+#fizzbuzz(20)
 
 # Kata 2 - ohne Verwendung einer Schleife (rekursiv)
 
