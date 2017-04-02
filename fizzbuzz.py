@@ -3,7 +3,7 @@ aufgezählt werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
 durch 5 teilbar, wird "buzz" gesagt. Ist sie durch 3 und 5 teilbar, wird
 "fizzbuzz" gesagt. Ansonsten wird die Zahl selbst gesagt.
 
-Wir versuchen und auf dem Blatt mit einer Aufwärmübung (Kata).
+Wir versuchen uns auf dem Blatt mit einer Aufwärmübung (Kata).
 
 # Kata 0 - auf Papier
 1
@@ -83,6 +83,7 @@ def fizzbuzz_threading():
     for i in range(20):
         th = threading.Thread(target=fizzbuzz_thread, args=(i,))
         th.start()
+        # Wait for thread to finish
         while th.isAlive():
             pass
 
@@ -140,7 +141,6 @@ class FizzBuzzClient:
     def send(self, i):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect(self.socket)
-            #print("sending", i)
             sock.sendall(bytes([i]))
 
 def fizzbuzz_client_server():
@@ -188,7 +188,11 @@ class GUI:
 
         self.i += 1
 
-#GUI()
+def fizzbuzz_gui():
+    GUI()
+
+
+#fizzbuzz_gui()
 
 
 # Kata 8 - Objekt-Orientiert: Klassen und Objekte verwenden
