@@ -42,7 +42,18 @@ def fizzbuzz(n):
         else:
             print(i)
 
+def fizzbuzz2(n):
+    for i in range(n):
+        if i % 3 == 0:
+            s = "fizz"
+        if i % 5 == 0:
+            s += "buzz"
+        if len(s) == 0:
+            s = i
+        print(s)
+
 #fizzbuzz(20)
+#fizzbuzz2(20)
 
 
 # Kata 2 - ohne Verwendung einer Schleife (rekursiv)
