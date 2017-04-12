@@ -560,3 +560,24 @@ def fizzbuzz_dokumentiert(n):
 # $ pydoc -p 8080
 # $ python -m pydoc -p 8080
 
+
+# Kata 18 - Chatbot (z.B. mit sopel https://sopel.chat/)
+# und https://github.com/sopel-irc/sopel/wiki TODO
+
+"""
+Installation: sudo pip3 install sopel
+Konfiguration (in ~/.sopel) erstellen: sopel
+Eigene Bots in ~/.sopel/modules erstellen
+
+import sopel.module
+
+@sopel.module.commands('hallo')
+def hello_welt(bot, trigger):
+        bot.say('Hallo, Welt!')
+
+rom sopel import module
+
+@module.commands('echo', 'repeat')
+def echo(bot, trigger):
+        bot.reply( trigger.group(2) )
+"""
