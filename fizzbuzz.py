@@ -522,3 +522,41 @@ def fizzbuzz_db():
     
 
 #fizzbuzz_db()
+
+
+# Kata 17 - mit Documentation
+
+def fizzbuzz_dokumentiert(n):
+    """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+    wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+    und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""
+
+    for i in range(n):
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        elif i % 3 == 0:
+            print("fizz")
+        elif i % 5 == 0:
+            print("buzz")
+        else:
+            print(i)
+
+# Der Kommentar einer Methode oder Klasse steht immer als erster
+# String in der Deklaration.
+#
+# Er kann im Python-Interpreter mit help() abgerufen werden:
+#
+# >>> help(fizzbuzz_dokumentiert)
+#
+# Außerdem gibt es das Modul pydoc, mit dem eine Dokumentation auf der
+# Kommandozeile oder über einen Webserver zur Verfügung steht.
+#
+# $ pydoc fizzbuzz.fizzbuzz_dokumentiert
+# $ python -m pydoc fizzbuzz.fizzbuzz_dokumentiert
+#
+# Webserver starten auf Port 8080 mit Dokumentation unter
+# http://localhost:8080
+#
+# $ pydoc -p 8080
+# $ python -m pydoc -p 8080
+
