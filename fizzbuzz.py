@@ -524,7 +524,7 @@ def fizzbuzz_db():
 #fizzbuzz_db()
 
 
-# Kata 17 - mit Documentation
+# Kata 17 - mit Dokumentation
 
 def fizzbuzz_dokumentiert(n):
     """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
