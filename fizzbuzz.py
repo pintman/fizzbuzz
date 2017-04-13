@@ -561,7 +561,7 @@ def fizzbuzz_dokumentiert(n):
 # $ python -m pydoc -p 8080
 
 
-# Kata 18 - Chatbot (z.B. mit sopel https://sopel.chat/)
+# Kata 18 - als Chatbot (z.B. mit sopel https://sopel.chat/)
 # und https://github.com/sopel-irc/sopel/wiki
 
 """
@@ -616,3 +616,44 @@ Punkt):
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 
 """
+
+
+# Kata 19 - auf einem Cluster (mit GNU parallel)
+
+"""Hierfür bedienen wir uns des Programmes GNU parallel.
+
+Zuerst muss das Programm 'fizzbuzz.py' auf jeden Rechner übertragen
+werden und der ssh-login gemäß der Beschreibung in 'man parallel'
+eingerichtet worden sein. Dies wird im Abschnitt "EXAMPLE: Using
+remote computers" der man-page beschrieben.
+
+Nun folgt der Aufruf:
+
+$ seq 20 | parallel --sshlogin server1,server2,server3 python3 fizzbuzz.py
+
+seq 20 generiert die Zahlen 1 bis 20 und sendet sie über eine Pip (|)
+an den Befehl 'parallel'. Dieser verteilt die Aufrufe
+
+ 'python3 fizzbuzz.py 1',
+ 'python3 fizzbuzz.py 2',
+ 'python3 fizzbuzz.py 3',
+ 'python3 fizzbuzz.py 4', ...
+
+auf die Server server1, server2 und server3.
+
+"""
+
+def fizzbuzz_cluster():
+    import sys
+    i = int (sys.argv[1])
+
+    if i % 3 == 0 and i % 5 == 0:
+        print(i, "fizzbuzz")
+    elif i % 3 == 0:
+        print(i, "fizz")
+    elif i % 5 == 0:
+        print(i, "buzz")
+    else:
+        print(i, i)
+
+#fizzbuzz_cluster()
