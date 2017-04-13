@@ -597,7 +597,8 @@ def echo(bot, trigger):
         bot.reply(i)
            
 """
-Eine mögliche Chat-Konversation:
+Eine mögliche Chat-Konversation (Sopel-Befehle beginnen mit einem
+Punkt):
 
 * FizzBuzzBot has joined
 <fizzbuzz_owner> .fizzbuz 1
@@ -613,4 +614,5 @@ Eine mögliche Chat-Konversation:
 <FizzBuzzBot>    fizzbuzz_owner: 14
 <fizzbuzz_owner> .fizzbuzz 15
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
+
 """
