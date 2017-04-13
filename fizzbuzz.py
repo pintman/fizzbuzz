@@ -31,7 +31,7 @@ fizz
 
 # Kata 1 - mit einer Methode
 
-def fizzbuzz(n):
+def fizzbuzz_methode(n):
     for i in range(n):
         if i % 3 == 0 and i % 5 == 0:
             print("fizzbuzz")
@@ -42,7 +42,7 @@ def fizzbuzz(n):
         else:
             print(i)
 
-def fizzbuzz2(n):
+def fizzbuzz_methode2(n):
     for i in range(n):
         if i % 3 == 0:
             s = "fizz"
@@ -52,8 +52,8 @@ def fizzbuzz2(n):
             s = i
         print(s)
 
-#fizzbuzz(20)
-#fizzbuzz2(20)
+#fizzbuzz_methode(20)
+#fizzbuzz_methode2(20)
 
 
 # Kata 2 - ohne Verwendung einer Schleife (rekursiv)
@@ -287,7 +287,7 @@ def fizzbuzz_objektorientiert2():
 #fizzbuzz_objektorientiert2()
 
 
-# Kata 10 - funktional
+# Kata 10 - funktional mit map, reduce und lambda-Ausdrücken
 import functools
 
 def by(number):
@@ -383,7 +383,7 @@ $ git log
 # s. setup.py
 
 
-# Kata 14 - als getestetes Programm (mit unittest und dcotests)
+# Kata 14 - als getestetes Programm (mit unittest und doctests)
 import unittest
 
 class FizzBuzzClass:
@@ -392,7 +392,7 @@ class FizzBuzzClass:
         einen doctest.
 
         Kommentare von Methoden lassen sich auch testen. Der folgende
-        Quelltext wird hierfür ausgeführt, sobald das doctext-Modul aufgerufen
+        Quelltext wird hierfür ausgeführt, sobald das doctest-Modul aufgerufen
         wird:
 
         $ python3 -m doctest fizzbuzz.py
@@ -524,7 +524,7 @@ def fizzbuzz_db():
 #fizzbuzz_db()
 
 
-# Kata 17 - mit Dokumentation
+# Kata 17 - mit docstring Dokumentation
 
 def fizzbuzz_dokumentiert(n):
     """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
@@ -601,7 +601,6 @@ Eine mögliche Chat-Konversation (Sopel-Befehle beginnen mit einem
 Punkt):
 
 * FizzBuzzBot has joined
-<fizzbuzz_owner> .fizzbuz 1
 <fizzbuzz_owner> .fizzbuzz 1
 <FizzBuzzBot>    fizzbuzz_owner: 1
 <fizzbuzz_owner> .fizzbuzz 2
@@ -631,7 +630,7 @@ Nun folgt der Aufruf:
 
 $ seq 20 | parallel --sshlogin server1,server2,server3 python3 fizzbuzz.py
 
-seq 20 generiert die Zahlen 1 bis 20 und sendet sie über eine Pip (|)
+seq 20 generiert die Zahlen 1 bis 20 und sendet sie über eine Pipe (|)
 an den Befehl 'parallel'. Dieser verteilt die Aufrufe
 
  'python3 fizzbuzz.py 1',
