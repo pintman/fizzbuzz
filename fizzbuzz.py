@@ -562,22 +562,55 @@ def fizzbuzz_dokumentiert(n):
 
 
 # Kata 18 - Chatbot (z.B. mit sopel https://sopel.chat/)
-# und https://github.com/sopel-irc/sopel/wiki TODO
+# und https://github.com/sopel-irc/sopel/wiki
 
 """
-Installation: sudo pip3 install sopel
-Konfiguration (in ~/.sopel) erstellen: sopel
-Eigene Bots in ~/.sopel/modules erstellen
+Installation: 
+$ sudo pip3 install sopel
 
-import sopel.module
+Konfiguration (in ~/.sopel) erstellen: 
+$ sopel
 
-@sopel.module.commands('hallo')
-def hello_welt(bot, trigger):
-        bot.say('Hallo, Welt!')
+Eigenen Bot in ~/.sopel/modules/fizzbuzz.py erstellen
 
-rom sopel import module
+Sopel starten
+$ sopel
+"""
 
-@module.commands('echo', 'repeat')
+from sopel import module
+
+@module.commands('fizzbuzz')
 def echo(bot, trigger):
-        bot.reply( trigger.group(2) )
+    # to everybody:   bot.say("...")
+    # to querstioner: bot.reply("...")
+
+    # take and convert argument
+    i = int(trigger.group(2))
+
+    if i % 3 == 0 and i % 5 == 0:
+        bot.reply("fizzbuzz")
+    elif i % 3 == 0:
+        bot.reply("fizz")
+    elif i % 5 == 0:
+        bot.reply("buzz")
+    else:
+        bot.reply(i)
+           
+"""
+Eine mögliche Chat-Konversation:
+
+* FizzBuzzBot has joined
+<fizzbuzz_owner> .fizzbuz 1
+<fizzbuzz_owner> .fizzbuzz 1
+<FizzBuzzBot>    fizzbuzz_owner: 1
+<fizzbuzz_owner> .fizzbuzz 2
+<FizzBuzzBot>    fizzbuzz_owner: 2
+<fizzbuzz_owner> .fizzbuzz 3
+<FizzBuzzBot>    fizzbuzz_owner: fizz
+<fizzbuzz_owner> .fizzbuzz 5
+<FizzBuzzBot>    fizzbuzz_owner: buzz
+<fizzbuzz_owner> .fizzbuzz 14
+<FizzBuzzBot>    fizzbuzz_owner: 14
+<fizzbuzz_owner> .fizzbuzz 15
+<FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 """
