@@ -295,7 +295,7 @@ def by(number):
     return (lambda i: i % number == 0)
 
 def fizzbuzz_func(i):
-    # create to functions to test for divisibility
+    # create two functions to test for divisibility
     by5 = by(5)
     by3 = by(3)
 
