@@ -448,7 +448,7 @@ def fizzbuzz_getestet():
 # https://github.com/pintman/ea_rpi_modul
 try:
     # Um die Bibliothek zu installieren: pip install eapi
-    import eamodul.hw 
+    import eapi.hw 
 except:
     pass
 
@@ -456,7 +456,7 @@ class FizzBuzzEAModul:
     def __init__(self):
         self.i = 0
 
-        eam = eamodul.hw.EAModul()
+        eam = eapi.hw.EAModul()
         # switching on green LED only
         eam.schalte_leds(False, False, True)
         # register for events when button0 pressed
