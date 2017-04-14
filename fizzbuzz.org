@@ -1212,7 +1212,7 @@ auf die Server server1, server2 und server3.
 
 ** In einem UML-Aktivitätsdiagramm
 
-#+BEGIN_SRC plantuml :file fizzbuzz-aktdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-aktdiag.png
 @startuml
 start
 :zahl = 1;
@@ -1242,7 +1242,7 @@ stop
 #+END_SRC
 
 #+RESULTS:
-[[file:fizzbuzz-aktdiag.png]]
+[[file:doc/fizzbuzz-aktdiag.png]]
 
 ** In einem UML-Sequenzdiagramm
 
@@ -1250,7 +1250,7 @@ Der FizzbuzzServer hat eine Methode =fizzbuzz(zahl: int): answer=, die
 von einem Client mit einer Zahl aufgerufen werden kann. Die Antwort
 ist eine Zahl oder ein String.
 
-#+BEGIN_SRC plantuml :file fizzbuzz-seqdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-seqdiag.png
 @startuml
 Client -> FizzbuzzServer: fizzbuzz(2)
 FizzbuzzServer --> Client: 2
@@ -1284,11 +1284,11 @@ end
 #+END_SRC
 
 #+RESULTS:
-[[file:fizzbuzz-seqdiag.png]]
+[[file:doc/fizzbuzz-seqdiag.png]]
 
 ** In einem UML-Klassendiagramm
 
-file:fizzbuzz-klassendiagramm.png
+file:doc/fizzbuzz-klassendiagramm.png
 
 Dies Klasse könnte wie folgt verwendet werden.
 
