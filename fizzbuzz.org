@@ -1569,3 +1569,39 @@ an den Befehl =parallel=. Dieser verteilt die Aufrufe
 
 auf die Server server1, server2 und server3.
 
+** In einem UML-Aktivitätsdiagramm
+
+#+BEGIN_SRC plantuml :file fizzbuzz-aktdiag.png
+@startuml
+start
+:zahl = 1;
+while (zahl <= 20) is (ja)
+
+if (zahl mod 3 == 0 und zahl mod 5 == 0) then (ja)
+    :Ausgabe "fizzbuzz";
+else (nein)
+    if (zahl mod 3 == 0) then (ja)
+        :Ausgabe "fizz";
+    else (nein)
+    	if (zahl mod 5 == 0) then (ja)
+      	    :Ausgabe "buzz";
+        else (nein)
+	    :Ausgabe zahl;
+	endif
+    endif
+endif
+  
+:zahl = zahl +1;
+  
+endwhile  (nein)
+
+stop
+
+@enduml
+
+
+#+END_SRC
+
+#+RESULTS:
+[[file:fizzbuzz-aktdiag.png]]
+
