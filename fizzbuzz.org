@@ -1,4 +1,4 @@
-* FizzBuzz
+* FizzBuzz Katas
 
 Bei FizzBuzz handelt es sich um ein Zählspiel, bei dem die Zahlen bis 100
 aufgezählt werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
@@ -7,7 +7,7 @@ durch 5 teilbar, wird "buzz" gesagt. Ist sie durch 3 und 5 teilbar, wird
 
 Wir versuchen uns auf dem Blatt mit einer Aufwärmübung (Kata).
 
-** Kata 0 - auf Papier
+** Auf Papier
 
 #+BEGIN_EXAMPLE
 1
@@ -31,7 +31,7 @@ fizz
 19
 #+END_EXAMPLE
 
-** Kata 1 - mit einer Methode
+** Mit einer Methode
 Hier ist eine erste einfache Variante.
 
 #+BEGIN_SRC python -n :results output :exports both
@@ -118,27 +118,27 @@ fizz
 19
 #+end_example
 
-** Kata 2 - ohne Verwendung einer Schleife (rekursiv)
+** Ohne Verwendung einer Schleife (rekursiv)
 
 #+BEGIN_SRC python -n :results output
 
-def fizzbuzz_rekursiv(i):
-    if i == 0:
-        return
-    else:
-        fizzbuzz_rekursiv(i-1)
+  def fizzbuzz_rekursiv(i):
+      if i == 0:
+          return
+      else:
+          fizzbuzz_rekursiv(i-1)
 
-        if i % 3 == 0 and i % 5 == 0:
-            print("fizzbuzz")
-        elif i % 3 == 0:
-            print("fizz")
-        elif i % 5 == 0:
-            print("buzz")
-        else:
-            print(i)
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
+          else:
+              print(i)
 
 
-fizzbuzz_rekursiv(20)
+  fizzbuzz_rekursiv(20)
 #+END_SRC
 
 #+RESULTS:
@@ -165,7 +165,7 @@ fizz
 buzz
 #+end_example
 
-** Kata 3 - mit Hilfe von nebenläufigen Threads
+** Mit Hilfe von nebenläufigen Threads
 
 #+BEGIN_SRC python -n :results output
 
@@ -216,7 +216,7 @@ fizz
 19
 #+end_example
 
-** Kata 4 - mit einer anderen IDE
+** Mit einer anderen IDE
 
 Mögliche Kandidaten wären:
 
@@ -226,7 +226,7 @@ Mögliche Kandidaten wären:
 - vim
 - Atom
 
-** Kata 5 - in einer anderen Programmiersprache
+** In einer anderen Programmiersprache
 
 Mögliche Sprachen wären:
 
@@ -237,7 +237,7 @@ Mögliche Sprachen wären:
 - C++
 - Bash
 
-** Kata 6 - als Client-Server Anwendung
+** Als Client-Server Anwendung
 
 #+BEGIN_SRC python -n :results output
 
@@ -284,7 +284,7 @@ fizzbuzz_client_server()
 
 #+RESULTS:
 
-** Kata 7 - mit einer grafischen Oberfläche (GUI)
+** Mit einer grafischen Oberfläche (GUI)
 
 #+BEGIN_SRC python -n
 
@@ -329,54 +329,54 @@ fizzbuzz_gui()
 #+RESULTS:
 : None
 
-** Kata 8 - Objekt-Orientiert: Klassen und Objekte verwenden
+** Objekt-Orientiert: Klassen und Objekte verwenden
 
 #+BEGIN_SRC python -n :results output
 
-class Fizzer:
-    def __init__(self, n):
-        pass
-    def print(self):
-        print("Fizz")
+  class Fizzer:
+      def __init__(self, n):
+          pass
+      def print(self):
+          print("Fizz")
 
-class Buzzer:
-    def __init__(self, n):
-        pass
-    def print(self):
-        print("Buzz")
+  class Buzzer:
+      def __init__(self, n):
+          pass
+      def print(self):
+          print("Buzz")
 
-class FizzBuzzer:
-    def __init__(self, n):
-        pass
-    def print(self):
-        print("FizzBuzz")
+  class FizzBuzzer:
+      def __init__(self, n):
+          pass
+      def print(self):
+          print("FizzBuzz")
 
-class Number:
-    def __init__(self, n):
-        self.n = n
-    def print(self):
-        print(self.n)
+  class Number:
+      def __init__(self, n):
+          self.n = n
+      def print(self):
+          print(self.n)
 
-class FizzBuzzNumber:
-    def __init__(self, i):
-        if i % 3 == 0 and i % 5 == 0:
-            self.printer = FizzBuzzer(i)
-        elif i % 3 == 0:
-            self.printer = Fizzer(i)
-        elif i % 5 == 0:
-            self.printer = Buzzer(i)
-        else:
-            self.printer = Number(i)
+  class FizzBuzzNumber:
+      def __init__(self, i):
+          if i % 3 == 0 and i % 5 == 0:
+              self.printer = FizzBuzzer(i)
+          elif i % 3 == 0:
+              self.printer = Fizzer(i)
+          elif i % 5 == 0:
+              self.printer = Buzzer(i)
+          else:
+              self.printer = Number(i)
 
-    def print(self):
-        self.printer.print()
+      def print(self):
+          self.printer.print()
 
-def fizzbuzz_objektorientiert():
-    for i in range(20):
-        f = FizzBuzzNumber(i)
-        f.print()
+  def fizzbuzz_objektorientiert():
+      for i in range(20):
+          f = FizzBuzzNumber(i)
+          f.print()
 
-fizzbuzz_objektorientiert()
+  fizzbuzz_objektorientiert()
 #+END_SRC
 
 #+RESULTS:
@@ -403,7 +403,10 @@ Fizz
 19
 #+end_example
 
-** Kata 9 - objekt-orientiert mit Vererbung
+** Objekt-orientiert mit Vererbung
+
+#+BEGIN_SRC python -n :results output
+
 class Numberer:
     def printit(self, i):
         print(i)
@@ -434,9 +437,34 @@ def fizzbuzz_objektorientiert2():
         fb = FizzBuzzingFizzingBuzzingNumberer()
         fb.printit(i)
 
-#fizzbuzz_objektorientiert2()
+fizzbuzz_objektorientiert2()
+#+END_SRC
 
-** Kata 10 - funktional mit map, reduce und lambda-Ausdrücken
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+** Funktional mit map, reduce und lambda-Ausdrücken
 
 #+BEGIN_SRC python -n :results output
 
@@ -500,10 +528,10 @@ fizz
 
 #+end_example
 
-** Kata 11 - als Webanwendung (mit bottle)
+** Als Webanwendung
 
-Bottle ist ein Webframework, das leicht mit =pip= installiert werden
-kann.
+Bottle (https://bottlepy.org) ist ein Webframework, das leicht mit
+=pip= installiert werden kann.
 
 #+BEGIN_SRC sh :results output
 pip install bottle
@@ -551,17 +579,19 @@ def fizzbuzz_web():
 fizzbuzz_web()
 #+END_SRC
 
-** Kata 12 - in git-repo einchecken
+Nach dem Start des Webservers kann die Webseite
+http://localhost:8081/fizzbuzz/20 aufgerufen werden.
+
+** In git-repo einchecken
 
 #+BEGIN_SRC sh -n :results output
-mkdir /tmp/fizzbuzz_repo
 # Ein Verzeichnis erstellen und den Quelltext kopieren
+mkdir /tmp/fizzbuzz_repo
 cp fizzbuzz.py /tmp/fizzbuzz_repo
 cd /tmp/fizzbuzz_repo
 
 # Repo initialisieren
 git init
-ls -al
 
 # Dateien für commit vormerken
 git add fizzbuzz.py
@@ -574,122 +604,710 @@ git log
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Reinitialisierte existierendes Git-Repository in /tmp/fizzbuzz_repo/.git/
-insgesamt 28
-drwxr-xr-x  3 marco marco  4096 Apr 14 09:24 .
-drwxrwxrwt 23 root  root   4096 Apr 14 09:32 ..
--rw-r--r--  1 marco marco 14322 Apr 14 09:32 fizzbuzz.py
-drwxr-xr-x  8 marco marco  4096 Apr 14 09:32 .git
-Auf Branch master
-nichts zu committen, Arbeitsverzeichnis unverändert
-commit fcc325165e397deb540afa3ad123c260d5347531
-Author: Marco Bakera <marco@bakera.de>
-Date:   Fri Apr 14 09:25:33 2017 +0200
+: Reinitialisierte existierendes Git-Repository in /tmp/fizzbuzz_repo/.git/
+: Auf Branch master
+: nichts zu committen, Arbeitsverzeichnis unverändert
+: commit fcc325165e397deb540afa3ad123c260d5347531
+: Author: Marco Bakera <marco@bakera.de>
+: Date:   Fri Apr 14 09:25:33 2017 +0200
+: 
+:     commit fizzbuzz.py
 
-    commit fizzbuzz.py
+** Als installierbares Programm
+
+Zunächst muss eine Datei =setup.py= angelegt werden. Sie könnte
+folgenden Inhalt haben:
+
+#+INCLUDE: "~/proj/fizzbuzz/setup.py" src python
+
+Das Programm kann dann mit folgenden Befehlen installiert oder
+erstellt werden:
+
+#+BEGIN_SRC sh -n :results output
+  # Release in Unterordner erstellen: 
+  python setup.py sdist
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+running sdist
+running egg_info
+writing dependency_links to fizzbuzz_katas.egg-info/dependency_links.txt
+writing fizzbuzz_katas.egg-info/PKG-INFO
+writing top-level names to fizzbuzz_katas.egg-info/top_level.txt
+reading manifest file 'fizzbuzz_katas.egg-info/SOURCES.txt'
+writing manifest file 'fizzbuzz_katas.egg-info/SOURCES.txt'
+running check
+creating fizzbuzz_katas-0.1
+creating fizzbuzz_katas-0.1/fizzbuzz_katas.egg-info
+making hard links in fizzbuzz_katas-0.1...
+hard linking setup.py -> fizzbuzz_katas-0.1
+hard linking fizzbuzz_katas.egg-info/PKG-INFO -> fizzbuzz_katas-0.1/fizzbuzz_katas.egg-info
+hard linking fizzbuzz_katas.egg-info/SOURCES.txt -> fizzbuzz_katas-0.1/fizzbuzz_katas.egg-info
+hard linking fizzbuzz_katas.egg-info/dependency_links.txt -> fizzbuzz_katas-0.1/fizzbuzz_katas.egg-info
+hard linking fizzbuzz_katas.egg-info/top_level.txt -> fizzbuzz_katas-0.1/fizzbuzz_katas.egg-info
+Writing fizzbuzz_katas-0.1/setup.cfg
+Creating tar archive
+removing 'fizzbuzz_katas-0.1' (and everything under it)
 #+end_example
 
-** Kata 13 - als installierbares Programm
-# s. setup.py
+Anschließend kann das Paket (lokal) installiert werden.
 
-** Kata 14 - als getestetes Programm (mit unittest und doctests)
-import unittest
+#+BEGIN_SRC sh -n :results output
+  #  Installation:
+  python setup.py install
 
-class FizzBuzzClass:
-    def fizzbuzz(self, i):
-        """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
-        einen doctest.
+  # Lokale Installation:
+  #python setup.py install --user
+#+END_SRC
 
-        Kommentare von Methoden lassen sich auch testen. Der folgende
-        Quelltext wird hierfür ausgeführt, sobald das doctest-Modul aufgerufen
-        wird:
+#+RESULTS:
+#+begin_example
+running install
+running bdist_egg
+running egg_info
+writing fizzbuzz_katas.egg-info/PKG-INFO
+writing top-level names to fizzbuzz_katas.egg-info/top_level.txt
+writing dependency_links to fizzbuzz_katas.egg-info/dependency_links.txt
+reading manifest file 'fizzbuzz_katas.egg-info/SOURCES.txt'
+writing manifest file 'fizzbuzz_katas.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+creating build/bdist.linux-x86_64/egg
+creating build/bdist.linux-x86_64/egg/EGG-INFO
+copying fizzbuzz_katas.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying fizzbuzz_katas.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying fizzbuzz_katas.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying fizzbuzz_katas.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+creating 'dist/fizzbuzz_katas-0.1-py3.5.egg' and adding 'build/bdist.linux-x86_64/egg' to it
+removing 'build/bdist.linux-x86_64/egg' (and everything under it)
+Processing fizzbuzz_katas-0.1-py3.5.egg
+Removing /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/lib/python3.5/site-packages/fizzbuzz_katas-0.1-py3.5.egg
+Copying fizzbuzz_katas-0.1-py3.5.egg to /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/lib/python3.5/site-packages
+fizzbuzz-katas 0.1 is already the active version in easy-install.pth
 
-        $ python3 -m doctest fizzbuzz.py
+Installed /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/lib/python3.5/site-packages/fizzbuzz_katas-0.1-py3.5.egg
+Processing dependencies for fizzbuzz-katas==0.1
+Finished processing dependencies for fizzbuzz-katas==0.1
+#+end_example
 
-        Hier kommt der Test:
+** Als getestetes Programm (mit unittest und doctests)
 
-        >>> fbc = FizzBuzzClass()
-        >>> fbc.fizzbuzz(3)
-        'fizz'
-        >>> fbc.fizzbuzz(5)
-        'buzz'
-        >>> fbc.fizzbuzz(10)
-        'buzz'
-        >>> fbc.fizzbuzz(11)
-        11
+#+BEGIN_SRC python -n :results output
+  import unittest
 
-        """
-        if i % 3 == 0 and i % 5 == 0:
-            return "fizzbuzz"
-        elif i % 3 == 0:
-            return "fizz"
-        elif i % 5 == 0:
-            return "buzz"
-        else:
-            return i
+  class FizzBuzzClass:
+      def fizzbuzz(self, i):
+          """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
+          einen doctest.
 
-class FizzBuzzClassTest(unittest.TestCase):
-    """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
+          Kommentare von Methoden lassen sich auch testen. Der folgende
+          Quelltext wird hierfür ausgeführt, sobald das doctest-Modul aufgerufen
+          wird:
 
-    Hierfür testet sie mögliche Eingaben und Ausgaben."""
+          $ python3 -m doctest fizzbuzz.py
 
-    def test_fizzbuzz(self):
-        fb = FizzBuzzClass()
+          Hier kommt der Test:
 
-        self.assertEqual(fb.fizzbuzz(3), "fizz")
-        self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
-        self.assertEqual(fb.fizzbuzz(9), "fizz")
-        self.assertEqual(fb.fizzbuzz(10), "buzz")
+          >>> fbc = FizzBuzzClass()
+          >>> fbc.fizzbuzz(3)
+          'fizz'
+          >>> fbc.fizzbuzz(5)
+          'buzz'
+          >>> fbc.fizzbuzz(10)
+          'buzz'
+          >>> fbc.fizzbuzz(11)
+          11
+
+          """
+          if i % 3 == 0 and i % 5 == 0:
+              return "fizzbuzz"
+          elif i % 3 == 0:
+              return "fizz"
+          elif i % 5 == 0:
+              return "buzz"
+          else:
+              return i
+
+  class FizzBuzzClassTest(unittest.TestCase):
+      """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
+
+      Hierfür testet sie mögliche Eingaben und Ausgaben."""
+
+      def test_fizzbuzz(self):
+          fb = FizzBuzzClass()
+
+          self.assertEqual(fb.fizzbuzz(3), "fizz")
+          self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
+          self.assertEqual(fb.fizzbuzz(9), "fizz")
+          self.assertEqual(fb.fizzbuzz(10), "buzz")
+
+  def fizzbuzz_getestet():
+      # Alle Tests ausführen.
+      unittest.main()
+
+  fizzbuzz_getestet()
+
+#+END_SRC
+
+#+RESULTS:
+
+** Mit einem EA-Modul ansteuern
+
+Die Bibliothek =eapi= (https://github.com/pintman/ea_rpi_modul) kann
+über =pip= installiert werden.
+
+#+BEGIN_SRC sh
+pip install eapi
+#+END_SRC
+
+#+BEGIN_SRC python -n
+
+  import eapi.hw 
+
+  class FizzBuzzEAModul:
+      def __init__(self):
+          self.i = 0
+
+          eam = eapi.hw.EAModul()
+          # switching on green LED only
+          eam.schalte_leds(False, False, True)
+          # register for events when button0 pressed
+          eam.taster_event_registrieren(0, self.taster0_gedrueckt)
+
+          # wait for taster event
+          while True:
+              pass
+
+      def taster0_gedrueckt(self, pin):
+          if self.i % 3 == 0 and self.i % 5 == 0:
+              print("fizzbuzz")
+          elif self.i % 3 == 0:
+              print("fizz")
+          elif self.i % 5 == 0:
+              print("buzz")
+          else:
+              print(self.i)
+
+          self.i += 1
+
+  def fizzbuzz_eamodul():
+      FizzBuzzEAModul()
+
+  fizzbuzz_eamodul()
+#+END_SRC
+
+#+RESULTS:
+
+Eine Hilfe zu dem Modul lässt sich über pydoc abrufen.
+
+#+BEGIN_SRC sh :results output
+python -m pydoc eapi.hw
+python -m pydoc eapi.hw.EAModul
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Help on module eapi.hw in eapi:
+
+NAME
+    eapi.hw
+
+DESCRIPTION
+    Ein Modul für die Verwendung des Eingabe-Ausgabe-Moduls für den Raspberry
+    Pi.
+    
+    Es besteht aus der Hauptklasse EAModul, die für die Ansteuerung vorgesehen
+    ist. Hierfür existieren verschiedene Demos, die von der Kommandozeile aus
+    aufgerufen werden können:
+    
+      $ python3 -m eapi.hw
+    
+    Mit Hilfe der Klasse DimmbaresEAModul können die LEDs auf dem Board gedimmt
+    werden.
+    
+    Das folgende Beispiel zeigt eine mögliche Verwendung:
+    
+    >>> from eapi.hw import EAModul
+    >>> ea = EAModul()
+    
+    Nun können wir ein paar LEDs anschalten
+    
+    >>> ea.schalte_led(EAModul.LED_ROT, 1)
+    >>> ea.schalte_led(EAModul.LED_GELB, 1)
+    >>> ea.schalte_led(EAModul.LED_GRUEN, 1)
+    
+    und wieder ausschalten
+    
+    >>> ea.schalte_led(EAModul.LED_ROT, 0)
+    >>> ea.schalte_led(EAModul.LED_GELB, 0)
+    >>> ea.schalte_led(EAModul.LED_GRUEN, 0)
+    
+    Der Wert des Tasters kann auch abgefragt werden.
+    
+    >>> taster0_gedrueckt = ea.taster_gedrueckt(0)
+    >>> taster1_gedrueckt = ea.taster_gedrueckt(1)
+    
+    Zum Schluss fahren wir das Modul wieder herunter:
+    
+    >>> ea.cleanup()
+    
+    Schaue in die Dokumentation der anderen Methoden, um weitere
+    Quelltextbeispiele zu finden.
+
+CLASSES
+    builtins.object
+        EAModul
+            DimmbaresEAModul
+    
+    class DimmbaresEAModul(EAModul)
+     |  Ein Erweiterung der Klasse EAModul, die dimmbare LEDs unterstüzt.
+     |  
+     |  Im Unterschied zum EAModul können über die Klasse DimmbaresEAModul die LEDs
+     |  mit Hilfe von PWM in der Helligkeit reguliert werden. Hierbei wurde die
+     |  Methode schalte_led so angepasst, dass sie nun auch Werte zwischen 0.0 und
+     |  1.0 annehmen kann.
+     |  
+     |  >>> from eapi.hw import DimmbaresEAModul
+     |  >>> ea = DimmbaresEAModul()
+     |  
+     |  Nach dem Erstellen eines Moduls, können die LEDs auch mit Werten zwischen
+     |  0.0 und 1.0 geschaltet werden. Sie leuchten dann weniger hell.
+     |  
+     |  >>> ea.schalte_led(EAModul.LED_ROT, 0.5)
+     |  >>> ea.schalte_led(EAModul.LED_GELB, 0.8)
+     |  >>> ea.schalte_led(EAModul.LED_GRUEN, 0.2)
+     |  
+     |  Method resolution order:
+     |      DimmbaresEAModul
+     |      EAModul
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, pin_taster0=29, pin_taster1=31, pin_led_rot=33, pin_led_gelb=35, pin_led_gruen=37)
+     |      Die PINs des Moduls werden konfiguriert.
+     |      
+     |      Pins der LED werden als Ausgänge, und Pins der Taster als Eingänge
+     |      konfiguriert. Wenn keine PINS angegeben werden, werden die PINs
+     |      oberhalb des GND Pins links unten verwendet.
+     |      
+     |      >>> from eapi.hw import DimmbaresEAModul
+     |      
+     |      >>> ea = DimmbaresEAModul()
+     |      >>> ea.cleanup()
+     |  
+     |  schalte_led(self, led_farbe, helligkeit)
+     |      Schalte die LED mit der gegebenen Nummer ein (1) oder aus (0).
+     |      
+     |      Der Wert für led_farbe ist LED_ROT, LED_GELB oder LED_GRUEN.
+     |      
+     |      Wenn für helligkeit eine Kommazahl zwischen 0 und 1 angegeben
+     |      wird, lässt sich die LED dimmen: ein Wert von 0.5 lässt die
+     |      LED nur mit halber Kraft leuchten.
+     |      
+     |      Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> from eapi.hw import DimmbaresEAModul
+     |      
+     |      >>> ea_modul = DimmbaresEAModul()
+     |      >>> ea_modul.schalte_led(EAModul.LED_ROT, 1)
+     |      >>> ea_modul.schalte_led(EAModul.LED_GELB, 0)
+     |      >>> ea_modul.schalte_led(EAModul.LED_GRUEN, 0.5)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from EAModul:
+     |  
+     |  cleanup(self)
+     |      Setzt alle Pins des Pi wieder in den Ausgangszustand.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      >>> ea = EAModul()
+     |      >>> ea.cleanup()
+     |  
+     |  led_event_registrieren(self, led_farbe, methode)
+     |      Registriert eine Methode, die ausgeführt wird, sobald die
+     |      entsprechende LED ihren Wert ändert.
+     |      
+     |      Die Methode wird über alle Veränderungen an der LED informiert. Dazu
+     |      wird die übergebene Methode aufgerufen.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      >>> def update_rote_led(neuer_wert):
+     |      ...    print("update: Status der roten LED hat sich geändert.")
+     |      ...    print("Neuer Wert:", neuer_wert)
+     |      
+     |      >>> ea = EAModul()
+     |      >>> ea.led_event_registrieren(EAModul.LED_ROT, update_rote_led)
+     |      
+     |      Nun wird die Update-Methode aufgerufen, sobald sich der Wert der LED
+     |      ändert.
+     |      
+     |      >>> ea.schalte_led(EAModul.LED_ROT, 1)
+     |      update: Status der roten LED hat sich geändert.
+     |      Neuer Wert: 1
+     |      
+     |      >>> ea.schalte_led(EAModul.LED_ROT, 0)
+     |      update: Status der roten LED hat sich geändert.
+     |      Neuer Wert: 0
+     |      
+     |      >>> ea.cleanup()
+     |  
+     |  schalte_leds(self, rot_anaus, gelb_anaus, gruen_anaus)
+     |      Schalte alle drei LEDs zu gleichen Zeit an oder aus.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> ea_modul.schalte_leds(True, False, True)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  taster_event_registrieren(self, taster_nr, methode)
+     |      Registriere eine Methode, die bei Betätigung eines Tasters
+     |      ausgeführt wird.
+     |      
+     |      Die übergebene Methode muss ein Argument haben und wird mit der
+     |      Pin-Nur des Tasters aufgerufen, sobald der Taster gedrückt 
+     |      wird. Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> def taster0_gedrueckt(pin):
+     |      ...  print("Taster 0 wurde gedrückt.")
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> ea_modul.taster_event_registrieren(0, taster0_gedrueckt)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  taster_gedrueckt(self, num=0)
+     |      Liest den Wert des Tasters mit der gegebenen Nummer aus und gibt den
+     |      Wert zurück. Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      >>> import time
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> while not ea_modul.taster_gedrueckt(1):
+     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 1)
+     |      ...   time.sleep(0.2)
+     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 0)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from EAModul:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from EAModul:
+     |  
+     |  LED_GELB = 1
+     |  
+     |  LED_GRUEN = 2
+     |  
+     |  LED_ROT = 0
+    
+    class EAModul(builtins.object)
+     |  Die Klasse EAModul hilft bei der Ansteuerung eines Eingabe-Ausgabe-Moduls
+     |  für den Raspberry Pi. Es besteht aus drei LED und zwei Tastern.
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, pin_taster0=29, pin_taster1=31, pin_led_rot=33, pin_led_gelb=35, pin_led_gruen=37)
+     |      Das Modul wird mit den gegebenen Pins konfiguriert.
+     |      
+     |      Pins der LEDs werden als Ausgänge und Pins der Taster als Eingänge
+     |      konfiguriert. Wenn keine PINS angegeben werden, werden die PINs
+     |      oberhalb des GND Pins links unten verwendet.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      Wenn keine Werte angegeben werden, werden die Standard-Pins verwendet.
+     |      
+     |      >>> ea1 = EAModul()
+     |      >>> ea1.cleanup()
+     |      
+     |      Bei einer abweichenden Verdrahtung können die Pins angegeben werden.
+     |      
+     |      >>> ea2 = EAModul(29, 31, 33, 35, 37)
+     |      
+     |      Um den Quelltext übersichtlicher zu gestalten, können die Pins
+     |      direkt bezeichnet werden.
+     |      
+     |      >>> ea2 = EAModul(pin_taster0=29, pin_taster1=31, pin_led_rot=33,
+     |      ...               pin_led_gelb=35, pin_led_gruen=37)
+     |      >>> ea2.cleanup()
+     |  
+     |  cleanup(self)
+     |      Setzt alle Pins des Pi wieder in den Ausgangszustand.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      >>> ea = EAModul()
+     |      >>> ea.cleanup()
+     |  
+     |  led_event_registrieren(self, led_farbe, methode)
+     |      Registriert eine Methode, die ausgeführt wird, sobald die
+     |      entsprechende LED ihren Wert ändert.
+     |      
+     |      Die Methode wird über alle Veränderungen an der LED informiert. Dazu
+     |      wird die übergebene Methode aufgerufen.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      >>> def update_rote_led(neuer_wert):
+     |      ...    print("update: Status der roten LED hat sich geändert.")
+     |      ...    print("Neuer Wert:", neuer_wert)
+     |      
+     |      >>> ea = EAModul()
+     |      >>> ea.led_event_registrieren(EAModul.LED_ROT, update_rote_led)
+     |      
+     |      Nun wird die Update-Methode aufgerufen, sobald sich der Wert der LED
+     |      ändert.
+     |      
+     |      >>> ea.schalte_led(EAModul.LED_ROT, 1)
+     |      update: Status der roten LED hat sich geändert.
+     |      Neuer Wert: 1
+     |      
+     |      >>> ea.schalte_led(EAModul.LED_ROT, 0)
+     |      update: Status der roten LED hat sich geändert.
+     |      Neuer Wert: 0
+     |      
+     |      >>> ea.cleanup()
+     |  
+     |  schalte_led(self, led_farbe, an_aus)
+     |      Schalte die LED mit der gegebenen Nummer ein (1) oder aus (0).
+     |      
+     |      Der Wert für led_farbe ist LED_ROT, LED_GELB oder LED_GRUEN.
+     |      
+     |      Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> ea_modul.schalte_led(EAModul.LED_ROT, 1)
+     |      >>> ea_modul.schalte_led(EAModul.LED_GELB, 0)
+     |      >>> ea_modul.schalte_led(EAModul.LED_GRUEN, 1)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  schalte_leds(self, rot_anaus, gelb_anaus, gruen_anaus)
+     |      Schalte alle drei LEDs zu gleichen Zeit an oder aus.
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> ea_modul.schalte_leds(True, False, True)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  taster_event_registrieren(self, taster_nr, methode)
+     |      Registriere eine Methode, die bei Betätigung eines Tasters
+     |      ausgeführt wird.
+     |      
+     |      Die übergebene Methode muss ein Argument haben und wird mit der
+     |      Pin-Nur des Tasters aufgerufen, sobald der Taster gedrückt 
+     |      wird. Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> def taster0_gedrueckt(pin):
+     |      ...  print("Taster 0 wurde gedrückt.")
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> ea_modul.taster_event_registrieren(0, taster0_gedrueckt)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  taster_gedrueckt(self, num=0)
+     |      Liest den Wert des Tasters mit der gegebenen Nummer aus und gibt den
+     |      Wert zurück. Eine einfache Verwendung könnte wie folgt aussehen:
+     |      
+     |      >>> from eapi.hw import EAModul
+     |      >>> import time
+     |      
+     |      >>> ea_modul = EAModul()
+     |      >>> while not ea_modul.taster_gedrueckt(1):
+     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 1)
+     |      ...   time.sleep(0.2)
+     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 0)
+     |      >>> ea_modul.cleanup()
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  LED_GELB = 1
+     |  
+     |  LED_GRUEN = 2
+     |  
+     |  LED_ROT = 0
+
+FUNCTIONS
+    demo_dimmen()
+        Demoprogramm, um die Dimmen-Funktionalität zu prüfen.
+    
+    demo_led_taster()
+        Ein einfaches Demoprogramm, um die LED und Taster auf dem Board zu prüfen.
+    
+    main()
+        Hauptprogramm, das beim Starten des Moduls ausgeführt wird.
+        
+        Hierüber können verschiedene Demoprogramme gestartet werden.
+
+FILE
+    /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/lib/python3.5/site-packages/eapi/hw.py
 
 
-def fizzbuzz_getestet():
-    # Alle Tests ausführen.
-    unittest.main()
+Help on class EAModul in eapi.hw:
 
-#fizzbuzz_getestet()
+eapi.hw.EAModul = class EAModul(builtins.object)
+ |  Die Klasse EAModul hilft bei der Ansteuerung eines Eingabe-Ausgabe-Moduls
+ |  für den Raspberry Pi. Es besteht aus drei LED und zwei Tastern.
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, pin_taster0=29, pin_taster1=31, pin_led_rot=33, pin_led_gelb=35, pin_led_gruen=37)
+ |      Das Modul wird mit den gegebenen Pins konfiguriert.
+ |      
+ |      Pins der LEDs werden als Ausgänge und Pins der Taster als Eingänge
+ |      konfiguriert. Wenn keine PINS angegeben werden, werden die PINs
+ |      oberhalb des GND Pins links unten verwendet.
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      
+ |      Wenn keine Werte angegeben werden, werden die Standard-Pins verwendet.
+ |      
+ |      >>> ea1 = EAModul()
+ |      >>> ea1.cleanup()
+ |      
+ |      Bei einer abweichenden Verdrahtung können die Pins angegeben werden.
+ |      
+ |      >>> ea2 = EAModul(29, 31, 33, 35, 37)
+ |      
+ |      Um den Quelltext übersichtlicher zu gestalten, können die Pins
+ |      direkt bezeichnet werden.
+ |      
+ |      >>> ea2 = EAModul(pin_taster0=29, pin_taster1=31, pin_led_rot=33,
+ |      ...               pin_led_gelb=35, pin_led_gruen=37)
+ |      >>> ea2.cleanup()
+ |  
+ |  cleanup(self)
+ |      Setzt alle Pins des Pi wieder in den Ausgangszustand.
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      >>> ea = EAModul()
+ |      >>> ea.cleanup()
+ |  
+ |  led_event_registrieren(self, led_farbe, methode)
+ |      Registriert eine Methode, die ausgeführt wird, sobald die
+ |      entsprechende LED ihren Wert ändert.
+ |      
+ |      Die Methode wird über alle Veränderungen an der LED informiert. Dazu
+ |      wird die übergebene Methode aufgerufen.
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      
+ |      >>> def update_rote_led(neuer_wert):
+ |      ...    print("update: Status der roten LED hat sich geändert.")
+ |      ...    print("Neuer Wert:", neuer_wert)
+ |      
+ |      >>> ea = EAModul()
+ |      >>> ea.led_event_registrieren(EAModul.LED_ROT, update_rote_led)
+ |      
+ |      Nun wird die Update-Methode aufgerufen, sobald sich der Wert der LED
+ |      ändert.
+ |      
+ |      >>> ea.schalte_led(EAModul.LED_ROT, 1)
+ |      update: Status der roten LED hat sich geändert.
+ |      Neuer Wert: 1
+ |      
+ |      >>> ea.schalte_led(EAModul.LED_ROT, 0)
+ |      update: Status der roten LED hat sich geändert.
+ |      Neuer Wert: 0
+ |      
+ |      >>> ea.cleanup()
+ |  
+ |  schalte_led(self, led_farbe, an_aus)
+ |      Schalte die LED mit der gegebenen Nummer ein (1) oder aus (0).
+ |      
+ |      Der Wert für led_farbe ist LED_ROT, LED_GELB oder LED_GRUEN.
+ |      
+ |      Eine einfache Verwendung könnte wie folgt aussehen:
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      
+ |      >>> ea_modul = EAModul()
+ |      >>> ea_modul.schalte_led(EAModul.LED_ROT, 1)
+ |      >>> ea_modul.schalte_led(EAModul.LED_GELB, 0)
+ |      >>> ea_modul.schalte_led(EAModul.LED_GRUEN, 1)
+ |      >>> ea_modul.cleanup()
+ |  
+ |  schalte_leds(self, rot_anaus, gelb_anaus, gruen_anaus)
+ |      Schalte alle drei LEDs zu gleichen Zeit an oder aus.
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      
+ |      >>> ea_modul = EAModul()
+ |      >>> ea_modul.schalte_leds(True, False, True)
+ |      >>> ea_modul.cleanup()
+ |  
+ |  taster_event_registrieren(self, taster_nr, methode)
+ |      Registriere eine Methode, die bei Betätigung eines Tasters
+ |      ausgeführt wird.
+ |      
+ |      Die übergebene Methode muss ein Argument haben und wird mit der
+ |      Pin-Nur des Tasters aufgerufen, sobald der Taster gedrückt 
+ |      wird. Eine einfache Verwendung könnte wie folgt aussehen:
+ |      
+ |      >>> def taster0_gedrueckt(pin):
+ |      ...  print("Taster 0 wurde gedrückt.")
+ |      
+ |      >>> ea_modul = EAModul()
+ |      >>> ea_modul.taster_event_registrieren(0, taster0_gedrueckt)
+ |      >>> ea_modul.cleanup()
+ |  
+ |  taster_gedrueckt(self, num=0)
+ |      Liest den Wert des Tasters mit der gegebenen Nummer aus und gibt den
+ |      Wert zurück. Eine einfache Verwendung könnte wie folgt aussehen:
+ |      
+ |      >>> from eapi.hw import EAModul
+ |      >>> import time
+ |      
+ |      >>> ea_modul = EAModul()
+ |      >>> while not ea_modul.taster_gedrueckt(1):
+ |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 1)
+ |      ...   time.sleep(0.2)
+ |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 0)
+ |      >>> ea_modul.cleanup()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  LED_GELB = 1
+ |  
+ |  LED_GRUEN = 2
+ |  
+ |  LED_ROT = 0
 
-** Kata 15 - mit einem EA-Modul ansteuern
-# https://github.com/pintman/ea_rpi_modul
-try:
-    # Um die Bibliothek zu installieren: pip install eapi
-    import eamodul.hw 
-except:
-    pass
+#+end_example
 
-class FizzBuzzEAModul:
-    def __init__(self):
-        self.i = 0
-
-        eam = eamodul.hw.EAModul()
-        # switching on green LED only
-        eam.schalte_leds(False, False, True)
-        # register for events when button0 pressed
-        eam.taster_event_registrieren(0, self.taster0_gedrueckt)
-
-        # wait for taster event
-        while True:
-            pass
-
-    def taster0_gedrueckt(self, pin):
-        if self.i % 3 == 0 and self.i % 5 == 0:
-            print("fizzbuzz")
-        elif self.i % 3 == 0:
-            print("fizz")
-        elif self.i % 5 == 0:
-            print("buzz")
-        else:
-            print(self.i)
-
-        self.i += 1
-
-def fizzbuzz_eamodul():
-    FizzBuzzEAModul()
-
-
-#fizzbuzz_eamodul()
-
-** Kata 16 - mit Anbindung an eine Datenbank
+** Mit Anbindung an eine Datenbank
 
 #+BEGIN_SRC python -n :results output
 
@@ -765,7 +1383,7 @@ rm fizzbuzz.db
 
 #+RESULTS:
 
-** Kata 17 - mit docstring Dokumentation
+** Mit docstring Dokumentation
 #+BEGIN_SRC python -n :results output :exports both
 
 def fizzbuzz_dokumentiert(n):
@@ -798,7 +1416,6 @@ help(fizzbuzz_dokumentiert)
 Der Kommentar einer Methode oder Klasse steht immer als erster
 String in der Deklaration.
 
-
 Er kann im Python-Interpreter mit =help()= abgerufen werden:
 
 Außerdem gibt es das Modul =pydoc=, mit dem eine Dokumentation auf der
@@ -822,89 +1439,36 @@ pydoc -p 8080
 python -m pydoc -p 8080
 #+END_SRC
 
-** Kata 18 - als Chatbot 
+** Als Chatbot 
 
-Wir verwenden hier mit sopel (https://sopel.chat/ und
+Wir verwenden hier sopel als Web-Framework (https://sopel.chat/ und
 https://github.com/sopel-irc/sopel/wiki).
 
 Installation
 #+BEGIN_SRC sh :results output
-pip3 install sopel
+pip install sopel
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Collecting sopel
-  Using cached sopel-6.5.0.tar.gz
-Collecting xmltodict (from sopel)
-  Using cached xmltodict-0.10.2.tar.gz
-Collecting pytz (from sopel)
-  Using cached pytz-2017.2-py2.py3-none-any.whl
-Collecting praw (from sopel)
-  Using cached praw-4.4.0-py2.py3-none-any.whl
-Collecting pyenchant (from sopel)
-  Using cached pyenchant-1.6.8.tar.gz
-Collecting pygeoip (from sopel)
-  Using cached pygeoip-0.3.2-py2.py3-none-any.whl
-Collecting requests<2.11.0,>=2.0.0 (from sopel)
-  Using cached requests-2.10.0-py2.py3-none-any.whl
-Collecting prawcore<0.9,>=0.8.0 (from praw->sopel)
-  Using cached prawcore-0.8.0-py2.py3-none-any.whl
-Collecting update-checker>=0.16 (from praw->sopel)
-  Using cached update_checker-0.16-py2.py3-none-any.whl
-Building wheels for collected packages: sopel, xmltodict, pyenchant
-  Running setup.py bdist_wheel for sopel: started
-  Running setup.py bdist_wheel for sopel: finished with status 'error'
-  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/sopel/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmp67cr7d87pip-wheel- --python-tag cp35:
-  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
-     or: -c --help [cmd1 cmd2 ...]
-     or: -c --help-commands
-     or: -c cmd --help
-  
-  error: invalid command 'bdist_wheel'
-  
-  ----------------------------------------
-  Running setup.py clean for sopel
-  Running setup.py bdist_wheel for xmltodict: started
-  Running setup.py bdist_wheel for xmltodict: finished with status 'error'
-  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/xmltodict/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmpg713bh36pip-wheel- --python-tag cp35:
-  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
-     or: -c --help [cmd1 cmd2 ...]
-     or: -c --help-commands
-     or: -c cmd --help
-  
-  error: invalid command 'bdist_wheel'
-  
-  ----------------------------------------
-  Running setup.py clean for xmltodict
-  Running setup.py bdist_wheel for pyenchant: started
-  Running setup.py bdist_wheel for pyenchant: finished with status 'error'
-  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/pyenchant/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmpgjnh643npip-wheel- --python-tag cp35:
-  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
-     or: -c --help [cmd1 cmd2 ...]
-     or: -c --help-commands
-     or: -c cmd --help
-  
-  error: invalid command 'bdist_wheel'
-  
-  ----------------------------------------
-  Running setup.py clean for pyenchant
-Failed to build sopel xmltodict pyenchant
-Installing collected packages: xmltodict, pytz, requests, prawcore, update-checker, praw, pyenchant, pygeoip, sopel
-  Running setup.py install for xmltodict: started
-    Running setup.py install for xmltodict: finished with status 'done'
-  Running setup.py install for pyenchant: started
-    Running setup.py install for pyenchant: finished with status 'done'
-  Running setup.py install for sopel: started
-    Running setup.py install for sopel: finished with status 'done'
-Successfully installed praw-4.4.0 prawcore-0.8.0 pyenchant-1.6.8 pygeoip-0.3.2 pytz-2017.2 requests-2.10.0 sopel-6.5.0 update-checker-0.16 xmltodict-0.10.2
-#+end_example
+: Requirement already satisfied (use --upgrade to upgrade): sopel in ./fizzbuzz-ve/lib/python3.5/site-packages
+: Requirement already satisfied (use --upgrade to upgrade): xmltodict in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): pytz in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): praw in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): pyenchant in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): pygeoip in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): requests<2.11.0,>=2.0.0 in ./fizzbuzz-ve/lib/python3.5/site-packages (from sopel)
+: Requirement already satisfied (use --upgrade to upgrade): update-checker>=0.16 in ./fizzbuzz-ve/lib/python3.5/site-packages (from praw->sopel)
+: Requirement already satisfied (use --upgrade to upgrade): prawcore<0.9,>=0.8.0 in ./fizzbuzz-ve/lib/python3.5/site-packages (from praw->sopel)
 
 
 Konfiguration (in =~/.sopel=) erstellen: 
 #+BEGIN_SRC sh
 sopel
 #+END_SRC
+
+Nach ein paar Fragen, könnte sie wie folgt aussehen.
+
+#+INCLUDE: "~/.sopel/fizzbuzz.cfg" src sh
 
 Eigenen Bot in =~/.sopel/modules/fizzbuzz.py= erstellen
 
@@ -933,7 +1497,6 @@ Sopel starten
 #+BEGIN_SRC sh
 sopel
 #+END_SRC
-
            
 *** Mögliche Konversation
 Eine mögliche Chat-Konversation (Sopel-Befehle beginnen mit einem
@@ -955,14 +1518,38 @@ Punkt):
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 #+END_EXAMPLE
 
-** Kata 19 - auf einem Cluster (mit GNU parallel)
+** Auf einem Cluster (mit GNU parallel)
 
-Hierfür bedienen wir uns des Programmes GNU parallel.
+Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
+Rechner installiert sein oder lässt sich unter ubuntu leich nachinstallieren.
 
-Zuerst muss das Programm =fizzbuzz.py= auf jeden Rechner übertragen
-werden und der ssh-login gemäß der Beschreibung in =man parallel=
-eingerichtet worden sein. Dies wird im Abschnitt "EXAMPLE: Using
-remote computers" der man-page beschrieben.
+#+BEGIN_SRC 
+sudo apt-get install parallel
+#+END_SRC
+
+Wir nutzen die folgende Datei =fizzbuzz.py=.
+
+#+BEGIN_SRC python -n
+  def fizzbuzz_cluster():
+      import sys
+      i = int (sys.argv[1])
+
+      if i % 3 == 0 and i % 5 == 0:
+          print(i, "fizzbuzz")
+      elif i % 3 == 0:
+          print(i, "fizz")
+      elif i % 5 == 0:
+          print(i, "buzz")
+      else:
+          print(i, i)
+
+  fizzbuzz_cluster()
+#+END_SRC
+
+Zuerst muss die Datei =fizzbuzz.py= auf jeden Rechner im Cluster
+übertragen werden und der ssh-login gemäß der Beschreibung in =man
+parallel= eingerichtet worden sein. Dies wird im Abschnitt "EXAMPLE:
+Using remote computers" der man-page beschrieben.
 
 Nun folgt der Aufruf:
 
@@ -980,20 +1567,3 @@ an den Befehl =parallel=. Dieser verteilt die Aufrufe
 
 auf die Server server1, server2 und server3.
 
-#+BEGIN_SRC python -n
-
-def fizzbuzz_cluster():
-    import sys
-    i = int (sys.argv[1])
-
-    if i % 3 == 0 and i % 5 == 0:
-        print(i, "fizzbuzz")
-    elif i % 3 == 0:
-        print(i, "fizz")
-    elif i % 5 == 0:
-        print(i, "buzz")
-    else:
-        print(i, i)
-
-fizzbuzz_cluster()
-#+END_SRC
