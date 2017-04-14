@@ -44,14 +44,17 @@ def fizzbuzz_methode(n):
 
 def fizzbuzz_methode2(n):
     for i in range(n):
+        s = ""
+
         if i % 3 == 0:
             s = "fizz"
         if i % 5 == 0:
             s += "buzz"
         if len(s) == 0:
             s = i
-        print(s)
 
+        print(s)
+            
 #fizzbuzz_methode(20)
 #fizzbuzz_methode2(20)
 
@@ -103,7 +106,7 @@ def fizzbuzz_threading():
 
 # Kata 4 - mit einer anderen IDE
 """
-Mögliche Kandiaten wären:
+Mögliche Kandidaten wären:
 
 - IDLE
 - PyCharm
@@ -131,6 +134,7 @@ Mögliche Sprachen wären:
 # Kata 6 - als Client-Server Anwendung
 import socketserver
 import socket
+import threading
 
 class FizzBuzzHandler(socketserver.BaseRequestHandler):
     def handle(self):
