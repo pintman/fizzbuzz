@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>fizzbuzz</title>
-<!-- 2017-04-14 Fr 16:07 -->
+<!-- 2017-04-14 Fr 22:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -170,6 +170,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-20">1.20. Auf einem Cluster (mit GNU parallel)</a></li>
 <li><a href="#sec-1-21">1.21. In einem UML-Aktivitätsdiagramm</a></li>
 <li><a href="#sec-1-22">1.22. In einem UML-Sequenzdiagramm</a></li>
+<li><a href="#sec-1-23">1.23. In einem UML-Klassendiagramm</a></li>
 </ul>
 </li>
 </ul>
@@ -1245,11 +1246,54 @@ ist eine Zahl oder ein String.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-1-23" class="outline-3">
+<h3 id="sec-1-23"><span class="section-number-3">1.23</span> In einem UML-Klassendiagramm</h3>
+<div class="outline-text-3" id="text-1-23">
+
+<div class="figure">
+<p><img src="fizzbuzz-klassendiagramm.png" alt="fizzbuzz-klassendiagramm.png" />
+</p>
+</div>
+
+<p>
+Dies Klasse könnte wie folgt verwendet werden.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
+<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.num = n
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 6: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.num % 3 == 0 <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
+<span class="linenr"> 7: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.num % 3 == 0:
+<span class="linenr"> 9: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
+<span class="linenr">11: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">12: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">13: </span>            <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.num
+<span class="linenr">14: </span>
+<span class="linenr">15: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(2)
+<span class="linenr">16: </span><span style="color: #a020f0;">print</span>(2, fb.fizzbuzz())
+<span class="linenr">17: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(15)
+<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(15, fb.fizzbuzz())
+</pre>
+</div>
+
+<pre class="example">
+2 2
+15 fizzbuzz
+</pre>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-14 Fr 16:07</p>
+<p class="date">Created: 2017-04-14 Fr 22:27</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
