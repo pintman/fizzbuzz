@@ -1,0 +1,999 @@
+* FizzBuzz
+
+Bei FizzBuzz handelt es sich um ein Zählspiel, bei dem die Zahlen bis 100
+aufgezählt werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
+durch 5 teilbar, wird "buzz" gesagt. Ist sie durch 3 und 5 teilbar, wird
+"fizzbuzz" gesagt. Ansonsten wird die Zahl selbst gesagt.
+
+Wir versuchen uns auf dem Blatt mit einer Aufwärmübung (Kata).
+
+** Kata 0 - auf Papier
+
+#+BEGIN_EXAMPLE
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+END_EXAMPLE
+
+** Kata 1 - mit einer Methode
+Hier ist eine erste einfache Variante.
+
+#+BEGIN_SRC python -n :results output :exports both
+  def fizzbuzz_methode(n):
+      for i in range(n):
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
+          else:
+              print(i)
+
+  fizzbuzz_methode(20)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+Das nächste Beispiel wandelt die obige Variante ab, erzeugt aber
+dieselbe Ausgabe.
+
+#+BEGIN_SRC python -n :results output
+  def fizzbuzz_methode2(n):
+      for i in range(n):
+          s = ""
+
+          if i % 3 == 0:
+              s = "fizz"
+          if i % 5 == 0:
+              s += "buzz"
+          if len(s) == 0:
+              s = i
+
+          print(s)
+
+  fizzbuzz_methode2(20)
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+** Kata 2 - ohne Verwendung einer Schleife (rekursiv)
+
+#+BEGIN_SRC python -n :results output
+
+def fizzbuzz_rekursiv(i):
+    if i == 0:
+        return
+    else:
+        fizzbuzz_rekursiv(i-1)
+
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        elif i % 3 == 0:
+            print("fizz")
+        elif i % 5 == 0:
+            print("buzz")
+        else:
+            print(i)
+
+
+fizzbuzz_rekursiv(20)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+buzz
+#+end_example
+
+** Kata 3 - mit Hilfe von nebenläufigen Threads
+
+#+BEGIN_SRC python -n :results output
+
+import threading
+
+def fizzbuzz_thread(i):
+    if i % 3 == 0 and i % 5 == 0:
+        print("fizzbuzz")
+    elif i % 3 == 0:
+        print("fizz")
+    elif i % 5 == 0:
+        print("buzz")
+    else:
+        print(i)
+
+def fizzbuzz_threading():
+    for i in range(20):
+        th = threading.Thread(target=fizzbuzz_thread, args=(i,))
+        th.start()
+        # Wait for thread to finish
+        while th.isAlive():
+            pass
+
+fizzbuzz_threading()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+** Kata 4 - mit einer anderen IDE
+
+Mögliche Kandidaten wären:
+
+- IDLE
+- PyCharm
+- Emacs
+- vim
+- Atom
+
+** Kata 5 - in einer anderen Programmiersprache
+
+Mögliche Sprachen wären:
+
+- Java
+- Javascript
+- C#
+- C
+- C++
+- Bash
+
+** Kata 6 - als Client-Server Anwendung
+
+#+BEGIN_SRC python -n :results output
+
+import socketserver
+import socket
+import threading
+
+class FizzBuzzHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        # received bytes from request and take the first one
+        i = self.request.recv(1)[0]
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        elif i % 3 == 0:
+            print("fizz")
+        elif i % 5 == 0:
+            print("buzz")
+        else:
+            print(i)
+
+class FizzBuzzClient:
+    def __init__(self, ip, port):
+        self.socket = (ip, port)
+
+    def send(self, i):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect(self.socket)
+            sock.sendall(bytes([i]))
+
+def fizzbuzz_client_server():
+    # Starting the server in a separate thread
+    server_socket = ("127.0.0.1", 8081)
+    server = socketserver.TCPServer(server_socket, FizzBuzzHandler)
+    th = threading.Thread(target=server.serve_forever)
+    th.start()
+    # starting the client
+    cl = FizzBuzzClient(*server_socket)
+    for i in range(20):
+        cl.send(i)
+
+fizzbuzz_client_server()
+
+#+END_SRC
+
+#+RESULTS:
+
+** Kata 7 - mit einer grafischen Oberfläche (GUI)
+
+#+BEGIN_SRC python -n
+
+import tkinter
+
+class GUI:
+    def __init__(self):
+        self.i = 0
+
+        root = tkinter.Tk()
+        btn = tkinter.Button(root, text="next", command=self.button_click)
+        btn.pack()
+        self.ent = tkinter.Entry(root)
+        self.ent.pack()
+        # entering main event loop
+        root.mainloop()
+
+    def button_click(self):
+        i = self.i
+        # clear the entry field
+        self.ent.delete(0, tkinter.END)
+
+        if i % 3 == 0 and i % 5 == 0:
+            self.ent.insert(0, "fizzbuzz")
+        elif i % 3 == 0:
+            self.ent.insert(0, "fizz")
+        elif i % 5 == 0:
+            self.ent.insert(0, "buzz")
+        else:
+            self.ent.insert(0, i)
+
+        self.i += 1
+
+def fizzbuzz_gui():
+    GUI()
+
+
+fizzbuzz_gui()
+
+#+END_SRC
+
+#+RESULTS:
+: None
+
+** Kata 8 - Objekt-Orientiert: Klassen und Objekte verwenden
+
+#+BEGIN_SRC python -n :results output
+
+class Fizzer:
+    def __init__(self, n):
+        pass
+    def print(self):
+        print("Fizz")
+
+class Buzzer:
+    def __init__(self, n):
+        pass
+    def print(self):
+        print("Buzz")
+
+class FizzBuzzer:
+    def __init__(self, n):
+        pass
+    def print(self):
+        print("FizzBuzz")
+
+class Number:
+    def __init__(self, n):
+        self.n = n
+    def print(self):
+        print(self.n)
+
+class FizzBuzzNumber:
+    def __init__(self, i):
+        if i % 3 == 0 and i % 5 == 0:
+            self.printer = FizzBuzzer(i)
+        elif i % 3 == 0:
+            self.printer = Fizzer(i)
+        elif i % 5 == 0:
+            self.printer = Buzzer(i)
+        else:
+            self.printer = Number(i)
+
+    def print(self):
+        self.printer.print()
+
+def fizzbuzz_objektorientiert():
+    for i in range(20):
+        f = FizzBuzzNumber(i)
+        f.print()
+
+fizzbuzz_objektorientiert()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+FizzBuzz
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+#+end_example
+
+** Kata 9 - objekt-orientiert mit Vererbung
+class Numberer:
+    def printit(self, i):
+        print(i)
+
+class BuzzingNumberer(Numberer):
+    def printit(self, i):
+        if i % 5 == 0:
+            print("buzz")
+        else:
+            super().printit(i)
+
+class FizzingBuzzingNumberer(BuzzingNumberer):
+    def printit(self, i):
+        if i % 3 == 0:
+            print("fizz")
+        else:
+            super().printit(i)
+
+class FizzBuzzingFizzingBuzzingNumberer(FizzingBuzzingNumberer):
+    def printit(self, i):
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        else:
+            super().printit(i)
+
+def fizzbuzz_objektorientiert2():
+    for i in range(20):
+        fb = FizzBuzzingFizzingBuzzingNumberer()
+        fb.printit(i)
+
+#fizzbuzz_objektorientiert2()
+
+** Kata 10 - funktional mit map, reduce und lambda-Ausdrücken
+
+#+BEGIN_SRC python -n :results output
+
+import functools
+
+def by(number):
+    """Return a function to prove divisibility by number."""
+    return (lambda i: i % number == 0)
+
+def fizzbuzz_func(i):
+    # create two functions to test for divisibility
+    by5 = by(5)
+    by3 = by(3)
+
+    if by5(i) and by3(i):
+        return "fizzbuzz"
+    elif by3(i):
+        return "fizz"
+    elif by5(i):
+        return "buzz"
+    else:
+        return i
+
+def fizzbuzz_funktional():
+    # apply fizzbuzz_func to numbers
+    res = map(fizzbuzz_func, range(20))
+
+    # reduce the result into a string
+    s = functools.reduce(
+        lambda acc, i: acc + str(i) + "\n", # updating function
+        res, # values to be reduced
+        "") # initial value
+
+    print(s)
+
+fizzbuzz_funktional()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+
+#+end_example
+
+** Kata 11 - als Webanwendung (mit bottle)
+
+Bottle ist ein Webframework, das leicht mit =pip= installiert werden
+kann.
+
+#+BEGIN_SRC sh :results output
+pip install bottle
+#+END_SRC
+
+#+RESULTS:
+: Requirement already satisfied (use --upgrade to upgrade): bottle in ./fizzbuzz-ve/lib/python3.5/site-packages
+
+#+BEGIN_SRC python -n
+
+import bottle
+
+@bottle.route("/fizzbuzz/<number:int>")
+def fizzbuzz_web_route(number):    
+    res = []
+    for i in range(number):
+        if i % 3 == 0 and i % 5 == 0:
+            res.append("fizzbuzz")
+        elif i % 3 == 0:
+            res.append("fizz")
+        elif i % 5 == 0:
+            res.append("buzz")
+        else:
+            res.append(i)
+
+    html = """
+        <!DOCTYPE html>
+        <html>
+          <body>
+            <h1>FizzBuzz Numbers up to {{max}}</h1>
+            <table>
+            % for r in res:
+              <tr><td> {{r}} </td></tr>
+            %end
+            </table>
+          </body>
+        </html>
+        """
+
+    return bottle.template(html, max=number, res=res)
+
+def fizzbuzz_web():
+    bottle.run(host="127.0.0.1", port=8081)
+
+fizzbuzz_web()
+#+END_SRC
+
+** Kata 12 - in git-repo einchecken
+
+#+BEGIN_SRC sh -n :results output
+mkdir /tmp/fizzbuzz_repo
+# Ein Verzeichnis erstellen und den Quelltext kopieren
+cp fizzbuzz.py /tmp/fizzbuzz_repo
+cd /tmp/fizzbuzz_repo
+
+# Repo initialisieren
+git init
+ls -al
+
+# Dateien für commit vormerken
+git add fizzbuzz.py
+
+# Dateien in Repo einchecken
+git commit -m "commit fizzbuzz.py" fizzbuzz.py
+
+# Logfile anschauen
+git log
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Reinitialisierte existierendes Git-Repository in /tmp/fizzbuzz_repo/.git/
+insgesamt 28
+drwxr-xr-x  3 marco marco  4096 Apr 14 09:24 .
+drwxrwxrwt 23 root  root   4096 Apr 14 09:32 ..
+-rw-r--r--  1 marco marco 14322 Apr 14 09:32 fizzbuzz.py
+drwxr-xr-x  8 marco marco  4096 Apr 14 09:32 .git
+Auf Branch master
+nichts zu committen, Arbeitsverzeichnis unverändert
+commit fcc325165e397deb540afa3ad123c260d5347531
+Author: Marco Bakera <marco@bakera.de>
+Date:   Fri Apr 14 09:25:33 2017 +0200
+
+    commit fizzbuzz.py
+#+end_example
+
+** Kata 13 - als installierbares Programm
+# s. setup.py
+
+** Kata 14 - als getestetes Programm (mit unittest und doctests)
+import unittest
+
+class FizzBuzzClass:
+    def fizzbuzz(self, i):
+        """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
+        einen doctest.
+
+        Kommentare von Methoden lassen sich auch testen. Der folgende
+        Quelltext wird hierfür ausgeführt, sobald das doctest-Modul aufgerufen
+        wird:
+
+        $ python3 -m doctest fizzbuzz.py
+
+        Hier kommt der Test:
+
+        >>> fbc = FizzBuzzClass()
+        >>> fbc.fizzbuzz(3)
+        'fizz'
+        >>> fbc.fizzbuzz(5)
+        'buzz'
+        >>> fbc.fizzbuzz(10)
+        'buzz'
+        >>> fbc.fizzbuzz(11)
+        11
+
+        """
+        if i % 3 == 0 and i % 5 == 0:
+            return "fizzbuzz"
+        elif i % 3 == 0:
+            return "fizz"
+        elif i % 5 == 0:
+            return "buzz"
+        else:
+            return i
+
+class FizzBuzzClassTest(unittest.TestCase):
+    """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
+
+    Hierfür testet sie mögliche Eingaben und Ausgaben."""
+
+    def test_fizzbuzz(self):
+        fb = FizzBuzzClass()
+
+        self.assertEqual(fb.fizzbuzz(3), "fizz")
+        self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
+        self.assertEqual(fb.fizzbuzz(9), "fizz")
+        self.assertEqual(fb.fizzbuzz(10), "buzz")
+
+
+def fizzbuzz_getestet():
+    # Alle Tests ausführen.
+    unittest.main()
+
+#fizzbuzz_getestet()
+
+** Kata 15 - mit einem EA-Modul ansteuern
+# https://github.com/pintman/ea_rpi_modul
+try:
+    # Um die Bibliothek zu installieren: pip install eapi
+    import eamodul.hw 
+except:
+    pass
+
+class FizzBuzzEAModul:
+    def __init__(self):
+        self.i = 0
+
+        eam = eamodul.hw.EAModul()
+        # switching on green LED only
+        eam.schalte_leds(False, False, True)
+        # register for events when button0 pressed
+        eam.taster_event_registrieren(0, self.taster0_gedrueckt)
+
+        # wait for taster event
+        while True:
+            pass
+
+    def taster0_gedrueckt(self, pin):
+        if self.i % 3 == 0 and self.i % 5 == 0:
+            print("fizzbuzz")
+        elif self.i % 3 == 0:
+            print("fizz")
+        elif self.i % 5 == 0:
+            print("buzz")
+        else:
+            print(self.i)
+
+        self.i += 1
+
+def fizzbuzz_eamodul():
+    FizzBuzzEAModul()
+
+
+#fizzbuzz_eamodul()
+
+** Kata 16 - mit Anbindung an eine Datenbank
+
+#+BEGIN_SRC python -n :results output
+
+import sqlite3
+
+def fizzbuzz_insert_into_db():
+    conn = sqlite3.connect("fizzbuzz.db")
+    c = conn.cursor()
+    c.execute("CREATE TABLE IF NOT EXISTS fizzbuzz(nr int, ergebnis text)")
+
+    for i in range(20):
+        erg = ""
+        if i % 3 == 0 and i % 5 == 0:
+            erg = "fizzbuzz"
+        elif i % 3 == 0:
+            erg = "fizz"
+        elif i % 5 == 0:
+            erg = "buzz"
+        else:
+            erg = i
+
+        c.execute("INSERT INTO fizzbuzz VALUES(?,?)", (i,erg))
+
+    conn.commit()
+    conn.close()
+
+def fizzbuzz_select_from_db():
+    conn = sqlite3.connect("fizzbuzz.db")
+    c = conn.cursor()
+    rows = c.execute("SELECT nr, ergebnis FROM fizzbuzz")
+
+    print("Nr.\tErgebnis")
+    for i,erg in rows:
+        print(i, "    ", erg)
+
+    conn.close()
+
+fizzbuzz_insert_into_db()
+fizzbuzz_select_from_db()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Nr.	Ergebnis
+0      fizzbuzz
+1      1
+2      2
+3      fizz
+4      4
+5      buzz
+6      fizz
+7      7
+8      8
+9      fizz
+10      buzz
+11      11
+12      fizz
+13      13
+14      14
+15      fizzbuzz
+16      16
+17      17
+18      fizz
+19      19
+#+end_example
+
+Nach dem Versuch entsteht eine Datei =fizzbuzz.db=, die man mit
+=sqlite= befragen oder auch einfach kopieren und löschen kann.
+
+#+BEGIN_SRC sh
+rm fizzbuzz.db
+#+END_SRC
+
+#+RESULTS:
+
+** Kata 17 - mit docstring Dokumentation
+#+BEGIN_SRC python -n :results output :exports both
+
+def fizzbuzz_dokumentiert(n):
+    """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+    wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+    und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""
+
+    for i in range(n):
+        if i % 3 == 0 and i % 5 == 0:
+            print("fizzbuzz")
+        elif i % 3 == 0:
+            print("fizz")
+        elif i % 5 == 0:
+            print("buzz")
+        else:
+            print(i)
+
+help(fizzbuzz_dokumentiert)
+#+END_SRC
+
+#+RESULTS:
+: Help on function fizzbuzz_dokumentiert in module __main__:
+: 
+: fizzbuzz_dokumentiert(n)
+:     Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+:     wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+:     und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+: 
+
+Der Kommentar einer Methode oder Klasse steht immer als erster
+String in der Deklaration.
+
+
+Er kann im Python-Interpreter mit =help()= abgerufen werden:
+
+Außerdem gibt es das Modul =pydoc=, mit dem eine Dokumentation auf der
+Kommandozeile oder über einen Webserver zur Verfügung steht.
+
+#+BEGIN_SRC sh
+pydoc3 fizzbuzz.fizzbuzz_dokumentiert
+python -m pydoc fizzbuzz.fizzbuzz_dokumentiert
+#+END_SRC
+
+#+RESULTS:
+: problem in fizzbuzz - ImportError: No module named 'sopel'
+
+Webserver starten auf Port 8080 mit Dokumentation unter
+http://localhost:8080
+
+#+BEGIN_SRC sh
+pydoc -p 8080
+
+# alternativ:
+python -m pydoc -p 8080
+#+END_SRC
+
+** Kata 18 - als Chatbot 
+
+Wir verwenden hier mit sopel (https://sopel.chat/ und
+https://github.com/sopel-irc/sopel/wiki).
+
+Installation
+#+BEGIN_SRC sh :results output
+pip3 install sopel
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Collecting sopel
+  Using cached sopel-6.5.0.tar.gz
+Collecting xmltodict (from sopel)
+  Using cached xmltodict-0.10.2.tar.gz
+Collecting pytz (from sopel)
+  Using cached pytz-2017.2-py2.py3-none-any.whl
+Collecting praw (from sopel)
+  Using cached praw-4.4.0-py2.py3-none-any.whl
+Collecting pyenchant (from sopel)
+  Using cached pyenchant-1.6.8.tar.gz
+Collecting pygeoip (from sopel)
+  Using cached pygeoip-0.3.2-py2.py3-none-any.whl
+Collecting requests<2.11.0,>=2.0.0 (from sopel)
+  Using cached requests-2.10.0-py2.py3-none-any.whl
+Collecting prawcore<0.9,>=0.8.0 (from praw->sopel)
+  Using cached prawcore-0.8.0-py2.py3-none-any.whl
+Collecting update-checker>=0.16 (from praw->sopel)
+  Using cached update_checker-0.16-py2.py3-none-any.whl
+Building wheels for collected packages: sopel, xmltodict, pyenchant
+  Running setup.py bdist_wheel for sopel: started
+  Running setup.py bdist_wheel for sopel: finished with status 'error'
+  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/sopel/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmp67cr7d87pip-wheel- --python-tag cp35:
+  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
+     or: -c --help [cmd1 cmd2 ...]
+     or: -c --help-commands
+     or: -c cmd --help
+  
+  error: invalid command 'bdist_wheel'
+  
+  ----------------------------------------
+  Running setup.py clean for sopel
+  Running setup.py bdist_wheel for xmltodict: started
+  Running setup.py bdist_wheel for xmltodict: finished with status 'error'
+  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/xmltodict/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmpg713bh36pip-wheel- --python-tag cp35:
+  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
+     or: -c --help [cmd1 cmd2 ...]
+     or: -c --help-commands
+     or: -c cmd --help
+  
+  error: invalid command 'bdist_wheel'
+  
+  ----------------------------------------
+  Running setup.py clean for xmltodict
+  Running setup.py bdist_wheel for pyenchant: started
+  Running setup.py bdist_wheel for pyenchant: finished with status 'error'
+  Complete output from command /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/bin/python3.5 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-48y92xit/pyenchant/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" bdist_wheel -d /tmp/tmpgjnh643npip-wheel- --python-tag cp35:
+  usage: -c [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
+     or: -c --help [cmd1 cmd2 ...]
+     or: -c --help-commands
+     or: -c cmd --help
+  
+  error: invalid command 'bdist_wheel'
+  
+  ----------------------------------------
+  Running setup.py clean for pyenchant
+Failed to build sopel xmltodict pyenchant
+Installing collected packages: xmltodict, pytz, requests, prawcore, update-checker, praw, pyenchant, pygeoip, sopel
+  Running setup.py install for xmltodict: started
+    Running setup.py install for xmltodict: finished with status 'done'
+  Running setup.py install for pyenchant: started
+    Running setup.py install for pyenchant: finished with status 'done'
+  Running setup.py install for sopel: started
+    Running setup.py install for sopel: finished with status 'done'
+Successfully installed praw-4.4.0 prawcore-0.8.0 pyenchant-1.6.8 pygeoip-0.3.2 pytz-2017.2 requests-2.10.0 sopel-6.5.0 update-checker-0.16 xmltodict-0.10.2
+#+end_example
+
+
+Konfiguration (in =~/.sopel=) erstellen: 
+#+BEGIN_SRC sh
+sopel
+#+END_SRC
+
+Eigenen Bot in =~/.sopel/modules/fizzbuzz.py= erstellen
+
+#+BEGIN_SRC python -n
+from sopel import module
+
+@module.commands('fizzbuzz')
+def echo(bot, trigger):
+    # to everybody:   bot.say("...")
+    # to querstioner: bot.reply("...")
+
+    # take and convert argument
+    i = int(trigger.group(2))
+
+    if i % 3 == 0 and i % 5 == 0:
+        bot.reply("fizzbuzz")
+    elif i % 3 == 0:
+        bot.reply("fizz")
+    elif i % 5 == 0:
+        bot.reply("buzz")
+    else:
+        bot.reply(i)
+#+END_SRC
+
+Sopel starten
+#+BEGIN_SRC sh
+sopel
+#+END_SRC
+
+           
+*** Mögliche Konversation
+Eine mögliche Chat-Konversation (Sopel-Befehle beginnen mit einem
+Punkt):
+
+#+BEGIN_EXAMPLE
+= FizzBuzzBot has joined
+<fizzbuzz_owner> .fizzbuzz 1
+<FizzBuzzBot>    fizzbuzz_owner: 1
+<fizzbuzz_owner> .fizzbuzz 2
+<FizzBuzzBot>    fizzbuzz_owner: 2
+<fizzbuzz_owner> .fizzbuzz 3
+<FizzBuzzBot>    fizzbuzz_owner: fizz
+<fizzbuzz_owner> .fizzbuzz 5
+<FizzBuzzBot>    fizzbuzz_owner: buzz
+<fizzbuzz_owner> .fizzbuzz 14
+<FizzBuzzBot>    fizzbuzz_owner: 14
+<fizzbuzz_owner> .fizzbuzz 15
+<FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
+#+END_EXAMPLE
+
+** Kata 19 - auf einem Cluster (mit GNU parallel)
+
+Hierfür bedienen wir uns des Programmes GNU parallel.
+
+Zuerst muss das Programm =fizzbuzz.py= auf jeden Rechner übertragen
+werden und der ssh-login gemäß der Beschreibung in =man parallel=
+eingerichtet worden sein. Dies wird im Abschnitt "EXAMPLE: Using
+remote computers" der man-page beschrieben.
+
+Nun folgt der Aufruf:
+
+#+BEGIN_SRC sh
+seq 20 | parallel --sshlogin server1,server2,server3 python3 fizzbuzz.py
+#+END_SRC
+
+=seq 20= generiert die Zahlen 1 bis 20 und sendet sie über eine Pipe (=|=)
+an den Befehl =parallel=. Dieser verteilt die Aufrufe
+
+- =python3 fizzbuzz.py 1=,
+- =python3 fizzbuzz.py 2=,
+- =python3 fizzbuzz.py 3=,
+- =python3 fizzbuzz.py 4=',
+
+auf die Server server1, server2 und server3.
+
+#+BEGIN_SRC python -n
+
+def fizzbuzz_cluster():
+    import sys
+    i = int (sys.argv[1])
+
+    if i % 3 == 0 and i % 5 == 0:
+        print(i, "fizzbuzz")
+    elif i % 3 == 0:
+        print(i, "fizz")
+    elif i % 5 == 0:
+        print(i, "buzz")
+    else:
+        print(i, i)
+
+fizzbuzz_cluster()
+#+END_SRC
