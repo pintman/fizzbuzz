@@ -1140,7 +1140,6 @@ Sopel starten
 sopel
 #+END_SRC
            
-*** Mögliche Konversation
 Eine mögliche Chat-Konversation (Sopel-Befehle beginnen mit einem
 Punkt):
 
@@ -1159,6 +1158,7 @@ Punkt):
 <fizzbuzz_owner> .fizzbuzz 15
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 #+END_EXAMPLE
+
 
 ** Auf einem Cluster (mit GNU parallel)
 
