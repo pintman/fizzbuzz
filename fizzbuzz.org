@@ -1598,10 +1598,58 @@ endwhile  (nein)
 stop
 
 @enduml
-
-
 #+END_SRC
 
 #+RESULTS:
 [[file:fizzbuzz-aktdiag.png]]
+
+** In einem UML-Sequenzdiagramm
+
+Der FizzbuzzServer hat eine Methode =fizzbuzz(zahl: int): answer=, die
+von einem Client mit einer Zahl aufgerufen werden kann. Die Antwort
+ist eine Zahl oder ein String.
+
+#+BEGIN_SRC plantuml :file fizzbuzz-seqdiag.png
+@startuml
+Client -> FizzbuzzServer: fizzbuzz(1)
+FizzbuzzServer --> Client: 1
+Client -> Client: Ausgabe 1
+
+Client -> FizzbuzzServer: fizzbuzz(2)
+FizzbuzzServer --> Client: 2
+Client -> Client: Ausgabe 2
+
+Client -> FizzbuzzServer: fizzbuzz(3)
+FizzbuzzServer --> Client: "fizz"
+Client -> Client: Ausgabe "fizz"
+
+Client -> FizzbuzzServer: fizzbuzz(5)
+FizzbuzzServer --> Client: "buzz"
+Client -> Client: Ausgabe "buzz"
+
+Client -> FizzbuzzServer: fizzbuzz(15)
+FizzbuzzServer --> Client: "fizzbuzz"
+Client -> Client: Ausgabe "fizzbuzz"
+
+Client -> FizzbuzzServer: fizzbuzz(zahl)
+
+alt zahl % 3 == 0 and zahl % 5 == 0
+    FizzbuzzServer --> Client: "fizzbuzz"
+    Client -> Client: Ausgabe "fizzbuzz"
+else zahl % 3 == 0
+    FizzbuzzServer --> Client: "fizz"
+    Client -> Client: Ausgabe "fizz"
+else zahl % 5 == 0
+    FizzbuzzServer --> Client: "buzz"
+    Client -> Client: Ausgabe "buzz"
+else sonst
+    FizzbuzzServer --> Client: zahl
+    Client -> Client: Ausgabe zahl
+
+end
+@enduml
+#+END_SRC
+
+#+RESULTS:
+[[file:fizzbuzz-seqdiag.png]]
 
