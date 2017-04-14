@@ -620,7 +620,7 @@ git log
 Zunächst muss eine Datei =setup.py= angelegt werden. Sie könnte
 folgenden Inhalt haben:
 
-#+INCLUDE: "~/proj/fizzbuzz/setup.py" src python
+#+INCLUDE: "~/proj/fizzbuzz/setup.py" src python -n
 
 Das Programm kann dann mit folgenden Befehlen installiert oder
 erstellt werden:
@@ -793,380 +793,20 @@ pip install eapi
 
           self.i += 1
 
-  def fizzbuzz_eamodul():
-      FizzBuzzEAModul()
+  FizzBuzzEAModul()
 
-  fizzbuzz_eamodul()
 #+END_SRC
 
 #+RESULTS:
 
 Eine Hilfe zu dem Modul lässt sich über pydoc abrufen.
 
-#+BEGIN_SRC sh :results output
-python -m pydoc eapi.hw
+#+BEGIN_SRC sh :results output :exports both
 python -m pydoc eapi.hw.EAModul
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-Help on module eapi.hw in eapi:
-
-NAME
-    eapi.hw
-
-DESCRIPTION
-    Ein Modul für die Verwendung des Eingabe-Ausgabe-Moduls für den Raspberry
-    Pi.
-    
-    Es besteht aus der Hauptklasse EAModul, die für die Ansteuerung vorgesehen
-    ist. Hierfür existieren verschiedene Demos, die von der Kommandozeile aus
-    aufgerufen werden können:
-    
-      $ python3 -m eapi.hw
-    
-    Mit Hilfe der Klasse DimmbaresEAModul können die LEDs auf dem Board gedimmt
-    werden.
-    
-    Das folgende Beispiel zeigt eine mögliche Verwendung:
-    
-    >>> from eapi.hw import EAModul
-    >>> ea = EAModul()
-    
-    Nun können wir ein paar LEDs anschalten
-    
-    >>> ea.schalte_led(EAModul.LED_ROT, 1)
-    >>> ea.schalte_led(EAModul.LED_GELB, 1)
-    >>> ea.schalte_led(EAModul.LED_GRUEN, 1)
-    
-    und wieder ausschalten
-    
-    >>> ea.schalte_led(EAModul.LED_ROT, 0)
-    >>> ea.schalte_led(EAModul.LED_GELB, 0)
-    >>> ea.schalte_led(EAModul.LED_GRUEN, 0)
-    
-    Der Wert des Tasters kann auch abgefragt werden.
-    
-    >>> taster0_gedrueckt = ea.taster_gedrueckt(0)
-    >>> taster1_gedrueckt = ea.taster_gedrueckt(1)
-    
-    Zum Schluss fahren wir das Modul wieder herunter:
-    
-    >>> ea.cleanup()
-    
-    Schaue in die Dokumentation der anderen Methoden, um weitere
-    Quelltextbeispiele zu finden.
-
-CLASSES
-    builtins.object
-        EAModul
-            DimmbaresEAModul
-    
-    class DimmbaresEAModul(EAModul)
-     |  Ein Erweiterung der Klasse EAModul, die dimmbare LEDs unterstüzt.
-     |  
-     |  Im Unterschied zum EAModul können über die Klasse DimmbaresEAModul die LEDs
-     |  mit Hilfe von PWM in der Helligkeit reguliert werden. Hierbei wurde die
-     |  Methode schalte_led so angepasst, dass sie nun auch Werte zwischen 0.0 und
-     |  1.0 annehmen kann.
-     |  
-     |  >>> from eapi.hw import DimmbaresEAModul
-     |  >>> ea = DimmbaresEAModul()
-     |  
-     |  Nach dem Erstellen eines Moduls, können die LEDs auch mit Werten zwischen
-     |  0.0 und 1.0 geschaltet werden. Sie leuchten dann weniger hell.
-     |  
-     |  >>> ea.schalte_led(EAModul.LED_ROT, 0.5)
-     |  >>> ea.schalte_led(EAModul.LED_GELB, 0.8)
-     |  >>> ea.schalte_led(EAModul.LED_GRUEN, 0.2)
-     |  
-     |  Method resolution order:
-     |      DimmbaresEAModul
-     |      EAModul
-     |      builtins.object
-     |  
-     |  Methods defined here:
-     |  
-     |  __init__(self, pin_taster0=29, pin_taster1=31, pin_led_rot=33, pin_led_gelb=35, pin_led_gruen=37)
-     |      Die PINs des Moduls werden konfiguriert.
-     |      
-     |      Pins der LED werden als Ausgänge, und Pins der Taster als Eingänge
-     |      konfiguriert. Wenn keine PINS angegeben werden, werden die PINs
-     |      oberhalb des GND Pins links unten verwendet.
-     |      
-     |      >>> from eapi.hw import DimmbaresEAModul
-     |      
-     |      >>> ea = DimmbaresEAModul()
-     |      >>> ea.cleanup()
-     |  
-     |  schalte_led(self, led_farbe, helligkeit)
-     |      Schalte die LED mit der gegebenen Nummer ein (1) oder aus (0).
-     |      
-     |      Der Wert für led_farbe ist LED_ROT, LED_GELB oder LED_GRUEN.
-     |      
-     |      Wenn für helligkeit eine Kommazahl zwischen 0 und 1 angegeben
-     |      wird, lässt sich die LED dimmen: ein Wert von 0.5 lässt die
-     |      LED nur mit halber Kraft leuchten.
-     |      
-     |      Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> from eapi.hw import DimmbaresEAModul
-     |      
-     |      >>> ea_modul = DimmbaresEAModul()
-     |      >>> ea_modul.schalte_led(EAModul.LED_ROT, 1)
-     |      >>> ea_modul.schalte_led(EAModul.LED_GELB, 0)
-     |      >>> ea_modul.schalte_led(EAModul.LED_GRUEN, 0.5)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  ----------------------------------------------------------------------
-     |  Methods inherited from EAModul:
-     |  
-     |  cleanup(self)
-     |      Setzt alle Pins des Pi wieder in den Ausgangszustand.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      >>> ea = EAModul()
-     |      >>> ea.cleanup()
-     |  
-     |  led_event_registrieren(self, led_farbe, methode)
-     |      Registriert eine Methode, die ausgeführt wird, sobald die
-     |      entsprechende LED ihren Wert ändert.
-     |      
-     |      Die Methode wird über alle Veränderungen an der LED informiert. Dazu
-     |      wird die übergebene Methode aufgerufen.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      >>> def update_rote_led(neuer_wert):
-     |      ...    print("update: Status der roten LED hat sich geändert.")
-     |      ...    print("Neuer Wert:", neuer_wert)
-     |      
-     |      >>> ea = EAModul()
-     |      >>> ea.led_event_registrieren(EAModul.LED_ROT, update_rote_led)
-     |      
-     |      Nun wird die Update-Methode aufgerufen, sobald sich der Wert der LED
-     |      ändert.
-     |      
-     |      >>> ea.schalte_led(EAModul.LED_ROT, 1)
-     |      update: Status der roten LED hat sich geändert.
-     |      Neuer Wert: 1
-     |      
-     |      >>> ea.schalte_led(EAModul.LED_ROT, 0)
-     |      update: Status der roten LED hat sich geändert.
-     |      Neuer Wert: 0
-     |      
-     |      >>> ea.cleanup()
-     |  
-     |  schalte_leds(self, rot_anaus, gelb_anaus, gruen_anaus)
-     |      Schalte alle drei LEDs zu gleichen Zeit an oder aus.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> ea_modul.schalte_leds(True, False, True)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  taster_event_registrieren(self, taster_nr, methode)
-     |      Registriere eine Methode, die bei Betätigung eines Tasters
-     |      ausgeführt wird.
-     |      
-     |      Die übergebene Methode muss ein Argument haben und wird mit der
-     |      Pin-Nur des Tasters aufgerufen, sobald der Taster gedrückt 
-     |      wird. Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> def taster0_gedrueckt(pin):
-     |      ...  print("Taster 0 wurde gedrückt.")
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> ea_modul.taster_event_registrieren(0, taster0_gedrueckt)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  taster_gedrueckt(self, num=0)
-     |      Liest den Wert des Tasters mit der gegebenen Nummer aus und gibt den
-     |      Wert zurück. Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      >>> import time
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> while not ea_modul.taster_gedrueckt(1):
-     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 1)
-     |      ...   time.sleep(0.2)
-     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 0)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data descriptors inherited from EAModul:
-     |  
-     |  __dict__
-     |      dictionary for instance variables (if defined)
-     |  
-     |  __weakref__
-     |      list of weak references to the object (if defined)
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data and other attributes inherited from EAModul:
-     |  
-     |  LED_GELB = 1
-     |  
-     |  LED_GRUEN = 2
-     |  
-     |  LED_ROT = 0
-    
-    class EAModul(builtins.object)
-     |  Die Klasse EAModul hilft bei der Ansteuerung eines Eingabe-Ausgabe-Moduls
-     |  für den Raspberry Pi. Es besteht aus drei LED und zwei Tastern.
-     |  
-     |  Methods defined here:
-     |  
-     |  __init__(self, pin_taster0=29, pin_taster1=31, pin_led_rot=33, pin_led_gelb=35, pin_led_gruen=37)
-     |      Das Modul wird mit den gegebenen Pins konfiguriert.
-     |      
-     |      Pins der LEDs werden als Ausgänge und Pins der Taster als Eingänge
-     |      konfiguriert. Wenn keine PINS angegeben werden, werden die PINs
-     |      oberhalb des GND Pins links unten verwendet.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      Wenn keine Werte angegeben werden, werden die Standard-Pins verwendet.
-     |      
-     |      >>> ea1 = EAModul()
-     |      >>> ea1.cleanup()
-     |      
-     |      Bei einer abweichenden Verdrahtung können die Pins angegeben werden.
-     |      
-     |      >>> ea2 = EAModul(29, 31, 33, 35, 37)
-     |      
-     |      Um den Quelltext übersichtlicher zu gestalten, können die Pins
-     |      direkt bezeichnet werden.
-     |      
-     |      >>> ea2 = EAModul(pin_taster0=29, pin_taster1=31, pin_led_rot=33,
-     |      ...               pin_led_gelb=35, pin_led_gruen=37)
-     |      >>> ea2.cleanup()
-     |  
-     |  cleanup(self)
-     |      Setzt alle Pins des Pi wieder in den Ausgangszustand.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      >>> ea = EAModul()
-     |      >>> ea.cleanup()
-     |  
-     |  led_event_registrieren(self, led_farbe, methode)
-     |      Registriert eine Methode, die ausgeführt wird, sobald die
-     |      entsprechende LED ihren Wert ändert.
-     |      
-     |      Die Methode wird über alle Veränderungen an der LED informiert. Dazu
-     |      wird die übergebene Methode aufgerufen.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      >>> def update_rote_led(neuer_wert):
-     |      ...    print("update: Status der roten LED hat sich geändert.")
-     |      ...    print("Neuer Wert:", neuer_wert)
-     |      
-     |      >>> ea = EAModul()
-     |      >>> ea.led_event_registrieren(EAModul.LED_ROT, update_rote_led)
-     |      
-     |      Nun wird die Update-Methode aufgerufen, sobald sich der Wert der LED
-     |      ändert.
-     |      
-     |      >>> ea.schalte_led(EAModul.LED_ROT, 1)
-     |      update: Status der roten LED hat sich geändert.
-     |      Neuer Wert: 1
-     |      
-     |      >>> ea.schalte_led(EAModul.LED_ROT, 0)
-     |      update: Status der roten LED hat sich geändert.
-     |      Neuer Wert: 0
-     |      
-     |      >>> ea.cleanup()
-     |  
-     |  schalte_led(self, led_farbe, an_aus)
-     |      Schalte die LED mit der gegebenen Nummer ein (1) oder aus (0).
-     |      
-     |      Der Wert für led_farbe ist LED_ROT, LED_GELB oder LED_GRUEN.
-     |      
-     |      Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> ea_modul.schalte_led(EAModul.LED_ROT, 1)
-     |      >>> ea_modul.schalte_led(EAModul.LED_GELB, 0)
-     |      >>> ea_modul.schalte_led(EAModul.LED_GRUEN, 1)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  schalte_leds(self, rot_anaus, gelb_anaus, gruen_anaus)
-     |      Schalte alle drei LEDs zu gleichen Zeit an oder aus.
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> ea_modul.schalte_leds(True, False, True)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  taster_event_registrieren(self, taster_nr, methode)
-     |      Registriere eine Methode, die bei Betätigung eines Tasters
-     |      ausgeführt wird.
-     |      
-     |      Die übergebene Methode muss ein Argument haben und wird mit der
-     |      Pin-Nur des Tasters aufgerufen, sobald der Taster gedrückt 
-     |      wird. Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> def taster0_gedrueckt(pin):
-     |      ...  print("Taster 0 wurde gedrückt.")
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> ea_modul.taster_event_registrieren(0, taster0_gedrueckt)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  taster_gedrueckt(self, num=0)
-     |      Liest den Wert des Tasters mit der gegebenen Nummer aus und gibt den
-     |      Wert zurück. Eine einfache Verwendung könnte wie folgt aussehen:
-     |      
-     |      >>> from eapi.hw import EAModul
-     |      >>> import time
-     |      
-     |      >>> ea_modul = EAModul()
-     |      >>> while not ea_modul.taster_gedrueckt(1):
-     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 1)
-     |      ...   time.sleep(0.2)
-     |      ...   ea_modul.schalte_led(EAModul.LED_ROT, 0)
-     |      >>> ea_modul.cleanup()
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data descriptors defined here:
-     |  
-     |  __dict__
-     |      dictionary for instance variables (if defined)
-     |  
-     |  __weakref__
-     |      list of weak references to the object (if defined)
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data and other attributes defined here:
-     |  
-     |  LED_GELB = 1
-     |  
-     |  LED_GRUEN = 2
-     |  
-     |  LED_ROT = 0
-
-FUNCTIONS
-    demo_dimmen()
-        Demoprogramm, um die Dimmen-Funktionalität zu prüfen.
-    
-    demo_led_taster()
-        Ein einfaches Demoprogramm, um die LED und Taster auf dem Board zu prüfen.
-    
-    main()
-        Hauptprogramm, das beim Starten des Moduls ausgeführt wird.
-        
-        Hierüber können verschiedene Demoprogramme gestartet werden.
-
-FILE
-    /media/marco/2e2c3431-cdb2-4a34-bc6a-f263678c5740/home/marco/proj/fizzbuzz/fizzbuzz-ve/lib/python3.5/site-packages/eapi/hw.py
-
-
 Help on class EAModul in eapi.hw:
 
 eapi.hw.EAModul = class EAModul(builtins.object)
@@ -1470,7 +1110,7 @@ sopel
 
 Nach ein paar Fragen, könnte sie wie folgt aussehen.
 
-#+INCLUDE: "~/.sopel/fizzbuzz.cfg" src sh
+#+INCLUDE: "~/.sopel/fizzbuzz.cfg" src sh -n
 
 Eigenen Bot in =~/.sopel/modules/fizzbuzz.py= erstellen
 
@@ -1532,8 +1172,9 @@ sudo apt-get install parallel
 Wir nutzen die folgende Datei =fizzbuzz.py=.
 
 #+BEGIN_SRC python -n
+  import sys
+
   def fizzbuzz_cluster():
-      import sys
       i = int (sys.argv[1])
 
       if i % 3 == 0 and i % 5 == 0:
@@ -1571,7 +1212,7 @@ auf die Server server1, server2 und server3.
 
 ** In einem UML-Aktivitätsdiagramm
 
-#+BEGIN_SRC plantuml :file fizzbuzz-aktdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-aktdiag.png
 @startuml
 start
 :zahl = 1;
@@ -1601,7 +1242,7 @@ stop
 #+END_SRC
 
 #+RESULTS:
-[[file:fizzbuzz-aktdiag.png]]
+[[file:doc/fizzbuzz-aktdiag.png]]
 
 ** In einem UML-Sequenzdiagramm
 
@@ -1609,7 +1250,7 @@ Der FizzbuzzServer hat eine Methode =fizzbuzz(zahl: int): answer=, die
 von einem Client mit einer Zahl aufgerufen werden kann. Die Antwort
 ist eine Zahl oder ein String.
 
-#+BEGIN_SRC plantuml :file fizzbuzz-seqdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-seqdiag.png
 @startuml
 Client -> FizzbuzzServer: fizzbuzz(2)
 FizzbuzzServer --> Client: 2
@@ -1643,11 +1284,11 @@ end
 #+END_SRC
 
 #+RESULTS:
-[[file:fizzbuzz-seqdiag.png]]
+[[file:doc/fizzbuzz-seqdiag.png]]
 
 ** In einem UML-Klassendiagramm
 
-file:fizzbuzz-klassendiagramm.png
+file:doc/fizzbuzz-klassendiagramm.png
 
 Dies Klasse könnte wie folgt verwendet werden.
 
