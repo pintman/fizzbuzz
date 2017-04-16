@@ -1,3 +1,5 @@
+#+TITLE: FizzBuzz Katas
+
 * FizzBuzz Katas
 
 FizzBuzz ist ein Zählspiel, bei dem die Zahlen bis 100 aufgezählt
