@@ -1159,7 +1159,6 @@ Punkt):
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 #+END_EXAMPLE
 
-
 ** Auf einem Cluster (mit GNU parallel)
 
 Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
@@ -1316,4 +1315,99 @@ Dies Klasse könnte wie folgt verwendet werden.
 #+RESULTS:
 : 2 2
 : 15 fizzbuzz
+
+** Als IOT-Anwendung mit einem Message-Broker (MQTT)
+
+Als Client-Bibliothek wird =paho-mqtt=
+(https://pypi.python.org/pypi/paho-mqtt/) verwendet. Diese lässt
+sich einfach installieren.
+
+#+BEGIN_SRC sh
+pip install paho-mqtt
+#+END_SRC
+
+#+RESULTS:
+: Requirement already satisfied (use --upgrade to upgrade): paho-mqtt in ./fizzbuzz-ve/lib/python3.5/site-packages
+
+#+BEGIN_SRC python -n :results output :exports both
+  import paho.mqtt.client as mqtt
+  import threading
+  import time
+
+  class FizzbuzzMqttClient:
+      def __init__(self, server="iot.eclipse.org", port=1883):
+          self._topic = "/fizzbuzz/"
+          self.client = mqtt.Client()
+          self.client.on_connect = self.on_connect
+          self.client.on_message = self.on_message
+          self.client.connect(server, port, keepalive=60)
+
+      def start(self):
+          self.client.loop_forever()
+
+      def on_connect(self, client, userdata, flags, rc):
+          print("[connected]")
+          self.client.subscribe(self._topic)
+      
+      def on_message(self, client, userdata, msg):
+          i = int(msg.payload)
+          
+          if i % 3 == 0 and i % 5 == 0:
+              answer = "fizzbuzz"
+          elif i % 3 == 0:
+              answer = "fizz"
+          elif i % 5 == 0:
+              answer = "buzz"
+          else:
+              answer = i
+
+          print("[msg reveived] topic:", msg.topic, "payload:", i, "answer:", answer)
+
+      def publish(self, payload):
+          self.client.publish(self._topic, payload)
+
+
+  #### Client 1 ####
+          
+  # Start thread in background that responds to messages
+  mqttc1 = FizzbuzzMqttClient()
+  th1 = threading.Thread(target=mqttc1.start, daemon=True)
+  th1.start()
+
+  #### Client 2 ####
+
+  print("[start publishing]")
+  mqttc2 = FizzbuzzMqttClient()
+  for i in range(1,21):
+      mqttc2.publish(i)
+
+  time.sleep(3)
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[start publishing]
+[connected]
+[msg reveived] topic: /fizzbuzz/ payload: 1 answer: 1
+[msg reveived] topic: /fizzbuzz/ payload: 2 answer: 2
+[msg reveived] topic: /fizzbuzz/ payload: 3 answer: fizz
+[msg reveived] topic: /fizzbuzz/ payload: 4 answer: 4
+[msg reveived] topic: /fizzbuzz/ payload: 5 answer: buzz
+[msg reveived] topic: /fizzbuzz/ payload: 6 answer: fizz
+[msg reveived] topic: /fizzbuzz/ payload: 7 answer: 7
+[msg reveived] topic: /fizzbuzz/ payload: 8 answer: 8
+[msg reveived] topic: /fizzbuzz/ payload: 9 answer: fizz
+[msg reveived] topic: /fizzbuzz/ payload: 10 answer: buzz
+[msg reveived] topic: /fizzbuzz/ payload: 11 answer: 11
+[msg reveived] topic: /fizzbuzz/ payload: 12 answer: fizz
+[msg reveived] topic: /fizzbuzz/ payload: 13 answer: 13
+[msg reveived] topic: /fizzbuzz/ payload: 14 answer: 14
+[msg reveived] topic: /fizzbuzz/ payload: 15 answer: fizzbuzz
+[msg reveived] topic: /fizzbuzz/ payload: 16 answer: 16
+[msg reveived] topic: /fizzbuzz/ payload: 17 answer: 17
+[msg reveived] topic: /fizzbuzz/ payload: 18 answer: fizz
+[msg reveived] topic: /fizzbuzz/ payload: 19 answer: 19
+[msg reveived] topic: /fizzbuzz/ payload: 20 answer: buzz
+#+end_example
 
