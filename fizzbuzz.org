@@ -698,7 +698,7 @@ Finished processing dependencies for fizzbuzz-katas==0.1
 #+BEGIN_SRC python -n :results output
   import unittest
 
-  class FizzBuzzClass:
+  class FizzBuzz:
       def fizzbuzz(self, i):
           """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
           einen doctest.
@@ -711,7 +711,7 @@ Finished processing dependencies for fizzbuzz-katas==0.1
 
           Hier kommt der Test:
 
-          >>> fbc = FizzBuzzClass()
+          >>> fbc = FizzBuzz()
           >>> fbc.fizzbuzz(3)
           'fizz'
           >>> fbc.fizzbuzz(5)
@@ -731,13 +731,13 @@ Finished processing dependencies for fizzbuzz-katas==0.1
           else:
               return i
 
-  class FizzBuzzClassTest(unittest.TestCase):
-      """Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. 
+  class FizzBuzzTest(unittest.TestCase):
+      """Diese Unit-Test-Klasse testet die Klasse FizzBuzz. 
 
       Hierfür testet sie mögliche Eingaben und Ausgaben."""
 
       def test_fizzbuzz(self):
-          fb = FizzBuzzClass()
+          fb = FizzBuzz()
 
           self.assertEqual(fb.fizzbuzz(3), "fizz")
           self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
@@ -1108,7 +1108,7 @@ Konfiguration (in =~/.sopel=) erstellen:
 sopel
 #+END_SRC
 
-Nach ein paar Fragen, könnte sie wie folgt aussehen.
+Nach ein paar Fragen könnte die Konfiguration wie folgt aussehen.
 
 #+INCLUDE: "~/.sopel/fizzbuzz.cfg" src sh -n
 
@@ -1162,7 +1162,7 @@ Punkt):
 * Auf einem Cluster (mit GNU parallel)
 
 Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
-Rechner installiert sein oder lässt sich unter ubuntu leich nachinstallieren.
+Rechner installiert sein oder lässt sich unter Ubuntu leicht nachinstallieren.
 
 #+BEGIN_SRC 
 sudo apt-get install parallel
@@ -1307,14 +1307,14 @@ Dies Klasse könnte wie folgt verwendet werden.
               return self.num
 
   fb = FizzBuzz(2)
-  print(2, fb.fizzbuzz())
+  print("Eingabe:", 2, "Ausgabe:", fb.fizzbuzz())
   fb = FizzBuzz(15)
-  print(15, fb.fizzbuzz())
+  print("Eingabe:", 15, "Ausgabe:", fb.fizzbuzz())
 #+END_SRC
 
 #+RESULTS:
-: 2 2
-: 15 fizzbuzz
+: Eingabe: 2 Ausgabe: 2
+: Eingabe: 15 Ausgabe: fizzbuzz
 
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
@@ -1336,6 +1336,7 @@ pip install paho-mqtt
 
   class FizzbuzzMqttClient:
       def __init__(self, server="iot.eclipse.org", port=1883):
+          """Create a client and connect to  the eclipse test Broker by default."""
           self._topic = "/fizzbuzz/"
           self.client = mqtt.Client()
           self.client.on_connect = self.on_connect

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-16 So 17:04 -->
+<!-- 2017-04-16 So 17:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -780,7 +780,7 @@ Anschließend kann das Paket (lokal) installiert werden.
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> unittest
 <span class="linenr"> 2: </span>
-<span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzClass</span>:
+<span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
 <span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Die ist ein Kommentar,der einen Test enth&#228;lt. Unter Python nennt man dies</span>
 <span class="linenr"> 6: </span><span style="color: #8b2252;">        einen doctest.</span>
@@ -793,7 +793,7 @@ Anschließend kann das Paket (lokal) installiert werden.
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #8b2252;">        Hier kommt der Test:</span>
 <span class="linenr">15: </span>
-<span class="linenr">16: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc = FizzBuzzClass()</span>
+<span class="linenr">16: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc = FizzBuzz()</span>
 <span class="linenr">17: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(3)</span>
 <span class="linenr">18: </span><span style="color: #8b2252;">        'fizz'</span>
 <span class="linenr">19: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(5)</span>
@@ -813,13 +813,13 @@ Anschließend kann das Paket (lokal) installiert werden.
 <span class="linenr">33: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">34: </span>            <span style="color: #a020f0;">return</span> i
 <span class="linenr">35: </span>
-<span class="linenr">36: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzClassTest</span>(unittest.TestCase):
-<span class="linenr">37: </span>    <span style="color: #8b2252;">"""Diese Unit-Test-Klasse testet die Klasse FizzBuzzClass. </span>
+<span class="linenr">36: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzTest</span>(unittest.TestCase):
+<span class="linenr">37: </span>    <span style="color: #8b2252;">"""Diese Unit-Test-Klasse testet die Klasse FizzBuzz. </span>
 <span class="linenr">38: </span>
 <span class="linenr">39: </span><span style="color: #8b2252;">    Hierf&#252;r testet sie m&#246;gliche Eingaben und Ausgaben."""</span>
 <span class="linenr">40: </span>
 <span class="linenr">41: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">42: </span>        <span style="color: #a0522d;">fb</span> = FizzBuzzClass()
+<span class="linenr">42: </span>        <span style="color: #a0522d;">fb</span> = FizzBuzz()
 <span class="linenr">43: </span>
 <span class="linenr">44: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(3), <span style="color: #8b2252;">"fizz"</span>)
 <span class="linenr">45: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(15), <span style="color: #8b2252;">"fizzbuzz"</span>)
@@ -1193,7 +1193,7 @@ Konfiguration (in <code>~/.sopel</code>) erstellen:
 </div>
 
 <p>
-Nach ein paar Fragen, könnte sie wie folgt aussehen.
+Nach ein paar Fragen könnte die Konfiguration wie folgt aussehen.
 </p>
 
 <div class="org-src-container">
@@ -1272,7 +1272,7 @@ Punkt):
 <div class="outline-text-2" id="text-20">
 <p>
 Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
-Rechner installiert sein oder lässt sich unter ubuntu leich nachinstallieren.
+Rechner installiert sein oder lässt sich unter Ubuntu leicht nachinstallieren.
 </p>
 
 <pre class="example">
@@ -1400,15 +1400,15 @@ Dies Klasse könnte wie folgt verwendet werden.
 <span class="linenr">13: </span>            <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.num
 <span class="linenr">14: </span>
 <span class="linenr">15: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(2)
-<span class="linenr">16: </span><span style="color: #a020f0;">print</span>(2, fb.fizzbuzz())
+<span class="linenr">16: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 2, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
 <span class="linenr">17: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(15)
-<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(15, fb.fizzbuzz())
+<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 15, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
 </pre>
 </div>
 
 <pre class="example">
-2 2
-15 fizzbuzz
+Eingabe: 2 Ausgabe: 2
+Eingabe: 15 Ausgabe: fizzbuzz
 </pre>
 </div>
 </div>
@@ -1436,52 +1436,53 @@ sich einfach installieren.
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzMqttClient</span>:
 <span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
-<span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>._topic = <span style="color: #8b2252;">"/fizzbuzz/"</span>
-<span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">self</span>.client.on_connect = <span style="color: #a020f0;">self</span>.on_connect
-<span class="linenr">10: </span>        <span style="color: #a020f0;">self</span>.client.on_message = <span style="color: #a020f0;">self</span>.on_message
-<span class="linenr">11: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
-<span class="linenr">12: </span>
-<span class="linenr">13: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">14: </span>        <span style="color: #a020f0;">self</span>.client.loop_forever()
-<span class="linenr">15: </span>
-<span class="linenr">16: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
-<span class="linenr">17: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[connected]"</span>)
-<span class="linenr">18: </span>        <span style="color: #a020f0;">self</span>.client.subscribe(<span style="color: #a020f0;">self</span>._topic)
-<span class="linenr">19: </span>
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
-<span class="linenr">21: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(msg.payload)
-<span class="linenr">22: </span>
-<span class="linenr">23: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">24: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr">25: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">26: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr">27: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">28: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">29: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">30: </span>            <span style="color: #a0522d;">answer</span> = i
-<span class="linenr">31: </span>
-<span class="linenr">32: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[msg reveived] topic:"</span>, msg.topic, <span style="color: #8b2252;">"payload:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
-<span class="linenr">33: </span>
-<span class="linenr">34: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">publish</span>(<span style="color: #a020f0;">self</span>, payload):
-<span class="linenr">35: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #a020f0;">self</span>._topic, payload)
-<span class="linenr">36: </span>
+<span class="linenr"> 7: </span>        <span style="color: #8b2252;">"""Create a client and connect to  the eclipse test Broker by default."""</span>
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>._topic = <span style="color: #8b2252;">"/fizzbuzz/"</span>
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
+<span class="linenr">10: </span>        <span style="color: #a020f0;">self</span>.client.on_connect = <span style="color: #a020f0;">self</span>.on_connect
+<span class="linenr">11: </span>        <span style="color: #a020f0;">self</span>.client.on_message = <span style="color: #a020f0;">self</span>.on_message
+<span class="linenr">12: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">15: </span>        <span style="color: #a020f0;">self</span>.client.loop_forever()
+<span class="linenr">16: </span>
+<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
+<span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[connected]"</span>)
+<span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>.client.subscribe(<span style="color: #a020f0;">self</span>._topic)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
+<span class="linenr">22: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(msg.payload)
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">25: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">26: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">27: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">28: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">29: </span>            <span style="color: #a0522d;">answer</span> = <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">30: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">31: </span>            <span style="color: #a0522d;">answer</span> = i
+<span class="linenr">32: </span>
+<span class="linenr">33: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[msg reveived] topic:"</span>, msg.topic, <span style="color: #8b2252;">"payload:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
+<span class="linenr">34: </span>
+<span class="linenr">35: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">publish</span>(<span style="color: #a020f0;">self</span>, payload):
+<span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #a020f0;">self</span>._topic, payload)
 <span class="linenr">37: </span>
-<span class="linenr">38: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 1 ####</span>
-<span class="linenr">39: </span>
-<span class="linenr">40: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Start thread in background that responds to messages</span>
-<span class="linenr">41: </span><span style="color: #a0522d;">mqttc1</span> = FizzbuzzMqttClient()
-<span class="linenr">42: </span><span style="color: #a0522d;">th1</span> = threading.Thread(target=mqttc1.start, daemon=<span style="color: #008b8b;">True</span>)
-<span class="linenr">43: </span>th1.start()
-<span class="linenr">44: </span>
-<span class="linenr">45: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 2 ####</span>
-<span class="linenr">46: </span>
-<span class="linenr">47: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[start publishing]"</span>)
-<span class="linenr">48: </span><span style="color: #a0522d;">mqttc2</span> = FizzbuzzMqttClient()
-<span class="linenr">49: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(1,21):
-<span class="linenr">50: </span>    mqttc2.publish(i)
-<span class="linenr">51: </span>
-<span class="linenr">52: </span>time.sleep(3)
+<span class="linenr">38: </span>
+<span class="linenr">39: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 1 ####</span>
+<span class="linenr">40: </span>
+<span class="linenr">41: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Start thread in background that responds to messages</span>
+<span class="linenr">42: </span><span style="color: #a0522d;">mqttc1</span> = FizzbuzzMqttClient()
+<span class="linenr">43: </span><span style="color: #a0522d;">th1</span> = threading.Thread(target=mqttc1.start, daemon=<span style="color: #008b8b;">True</span>)
+<span class="linenr">44: </span>th1.start()
+<span class="linenr">45: </span>
+<span class="linenr">46: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 2 ####</span>
+<span class="linenr">47: </span>
+<span class="linenr">48: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[start publishing]"</span>)
+<span class="linenr">49: </span><span style="color: #a0522d;">mqttc2</span> = FizzbuzzMqttClient()
+<span class="linenr">50: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(1,21):
+<span class="linenr">51: </span>    mqttc2.publish(i)
+<span class="linenr">52: </span>
+<span class="linenr">53: </span>time.sleep(3)
 </pre>
 </div>
 
@@ -1514,7 +1515,7 @@ sich einfach installieren.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-16 So 17:04</p>
+<p class="date">Created: 2017-04-16 So 17:15</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
