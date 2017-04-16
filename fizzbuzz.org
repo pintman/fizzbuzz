@@ -1,7 +1,5 @@
 #+TITLE: FizzBuzz Katas
 
-* FizzBuzz Katas
-
 FizzBuzz ist ein Zählspiel, bei dem die Zahlen bis 100 aufgezählt
 werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
 durch 5 teilbar, wird "buzz" gesagt. Ist sie durch 3 und 5 teilbar,
@@ -11,7 +9,7 @@ Wir versuchen uns auf dem Blatt mit einer Aufwärmübung (Kata). Die
 anschließenden Übungen lösen alle dasselbe fizzbuzz-Problem, nutzen
 jedoch ganz unterschiedliche Herangehensweisen oder Technologien.
 
-** Auf Papier
+* Auf Papier
 
 #+BEGIN_EXAMPLE
 1
@@ -35,7 +33,7 @@ fizz
 19
 #+END_EXAMPLE
 
-** Mit einer Methode
+* Mit einer Methode
 Hier ist eine erste einfache Variante.
 
 #+BEGIN_SRC python -n :results output :exports both
@@ -122,7 +120,7 @@ fizz
 19
 #+end_example
 
-** Ohne Verwendung einer Schleife (rekursiv)
+* Ohne Verwendung einer Schleife (rekursiv)
 
 #+BEGIN_SRC python -n :results output
 
@@ -169,7 +167,7 @@ fizz
 buzz
 #+end_example
 
-** Mit Hilfe von nebenläufigen Threads
+* Mit Hilfe von nebenläufigen Threads
 
 #+BEGIN_SRC python -n :results output
 import threading
@@ -219,7 +217,7 @@ fizz
 19
 #+end_example
 
-** Mit einer anderen IDE
+* Mit einer anderen IDE
 
 Mögliche Kandidaten wären:
 
@@ -229,7 +227,7 @@ Mögliche Kandidaten wären:
 - vim
 - Atom
 
-** In einer anderen Programmiersprache
+* In einer anderen Programmiersprache
 
 Mögliche Sprachen wären:
 
@@ -242,7 +240,7 @@ Mögliche Sprachen wären:
 - Smalltalk
 - Clojure
 
-** Als Client-Server Anwendung
+* Als Client-Server Anwendung
 
 #+BEGIN_SRC python -n :results output
 import socketserver
@@ -288,7 +286,7 @@ fizzbuzz_client_server()
 
 #+RESULTS:
 
-** Mit einer grafischen Oberfläche (GUI)
+* Mit einer grafischen Oberfläche (GUI)
 
 #+BEGIN_SRC python -n
 
@@ -333,7 +331,7 @@ fizzbuzz_gui()
 #+RESULTS:
 : None
 
-** Objekt-Orientiert: Klassen und Objekte verwenden
+* Objekt-Orientiert: Klassen und Objekte verwenden
 
 #+BEGIN_SRC python -n :results output
 
@@ -407,7 +405,7 @@ Fizz
 19
 #+end_example
 
-** Objekt-orientiert mit Vererbung
+* Objekt-orientiert mit Vererbung
 
 #+BEGIN_SRC python -n :results output
 
@@ -468,7 +466,7 @@ fizz
 19
 #+end_example
 
-** Funktional mit map, reduce und lambda-Ausdrücken
+* Funktional mit map, reduce und lambda-Ausdrücken
 
 #+BEGIN_SRC python -n :results output
 
@@ -532,7 +530,7 @@ fizz
 
 #+end_example
 
-** Als Webanwendung
+* Als Webanwendung
 
 Bottle (https://bottlepy.org) ist ein Webframework, das leicht mit
 =pip= installiert werden kann.
@@ -586,7 +584,7 @@ fizzbuzz_web()
 Nach dem Start des Webservers kann die Webseite
 http://localhost:8081/fizzbuzz/20 aufgerufen werden.
 
-** In git-repo einchecken
+* In git-repo einchecken
 
 #+BEGIN_SRC sh -n :results output
 # Ein Verzeichnis erstellen und den Quelltext kopieren
@@ -617,7 +615,7 @@ git log
 : 
 :     commit fizzbuzz.py
 
-** Als installierbares Programm
+* Als installierbares Programm
 
 Zunächst muss eine Datei =setup.py= angelegt werden. Sie könnte
 folgenden Inhalt haben:
@@ -695,7 +693,7 @@ Processing dependencies for fizzbuzz-katas==0.1
 Finished processing dependencies for fizzbuzz-katas==0.1
 #+end_example
 
-** Als getestetes Programm (mit unittest und doctests)
+* Als getestetes Programm (mit unittest und doctests)
 
 #+BEGIN_SRC python -n :results output
   import unittest
@@ -756,7 +754,7 @@ Finished processing dependencies for fizzbuzz-katas==0.1
 
 #+RESULTS:
 
-** Mit einem EA-Modul ansteuern
+* Mit einem EA-Modul ansteuern
 
 Die Bibliothek =eapi= (https://github.com/pintman/ea_rpi_modul) kann
 über =pip= installiert werden.
@@ -951,7 +949,7 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 
 #+end_example
 
-** Mit Anbindung an eine Datenbank
+* Mit Anbindung an eine Datenbank
 
 #+BEGIN_SRC python -n :results output
 
@@ -1027,7 +1025,7 @@ rm fizzbuzz.db
 
 #+RESULTS:
 
-** Mit docstring Dokumentation
+* Mit docstring Dokumentation
 #+BEGIN_SRC python -n :results output :exports both
 
 def fizzbuzz_dokumentiert(n):
@@ -1083,7 +1081,7 @@ pydoc -p 8080
 python -m pydoc -p 8080
 #+END_SRC
 
-** Als Chatbot 
+* Als Chatbot 
 
 Wir verwenden hier sopel als Web-Framework (https://sopel.chat/ und
 https://github.com/sopel-irc/sopel/wiki).
@@ -1161,7 +1159,7 @@ Punkt):
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 #+END_EXAMPLE
 
-** Auf einem Cluster (mit GNU parallel)
+* Auf einem Cluster (mit GNU parallel)
 
 Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
 Rechner installiert sein oder lässt sich unter ubuntu leich nachinstallieren.
@@ -1211,7 +1209,7 @@ an den Befehl =parallel=. Dieser verteilt die Aufrufe
 
 auf die Server server1, server2 und server3.
 
-** In einem UML-Aktivitätsdiagramm
+* In einem UML-Aktivitätsdiagramm
 
 #+BEGIN_SRC plantuml :file doc/fizzbuzz-aktdiag.png
 @startuml
@@ -1245,7 +1243,7 @@ stop
 #+RESULTS:
 [[file:doc/fizzbuzz-aktdiag.png]]
 
-** In einem UML-Sequenzdiagramm
+* In einem UML-Sequenzdiagramm
 
 Der FizzbuzzServer hat eine Methode =fizzbuzz(zahl: int): answer=, die
 von einem Client mit einer Zahl aufgerufen werden kann. Die Antwort
@@ -1287,7 +1285,7 @@ end
 #+RESULTS:
 [[file:doc/fizzbuzz-seqdiag.png]]
 
-** In einem UML-Klassendiagramm
+* In einem UML-Klassendiagramm
 
 file:doc/fizzbuzz-klassendiagramm.png
 
@@ -1318,7 +1316,7 @@ Dies Klasse könnte wie folgt verwendet werden.
 : 2 2
 : 15 fizzbuzz
 
-** Als IOT-Anwendung mit einem Message-Broker (MQTT)
+* Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
 Als Client-Bibliothek wird =paho-mqtt=
 (https://pypi.python.org/pypi/paho-mqtt/) verwendet. Diese lässt
