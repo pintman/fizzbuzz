@@ -380,48 +380,41 @@ fizzbuzz_gui()
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
 #+BEGIN_SRC python -n :results output
-
-  class Fizzer:
+  class FizzBuzzerAusgabe:
       def __init__(self, n):
           pass
+      
       def print(self):
-          print("Fizz")
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
 
-  class Buzzer:
-      def __init__(self, n):
-          pass
-      def print(self):
-          print("Buzz")
-
-  class FizzBuzzer:
-      def __init__(self, n):
-          pass
-      def print(self):
-          print("FizzBuzz")
-
-  class Number:
+          
+  class NumberAusgabe:
       def __init__(self, n):
           self.n = n
+          
       def print(self):
           print(self.n)
 
-  class FizzBuzzNumber:
+          
+  class FizzBuzzSpiel:
       def __init__(self, i):
-          if i % 3 == 0 and i % 5 == 0:
-              self.printer = FizzBuzzer(i)
-          elif i % 3 == 0:
-              self.printer = Fizzer(i)
-          elif i % 5 == 0:
-              self.printer = Buzzer(i)
+          if i % 3 == 0 or i % 5 == 0:
+              self.printer = FizzBuzzerAusgabe(i)
           else:
-              self.printer = Number(i)
+              self.printer = NumberAusgabe(i)
 
       def print(self):
           self.printer.print()
 
+          
   def fizzbuzz_objektorientiert():
       for i in range(20):
-          f = FizzBuzzNumber(i)
+          f = FizzBuzzSpiel(i)
           f.print()
 
   fizzbuzz_objektorientiert()
@@ -1607,4 +1600,3 @@ fizzbuzz
 fizz
 19
 #+end_example
-
