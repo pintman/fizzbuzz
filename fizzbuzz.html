@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-17 Mo 09:14 -->
+<!-- 2017-04-17 Mo 09:44 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -151,7 +151,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-7">7. Als Client-Server Anwendung</a></li>
 <li><a href="#sec-8">8. Mit einer grafischen Oberfläche (GUI)</a></li>
 <li><a href="#sec-9">9. Objekt-Orientiert: Klassen und Objekte verwenden</a></li>
-<li><a href="#sec-10">10. Objekt-orientiert mit Vererbung</a></li>
+<li><a href="#sec-10">10. Objekt-Orientiert mit Vererbung</a></li>
 <li><a href="#sec-11">11. Funktional mit map, reduce und lambda-Ausdrücken</a></li>
 <li><a href="#sec-12">12. Als Webanwendung</a></li>
 <li><a href="#sec-13">13. In git-repo einchecken</a></li>
@@ -414,7 +414,7 @@ Mögliche Sprachen wären:
 <span class="linenr">15: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">16: </span>            <span style="color: #a0522d;">answer</span> = i
 <span class="linenr">17: </span>
-<span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"received:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
+<span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[server] received:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
 <span class="linenr">19: </span>
 <span class="linenr">20: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzClient</span>:
 <span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, ip, port):
@@ -423,7 +423,7 @@ Mögliche Sprachen wären:
 <span class="linenr">24: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">send</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">25: </span>        <span style="color: #a020f0;">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span style="color: #a020f0;">as</span> sock:
 <span class="linenr">26: </span>            sock.connect(<span style="color: #a020f0;">self</span>.socket)
-<span class="linenr">27: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"sending"</span>, i)
+<span class="linenr">27: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[client] sending"</span>, i)
 <span class="linenr">28: </span>            sock.sendall(<span style="color: #483d8b;">bytes</span>([i]))
 <span class="linenr">29: </span>
 <span class="linenr">30: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_client_server</span>():
@@ -443,46 +443,46 @@ Mögliche Sprachen wären:
 </div>
 
 <pre class="example">
-sending 0
-received: 0 answer: fizzbuzz
-sending 1
-received: 1 answer: 1
-sending 2
-received: 2 answer: 2
-sending 3
-received: 3 answer: fizz
-sending 4
-received: 4 answer: 4
-sending 5
-received: 5 answer: buzz
-sending 6
-received: 6 answer: fizz
-sending 7
-received: 7 answer: 7
-sending 8
-received: 8 answer: 8
-sending 9
-received: 9 answer: fizz
-sending 10
-received: 10 answer: buzz
-sending 11
-received: 11 answer: 11
-sending 12
-received: 12 answer: fizz
-sending 13
-received: 13 answer: 13
-sending 14
-received: 14 answer: 14
-sending 15
-received: 15 answer: fizzbuzz
-sending 16
-received: 16 answer: 16
-sending 17
-received: 17 answer: 17
-sending 18
-received: 18 answer: fizz
-sending 19
-received: 19 answer: 19
+[client] sending 0
+[server] received: 0 answer: fizzbuzz
+[client] sending 1
+[server] received: 1 answer: 1
+[client] sending 2
+[server] received: 2 answer: 2
+[client] sending 3
+[server] received: 3 answer: fizz
+[client] sending 4
+[client] sending 5
+[server] received: 4 answer: 4
+[server] received: 5 answer: buzz
+[client] sending 6
+[server] received: 6 answer: fizz
+[client] sending 7
+[server] received: 7 answer: 7
+[client] sending 8
+[server] received: 8 answer: 8
+[client] sending 9
+[server] received: 9 answer: fizz
+[client] sending 10
+[server] received: 10 answer: buzz
+[client] sending 11
+[server] received: 11 answer: 11
+[client] sending 12
+[server] received: 12 answer: fizz
+[client] sending 13
+[server] received: 13 answer: 13
+[client] sending 14
+[server] received: 14 answer: 14
+[client] sending 15
+[server] received: 15 answer: fizzbuzz
+[client] sending 16
+[server] received: 16 answer: 16
+[client] sending 17
+[server] received: 17 answer: 17
+[client] sending 18
+[server] received: 18 answer: fizz
+[client] sending 19
+[server] received: 19 answer: 19
 </pre>
 </div>
 </div>
@@ -537,91 +537,88 @@ received: 19 answer: 19
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Fizzer</span>:
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerAusgabe</span>:
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr"> 3: </span>        <span style="color: #a020f0;">pass</span>
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr"> 5: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Fizz"</span>)
-<span class="linenr"> 6: </span>
-<span class="linenr"> 7: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Buzzer</span>:
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">pass</span>
-<span class="linenr">10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Buzz"</span>)
-<span class="linenr">12: </span>
-<span class="linenr">13: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzer</span>:
-<span class="linenr">14: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr">15: </span>        <span style="color: #a020f0;">pass</span>
-<span class="linenr">16: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">17: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"FizzBuzz"</span>)
-<span class="linenr">18: </span>
-<span class="linenr">19: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Number</span>:
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr">21: </span>        <span style="color: #a020f0;">self</span>.n = n
-<span class="linenr">22: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">23: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
-<span class="linenr">24: </span>
-<span class="linenr">25: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzNumber</span>:
-<span class="linenr">26: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr">27: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">28: </span>            <span style="color: #a020f0;">self</span>.printer = FizzBuzzer(i)
-<span class="linenr">29: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">30: </span>            <span style="color: #a020f0;">self</span>.printer = Fizzer(i)
-<span class="linenr">31: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">32: </span>            <span style="color: #a020f0;">self</span>.printer = Buzzer(i)
-<span class="linenr">33: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">34: </span>            <span style="color: #a020f0;">self</span>.printer = Number(i)
-<span class="linenr">35: </span>
-<span class="linenr">36: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">37: </span>        <span style="color: #a020f0;">self</span>.printer.<span style="color: #a020f0;">print</span>()
-<span class="linenr">38: </span>
-<span class="linenr">39: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_objektorientiert</span>():
-<span class="linenr">40: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">41: </span>        <span style="color: #a0522d;">f</span> = FizzBuzzNumber(i)
-<span class="linenr">42: </span>        f.<span style="color: #a020f0;">print</span>()
-<span class="linenr">43: </span>
-<span class="linenr">44: </span>fizzbuzz_objektorientiert()
+<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.n = n
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 6: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.n
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 9: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">11: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">12: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">13: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberAusgabe</span>:
+<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr">18: </span>        <span style="color: #a020f0;">self</span>.n = n
+<span class="linenr">19: </span>
+<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">21: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
+<span class="linenr">22: </span>
+<span class="linenr">23: </span>
+<span class="linenr">24: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzSpiel</span>:
+<span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr">26: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">or</span> i % 5 == 0:
+<span class="linenr">27: </span>            <span style="color: #a020f0;">self</span>.printer = FizzBuzzerAusgabe(i)
+<span class="linenr">28: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">29: </span>            <span style="color: #a020f0;">self</span>.printer = NumberAusgabe(i)
+<span class="linenr">30: </span>
+<span class="linenr">31: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">32: </span>        <span style="color: #a020f0;">self</span>.printer.<span style="color: #a020f0;">print</span>()
+<span class="linenr">33: </span>
+<span class="linenr">34: </span>
+<span class="linenr">35: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_objektorientiert</span>():
+<span class="linenr">36: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">37: </span>        <span style="color: #a0522d;">f</span> = FizzBuzzSpiel(i)
+<span class="linenr">38: </span>        f.<span style="color: #a020f0;">print</span>()
+<span class="linenr">39: </span>
+<span class="linenr">40: </span>fizzbuzz_objektorientiert()
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Objekt-orientiert mit Vererbung</h2>
+<h2 id="sec-10"><span class="section-number-2">10</span> Objekt-Orientiert mit Vererbung</h2>
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Numberer</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">printit</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr"> 3: </span>        <span style="color: #a020f0;">print</span>(i)
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerAusgabe</span>:
+<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.n = n
 <span class="linenr"> 4: </span>
-<span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">BuzzingNumberer</span>(Numberer):
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">printit</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 5 == 0:
-<span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">10: </span>            <span style="color: #483d8b;">super</span>().printit(i)
-<span class="linenr">11: </span>
-<span class="linenr">12: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzingBuzzingNumberer</span>(BuzzingNumberer):
-<span class="linenr">13: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">printit</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr">14: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0:
-<span class="linenr">15: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">16: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">17: </span>            <span style="color: #483d8b;">super</span>().printit(i)
-<span class="linenr">18: </span>
-<span class="linenr">19: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzingFizzingBuzzingNumberer</span>(FizzingBuzzingNumberer):
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">printit</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr">21: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">22: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">23: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">24: </span>            <span style="color: #483d8b;">super</span>().printit(i)
-<span class="linenr">25: </span>
-<span class="linenr">26: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_objektorientiert2</span>():
-<span class="linenr">27: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">28: </span>        <span style="color: #a0522d;">fb</span> = FizzBuzzingFizzingBuzzingNumberer()
-<span class="linenr">29: </span>        fb.printit(i)
-<span class="linenr">30: </span>
-<span class="linenr">31: </span>fizzbuzz_objektorientiert2()
+<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 6: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.n
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 9: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">11: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">12: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">13: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberFizzBuzzerAusgabe</span>(FizzBuzzerAusgabe):
+<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">calling constructor of super class</span>
+<span class="linenr">19: </span>        <span style="color: #483d8b;">super</span>().__init__(n)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">22: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.n % 3 == 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.n % 5 == 0:
+<span class="linenr">23: </span>            <span style="color: #b22222;"># </span><span style="color: #b22222;">delegate to super class</span>
+<span class="linenr">24: </span>            <span style="color: #483d8b;">super</span>().<span style="color: #a020f0;">print</span>()
+<span class="linenr">25: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">26: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
+<span class="linenr">27: </span>
+<span class="linenr">28: </span>
+<span class="linenr">29: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">using the classes</span>
+<span class="linenr">30: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">31: </span>    <span style="color: #a0522d;">fb</span> = NumberFizzBuzzerAusgabe(i)
+<span class="linenr">32: </span>    fb.<span style="color: #a020f0;">print</span>()
 </pre>
 </div>
 </div>
@@ -1771,7 +1768,7 @@ fizz
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-17 Mo 09:14</p>
+<p class="date">Created: 2017-04-17 Mo 09:44</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

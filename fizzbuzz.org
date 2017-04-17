@@ -446,41 +446,42 @@ fizz
 19
 #+end_example
 
-* Objekt-orientiert mit Vererbung
+* Objekt-Orientiert mit Vererbung
 
 #+BEGIN_SRC python -n :results output
+  class FizzBuzzerAusgabe:
+      def __init__(self, n):
+          self.n = n
+        
+      def print(self):
+          i = self.n
+            
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
 
-class Numberer:
-    def printit(self, i):
-        print(i)
+            
+  class NumberFizzBuzzerAusgabe(FizzBuzzerAusgabe):
+      def __init__(self, n):
+          # calling constructor of super class
+          super().__init__(n)
+            
+      def print(self):
+          if self.n % 3 == 0 or self.n % 5 == 0:
+              # delegate to super class
+              super().print()
+          else:
+              print(self.n)
 
-class BuzzingNumberer(Numberer):
-    def printit(self, i):
-        if i % 5 == 0:
-            print("buzz")
-        else:
-            super().printit(i)
 
-class FizzingBuzzingNumberer(BuzzingNumberer):
-    def printit(self, i):
-        if i % 3 == 0:
-            print("fizz")
-        else:
-            super().printit(i)
+  # using the classes
+  for i in range(20):
+      fb = NumberFizzBuzzerAusgabe(i)
+      fb.print()
 
-class FizzBuzzingFizzingBuzzingNumberer(FizzingBuzzingNumberer):
-    def printit(self, i):
-        if i % 3 == 0 and i % 5 == 0:
-            print("fizzbuzz")
-        else:
-            super().printit(i)
-
-def fizzbuzz_objektorientiert2():
-    for i in range(20):
-        fb = FizzBuzzingFizzingBuzzingNumberer()
-        fb.printit(i)
-
-fizzbuzz_objektorientiert2()
 #+END_SRC
 
 #+RESULTS:
