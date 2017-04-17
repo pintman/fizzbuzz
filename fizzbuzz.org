@@ -1457,3 +1457,16 @@ pip install paho-mqtt
 [msg reveived] topic: /fizzbuzz/ payload: 20 answer: buzz
 #+end_example
 
+* Mit Kommandozeilenparametern
+
+#+INCLUDE: "fizzbuzz-cli.py" 
+
+#+BEGIN_SRC sh
+python fizzbuzz-cli.py 20
+
+#+END_SRC
+
+
+#+RESULTS:
+: Evaluating command line
+
