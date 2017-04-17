@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-17 Mo 09:44 -->
+<!-- 2017-04-17 Mo 10:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -1474,6 +1474,17 @@ sich einfach installieren.
 </pre>
 </div>
 
+<p>
+Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
+</p>
+
+
+<div class="figure">
+<p><img src="doc/fizzbuzz-mqtt.png" alt="fizzbuzz-mqtt.png" />
+</p>
+</div>
+
+
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> paho.mqtt.client <span style="color: #a020f0;">as</span> mqtt
@@ -1511,47 +1522,70 @@ sich einfach installieren.
 <span class="linenr">33: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[msg reveived] topic:"</span>, msg.topic, <span style="color: #8b2252;">"payload:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
 <span class="linenr">34: </span>
 <span class="linenr">35: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">publish</span>(<span style="color: #a020f0;">self</span>, payload):
-<span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #a020f0;">self</span>._topic, payload)
-<span class="linenr">37: </span>
+<span class="linenr">36: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[publish]"</span>, payload)
+<span class="linenr">37: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #a020f0;">self</span>._topic, payload)
 <span class="linenr">38: </span>
-<span class="linenr">39: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 1 ####</span>
-<span class="linenr">40: </span>
-<span class="linenr">41: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Start thread in background that responds to messages</span>
-<span class="linenr">42: </span><span style="color: #a0522d;">mqttc1</span> = FizzbuzzMqttClient()
-<span class="linenr">43: </span><span style="color: #a0522d;">th1</span> = threading.Thread(target=mqttc1.start, daemon=<span style="color: #008b8b;">True</span>)
-<span class="linenr">44: </span>th1.start()
-<span class="linenr">45: </span>
-<span class="linenr">46: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 2 ####</span>
-<span class="linenr">47: </span>
-<span class="linenr">48: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[start publishing]"</span>)
-<span class="linenr">49: </span><span style="color: #a0522d;">mqttc2</span> = FizzbuzzMqttClient()
-<span class="linenr">50: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(1,21):
-<span class="linenr">51: </span>    mqttc2.publish(i)
-<span class="linenr">52: </span>
-<span class="linenr">53: </span>time.sleep(3)
+<span class="linenr">39: </span>
+<span class="linenr">40: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 1 ####</span>
+<span class="linenr">41: </span>
+<span class="linenr">42: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Start thread in background that responds to messages</span>
+<span class="linenr">43: </span><span style="color: #a0522d;">mqttc1</span> = FizzbuzzMqttClient()
+<span class="linenr">44: </span><span style="color: #a0522d;">th1</span> = threading.Thread(target=mqttc1.start, daemon=<span style="color: #008b8b;">True</span>)
+<span class="linenr">45: </span>th1.start()
+<span class="linenr">46: </span>
+<span class="linenr">47: </span><span style="color: #b22222;">#### </span><span style="color: #b22222;">Client 2 ####</span>
+<span class="linenr">48: </span>
+<span class="linenr">49: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[start publishing]"</span>)
+<span class="linenr">50: </span><span style="color: #a0522d;">mqttc2</span> = FizzbuzzMqttClient()
+<span class="linenr">51: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(1,21):
+<span class="linenr">52: </span>    mqttc2.publish(i)
+<span class="linenr">53: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">waiting some time and give the subscribed client time to do the job.</span>
+<span class="linenr">54: </span>    time.sleep(0.1)
+<span class="linenr">55: </span>
+<span class="linenr">56: </span>time.sleep(3)
 </pre>
 </div>
 
 <pre class="example">
 [start publishing]
 [connected]
+[publish] 1
+[publish] 2
+[publish] 3
+[publish] 4
 [msg reveived] topic: /fizzbuzz/ payload: 1 answer: 1
 [msg reveived] topic: /fizzbuzz/ payload: 2 answer: 2
+[publish] 5
 [msg reveived] topic: /fizzbuzz/ payload: 3 answer: fizz
+[publish] 6
+[publish] 7
 [msg reveived] topic: /fizzbuzz/ payload: 4 answer: 4
 [msg reveived] topic: /fizzbuzz/ payload: 5 answer: buzz
+[publish] 8
 [msg reveived] topic: /fizzbuzz/ payload: 6 answer: fizz
+[publish] 9
 [msg reveived] topic: /fizzbuzz/ payload: 7 answer: 7
 [msg reveived] topic: /fizzbuzz/ payload: 8 answer: 8
+[publish] 10
+[publish] 11
 [msg reveived] topic: /fizzbuzz/ payload: 9 answer: fizz
+[publish] 12
 [msg reveived] topic: /fizzbuzz/ payload: 10 answer: buzz
+[publish] 13
 [msg reveived] topic: /fizzbuzz/ payload: 11 answer: 11
 [msg reveived] topic: /fizzbuzz/ payload: 12 answer: fizz
+[publish] 14
+[publish] 15
 [msg reveived] topic: /fizzbuzz/ payload: 13 answer: 13
+[publish] 16
 [msg reveived] topic: /fizzbuzz/ payload: 14 answer: 14
 [msg reveived] topic: /fizzbuzz/ payload: 15 answer: fizzbuzz
+[publish] 17
 [msg reveived] topic: /fizzbuzz/ payload: 16 answer: 16
+[publish] 18
+[publish] 19
 [msg reveived] topic: /fizzbuzz/ payload: 17 answer: 17
+[publish] 20
 [msg reveived] topic: /fizzbuzz/ payload: 18 answer: fizz
 [msg reveived] topic: /fizzbuzz/ payload: 19 answer: 19
 [msg reveived] topic: /fizzbuzz/ payload: 20 answer: buzz
@@ -1768,7 +1802,7 @@ fizz
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-17 Mo 09:44</p>
+<p class="date">Created: 2017-04-17 Mo 10:13</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
