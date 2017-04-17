@@ -36,7 +36,7 @@ fizz
 * Mit einer Methode
 Hier ist eine erste einfache Variante.
 
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
   def fizzbuzz_methode(n):
       for i in range(n):
           if i % 3 == 0 and i % 5 == 0:
@@ -51,7 +51,7 @@ Hier ist eine erste einfache Variante.
   fizzbuzz_methode(20)
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[e51bb9a5c49b0fe5fdecdab0c7f63ffb9ef872c6]:
 #+begin_example
 fizzbuzz
 1
@@ -78,7 +78,7 @@ fizz
 Das nächste Beispiel wandelt die obige Variante ab, erzeugt aber
 dieselbe Ausgabe.
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
   def fizzbuzz_methode2(n):
       for i in range(n):
           s = ""
@@ -96,7 +96,7 @@ dieselbe Ausgabe.
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[4f2fef1880aab0b123a0d085f92e4650943accfa]:
 #+begin_example
 fizzbuzz
 1
@@ -242,7 +242,7 @@ Mögliche Sprachen wären:
 
 * Als Client-Server Anwendung
 
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
   import socketserver
   import socket
   import threading
@@ -288,7 +288,7 @@ Mögliche Sprachen wären:
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[29feaa63ab858c46bf7efced5ba2825966181a8b]:
 #+begin_example
 [client] sending 0
 [server] received: 0 answer: fizzbuzz
@@ -299,8 +299,8 @@ Mögliche Sprachen wären:
 [client] sending 3
 [server] received: 3 answer: fizz
 [client] sending 4
-[client] sending 5
 [server] received: 4 answer: 4
+[client] sending 5
 [server] received: 5 answer: buzz
 [client] sending 6
 [server] received: 6 answer: fizz
@@ -842,11 +842,11 @@ pip install eapi
 
 Eine Hilfe zu dem Modul lässt sich über pydoc abrufen.
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output :exports both :cache yes
 python -m pydoc eapi.hw.EAModul
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[071b7056b27e45c1db8d2d5613275e14cc7870ba]:
 #+begin_example
 Help on class EAModul in eapi.hw:
 
@@ -1067,7 +1067,7 @@ rm fizzbuzz.db
 #+RESULTS:
 
 * Mit docstring Dokumentation
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
 
 def fizzbuzz_dokumentiert(n):
     """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
@@ -1087,7 +1087,7 @@ def fizzbuzz_dokumentiert(n):
 help(fizzbuzz_dokumentiert)
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[b361da44808c18519ce7d67d0a7578413e59b8e9]:
 : Help on function fizzbuzz_dokumentiert in module __main__:
 : 
 : fizzbuzz_dokumentiert(n)
@@ -1252,7 +1252,7 @@ auf die Server server1, server2 und server3.
 
 * In einem UML-Aktivitätsdiagramm
 
-#+BEGIN_SRC plantuml :file doc/fizzbuzz-aktdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-aktdiag.png :cache yes
 @startuml
 start
 :zahl = 1;
@@ -1281,7 +1281,7 @@ stop
 @enduml
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[7bf18c2091416d56db25e7fd95f57a3963107119]:
 [[file:doc/fizzbuzz-aktdiag.png]]
 
 * In einem UML-Sequenzdiagramm
@@ -1290,7 +1290,7 @@ Der FizzbuzzServer hat eine Methode =fizzbuzz(zahl: int): answer=, die
 von einem Client mit einer Zahl aufgerufen werden kann. Die Antwort
 ist eine Zahl oder ein String.
 
-#+BEGIN_SRC plantuml :file doc/fizzbuzz-seqdiag.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-seqdiag.png :cache yes
 @startuml
 Client -> FizzbuzzServer: fizzbuzz(2)
 FizzbuzzServer --> Client: 2
@@ -1323,7 +1323,7 @@ end
 @enduml
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[ce4baf64489ce021c830488dd8ed7060e96fc4c7]:
 [[file:doc/fizzbuzz-seqdiag.png]]
 
 * In einem UML-Klassendiagramm
@@ -1332,7 +1332,7 @@ file:doc/fizzbuzz-klassendiagramm.png
 
 Dies Klasse könnte wie folgt verwendet werden.
 
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
   class FizzBuzz:
       def __init__(self, n):
           self.num = n
@@ -1353,7 +1353,7 @@ Dies Klasse könnte wie folgt verwendet werden.
   print("Eingabe:", 15, "Ausgabe:", fb.fizzbuzz())
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[72e8deaa5f8f1d0abf0348e137bceb645c4b2cfd]:
 : Eingabe: 2 Ausgabe: 2
 : Eingabe: 15 Ausgabe: fizzbuzz
 
@@ -1372,7 +1372,7 @@ pip install paho-mqtt
 
 Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
 
-#+BEGIN_SRC plantuml :file doc/fizzbuzz-mqtt.png
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-mqtt.png :cache yes
 @startuml
 client1 -> Broker: connect()
 client2 -> Broker: connect()
@@ -1395,7 +1395,7 @@ client2 -> Broker: publish("/falscher_kanal/", "2")
 [[file:doc/fizzbuzz-mqtt.png]]
 
 
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
   import paho.mqtt.client as mqtt
   import threading
   import time
@@ -1455,11 +1455,11 @@ client2 -> Broker: publish("/falscher_kanal/", "2")
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[7c8e020bd578289df59c424a2afebf451ed5ba88]:
 #+begin_example
 [start publishing]
-[connected]
 [publish] 1
+[connected]
 [publish] 2
 [publish] 3
 [publish] 4
@@ -1475,25 +1475,25 @@ client2 -> Broker: publish("/falscher_kanal/", "2")
 [msg reveived] topic: /fizzbuzz/ payload: 6 answer: fizz
 [publish] 9
 [msg reveived] topic: /fizzbuzz/ payload: 7 answer: 7
-[msg reveived] topic: /fizzbuzz/ payload: 8 answer: 8
 [publish] 10
 [publish] 11
+[msg reveived] topic: /fizzbuzz/ payload: 8 answer: 8
 [msg reveived] topic: /fizzbuzz/ payload: 9 answer: fizz
 [publish] 12
 [msg reveived] topic: /fizzbuzz/ payload: 10 answer: buzz
 [publish] 13
 [msg reveived] topic: /fizzbuzz/ payload: 11 answer: 11
-[msg reveived] topic: /fizzbuzz/ payload: 12 answer: fizz
 [publish] 14
 [publish] 15
+[msg reveived] topic: /fizzbuzz/ payload: 12 answer: fizz
 [msg reveived] topic: /fizzbuzz/ payload: 13 answer: 13
 [publish] 16
 [msg reveived] topic: /fizzbuzz/ payload: 14 answer: 14
-[msg reveived] topic: /fizzbuzz/ payload: 15 answer: fizzbuzz
 [publish] 17
-[msg reveived] topic: /fizzbuzz/ payload: 16 answer: 16
+[msg reveived] topic: /fizzbuzz/ payload: 15 answer: fizzbuzz
 [publish] 18
 [publish] 19
+[msg reveived] topic: /fizzbuzz/ payload: 16 answer: 16
 [msg reveived] topic: /fizzbuzz/ payload: 17 answer: 17
 [publish] 20
 [msg reveived] topic: /fizzbuzz/ payload: 18 answer: fizz
@@ -1507,12 +1507,11 @@ client2 -> Broker: publish("/falscher_kanal/", "2")
 
 Aufruf mit einem Parameter:
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output :exports both :cache yes
 python fizzbuzz-cli.py 20
 #+END_SRC
 
-
-#+RESULTS:
+#+RESULTS[b5b05a43541d82fb48b9e5d7821951fe87ebb0a5]:
 #+begin_example
 Evaluating command line: ['fizzbuzz-cli.py', '20']
 fizzbuzz
@@ -1545,11 +1544,11 @@ von Kommandozeilenparametern manchmal vereinfacht.
 
 Nun steht eine Hilfe zur Verfügung:
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output :exports both :cache yes
 python fizzbuzz-argparse.py --help
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[b2b9fcc4d34f2f2f088b9e97049f5f10337af69a]:
 : usage: fizzbuzz-argparse.py [-h] [--max_wert MAX_WERT]
 : 
 : FizzBuzz Spiel
@@ -1600,7 +1599,7 @@ Die Datei =fizzbuzz.ini=:
 
 Auswerten der Datei:
 
-#+BEGIN_SRC python -n :results output :exports both
+#+BEGIN_SRC python -n :results output :exports both :cache yes
   import configparser
 
   def fizzbuzz(n):
@@ -1627,7 +1626,7 @@ Auswerten der Datei:
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[87f9b7644932e5f4182f2d64b3a916f6f5cf2e4b]:
 #+begin_example
 Beschreibung: Ein Zählspiel
 fizzbuzz
@@ -1651,3 +1650,4 @@ fizzbuzz
 fizz
 19
 #+end_example
+
