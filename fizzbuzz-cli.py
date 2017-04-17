@@ -14,6 +14,7 @@ def fizzbuzz(n):
 if __name__ == "__main__":
     print("Evaluating command line:", sys.argv)
 
+    # sys.argv contains all parameters, program name at position 0.
     num_arg = sys.argv[1]
     number = int(num_arg)
 

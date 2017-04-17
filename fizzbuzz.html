@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-16 So 17:23 -->
+<!-- 2017-04-17 Mo 09:03 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -166,6 +166,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-22">22. In einem UML-Sequenzdiagramm</a></li>
 <li><a href="#sec-23">23. In einem UML-Klassendiagramm</a></li>
 <li><a href="#sec-24">24. Als IOT-Anwendung mit einem Message-Broker (MQTT)</a></li>
+<li><a href="#sec-25">25. Mit Kommandozeilenparametern</a></li>
 </ul>
 </div>
 </div>
@@ -688,16 +689,16 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #228b22;">@bottle.route</span>(<span style="color: #8b2252;">"/fizzbuzz/&lt;number:int&gt;"</span>)
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web_route</span>(number):    
-<span class="linenr"> 5: </span>    <span style="color: #a0522d;">res</span> = []
+<span class="linenr"> 5: </span>    <span style="color: #a0522d;">results</span> = []
 <span class="linenr"> 6: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr"> 8: </span>            res.append(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 8: </span>            results.append(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">10: </span>            res.append(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">10: </span>            results.append(<span style="color: #8b2252;">"fizz"</span>)
 <span class="linenr">11: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">12: </span>            res.append(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">12: </span>            results.append(<span style="color: #8b2252;">"buzz"</span>)
 <span class="linenr">13: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">14: </span>            res.append(i)
+<span class="linenr">14: </span>            results.append(i)
 <span class="linenr">15: </span>
 <span class="linenr">16: </span>    <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
 <span class="linenr">17: </span><span style="color: #8b2252;">        &lt;!DOCTYPE html&gt;</span>
@@ -705,7 +706,7 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr">19: </span><span style="color: #8b2252;">          &lt;body&gt;</span>
 <span class="linenr">20: </span><span style="color: #8b2252;">            &lt;h1&gt;FizzBuzz Numbers up to {{max}}&lt;/h1&gt;</span>
 <span class="linenr">21: </span><span style="color: #8b2252;">            &lt;table&gt;</span>
-<span class="linenr">22: </span><span style="color: #8b2252;">            % for r in res:</span>
+<span class="linenr">22: </span><span style="color: #8b2252;">            % for r in results:</span>
 <span class="linenr">23: </span><span style="color: #8b2252;">              &lt;tr&gt;&lt;td&gt; {{r}} &lt;/td&gt;&lt;/tr&gt;</span>
 <span class="linenr">24: </span><span style="color: #8b2252;">            %end</span>
 <span class="linenr">25: </span><span style="color: #8b2252;">            &lt;/table&gt;</span>
@@ -713,7 +714,7 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr">27: </span><span style="color: #8b2252;">        &lt;/html&gt;</span>
 <span class="linenr">28: </span><span style="color: #8b2252;">        """</span>
 <span class="linenr">29: </span>
-<span class="linenr">30: </span>    <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, res=res)
+<span class="linenr">30: </span>    <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
 <span class="linenr">31: </span>
 <span class="linenr">32: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web</span>():
 <span class="linenr">33: </span>    bottle.run(host=<span style="color: #8b2252;">"127.0.0.1"</span>, port=8081)
@@ -1559,10 +1560,137 @@ sich einfach installieren.
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-25" class="outline-2">
+<h2 id="sec-25"><span class="section-number-2">25</span> Mit Kommandozeilenparametern</h2>
+<div class="outline-text-2" id="text-25">
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">11: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">15: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Evaluating command line:"</span>, sys.argv)
+<span class="linenr">16: </span>
+<span class="linenr">17: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">sys.argv contains all parameters, program name at position 0.</span>
+<span class="linenr">18: </span>    <span style="color: #a0522d;">num_arg</span> = sys.argv[1]
+<span class="linenr">19: </span>    <span style="color: #a0522d;">number</span> = <span style="color: #483d8b;">int</span>(num_arg)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>    fizzbuzz(number)
+</pre>
+</div>
+
+<p>
+Aufruf mit einem Parameter:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python fizzbuzz-cli.py 20
+</pre>
+</div>
+
+
+<pre class="example">
+Evaluating command line: ['fizzbuzz-cli.py', '20']
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+</pre>
+
+<p>
+Mit dem Paket <code>argparse</code>
+(<a href="https://docs.python.org/3/library/argparse.html">https://docs.python.org/3/library/argparse.html</a>) wird die Auswertung
+von Kommandozeilenparametern manchmal vereinfacht.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> argparse
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">11: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">15: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Using class ArgumentParser to help handling parameters</span>
+<span class="linenr">16: </span>    <span style="color: #a0522d;">parser</span> = argparse.ArgumentParser(description=<span style="color: #8b2252;">"FizzBuzz Spiel"</span>)
+<span class="linenr">17: </span>    parser.add_argument(<span style="color: #8b2252;">"--max_wert"</span>, <span style="color: #483d8b;">type</span>=<span style="color: #483d8b;">int</span>, default=20,
+<span class="linenr">18: </span>                        <span style="color: #483d8b;">help</span>=<span style="color: #8b2252;">"Bis zu diesem Wert wird gez&#228;hlt"</span>)
+<span class="linenr">19: </span>    <span style="color: #a0522d;">args</span> = parser.parse_args()
+<span class="linenr">20: </span>    fizzbuzz(args.max_wert)
+</pre>
+</div>
+
+<p>
+Nun steht eine Hilfe zur Verfügung:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python fizzbuzz-argparse.py --help
+</pre>
+</div>
+
+<pre class="example">
+usage: fizzbuzz-argparse.py [-h] [--max_wert MAX_WERT]
+
+FizzBuzz Spiel
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --max_wert MAX_WERT  Bis zu diesem Wert wird gezählt
+</pre>
+
+<p>
+Aufruf mit einem Parameter.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python fizzbuzz-argparse.py --max_wert 20
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-16 So 17:23</p>
+<p class="date">Created: 2017-04-17 Mo 09:03</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

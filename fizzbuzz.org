@@ -1459,14 +1459,88 @@ pip install paho-mqtt
 
 * Mit Kommandozeilenparametern
 
-#+INCLUDE: "fizzbuzz-cli.py" 
+#+INCLUDE: "fizzbuzz-cli.py" src python -n
 
-#+BEGIN_SRC sh
+Aufruf mit einem Parameter:
+
+#+BEGIN_SRC sh :results output :exports both
 python fizzbuzz-cli.py 20
-
 #+END_SRC
 
 
 #+RESULTS:
-: Evaluating command line
+#+begin_example
+Evaluating command line: ['fizzbuzz-cli.py', '20']
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+Mit dem Paket =argparse=
+(https://docs.python.org/3/library/argparse.html) wird die Auswertung
+von Kommandozeilenparametern manchmal vereinfacht.
+
+#+INCLUDE: "fizzbuzz-argparse.py" src python -n
+
+Nun steht eine Hilfe zur Verfügung:
+
+#+BEGIN_SRC sh :results output :exports both
+python fizzbuzz-argparse.py --help
+#+END_SRC
+
+#+RESULTS:
+: usage: fizzbuzz-argparse.py [-h] [--max_wert MAX_WERT]
+: 
+: FizzBuzz Spiel
+: 
+: optional arguments:
+:   -h, --help           show this help message and exit
+:   --max_wert MAX_WERT  Bis zu diesem Wert wird gezählt
+
+Aufruf mit einem Parameter.
+
+#+BEGIN_SRC sh :results output
+python fizzbuzz-argparse.py --max_wert 20
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
 
