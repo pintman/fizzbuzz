@@ -464,7 +464,7 @@ fizz
               print("buzz")
 
             
-  class NumberFizzBuzzerAusgabe(FizzBuzzerAusgabe):
+  class NumberFizzBuzzerAusgabe(FizzBuzzerAusgabe): # Unterklasse(Oberklasse)
       def __init__(self, n):
           # calling constructor of super class
           super().__init__(n)
