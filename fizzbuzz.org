@@ -1736,3 +1736,130 @@ curl localhost:8081/fizzbuzz --data max_number=10 --request GET
 #+RESULTS[8747c8df176c2a6ab70e55e09412c44a2e9a4059]:
 : {"0": "fizzbuzz", "1": 1, "2": 2, "3": "fizz", "4": 4, "5": "buzz", "6": "fizz", "7": 7, "8": 8, "9": "fizz"}
 
+* In einer MVC-Architektur
+
+file:doc/mvc.png
+
+[[https://de.wikipedia.org/wiki/Model_View_Controller][Model-View-Controller-Konzept]]. Eine durchgezogene Linie symbolisiert
+eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
+(zum Beispiel über einen [[https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)][Beobachter]]).
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  class FizzBuzzModel:
+      def __init__(self):
+          self.results = {}
+
+          # a list of observers that react to modifications
+          # they must implement a method model_changed(added_value)
+          self.observers = []
+
+      def add_value(self, val):        
+          if val % 3 == 0 and val % 5 == 0:
+              self.results[val] = "fizzbuzz"
+          elif val % 3 == 0:
+                self.results[val] = "fizz"
+          elif val % 5 == 0:
+              self.results[val] = "buzz"
+          else:
+              self.results[val] = val
+
+          self._notify_observers(val)
+
+      def add_observer(self, observer):
+          self.observers.append(observer)
+          
+      def _notify_observers(self, added_val):
+          for o in self.observers:
+              o.model_changed(added_val)
+
+              
+  class FizzBuzzView:
+      def __init__(self, model):
+          self.model = model
+
+      def show(self):
+          for r in self.model.results:
+              print(r, self.model.results[r])
+          
+
+  class FizzBuzzController:
+      def __init__(self, model, view):
+          self.model = model
+          self.model.add_observer(self)
+          self.view = view
+
+      def add_value_to_model(self, new_val):
+          self.model.add_value(new_val)
+
+      def notify_view(self):
+          self.view.model_changed()
+
+      def model_changed(self, added_value):
+          print("[controller] model changed. Added", added_value)
+
+      def show_view(self):
+          self.view.show()
+
+  def main():
+      # creating and connecting model, view, and controller
+      model = FizzBuzzModel()
+      view = FizzBuzzView(model)
+      controller = FizzBuzzController(model, view)
+
+      print("# Adding values via controller to model")
+      for i in range(20):
+          controller.add_value_to_model(i)
+
+      print("# Showing view of the model via controller")
+      controller.show_view()
+
+      
+  main()
+#+END_SRC
+
+#+RESULTS[664a5e432edf78896d2c97903b051e0e9444c5c3]:
+#+begin_example
+# Adding values via controller to model
+[controller] model changed. Added 0
+[controller] model changed. Added 1
+[controller] model changed. Added 2
+[controller] model changed. Added 3
+[controller] model changed. Added 4
+[controller] model changed. Added 5
+[controller] model changed. Added 6
+[controller] model changed. Added 7
+[controller] model changed. Added 8
+[controller] model changed. Added 9
+[controller] model changed. Added 10
+[controller] model changed. Added 11
+[controller] model changed. Added 12
+[controller] model changed. Added 13
+[controller] model changed. Added 14
+[controller] model changed. Added 15
+[controller] model changed. Added 16
+[controller] model changed. Added 17
+[controller] model changed. Added 18
+[controller] model changed. Added 19
+# Showing view of the model via controller
+0 fizzbuzz
+1 1
+2 2
+3 fizz
+4 4
+5 buzz
+6 fizz
+7 7
+8 8
+9 fizz
+10 buzz
+11 11
+12 fizz
+13 13
+14 14
+15 fizzbuzz
+16 16
+17 17
+18 fizz
+19 19
+#+end_example
+

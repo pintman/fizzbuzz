@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-18 Di 20:18 -->
+<!-- 2017-04-18 Di 23:21 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -169,6 +169,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-25">25. Mit Kommandozeilenparametern</a></li>
 <li><a href="#sec-26">26. Mit einer Konfigurationsdatei</a></li>
 <li><a href="#sec-27">27. Als Web-Service mit REST-API</a></li>
+<li><a href="#sec-28">28. In einer MVC-Architektur</a></li>
 </ul>
 </div>
 </div>
@@ -1921,10 +1922,147 @@ Alternative mit Parameter im Request:
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-28" class="outline-2">
+<h2 id="sec-28"><span class="section-number-2">28</span> In einer MVC-Architektur</h2>
+<div class="outline-text-2" id="text-28">
+
+<div class="figure">
+<p><img src="doc/mvc.png" alt="mvc.png" />
+</p>
+</div>
+
+<p>
+<a href="https://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller-Konzept</a>. Eine durchgezogene Linie symbolisiert
+eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
+(zum Beispiel über einen <a href="https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)">Beobachter</a>).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzModel</span>:
+<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.results = {}
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">a list of observers that react to modifications</span>
+<span class="linenr"> 6: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">they must implement a method model_changed(added_value)</span>
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.observers = []
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value</span>(<span style="color: #a020f0;">self</span>, val):        
+<span class="linenr">10: </span>        <span style="color: #a020f0;">if</span> val % 3 == 0 <span style="color: #a020f0;">and</span> val % 5 == 0:
+<span class="linenr">11: </span>            <span style="color: #a020f0;">self</span>.results[val] = <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">12: </span>        <span style="color: #a020f0;">elif</span> val % 3 == 0:
+<span class="linenr">13: </span>              <span style="color: #a020f0;">self</span>.results[val] = <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">14: </span>        <span style="color: #a020f0;">elif</span> val % 5 == 0:
+<span class="linenr">15: </span>            <span style="color: #a020f0;">self</span>.results[val] = <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">16: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">17: </span>            <span style="color: #a020f0;">self</span>.results[val] = val
+<span class="linenr">18: </span>
+<span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>._notify_observers(val)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_observer</span>(<span style="color: #a020f0;">self</span>, observer):
+<span class="linenr">22: </span>        <span style="color: #a020f0;">self</span>.observers.append(observer)
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_notify_observers</span>(<span style="color: #a020f0;">self</span>, added_val):
+<span class="linenr">25: </span>        <span style="color: #a020f0;">for</span> o <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>.observers:
+<span class="linenr">26: </span>            o.model_changed(added_val)
+<span class="linenr">27: </span>
+<span class="linenr">28: </span>
+<span class="linenr">29: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzView</span>:
+<span class="linenr">30: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model):
+<span class="linenr">31: </span>        <span style="color: #a020f0;">self</span>.model = model
+<span class="linenr">32: </span>
+<span class="linenr">33: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">34: </span>        <span style="color: #a020f0;">for</span> r <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>.model.results:
+<span class="linenr">35: </span>            <span style="color: #a020f0;">print</span>(r, <span style="color: #a020f0;">self</span>.model.results[r])
+<span class="linenr">36: </span>
+<span class="linenr">37: </span>
+<span class="linenr">38: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzController</span>:
+<span class="linenr">39: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model, view):
+<span class="linenr">40: </span>        <span style="color: #a020f0;">self</span>.model = model
+<span class="linenr">41: </span>        <span style="color: #a020f0;">self</span>.model.add_observer(<span style="color: #a020f0;">self</span>)
+<span class="linenr">42: </span>        <span style="color: #a020f0;">self</span>.view = view
+<span class="linenr">43: </span>
+<span class="linenr">44: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value_to_model</span>(<span style="color: #a020f0;">self</span>, new_val):
+<span class="linenr">45: </span>        <span style="color: #a020f0;">self</span>.model.add_value(new_val)
+<span class="linenr">46: </span>
+<span class="linenr">47: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">notify_view</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">48: </span>        <span style="color: #a020f0;">self</span>.view.model_changed()
+<span class="linenr">49: </span>
+<span class="linenr">50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">model_changed</span>(<span style="color: #a020f0;">self</span>, added_value):
+<span class="linenr">51: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[controller] model changed. Added"</span>, added_value)
+<span class="linenr">52: </span>
+<span class="linenr">53: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show_view</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">54: </span>        <span style="color: #a020f0;">self</span>.view.show()
+<span class="linenr">55: </span>
+<span class="linenr">56: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():
+<span class="linenr">57: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">creating and connecting model, view, and controller</span>
+<span class="linenr">58: </span>    <span style="color: #a0522d;">model</span> = FizzBuzzModel()
+<span class="linenr">59: </span>    <span style="color: #a0522d;">view</span> = FizzBuzzView(model)
+<span class="linenr">60: </span>    <span style="color: #a0522d;">controller</span> = FizzBuzzController(model, view)
+<span class="linenr">61: </span>
+<span class="linenr">62: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Adding values via controller to model"</span>)
+<span class="linenr">63: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">64: </span>        controller.add_value_to_model(i)
+<span class="linenr">65: </span>
+<span class="linenr">66: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Showing view of the model via controller"</span>)
+<span class="linenr">67: </span>    controller.show_view()
+<span class="linenr">68: </span>
+<span class="linenr">69: </span>
+<span class="linenr">70: </span>main()
+</pre>
+</div>
+
+<pre class="example">
+# Adding values via controller to model
+[controller] model changed. Added 0
+[controller] model changed. Added 1
+[controller] model changed. Added 2
+[controller] model changed. Added 3
+[controller] model changed. Added 4
+[controller] model changed. Added 5
+[controller] model changed. Added 6
+[controller] model changed. Added 7
+[controller] model changed. Added 8
+[controller] model changed. Added 9
+[controller] model changed. Added 10
+[controller] model changed. Added 11
+[controller] model changed. Added 12
+[controller] model changed. Added 13
+[controller] model changed. Added 14
+[controller] model changed. Added 15
+[controller] model changed. Added 16
+[controller] model changed. Added 17
+[controller] model changed. Added 18
+[controller] model changed. Added 19
+# Showing view of the model via controller
+0 fizzbuzz
+1 1
+2 2
+3 fizz
+4 4
+5 buzz
+6 fizz
+7 7
+8 8
+9 fizz
+10 buzz
+11 11
+12 fizz
+13 13
+14 14
+15 fizzbuzz
+16 16
+17 17
+18 fizz
+19 19
+</pre>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-18 Di 20:18</p>
+<p class="date">Created: 2017-04-18 Di 23:21</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
