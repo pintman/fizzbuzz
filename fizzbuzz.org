@@ -1701,7 +1701,7 @@ curl localhost:8081
         "handlers": {
             "/fizzbuzz": {
                 "GET": {
-                    "usage": "Return fizz up to the given number.",
+                    "usage": "Return fizzbuzz up to the given number.",
                     "outputs": {
                         "format": "JSON (Javascript Serialized Object Notation)",
                         "content_type": "application/json"

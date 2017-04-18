@@ -16,6 +16,6 @@ def fizzbuzz_results(n):
 
 @hug.get('/fizzbuzz') # respond to get-requests
 def fizzbuzz_get(max_number):
-    """Return fizz up to the given number."""
+    """Return fizzbuzz up to the given number."""
     n = int(max_number)
     return fizzbuzz_results(n)
