@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-17 Mo 19:37 -->
+<!-- 2017-04-18 Di 20:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -168,6 +168,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-24">24. Als IOT-Anwendung mit einem Message-Broker (MQTT)</a></li>
 <li><a href="#sec-25">25. Mit Kommandozeilenparametern</a></li>
 <li><a href="#sec-26">26. Mit einer Konfigurationsdatei</a></li>
+<li><a href="#sec-27">27. Als Web-Service mit REST-API</a></li>
 </ul>
 </div>
 </div>
@@ -1804,10 +1805,126 @@ fizz
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-27" class="outline-2">
+<h2 id="sec-27"><span class="section-number-2">27</span> Als Web-Service mit REST-API</h2>
+<div class="outline-text-2" id="text-27">
+<p>
+<code>hug</code> (<a href="http://www.hug.rest/">http://www.hug.rest/</a>) stellt eine einfache Schnittstelle für
+REST-Web-Services bereit.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">pip install hug
+</pre>
+</div>
+
+<p>
+Ein einfacher Service wird mit der Annotation <code>@hug.get()</code>
+ausgestattet.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> hug
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_results</span>(n):
+<span class="linenr"> 4: </span>    <span style="color: #a0522d;">results</span> = {}
+<span class="linenr"> 5: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 6: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 7: </span>            <span style="color: #a0522d;">results</span>[i] = <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 9: </span>            <span style="color: #a0522d;">results</span>[i] = <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">11: </span>            <span style="color: #a0522d;">results</span>[i] = <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">12: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">13: </span>            <span style="color: #a0522d;">results</span>[i] = i
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>    <span style="color: #a020f0;">return</span> results
+<span class="linenr">16: </span>
+<span class="linenr">17: </span><span style="color: #228b22;">@hug.get</span>(<span style="color: #8b2252;">'/fizzbuzz'</span>) <span style="color: #b22222;"># </span><span style="color: #b22222;">respond to get-requests</span>
+<span class="linenr">18: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_get</span>(max_number):
+<span class="linenr">19: </span>    <span style="color: #8b2252;">"""Return fizz up to the given number."""</span>
+<span class="linenr">20: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(max_number)
+<span class="linenr">21: </span>    <span style="color: #a020f0;">return</span> fizzbuzz_results(n)
+</pre>
+</div>
+
+<p>
+Server auf Port 8081 starten:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">hug -p 8081 -f fizzbuzz_hug.py
+</pre>
+</div>
+
+<p>
+Nun kann der Web-Service abgerufen werden (für Tests z.B. mit
+curl). Wenn keine korrekte URL angegeben wird, liefert hug eine Hilfe.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">curl localhost:8081
+</pre>
+</div>
+
+<pre class="example">
+{
+    "404": "The API call you tried to make was not defined. Here's a definition of the API to help you get going :)",
+    "documentation": {
+        "handlers": {
+            "/fizzbuzz": {
+                "GET": {
+                    "usage": "Return fizz up to the given number.",
+                    "outputs": {
+                        "format": "JSON (Javascript Serialized Object Notation)",
+                        "content_type": "application/json"
+                    },
+                    "inputs": {
+                        "max_number": {
+                            "type": "Basic text / string value"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</pre>
+
+<p>
+Nun mit einer bekannten URL.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">curl localhost:8081/fizzbuzz?<span style="color: #a0522d;">max_number</span>=10
+</pre>
+</div>
+
+<pre class="example">
+{"0": "fizzbuzz", "1": 1, "2": 2, "3": "fizz", "4": 4, "5": "buzz", "6": "fizz", "7": 7, "8": 8, "9": "fizz"}
+</pre>
+
+<p>
+Alternative mit Parameter im Request:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">curl localhost:8081/fizzbuzz --data <span style="color: #a0522d;">max_number</span>=10 --request GET
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-17 Mo 19:37</p>
+<p class="date">Created: 2017-04-18 Di 20:13</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

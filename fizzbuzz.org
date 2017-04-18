@@ -1657,3 +1657,82 @@ fizz
 19
 #+end_example
 
+* Als Web-Service mit REST-API
+
+=hug= (http://www.hug.rest/) stellt eine einfache Schnittstelle für
+REST-Web-Services bereit.
+
+#+BEGIN_SRC sh :results output
+pip install hug
+#+END_SRC
+
+#+RESULTS:
+: Requirement already satisfied (use --upgrade to upgrade): hug in ./fizzbuzz-ve/lib/python3.5/site-packages
+: Requirement already satisfied (use --upgrade to upgrade): falcon==1.0.0 in ./fizzbuzz-ve/lib/python3.5/site-packages (from hug)
+: Requirement already satisfied (use --upgrade to upgrade): requests in ./fizzbuzz-ve/lib/python3.5/site-packages (from hug)
+: Requirement already satisfied (use --upgrade to upgrade): python-mimeparse in ./fizzbuzz-ve/lib/python3.5/site-packages (from falcon==1.0.0->hug)
+: Requirement already satisfied (use --upgrade to upgrade): six>=1.4.0 in ./fizzbuzz-ve/lib/python3.5/site-packages (from falcon==1.0.0->hug)
+
+Ein einfacher Service wird mit der Annotation =@hug.get()=
+ausgestattet.
+
+#+INCLUDE: "~/proj/fizzbuzz/fizzbuzz_hug.py" src python -n
+
+Server auf Port 8081 starten:
+
+#+BEGIN_SRC sh 
+hug -p 8081 -f fizzbuzz_hug.py
+#+END_SRC
+
+#+RESULTS:
+
+Nun kann der Web-Service abgerufen werden (für Tests z.B. mit
+curl). Wenn keine korrekte URL angegeben wird, liefert hug eine Hilfe.
+
+#+BEGIN_SRC sh :results output :exports both :cache yes
+curl localhost:8081
+#+END_SRC
+
+#+RESULTS[af04781cfa76759215e0224901cfc913d06f1a36]:
+#+begin_example
+{
+    "404": "The API call you tried to make was not defined. Here's a definition of the API to help you get going :)",
+    "documentation": {
+        "handlers": {
+            "/fizzbuzz": {
+                "GET": {
+                    "usage": "Return fizz up to the given number.",
+                    "outputs": {
+                        "format": "JSON (Javascript Serialized Object Notation)",
+                        "content_type": "application/json"
+                    },
+                    "inputs": {
+                        "max_number": {
+                            "type": "Basic text / string value"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#+end_example
+
+Nun mit einer bekannten URL.
+
+#+BEGIN_SRC sh :results output :exports both :cache yes
+curl localhost:8081/fizzbuzz?max_number=10
+#+END_SRC
+
+#+RESULTS[817e61e632bf3667e616f7d831d512036707b26b]:
+: {"0": "fizzbuzz", "1": 1, "2": 2, "3": "fizz", "4": 4, "5": "buzz", "6": "fizz", "7": 7, "8": 8, "9": "fizz"}
+
+Alternative mit Parameter im Request:
+
+#+BEGIN_SRC sh :results output
+curl localhost:8081/fizzbuzz --data max_number=10 --request GET
+#+END_SRC
+
+#+RESULTS[8747c8df176c2a6ab70e55e09412c44a2e9a4059]:
+: {"0": "fizzbuzz", "1": 1, "2": 2, "3": "fizz", "4": 4, "5": "buzz", "6": "fizz", "7": 7, "8": 8, "9": "fizz"}
+
