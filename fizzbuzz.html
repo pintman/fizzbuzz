@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-19 Mi 20:46 -->
+<!-- 2017-04-19 Mi 20:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -799,30 +799,14 @@ folgenden Inhalt haben:
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #8b2252;">"""Kata 13 - fizzbuzz als installierbares Programm.</span>
-<span class="linenr"> 2: </span>
-<span class="linenr"> 3: </span><span style="color: #8b2252;">Das Programm kann mit folgenden Befehlen installiert oder erstellt</span>
-<span class="linenr"> 4: </span><span style="color: #8b2252;">werden:</span>
-<span class="linenr"> 5: </span>
-<span class="linenr"> 6: </span><span style="color: #8b2252;">Release in Unterordner erstellen: </span>
-<span class="linenr"> 7: </span><span style="color: #8b2252;">$ python3 setup.py sdist</span>
-<span class="linenr"> 8: </span>
-<span class="linenr"> 9: </span><span style="color: #8b2252;">Installation:</span>
-<span class="linenr">10: </span><span style="color: #8b2252;">$ python3 setup.py install</span>
-<span class="linenr">11: </span>
-<span class="linenr">12: </span><span style="color: #8b2252;">Lokale Installation:</span>
-<span class="linenr">13: </span><span style="color: #8b2252;">$ python3 setup.py install --user</span>
-<span class="linenr">14: </span>
-<span class="linenr">15: </span><span style="color: #8b2252;">"""</span>
-<span class="linenr">16: </span>
-<span class="linenr">17: </span><span style="color: #a020f0;">from</span> setuptools <span style="color: #a020f0;">import</span> setup, find_packages
-<span class="linenr">18: </span>
-<span class="linenr">19: </span>setup(
-<span class="linenr">20: </span>    name = <span style="color: #8b2252;">"fizzbuzz_katas"</span>,
-<span class="linenr">21: </span>    version = <span style="color: #8b2252;">"0.1"</span>,
-<span class="linenr">22: </span>    description = <span style="color: #8b2252;">"Exercises with the famous FizzBuzz-Game."</span>,
-<span class="linenr">23: </span>    packages = find_packages()
-<span class="linenr">24: </span>)
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #a020f0;">from</span> setuptools <span style="color: #a020f0;">import</span> setup, find_packages
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>setup(
+<span class="linenr">4: </span>    name = <span style="color: #8b2252;">"fizzbuzz_katas"</span>,
+<span class="linenr">5: </span>    version = <span style="color: #8b2252;">"0.1"</span>,
+<span class="linenr">6: </span>    description = <span style="color: #8b2252;">"Exercises with the famous FizzBuzz-Game."</span>,
+<span class="linenr">7: </span>    packages = find_packages()
+<span class="linenr">8: </span>)
 </pre>
 </div>
 
@@ -844,7 +828,7 @@ Anschließend kann das Paket (lokal) installiert werden.
 
 <div class="org-src-container">
 
-<pre class="src src-sh"><span class="linenr">1: </span><span style="color: #b22222;">#  </span><span style="color: #b22222;">Installation:</span>
+<pre class="src src-sh"><span class="linenr">1: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Systemweite Installation:</span>
 <span class="linenr">2: </span>python setup.py install
 <span class="linenr">3: </span>
 <span class="linenr">4: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Lokale Installation:</span>
@@ -2203,7 +2187,7 @@ Weitere Informationen gibt es in einem <a href="http://pygame.org/docs/tut/Pygam
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-19 Mi 20:46</p>
+<p class="date">Created: 2017-04-19 Mi 20:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

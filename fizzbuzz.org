@@ -704,7 +704,7 @@ removing 'fizzbuzz_katas-0.1' (and everything under it)
 Anschließend kann das Paket (lokal) installiert werden.
 
 #+BEGIN_SRC sh -n :results output
-  #  Installation:
+  # Systemweite Installation:
   python setup.py install
 
   # Lokale Installation:
