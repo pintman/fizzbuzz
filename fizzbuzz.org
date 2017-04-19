@@ -169,53 +169,60 @@ buzz
 
 * Mit Hilfe von nebenläufigen Threads
 
-#+BEGIN_SRC python -n :results output
-import threading
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  import threading
+  import time
 
-def fizzbuzz_thread(i):
-    if i % 3 == 0 and i % 5 == 0:
-        print("fizzbuzz")
-    elif i % 3 == 0:
-        print("fizz")
-    elif i % 5 == 0:
-        print("buzz")
-    else:
-        print(i)
+  def fizzbuzz_thread(i):    
+      time.sleep(1)
+      if i % 3 == 0 and i % 5 == 0:
+          print(i, "fizzbuzz")
+      elif i % 3 == 0:
+          print(i, "fizz")
+      elif i % 5 == 0:
+          print(i, "buzz")
+      else:
+          print(i)
 
-def fizzbuzz_threading():
-    for i in range(20):
-        th = threading.Thread(target=fizzbuzz_thread, args=(i,))
-        th.start()
-        # Wait for thread to finish
-        while th.isAlive():
-            pass
+  def fizzbuzz_start_threads():
+      for i in range(20):
+          # Creating a thread object that will execute the method above
+          # with the given argument i.
+          th = threading.Thread(target=fizzbuzz_thread, args=(i,))
+          th.start()
 
-fizzbuzz_threading()
+  fizzbuzz_start_threads()
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[86f7fd2964c87c11c0d562188945a6f028ce3f63]:
 #+begin_example
-fizzbuzz
-1
-2
-fizz
+3 fizz
 4
-buzz
-fizz
+2
+1
+0 fizzbuzz
+5 buzz
 7
+6 fizz
+10 buzz
 8
-fizz
-buzz
 11
-fizz
-13
+9 fizz
 14
-fizzbuzz
+15 fizzbuzz
 16
 17
-fizz
+13
+18 fizz
+12 fizz
 19
 #+end_example
+
+Die Ausgabe kann bei jedem Start in einer anderen Reihenfolge
+erfolgen, da die Methodenaufrufe fast gleichzeitig erfolgen. Obwohl
+die Methode =fizzbuzz_thread()= zu Beginn wartet, ist das Programm
+schnell beendet, da die Threads nicht sequentiell ablaufen, sondern
+gleichzeitig.
 
 * Mit einer anderen IDE
 

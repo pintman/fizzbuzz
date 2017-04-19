@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-19 Mi 20:29 -->
+<!-- 2017-04-19 Mi 20:43 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -320,28 +320,60 @@ dieselbe Ausgabe.
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> threading
-<span class="linenr"> 2: </span>
-<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_thread</span>(i):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr"> 5: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">10: </span>    <span style="color: #a020f0;">else</span>:
-<span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i)
-<span class="linenr">12: </span>
-<span class="linenr">13: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_threading</span>():
-<span class="linenr">14: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">15: </span>        <span style="color: #a0522d;">th</span> = threading.Thread(target=fizzbuzz_thread, args=(i,))
-<span class="linenr">16: </span>        th.start()
-<span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Wait for thread to finish</span>
-<span class="linenr">18: </span>        <span style="color: #a020f0;">while</span> th.isAlive():
-<span class="linenr">19: </span>            <span style="color: #a020f0;">pass</span>
-<span class="linenr">20: </span>
-<span class="linenr">21: </span>fizzbuzz_threading()
+<span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> time
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_thread</span>(i):    
+<span class="linenr"> 5: </span>    time.sleep(1)
+<span class="linenr"> 6: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">10: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">12: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">13: </span>        <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">14: </span>
+<span class="linenr">15: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_start_threads</span>():
+<span class="linenr">16: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Creating a thread object that will execute the method above</span>
+<span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">with the given argument i.</span>
+<span class="linenr">19: </span>        <span style="color: #a0522d;">th</span> = threading.Thread(target=fizzbuzz_thread, args=(i,))
+<span class="linenr">20: </span>        th.start()
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>fizzbuzz_start_threads()
 </pre>
 </div>
+
+<pre class="example">
+3 fizz
+4
+2
+1
+0 fizzbuzz
+5 buzz
+7
+6 fizz
+10 buzz
+8
+11
+9 fizz
+14
+15 fizzbuzz
+16
+17
+13
+18 fizz
+12 fizz
+19
+</pre>
+
+<p>
+Die Ausgabe kann bei jedem Start in einer anderen Reihenfolge
+erfolgen, da die Methodenaufrufe fast gleichzeitig erfolgen. Obwohl
+die Methode <code>fizzbuzz_thread()</code> zu Beginn wartet, ist das Programm
+schnell beendet, da die Threads nicht sequentiell ablaufen, sondern
+gleichzeitig.
+</p>
 </div>
 </div>
 
@@ -2154,7 +2186,7 @@ Weitere Informationen gibt es in einem <a href="http://pygame.org/docs/tut/Pygam
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-19 Mi 20:29</p>
+<p class="date">Created: 2017-04-19 Mi 20:43</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
