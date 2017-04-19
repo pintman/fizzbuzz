@@ -1875,6 +1875,7 @@ pip install pygame
 : Requirement already satisfied (use --upgrade to upgrade): pygame in ./fizzbuzz-ve/lib/python3.5/site-packages
 
 file:doc/fizzbuzz_pygame.png
+file:doc/ball.gif
 
 Bei dem folgenden Beispiel hüpft ein Ball über den Bildschirm. Bei
 jedem Mausklick wird eine Zahl, "fizz", "buzz" oder "fizzbuzz" auf dem
