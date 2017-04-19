@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-19 Mi 20:43 -->
+<!-- 2017-04-19 Mi 20:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -1181,32 +1181,49 @@ Nach dem Versuch entsteht eine Datei <code>fizzbuzz.db</code>, die man mit
 <div class="outline-text-2" id="text-18">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_dokumentiert</span>(n):
-<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""Diese Methode durchl&#228;uft die Zahlen 1 bis n. Sie gibt 'fizz' aus,</span>
-<span class="linenr"> 3: </span><span style="color: #8b2252;">    wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist</span>
-<span class="linenr"> 4: </span><span style="color: #8b2252;">    und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""</span>
-<span class="linenr"> 5: </span>
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
-<span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">10: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">11: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">13: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">14: </span>            <span style="color: #a020f0;">print</span>(i)
-<span class="linenr">15: </span>
-<span class="linenr">16: </span><span style="color: #483d8b;">help</span>(fizzbuzz_dokumentiert)
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzSpiel</span>:
+<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""Ein Klasse f&#252;r das FizzBuzzSpiel."""</span>
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_dokumentiert</span>(n):
+<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Diese Methode durchl&#228;uft die Zahlen 1 bis n. Sie gibt 'fizz' aus,</span>
+<span class="linenr"> 6: </span><span style="color: #8b2252;">        wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist</span>
+<span class="linenr"> 7: </span><span style="color: #8b2252;">        und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""</span>
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr">10: </span>            <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">11: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">12: </span>            <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">13: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">14: </span>            <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">15: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">16: </span>            <span style="color: #a020f0;">else</span>:
+<span class="linenr">17: </span>                <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">18: </span>
+<span class="linenr">19: </span><span style="color: #483d8b;">help</span>(FizzBuzzSpiel)
 </pre>
 </div>
 
 <pre class="example">
-Help on function fizzbuzz_dokumentiert in module __main__:
+Help on class FizzBuzzSpiel in module __main__:
 
-fizzbuzz_dokumentiert(n)
-    Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
-    wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
-    und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+class FizzBuzzSpiel(builtins.object)
+ |  Ein Klasse für das FizzBuzzSpiel.
+ |  
+ |  Methods defined here:
+ |  
+ |  fizzbuzz_dokumentiert(n)
+ |      Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+ |      wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+ |      und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
 </pre>
 
 <p>
@@ -2186,7 +2203,7 @@ Weitere Informationen gibt es in einem <a href="http://pygame.org/docs/tut/Pygam
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-19 Mi 20:43</p>
+<p class="date">Created: 2017-04-19 Mi 20:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

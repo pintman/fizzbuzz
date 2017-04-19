@@ -1076,32 +1076,51 @@ rm fizzbuzz.db
 * Mit docstring Dokumentation
 #+BEGIN_SRC python -n :results output :exports both :cache yes
 
-def fizzbuzz_dokumentiert(n):
-    """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
-    wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
-    und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""
+  class FizzBuzzSpiel:
+      """Ein Klasse für das FizzBuzzSpiel."""
+      
+      def fizzbuzz_dokumentiert(n):
+          """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+          wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+          und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""
 
-    for i in range(n):
-        if i % 3 == 0 and i % 5 == 0:
-            print("fizzbuzz")
-        elif i % 3 == 0:
-            print("fizz")
-        elif i % 5 == 0:
-            print("buzz")
-        else:
-            print(i)
+          for i in range(n):
+              if i % 3 == 0 and i % 5 == 0:
+                  print("fizzbuzz")
+              elif i % 3 == 0:
+                  print("fizz")
+              elif i % 5 == 0:
+                  print("buzz")
+              else:
+                  print(i)
 
-help(fizzbuzz_dokumentiert)
+  help(FizzBuzzSpiel)
 #+END_SRC
 
-#+RESULTS[b361da44808c18519ce7d67d0a7578413e59b8e9]:
-: Help on function fizzbuzz_dokumentiert in module __main__:
-: 
-: fizzbuzz_dokumentiert(n)
-:     Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
-:     wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
-:     und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
-: 
+#+RESULTS[227b7460276203ab5534ca4786baa3b6f5ab2e7d]:
+#+begin_example
+Help on class FizzBuzzSpiel in module __main__:
+
+class FizzBuzzSpiel(builtins.object)
+ |  Ein Klasse für das FizzBuzzSpiel.
+ |  
+ |  Methods defined here:
+ |  
+ |  fizzbuzz_dokumentiert(n)
+ |      Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
+ |      wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
+ |      und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+
+#+end_example
 
 Der Kommentar einer Methode oder Klasse steht immer als erster
 String in der Deklaration.
