@@ -1863,3 +1863,82 @@ eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
 19 19
 #+end_example
 
+* Als Spiel (mit pygame)
+
+=pygame= (http://pygame.org/) kann mit =pip= installiert werden.
+
+#+BEGIN_SRC sh :results output
+pip install pygame
+#+END_SRC
+
+#+RESULTS:
+: Requirement already satisfied (use --upgrade to upgrade): pygame in ./fizzbuzz-ve/lib/python3.5/site-packages
+
+file:doc/fizzbuzz_pygame.png
+
+Bei dem folgenden Beispiel hüpft ein Ball über den Bildschirm. Bei
+jedem Mausklick wird eine Zahl, "fizz", "buzz" oder "fizzbuzz" auf dem
+Ball angezeigt.
+
+#+BEGIN_SRC python -n
+  import sys, pygame
+
+  class FizzBuzzGame:
+      def __init__(self):
+          pygame.init()
+
+          size = self.width, self.height = 320, 240
+          self.screen = pygame.display.set_mode(size)
+
+          self.ball = pygame.image.load("doc/ball.gif")
+          self.ballrect = self.ball.get_rect()
+          self.font = pygame.font.SysFont("Arial", 16)
+
+      def fizzbuzz(self, n):
+          if n % 3 == 0 and n % 5 == 0:
+              return "fizzbuzz"
+          elif n % 3 == 0:
+              return "fizz"
+          elif n % 5 == 0:
+              return "buzz"
+          else:
+              return n
+
+      def start_game_loop(self):
+          background = 0,0,0
+          number = 0
+          speed = [2,2]
+          
+          while True:
+              for event in pygame.event.get():
+                  ## handle events ##
+                  if event.type == pygame.QUIT:
+                      sys.exit()
+                  elif event.type == pygame.MOUSEBUTTONDOWN:
+                      number += 1
+
+                  ## update game objects ##
+                  self.ballrect = self.ballrect.move(speed)
+                  if self.ballrect.left < 0 or self.ballrect.right > self.width:
+                      speed[0] = -speed[0]
+                  if self.ballrect.top < 0 or self.ballrect.bottom > self.height:
+                      speed[1] = -speed[1]
+                  fb_result = self.fizzbuzz(number)
+
+                  ## draw screen ##
+                  self.screen.fill(background)
+                  # copy from image ball to the given position
+                  self.screen.blit(self.ball, self.ballrect)
+                  fontsurf = self.font.render(str(fb_result), False, (0,255,0))
+                  self.screen.blit(fontsurf, self.ballrect)
+                  # flip the buffer
+                  pygame.display.flip()
+
+
+  game = FizzBuzzGame()
+  game.start_game_loop()
+#+END_SRC
+
+#+RESULTS:
+
+Weitere Informationen gibt es in einem [[http://pygame.org/docs/tut/PygameIntro.html][Tutorial]].

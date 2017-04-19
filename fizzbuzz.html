@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-18 Di 23:23 -->
+<!-- 2017-04-19 Mi 11:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -170,6 +170,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-26">26. Mit einer Konfigurationsdatei</a></li>
 <li><a href="#sec-27">27. Als Web-Service mit REST-API</a></li>
 <li><a href="#sec-28">28. In einer MVC-Architektur</a></li>
+<li><a href="#sec-29">29. Als Spiel (mit pygame)</a></li>
 </ul>
 </div>
 </div>
@@ -2059,10 +2060,102 @@ eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-29" class="outline-2">
+<h2 id="sec-29"><span class="section-number-2">29</span> Als Spiel (mit pygame)</h2>
+<div class="outline-text-2" id="text-29">
+<p>
+<code>pygame</code> (<a href="http://pygame.org/">http://pygame.org/</a>) kann mit <code>pip</code> installiert werden.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">pip install pygame
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="doc/fizzbuzz_pygame.png" alt="fizzbuzz_pygame.png" />
+</p>
+</div>
+
+<p>
+Bei dem folgenden Beispiel hüpft ein Ball über den Bildschirm. Bei
+jedem Mausklick wird eine Zahl, "fizz", "buzz" oder "fizzbuzz" auf dem
+Ball angezeigt.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys, pygame
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 5: </span>        pygame.init()
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>        <span style="color: #a0522d;">size</span> = <span style="color: #a020f0;">self</span>.width, <span style="color: #a020f0;">self</span>.height = 320, 240
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>.screen = pygame.display.set_mode(size)
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>        <span style="color: #a020f0;">self</span>.ball = pygame.image.load(<span style="color: #8b2252;">"doc/ball.gif"</span>)
+<span class="linenr">11: </span>        <span style="color: #a020f0;">self</span>.ballrect = <span style="color: #a020f0;">self</span>.ball.get_rect()
+<span class="linenr">12: </span>        <span style="color: #a020f0;">self</span>.font = pygame.font.SysFont(<span style="color: #8b2252;">"Arial"</span>, 16)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr">15: </span>        <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
+<span class="linenr">16: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">17: </span>        <span style="color: #a020f0;">elif</span> n % 3 == 0:
+<span class="linenr">18: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">19: </span>        <span style="color: #a020f0;">elif</span> n % 5 == 0:
+<span class="linenr">20: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">21: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">22: </span>            <span style="color: #a020f0;">return</span> n
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">25: </span>        <span style="color: #a0522d;">background</span> = 0,0,0
+<span class="linenr">26: </span>        <span style="color: #a0522d;">number</span> = 0
+<span class="linenr">27: </span>        <span style="color: #a0522d;">speed</span> = [2,2]
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>        <span style="color: #a020f0;">while</span> <span style="color: #008b8b;">True</span>:
+<span class="linenr">30: </span>            <span style="color: #a020f0;">for</span> event <span style="color: #a020f0;">in</span> pygame.event.get():
+<span class="linenr">31: </span>                <span style="color: #b22222;">## </span><span style="color: #b22222;">handle events ##</span>
+<span class="linenr">32: </span>                <span style="color: #a020f0;">if</span> event.<span style="color: #483d8b;">type</span> == pygame.QUIT:
+<span class="linenr">33: </span>                    sys.<span style="color: #008b8b;">exit</span>()
+<span class="linenr">34: </span>                <span style="color: #a020f0;">elif</span> event.<span style="color: #483d8b;">type</span> == pygame.MOUSEBUTTONDOWN:
+<span class="linenr">35: </span>                    <span style="color: #a0522d;">number</span> += 1
+<span class="linenr">36: </span>
+<span class="linenr">37: </span>                <span style="color: #b22222;">## </span><span style="color: #b22222;">update game objects ##</span>
+<span class="linenr">38: </span>                <span style="color: #a020f0;">self</span>.ballrect = <span style="color: #a020f0;">self</span>.ballrect.move(speed)
+<span class="linenr">39: </span>                <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.ballrect.left &lt; 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.ballrect.right &gt; <span style="color: #a020f0;">self</span>.width:
+<span class="linenr">40: </span>                    <span style="color: #a0522d;">speed</span>[0] = -speed[0]
+<span class="linenr">41: </span>                <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.ballrect.top &lt; 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.ballrect.bottom &gt; <span style="color: #a020f0;">self</span>.height:
+<span class="linenr">42: </span>                    <span style="color: #a0522d;">speed</span>[1] = -speed[1]
+<span class="linenr">43: </span>                <span style="color: #a0522d;">fb_result</span> = <span style="color: #a020f0;">self</span>.fizzbuzz(number)
+<span class="linenr">44: </span>
+<span class="linenr">45: </span>                <span style="color: #b22222;">## </span><span style="color: #b22222;">draw screen ##</span>
+<span class="linenr">46: </span>                <span style="color: #a020f0;">self</span>.screen.fill(background)
+<span class="linenr">47: </span>                <span style="color: #b22222;"># </span><span style="color: #b22222;">copy from image ball to the given position</span>
+<span class="linenr">48: </span>                <span style="color: #a020f0;">self</span>.screen.blit(<span style="color: #a020f0;">self</span>.ball, <span style="color: #a020f0;">self</span>.ballrect)
+<span class="linenr">49: </span>                <span style="color: #a0522d;">fontsurf</span> = <span style="color: #a020f0;">self</span>.font.render(<span style="color: #483d8b;">str</span>(fb_result), <span style="color: #008b8b;">False</span>, (0,255,0))
+<span class="linenr">50: </span>                <span style="color: #a020f0;">self</span>.screen.blit(fontsurf, <span style="color: #a020f0;">self</span>.ballrect)
+<span class="linenr">51: </span>                <span style="color: #b22222;"># </span><span style="color: #b22222;">flip the buffer</span>
+<span class="linenr">52: </span>                pygame.display.flip()
+<span class="linenr">53: </span>
+<span class="linenr">54: </span>
+<span class="linenr">55: </span><span style="color: #a0522d;">game</span> = FizzBuzzGame()
+<span class="linenr">56: </span>game.start_game_loop()
+</pre>
+</div>
+
+<p>
+Weitere Informationen gibt es in einem <a href="http://pygame.org/docs/tut/PygameIntro.html">Tutorial</a>.
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-18 Di 23:23</p>
+<p class="date">Created: 2017-04-19 Mi 11:32</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
