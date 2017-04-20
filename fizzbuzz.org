@@ -2052,7 +2052,9 @@ folgenden Inhalt.
 
 #+INCLUDE: "fizzbuzz_docker.py" src python -n
 
-Der Container can mit diesem Script nun gebaut werden.
+Der Container kann mit diesem Script nun gebaut werden. Dafür muss man
+im gleichen Verzeichnis sein, in dem sich die Dateien =Dockerfile= und
+=fizzbuzz_docker.py= befinden.
 
 #+BEGIN_SRC sh :results output :exports both :cache yes
 docker build -t fizzbuzz .
@@ -2077,8 +2079,9 @@ Successfully built 45468e2e8f88
 #+end_example
 
 Nun kann der Container gestartet werden. Mit der Option =--rm= wird
-der Container nach Beendigung der Ausführung direkt gelöscht. Das oben
-erstellte Image bleibt jedoch erhalten.
+der Container nach Beendigung der Ausführung direkt gelöscht.
+Gewöhnlich sollen Container ja länger laufen und einen Dienst
+bereitstellen. Das oben erstellte Image bleibt jedoch erhalten.
 
 #+BEGIN_SRC sh :results output :exports both :cache yes
 docker run --rm fizzbuzz
