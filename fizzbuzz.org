@@ -167,7 +167,7 @@ fizz
 buzz
 #+end_example
 
-* Mit Hilfe von nebenläufigen Threads
+* Mit Hilfe von nebenläufigen Threads und Prozessen
 
 #+BEGIN_SRC python -n :results output :exports both :cache yes
   import threading
@@ -223,6 +223,64 @@ erfolgen, da die Methodenaufrufe fast gleichzeitig erfolgen. Obwohl
 die Methode =fizzbuzz_thread()= zu Beginn wartet, ist das Programm
 schnell beendet, da die Threads nicht sequentiell ablaufen, sondern
 gleichzeitig.
+
+In einer zweiten Variante verwenden wir echte Prozesse des
+Betriebssystems, die auch auf verschiedene Kerne oder Prozessoren
+aufgeteilt werden können. Hierfür gibt es das Paket [[https://docs.python.org/3/library/multiprocessing.html][multiprocessing]].
+
+#+BEGIN_SRC python -n :results output :exports both :cache no
+  import time
+  import multiprocessing
+      
+  def fizzbuzz_process(i):
+      time.sleep(1)
+      if i % 3 == 0 and i % 5 == 0:
+          print(i, "fizzbuzz")
+      elif i % 3 == 0:
+          print(i, "fizz")
+      elif i % 5 == 0:
+          print(i, "buzz")
+      else:
+          print(i)
+
+  def fizzbuzz_start_processes():
+      for i in range(20):
+          # Creating a process that will execute the method above
+          # with the given argument i.
+          pr = multiprocessing.Process(target=fizzbuzz_process, args=(i,))
+          pr.start()
+
+  fizzbuzz_start_processes()
+
+#+END_SRC
+
+#+RESULTS[953d4fe73db7b5b329f41715c5567fa1b257e7d6]:
+#+begin_example
+0 fizzbuzz
+1
+2
+3 fizz
+4
+5 buzz
+6 fizz
+8
+7
+9 fizz
+10 buzz
+11
+12 fizz
+13
+15 fizzbuzz
+14
+16
+18 fizz
+17
+19
+#+end_example
+
+Auch hier ist die Ausgabereihenfolge nicht-deterministisch. Zudem
+sieht man nun in einem Task-Manager, dass viele verschiedene Prozesse
+kurz gestartet werden.
 
 * Mit einer anderen IDE
 

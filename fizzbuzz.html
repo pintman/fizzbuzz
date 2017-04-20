@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-19 Mi 20:49 -->
+<!-- 2017-04-20 Do 11:42 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -145,7 +145,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1">1. Auf Papier</a></li>
 <li><a href="#sec-2">2. Mit einer Methode</a></li>
 <li><a href="#sec-3">3. Ohne Verwendung einer Schleife (rekursiv)</a></li>
-<li><a href="#sec-4">4. Mit Hilfe von nebenläufigen Threads</a></li>
+<li><a href="#sec-4">4. Mit Hilfe von nebenläufigen Threads und Prozessen</a></li>
 <li><a href="#sec-5">5. Mit einer anderen IDE</a></li>
 <li><a href="#sec-6">6. In einer anderen Programmiersprache</a></li>
 <li><a href="#sec-7">7. Als Client-Server Anwendung</a></li>
@@ -315,7 +315,7 @@ dieselbe Ausgabe.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Mit Hilfe von nebenläufigen Threads</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Mit Hilfe von nebenläufigen Threads und Prozessen</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
@@ -373,6 +373,68 @@ erfolgen, da die Methodenaufrufe fast gleichzeitig erfolgen. Obwohl
 die Methode <code>fizzbuzz_thread()</code> zu Beginn wartet, ist das Programm
 schnell beendet, da die Threads nicht sequentiell ablaufen, sondern
 gleichzeitig.
+</p>
+
+<p>
+In einer zweiten Variante verwenden wir echte Prozesse des
+Betriebssystems, die auch auf verschiedene Kerne oder Prozessoren
+aufgeteilt werden können. Hierfür gibt es das Paket <a href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> time
+<span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> multiprocessing
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_process</span>(i):
+<span class="linenr"> 5: </span>    time.sleep(1)
+<span class="linenr"> 6: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">10: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">12: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">13: </span>        <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">14: </span>
+<span class="linenr">15: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_start_processes</span>():
+<span class="linenr">16: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Creating a process that will execute the method above</span>
+<span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">with the given argument i.</span>
+<span class="linenr">19: </span>        <span style="color: #a0522d;">pr</span> = multiprocessing.Process(target=fizzbuzz_process, args=(i,))
+<span class="linenr">20: </span>        pr.start()
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>fizzbuzz_start_processes()
+</pre>
+</div>
+
+<pre class="example">
+0 fizzbuzz
+1
+2
+3 fizz
+5 buzz
+4
+6 fizz
+7
+8
+9 fizz
+11
+10 buzz
+12 fizz
+13
+15 fizzbuzz
+14
+16
+17
+18 fizz
+19
+</pre>
+
+<p>
+Auch hier ist die Ausgabereihenfolge nicht-deterministisch. Zudem
+sieht man nun in einem Task-Manager, dass viele verschiedene Prozesse
+kurz gestartet werden.
 </p>
 </div>
 </div>
@@ -2187,7 +2249,7 @@ Weitere Informationen gibt es in einem <a href="http://pygame.org/docs/tut/Pygam
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-19 Mi 20:49</p>
+<p class="date">Created: 2017-04-20 Do 11:42</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
