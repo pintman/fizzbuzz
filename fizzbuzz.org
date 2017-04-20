@@ -1962,21 +1962,45 @@ file:doc/fizzbuzz_pygame.png
 file:doc/ball.gif
 
 Bei dem folgenden Beispiel hüpft ein Ball über den Bildschirm. Bei
-jedem Mausklick wird eine Zahl, "fizz", "buzz" oder "fizzbuzz" auf dem
-Ball angezeigt.
+jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
+"fizzbuzz" auf dem Ball angezeigt.
 
 #+BEGIN_SRC python -n
   import sys, pygame
 
+  class Ball(pygame.sprite.Sprite):
+      def __init__(self, screen_width, screen_height):
+          super().__init__()
+          self.image = pygame.image.load("doc/ball.gif")
+          self.rect = self.image.get_rect()
+          self.speed = [2, 2] # speed in x and y direction
+          self.screen_width = screen_width
+          self.screen_height = screen_height
+
+      def update(self):
+          """Update called by the update of the Group method."""
+          self.rect = self.rect.move(self.speed)
+          if self.rect.left < 0 or self.rect.right > self.screen_width:
+              self.speed[0] = -self.speed[0]
+          if self.rect.top < 0 or self.rect.bottom > self.screen_height:
+              self.speed[1] = -self.speed[1]
+
+      def is_clicked(self):
+          """Check whether this Ball has been clicked."""
+          x,y = pygame.mouse.get_pos()
+          # Coordinate system with (0,0) at top left
+          return (self.rect.left < x < self.rect.right and
+                  self.rect.top < y < self.rect.bottom)
+
+
   class FizzBuzzGame:
-      def __init__(self):
+      def __init__(self, width, height):
           pygame.init()
 
-          size = self.width, self.height = 320, 240
-          self.screen = pygame.display.set_mode(size)
+          self.width, self.height = width, height
+          self.screen = pygame.display.set_mode((width, height))
 
-          self.ball = pygame.image.load("doc/ball.gif")
-          self.ballrect = self.ball.get_rect()
+          self.ball = Ball(width, height)
           self.font = pygame.font.SysFont("Arial", 16)
 
       def fizzbuzz(self, n):
@@ -1990,43 +2014,46 @@ Ball angezeigt.
               return n
 
       def start_game_loop(self):
-          background = 0,0,0
-          number = 0
-          speed = [2,2]
-          
+          clock = pygame.time.Clock()
+          # group all sprites (here only one)
+          allsprites = pygame.sprite.Group((self.ball))
+          number, fb_result = 1, 1
+
           while True:
+              clock.tick(60) # limit runtime to 60 Frames/Second
+
+              # handle events
               for event in pygame.event.get():
                   ## handle events ##
                   if event.type == pygame.QUIT:
                       sys.exit()
-                  elif event.type == pygame.MOUSEBUTTONDOWN:
-                      number += 1
+                  elif event.type == pygame.MOUSEBUTTONDOWN and self.ball.is_clicked():
+                      number += 1                    
+                      fb_result = self.fizzbuzz(number)
 
-                  ## update game objects ##
-                  self.ballrect = self.ballrect.move(speed)
-                  if self.ballrect.left < 0 or self.ballrect.right > self.width:
-                      speed[0] = -speed[0]
-                  if self.ballrect.top < 0 or self.ballrect.bottom > self.height:
-                      speed[1] = -speed[1]
-                  fb_result = self.fizzbuzz(number)
+              # update all Sprites
+              allsprites.update()
 
-                  ## draw screen ##
-                  self.screen.fill(background)
-                  # copy from image ball to the given position
-                  self.screen.blit(self.ball, self.ballrect)
-                  fontsurf = self.font.render(str(fb_result), False, (0,255,0))
-                  self.screen.blit(fontsurf, self.ballrect)
-                  # flip the buffer
-                  pygame.display.flip()
+              # draw the screen: background, sprites, text
+              self.screen.fill((0,0,0))
+              # for each sprite in the group draw/blit the image into a rect
+              allsprites.draw(self.screen)
+              # draw text on top
+              fontsurf = self.font.render(str(fb_result), False, (0,255,0))
+              self.screen.blit(fontsurf, self.ball.rect)                
+              # flip the buffer
+              pygame.display.flip()
 
 
-  game = FizzBuzzGame()
+  game = FizzBuzzGame(320, 240)
   game.start_game_loop()
+
 #+END_SRC
 
 #+RESULTS:
 
 Weitere Informationen gibt es in einem [[http://pygame.org/docs/tut/PygameIntro.html][Tutorial]].
+
 * In einem docker Container
 
 Zunächst muss docker (https://www.docker.com/) installiert werden.
