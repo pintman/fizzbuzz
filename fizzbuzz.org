@@ -399,44 +399,53 @@ Mögliche Sprachen wären:
 
 * Mit einer grafischen Oberfläche (GUI)
 
+Mit Python wird das einfache Paket =tkinter= für die Gestaltung von
+GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
+http://effbot.org/tkinterbook/ zu finden.
+
+file:doc/fizzbuzz_gui.png
+
 #+BEGIN_SRC python -n
+  import tkinter
 
-import tkinter
+  class GUI:
+      def __init__(self):
+          self.i = 0
 
-class GUI:
-    def __init__(self):
-        self.i = 0
+          root = tkinter.Tk()
+          root.title("FizzBuzz")
+          
+          btn = tkinter.Button(root, text="next", command=self.button_click)
+          btn.pack()
 
-        root = tkinter.Tk()
-        btn = tkinter.Button(root, text="next", command=self.button_click)
-        btn.pack()
-        self.ent = tkinter.Entry(root)
-        self.ent.pack()
-        # entering main event loop
-        root.mainloop()
+          self.lbl = tkinter.Label(root, text="fizzbuzz GUI")
+          self.lbl.pack()
+          self.ent = tkinter.Entry(root)
+          self.ent.pack()
+          # entering main event loop
+          root.mainloop()
 
-    def button_click(self):
-        i = self.i
-        # clear the entry field
-        self.ent.delete(0, tkinter.END)
+      def button_click(self):
+          i = self.i
 
-        if i % 3 == 0 and i % 5 == 0:
-            self.ent.insert(0, "fizzbuzz")
-        elif i % 3 == 0:
-            self.ent.insert(0, "fizz")
-        elif i % 5 == 0:
-            self.ent.insert(0, "buzz")
-        else:
-            self.ent.insert(0, i)
+          # update label
+          self.lbl.configure(text="fizzbuzz von " + str(i))
+          
+          # clear the entry field
+          self.ent.delete(0, tkinter.END)
 
-        self.i += 1
+          if i % 3 == 0 and i % 5 == 0:
+              self.ent.insert(0, "fizzbuzz")
+          elif i % 3 == 0:
+              self.ent.insert(0, "fizz")
+          elif i % 5 == 0:
+              self.ent.insert(0, "buzz")
+          else:
+              self.ent.insert(0, i)
 
-def fizzbuzz_gui():
-    GUI()
+          self.i += 1
 
-
-fizzbuzz_gui()
-
+  GUI()
 #+END_SRC
 
 #+RESULTS:
@@ -919,7 +928,6 @@ Got:
    1 of   6 in __main__.FizzBuzz.fizzbuzz
 ***Test Failed*** 1 failures.
 #+end_example
-
 
 * Mit einem EA-Modul ansteuern
 
