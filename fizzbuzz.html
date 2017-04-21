@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-20 Do 19:21 -->
+<!-- 2017-04-21 Fr 10:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -904,65 +904,131 @@ Anschließend kann das Paket (lokal) installiert werden.
 <div id="outline-container-sec-15" class="outline-2">
 <h2 id="sec-15"><span class="section-number-2">15</span> Als getestetes Programm (mit unittest und doctests)</h2>
 <div class="outline-text-2" id="text-15">
+<p>
+Bei einem UnitTest testet eine Testklasse die Methoden einer anderen
+Klasse und prüft einen erhaltenen Ist-Wert gegen den erwarteten
+Soll-Wert. In Python geschiet dies über das Paket <a href="https://docs.python.org/3/library/unittest.html">unittest</a>.
+</p>
+
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> unittest
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
 <span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Die ist ein Kommentar,der einen Test enth&#228;lt. Unter Python nennt man dies</span>
-<span class="linenr"> 6: </span><span style="color: #8b2252;">        einen doctest.</span>
-<span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span><span style="color: #8b2252;">        Kommentare von Methoden lassen sich auch testen. Der folgende</span>
-<span class="linenr"> 9: </span><span style="color: #8b2252;">        Quelltext wird hierf&#252;r ausgef&#252;hrt, sobald das doctest-Modul aufgerufen</span>
-<span class="linenr">10: </span><span style="color: #8b2252;">        wird:</span>
-<span class="linenr">11: </span>
-<span class="linenr">12: </span><span style="color: #8b2252;">        $ python3 -m doctest fizzbuzz.py</span>
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 6: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">11: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span>            <span style="color: #a020f0;">return</span> i
 <span class="linenr">13: </span>
-<span class="linenr">14: </span><span style="color: #8b2252;">        Hier kommt der Test:</span>
-<span class="linenr">15: </span>
-<span class="linenr">16: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc = FizzBuzz()</span>
-<span class="linenr">17: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(3)</span>
-<span class="linenr">18: </span><span style="color: #8b2252;">        'fizz'</span>
-<span class="linenr">19: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(5)</span>
-<span class="linenr">20: </span><span style="color: #8b2252;">        'buzz'</span>
-<span class="linenr">21: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(10)</span>
-<span class="linenr">22: </span><span style="color: #8b2252;">        'buzz'</span>
-<span class="linenr">23: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fbc.fizzbuzz(11)</span>
-<span class="linenr">24: </span><span style="color: #8b2252;">        11</span>
+<span class="linenr">14: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzTest</span>(unittest.TestCase):
+<span class="linenr">15: </span>    <span style="color: #8b2252;">"""Diese Unit-Test-Klasse testet die Klasse FizzBuzz. </span>
+<span class="linenr">16: </span>
+<span class="linenr">17: </span><span style="color: #8b2252;">    Hierf&#252;r testet sie m&#246;gliche Eingaben und Ausgaben."""</span>
+<span class="linenr">18: </span>
+<span class="linenr">19: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setUp</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">20: </span>        <span style="color: #8b2252;">"""Wird vor jedem Test aufgerufen."""</span>
+<span class="linenr">21: </span>        <span style="color: #a020f0;">self</span>.fizzbuzz = FizzBuzz()
+<span class="linenr">22: </span>
+<span class="linenr">23: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">24: </span>        <span style="color: #a0522d;">fb</span> = <span style="color: #a020f0;">self</span>.fizzbuzz
 <span class="linenr">25: </span>
-<span class="linenr">26: </span><span style="color: #8b2252;">        """</span>
-<span class="linenr">27: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">28: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr">29: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">30: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr">31: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">32: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">33: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">34: </span>            <span style="color: #a020f0;">return</span> i
+<span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Wertvergleiche</span>
+<span class="linenr">27: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(2), 2)
+<span class="linenr">28: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(15), <span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">29: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(9), <span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">30: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(10), <span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">31: </span>
+<span class="linenr">32: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Boolesche Vergleiche</span>
+<span class="linenr">33: </span>        <span style="color: #a020f0;">self</span>.assertTrue(fb.fizzbuzz(12) != 12)
+<span class="linenr">34: </span>        <span style="color: #a020f0;">self</span>.assertFalse(fb.fizzbuzz(12) == 12)
 <span class="linenr">35: </span>
-<span class="linenr">36: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzTest</span>(unittest.TestCase):
-<span class="linenr">37: </span>    <span style="color: #8b2252;">"""Diese Unit-Test-Klasse testet die Klasse FizzBuzz. </span>
+<span class="linenr">36: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Typvergleiche</span>
+<span class="linenr">37: </span>        <span style="color: #a020f0;">self</span>.assertIsInstance(fb.fizzbuzz(2), <span style="color: #483d8b;">int</span>)
 <span class="linenr">38: </span>
-<span class="linenr">39: </span><span style="color: #8b2252;">    Hierf&#252;r testet sie m&#246;gliche Eingaben und Ausgaben."""</span>
-<span class="linenr">40: </span>
-<span class="linenr">41: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">42: </span>        <span style="color: #a0522d;">fb</span> = FizzBuzz()
+<span class="linenr">39: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Vergleich mit Collection</span>
+<span class="linenr">40: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">41: </span>            <span style="color: #a0522d;">result</span> = fb.fizzbuzz(i)            
+<span class="linenr">42: </span>            <span style="color: #a020f0;">self</span>.assertIn(result, [<span style="color: #8b2252;">'fizz'</span>, <span style="color: #8b2252;">'buzz'</span>, <span style="color: #8b2252;">'fizzbuzz'</span>, i])
 <span class="linenr">43: </span>
-<span class="linenr">44: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(3), <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">45: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(15), <span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">46: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(9), <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">47: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(10), <span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">48: </span>
-<span class="linenr">49: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_getestet</span>():
-<span class="linenr">50: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Alle Tests ausf&#252;hren.</span>
-<span class="linenr">51: </span>    unittest.main()
-<span class="linenr">52: </span>
-<span class="linenr">53: </span>fizzbuzz_getestet()
+<span class="linenr">44: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_unit_tests</span>():
+<span class="linenr">45: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Alle Tests ausf&#252;hren.</span>
+<span class="linenr">46: </span>    unittest.main()
+<span class="linenr">47: </span>
+<span class="linenr">48: </span>run_unit_tests()
+</pre>
+</div>
+
+<p>
+Die Tests können bei Python auch direkt in den Kommentaren stehen. In
+diesem Fall spricht man von einem <a href="https://docs.python.org/3/library/doctest.html">docttest</a>. Die Zeichen "<code>&gt;&gt;&gt;</code>"
+beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> doctest
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Die ist ein Kommentar,der einen Test enth&#228;lt. Unter Python nennt</span>
+<span class="linenr"> 6: </span><span style="color: #8b2252;">        man dies einen doctest.</span>
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #8b2252;">        Hier kommt der Test:</span>
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb = FizzBuzz()</span>
+<span class="linenr">11: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(3)</span>
+<span class="linenr">12: </span><span style="color: #8b2252;">        'fizz'</span>
+<span class="linenr">13: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(5)</span>
+<span class="linenr">14: </span><span style="color: #8b2252;">        'buzz'</span>
+<span class="linenr">15: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(10)</span>
+<span class="linenr">16: </span><span style="color: #8b2252;">        'buzz'</span>
+<span class="linenr">17: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(11)</span>
+<span class="linenr">18: </span><span style="color: #8b2252;">        11</span>
+<span class="linenr">19: </span>
+<span class="linenr">20: </span><span style="color: #8b2252;">        Nun ein Test, der fehlschl&#228;gt:</span>
+<span class="linenr">21: </span>
+<span class="linenr">22: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(12)</span>
+<span class="linenr">23: </span><span style="color: #8b2252;">        12</span>
+<span class="linenr">24: </span>
+<span class="linenr">25: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr">26: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">27: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">28: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">29: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">30: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">31: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">32: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">33: </span>            <span style="color: #a020f0;">return</span> i
+<span class="linenr">34: </span>
+<span class="linenr">35: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_doc_tests</span>():
+<span class="linenr">36: </span>    doctest.testmod()
+<span class="linenr">37: </span>
+<span class="linenr">38: </span>run_doc_tests()
+</pre>
+</div>
+
+<pre class="example">
+**********************************************************************
+File "&lt;stdin&gt;", line 22, in __main__.FizzBuzz.fizzbuzz
+Failed example:
+    fb.fizzbuzz(12)
+Expected:
+    12
+Got:
+    'fizz'
+**********************************************************************
+1 items had failures:
+   1 of   6 in __main__.FizzBuzz.fizzbuzz
+***Test Failed*** 1 failures.
 </pre>
 </div>
 </div>
-</div>
+
 
 <div id="outline-container-sec-16" class="outline-2">
 <h2 id="sec-16"><span class="section-number-2">16</span> Mit einem EA-Modul ansteuern</h2>
@@ -2453,7 +2519,7 @@ Deleted: sha256:d6710223ee5a861c4a66cb8df4315952ca65ae5b6c70056e99bd8de0fec5990f
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-20 Do 19:21</p>
+<p class="date">Created: 2017-04-21 Fr 10:29</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

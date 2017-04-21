@@ -801,33 +801,15 @@ Finished processing dependencies for fizzbuzz-katas==0.1
 
 * Als getestetes Programm (mit unittest und doctests)
 
+Bei einem UnitTest testet eine Testklasse die Methoden einer anderen
+Klasse und prüft einen erhaltenen Ist-Wert gegen den erwarteten
+Soll-Wert. In Python geschiet dies über das Paket [[https://docs.python.org/3/library/unittest.html][unittest]].
+
 #+BEGIN_SRC python -n :results output
   import unittest
 
   class FizzBuzz:
       def fizzbuzz(self, i):
-          """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt man dies
-          einen doctest.
-
-          Kommentare von Methoden lassen sich auch testen. Der folgende
-          Quelltext wird hierfür ausgeführt, sobald das doctest-Modul aufgerufen
-          wird:
-
-          $ python3 -m doctest fizzbuzz.py
-
-          Hier kommt der Test:
-
-          >>> fbc = FizzBuzz()
-          >>> fbc.fizzbuzz(3)
-          'fizz'
-          >>> fbc.fizzbuzz(5)
-          'buzz'
-          >>> fbc.fizzbuzz(10)
-          'buzz'
-          >>> fbc.fizzbuzz(11)
-          11
-
-          """
           if i % 3 == 0 and i % 5 == 0:
               return "fizzbuzz"
           elif i % 3 == 0:
@@ -842,23 +824,102 @@ Finished processing dependencies for fizzbuzz-katas==0.1
 
       Hierfür testet sie mögliche Eingaben und Ausgaben."""
 
+      def setUp(self):
+          """Wird vor jedem Test aufgerufen."""
+          self.fizzbuzz = FizzBuzz()
+      
       def test_fizzbuzz(self):
-          fb = FizzBuzz()
+          fb = self.fizzbuzz
 
-          self.assertEqual(fb.fizzbuzz(3), "fizz")
+          # Wertvergleiche
+          self.assertEqual(fb.fizzbuzz(2), 2)
           self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
           self.assertEqual(fb.fizzbuzz(9), "fizz")
           self.assertEqual(fb.fizzbuzz(10), "buzz")
 
-  def fizzbuzz_getestet():
+          # Boolesche Vergleiche
+          self.assertTrue(fb.fizzbuzz(12) != 12)
+          self.assertFalse(fb.fizzbuzz(12) == 12)
+
+          # Typvergleiche
+          self.assertIsInstance(fb.fizzbuzz(2), int)
+
+          # Vergleich mit Collection
+          for i in range(20):
+              result = fb.fizzbuzz(i)            
+              self.assertIn(result, ['fizz', 'buzz', 'fizzbuzz', i])
+
+  def run_unit_tests():
       # Alle Tests ausführen.
       unittest.main()
 
-  fizzbuzz_getestet()
+  run_unit_tests()
 
 #+END_SRC
 
 #+RESULTS:
+
+Die Tests können bei Python auch direkt in den Kommentaren stehen. In
+diesem Fall spricht man von einem [[https://docs.python.org/3/library/doctest.html][docttest]]. Die Zeichen "=>>>="
+beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  import doctest
+
+  class FizzBuzz:
+      def fizzbuzz(self, i):
+          """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt
+          man dies einen doctest.
+
+          Hier kommt der Test:
+
+          >>> fb = FizzBuzz()
+          >>> fb.fizzbuzz(3)
+          'fizz'
+          >>> fb.fizzbuzz(5)
+          'buzz'
+          >>> fb.fizzbuzz(10)
+          'buzz'
+          >>> fb.fizzbuzz(11)
+          11
+
+          Nun ein Test, der fehlschlägt:
+
+          >>> fb.fizzbuzz(12)
+          12
+
+          """
+          if i % 3 == 0 and i % 5 == 0:
+              return "fizzbuzz"
+          elif i % 3 == 0:
+              return "fizz"
+          elif i % 5 == 0:
+              return "buzz"
+          else:
+              return i
+
+  def run_doc_tests():
+      doctest.testmod()
+
+  run_doc_tests()
+#+END_SRC
+
+#+RESULTS[2b9ac0e47c62d186c289d72c26cfd5fd8f5b2d03]:
+#+begin_example
+**********************************************************************
+File "<stdin>", line 22, in __main__.FizzBuzz.fizzbuzz
+Failed example:
+    fb.fizzbuzz(12)
+Expected:
+    12
+Got:
+    'fizz'
+**********************************************************************
+1 items had failures:
+   1 of   6 in __main__.FizzBuzz.fizzbuzz
+***Test Failed*** 1 failures.
+#+end_example
+
 
 * Mit einem EA-Modul ansteuern
 
