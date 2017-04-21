@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-21 Fr 10:53 -->
+<!-- 2017-04-21 Fr 11:43 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -2401,31 +2401,6 @@ CMD [<span style="color: #8b2252;">"python3"</span>, <span style="color: #8b2252
 </div>
 
 <p>
-Die in dem Image referenzierte Datei <code>fizzbuzz_docker.py</code> hat
-folgenden Inhalt.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys
-<span class="linenr"> 2: </span>
-<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
-<span class="linenr"> 5: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">elif</span> n % 3 == 0:
-<span class="linenr"> 7: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> n % 5 == 0:
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">10: </span>    <span style="color: #a020f0;">else</span>:
-<span class="linenr">11: </span>        <span style="color: #a020f0;">return</span> n
-<span class="linenr">12: </span>
-<span class="linenr">13: </span><span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(sys.argv[1])    
-<span class="linenr">14: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
-<span class="linenr">15: </span>    <span style="color: #a020f0;">print</span>(fizzbuzz(i))
-</pre>
-</div>
-
-<p>
 Der Container kann mit diesem Script nun gebaut werden. Dafür muss man
 im gleichen Verzeichnis sein, in dem sich die Dateien <code>Dockerfile</code> und
 <code>fizzbuzz_docker.py</code> befinden.
@@ -2455,6 +2430,44 @@ Successfully built 45468e2e8f88
 </pre>
 
 <p>
+Die in dem Dockerfile referenzierte Datei <code>fizzbuzz_docker.py</code> hat
+folgenden Inhalt.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys
+<span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> os
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
+<span class="linenr"> 5: </span>    <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
+<span class="linenr"> 6: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr"> 7: </span>    <span style="color: #a020f0;">elif</span> n % 3 == 0:
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr"> 9: </span>    <span style="color: #a020f0;">elif</span> n % 5 == 0:
+<span class="linenr">10: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">11: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span>        <span style="color: #a020f0;">return</span> n
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">determine parameter for fizzbuzz: environment variable, commandline,</span>
+<span class="linenr">15: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">or default value.</span>
+<span class="linenr">16: </span><span style="color: #a020f0;">if</span> <span style="color: #8b2252;">"FIZZBUZZ"</span> <span style="color: #a020f0;">in</span> os.environ:
+<span class="linenr">17: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using environment variable as parameter]"</span>)
+<span class="linenr">18: </span>    <span style="color: #a0522d;">n</span> = os.environ[<span style="color: #8b2252;">"FIZZBUZZ"</span>]
+<span class="linenr">19: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(n)    
+<span class="linenr">20: </span><span style="color: #a020f0;">elif</span> <span style="color: #483d8b;">len</span>(sys.argv) &gt; 1:
+<span class="linenr">21: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using command line parameter]"</span>)
+<span class="linenr">22: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(sys.argv[1])
+<span class="linenr">23: </span><span style="color: #a020f0;">else</span>:
+<span class="linenr">24: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using default value as parameter]"</span>)
+<span class="linenr">25: </span>    <span style="color: #a0522d;">n</span> = 20   
+<span class="linenr">26: </span>
+<span class="linenr">27: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr">28: </span>    <span style="color: #a020f0;">print</span>(fizzbuzz(i))
+</pre>
+</div>
+
+<p>
 Nun kann der Container gestartet werden. Mit der Option <code>--rm</code> wird
 der Container nach Beendigung der Ausführung direkt gelöscht.
 Gewöhnlich sollen Container ja länger laufen und einen Dienst
@@ -2468,6 +2481,7 @@ bereitstellen. Das oben erstellte Image bleibt jedoch erhalten.
 </div>
 
 <pre class="example">
+[using command line parameter]
 fizzbuzz
 1
 2
@@ -2501,6 +2515,7 @@ Es können auch Parameter direkt übergeben werden.
 </div>
 
 <pre class="example">
+[using command line parameter]
 fizzbuzz
 1
 2
@@ -2511,6 +2526,63 @@ fizz
 7
 8
 fizz
+</pre>
+
+<p>
+Nun übergeben wir keinen Parameter.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run --rm fizzbuzz /usr/bin/python3 /fizzbuzz_docker.py
+</pre>
+</div>
+
+<pre class="example">
+[using default value as parameter]
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+</pre>
+
+<p>
+Auch eine Umgebungsvariable kann mit der Option <code>-e &lt;VARIABLE&gt;=&lt;WERT&gt;</code>
+an den Container übergeben werden.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run --rm -e <span style="color: #a0522d;">FIZZBUZZ</span>=8 fizzbuzz
+</pre>
+</div>
+
+<pre class="example">
+[using environment variable as parameter]
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
 </pre>
 
 <p>
@@ -2526,16 +2598,16 @@ werden.
 
 <pre class="example">
 Untagged: fizzbuzz:latest
-Deleted: sha256:45468e2e8f882a61444888d407fab25f93c9670c5fe4096dc76801e9cf241ced
-Deleted: sha256:11088b4c74dff8accb7a2c72a3acf41709b6c44a9b25c8187738ade2b0f1452a
-Deleted: sha256:d6710223ee5a861c4a66cb8df4315952ca65ae5b6c70056e99bd8de0fec5990f
+Deleted: sha256:6fe92919b9068f38cf7e4a4f5cd9fd0d6fc4c69f280e3c82668e4cd6d0edc539
+Deleted: sha256:5ddf7803d3884e39ea8517e3fb1a2200fdf9182726dcd06c1336938e0ddb89ae
+Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 </pre>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-21 Fr 10:53</p>
+<p class="date">Created: 2017-04-21 Fr 11:43</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

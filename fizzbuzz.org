@@ -2143,11 +2143,6 @@ werden kann.
 
 #+INCLUDE: "Dockerfile" src sh
 
-Die in dem Image referenzierte Datei =fizzbuzz_docker.py= hat
-folgenden Inhalt.
-
-#+INCLUDE: "fizzbuzz_docker.py" src python -n
-
 Der Container kann mit diesem Script nun gebaut werden. Dafür muss man
 im gleichen Verzeichnis sein, in dem sich die Dateien =Dockerfile= und
 =fizzbuzz_docker.py= befinden.
@@ -2174,6 +2169,11 @@ Removing intermediate container b83807219cdc
 Successfully built 45468e2e8f88
 #+end_example
 
+Die in dem Dockerfile referenzierte Datei =fizzbuzz_docker.py= hat
+folgenden Inhalt.
+
+#+INCLUDE: "fizzbuzz_docker.py" src python -n
+
 Nun kann der Container gestartet werden. Mit der Option =--rm= wird
 der Container nach Beendigung der Ausführung direkt gelöscht.
 Gewöhnlich sollen Container ja länger laufen und einen Dienst
@@ -2185,6 +2185,7 @@ docker run --rm fizzbuzz
 
 #+RESULTS[fcb1f9da925c411a5992e387fb529eb9f5c90958]:
 #+begin_example
+[using command line parameter]
 fizzbuzz
 1
 2
@@ -2215,6 +2216,7 @@ docker run --rm fizzbuzz /usr/bin/python3 /fizzbuzz_docker.py 10
 
 #+RESULTS[14201e0dc02dabdf42ea0c0abb9b53171075c412]:
 #+begin_example
+[using command line parameter]
 fizzbuzz
 1
 2
@@ -2227,16 +2229,65 @@ fizz
 fizz
 #+end_example
 
+Nun übergeben wir keinen Parameter.
+
+#+BEGIN_SRC sh :results output :results output :exports both :cache yes
+docker run --rm fizzbuzz /usr/bin/python3 /fizzbuzz_docker.py
+#+END_SRC
+
+#+RESULTS[99e033961af6aa4e11363a090019bb04ed2a1556]:
+#+begin_example
+[using default value as parameter]
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+#+end_example
+
+Auch eine Umgebungsvariable kann mit der Option =-e <VARIABLE>=<WERT>=
+an den Container übergeben werden.
+
+#+BEGIN_SRC sh :results output :exports both :cache yes
+docker run --rm -e FIZZBUZZ=8 fizzbuzz
+#+END_SRC
+
+#+RESULTS[645de4e802d5e3f18cbbc60c57f82201acab31eb]:
+: [using environment variable as parameter]
+: fizzbuzz
+: 1
+: 2
+: fizz
+: 4
+: buzz
+: fizz
+: 7
+
 Wenn das Image nicht mehr benötigt wird, kann es wieder gelöscht
 werden.
 
 #+BEGIN_SRC sh :results output :exports both :cache yes
-docker rmi fizzbuzz 
+docker rmi fizzbuzz
 #+END_SRC
 
-#+RESULTS[3459ab19f0fe7638d082a9bbf91d607b3cb0a33d]:
+#+RESULTS[365b7635c6c590b1263ffcf4f467075c36903023]:
 : Untagged: fizzbuzz:latest
-: Deleted: sha256:45468e2e8f882a61444888d407fab25f93c9670c5fe4096dc76801e9cf241ced
-: Deleted: sha256:11088b4c74dff8accb7a2c72a3acf41709b6c44a9b25c8187738ade2b0f1452a
-: Deleted: sha256:d6710223ee5a861c4a66cb8df4315952ca65ae5b6c70056e99bd8de0fec5990f
+: Deleted: sha256:6fe92919b9068f38cf7e4a4f5cd9fd0d6fc4c69f280e3c82668e4cd6d0edc539
+: Deleted: sha256:5ddf7803d3884e39ea8517e3fb1a2200fdf9182726dcd06c1336938e0ddb89ae
+: Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 
