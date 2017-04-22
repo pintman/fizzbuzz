@@ -522,65 +522,30 @@ fizz
 
 * Objekt-Orientiert mit Vererbung
 
-#+BEGIN_SRC python -n :results output
-  class FizzBuzzerAusgabe:
-      def __init__(self, n):
-          self.n = n
-        
-      def print(self):
-          i = self.n
-            
-          if i % 3 == 0 and i % 5 == 0:
-              print("fizzbuzz")
-          elif i % 3 == 0:
-              print("fizz")
-          elif i % 5 == 0:
-              print("buzz")
+Wir verwenden zwei Klassen =Spiel= und =FizzbuzzSpiel=, wobei letztere
+die erstere erweitert und damit alle Attribute und Methoden von dieser
+übernimmt und ggf. um weitere ergänzt. Man kann sagen =FizzbuzzSpiel=
+ist ein =Spiel=. Durch die Vererbung muss nicht jedes neue Spiel die
+Gameloop erneut programmieren, sondern kann diese generische
+Funktionalität übernehmen.
 
-            
-  class NumberFizzBuzzerAusgabe(FizzBuzzerAusgabe): # Unterklasse(Oberklasse)
-      def __init__(self, n):
-          # calling constructor of super class
-          super().__init__(n)
-            
-      def print(self):
-          if self.n % 3 == 0 or self.n % 5 == 0:
-              # delegate to super class
-              super().print()
-          else:
-              print(self.n)
+#+INCLUDE: "fizzbuzz_vererbung.py" src python -n
 
+Wir simulieren ein Spiel, indem wir testweise die Eingaben 1, 2 und
+"fizz" an das Spiel senden (Spielereingaben tauchen daher nicht in der
+Ausgabe auf).
 
-  # using the classes
-  for i in range(20):
-      fb = NumberFizzBuzzerAusgabe(i)
-      fb.print()
-
+#+BEGIN_SRC sh :results output :exports both :cache yes
+/bin/echo -e "1\n2\nfizz\n4\nbuzz\n" | python3 fizzbuzz_vererbung.py
 #+END_SRC
 
-#+RESULTS:
-#+begin_example
-fizzbuzz
-1
-2
-fizz
-4
-buzz
-fizz
-7
-8
-fizz
-buzz
-11
-fizz
-13
-14
-fizzbuzz
-16
-17
-fizz
-19
-#+end_example
+#+RESULTS[221c1b86c7bd0b8b478827f2944dbc5293eabaad]:
+: Spiel gestartet
+: 1 ? Richtig :)
+: 2 ? Richtig :)
+: 3 ? Richtig :)
+: 4 ? Richtig :)
+: 5 ? Gewonnen!
 
 * Funktional mit map, reduce und lambda-Ausdrücken
 

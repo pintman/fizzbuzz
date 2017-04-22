@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-21 Fr 11:43 -->
+<!-- 2017-04-22 Sa 09:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -700,42 +700,108 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <div id="outline-container-sec-10" class="outline-2">
 <h2 id="sec-10"><span class="section-number-2">10</span> Objekt-Orientiert mit Vererbung</h2>
 <div class="outline-text-2" id="text-10">
+<p>
+Wir verwenden zwei Klassen <code>Spiel</code> und <code>FizzbuzzSpiel</code>, wobei letztere
+die erstere erweitert und damit alle Attribute und Methoden von dieser
+übernimmt und ggf. um weitere ergänzt. Man kann sagen <code>FizzbuzzSpiel</code>
+ist ein <code>Spiel</code>. Durch die Vererbung muss nicht jedes neue Spiel die
+Gameloop erneut programmieren, sondern kann diese generische
+Funktionalität übernehmen.
+</p>
+
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerAusgabe</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.n = n
-<span class="linenr"> 4: </span>
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr"> 6: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.n
-<span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr"> 9: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">11: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">12: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">13: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">14: </span>
-<span class="linenr">15: </span>
-<span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberFizzBuzzerAusgabe</span>(FizzBuzzerAusgabe): <span style="color: #b22222;"># </span><span style="color: #b22222;">Unterklasse(Oberklasse)</span>
-<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">calling constructor of super class</span>
-<span class="linenr">19: </span>        <span style="color: #483d8b;">super</span>().__init__(n)
-<span class="linenr">20: </span>
-<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">22: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.n % 3 == 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.n % 5 == 0:
-<span class="linenr">23: </span>            <span style="color: #b22222;"># </span><span style="color: #b22222;">delegate to super class</span>
-<span class="linenr">24: </span>            <span style="color: #483d8b;">super</span>().<span style="color: #a020f0;">print</span>()
-<span class="linenr">25: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">26: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
-<span class="linenr">27: </span>
-<span class="linenr">28: </span>
-<span class="linenr">29: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">using the classes</span>
-<span class="linenr">30: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">31: </span>    <span style="color: #a0522d;">fb</span> = NumberFizzBuzzerAusgabe(i)
-<span class="linenr">32: </span>    fb.<span style="color: #a020f0;">print</span>()
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Game</span>:
+<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 3: </span>        <span style="color: #8b2252;">"""Starting the gameloop of the game."""</span>
+<span class="linenr"> 4: </span>        <span style="color: #a020f0;">self</span>.setup()
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">while</span> <span style="color: #008b8b;">True</span>:
+<span class="linenr"> 6: </span>            <span style="color: #a020f0;">self</span>.handle_input()
+<span class="linenr"> 7: </span>            <span style="color: #a020f0;">self</span>.update()
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">self</span>.draw()
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>():
+<span class="linenr">11: </span>        <span style="color: #8b2252;">"""Will be invoked once at the beginning of a game."""</span>
+<span class="linenr">12: </span>        <span style="color: #a020f0;">pass</span>
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>():
+<span class="linenr">15: </span>        <span style="color: #8b2252;">"""Evaluate inputs of the player."""</span>
+<span class="linenr">16: </span>        <span style="color: #a020f0;">pass</span>
+<span class="linenr">17: </span>
+<span class="linenr">18: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>():
+<span class="linenr">19: </span>        <span style="color: #8b2252;">"""Updating all game objects and game values."""</span>
+<span class="linenr">20: </span>        <span style="color: #a020f0;">pass</span>
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>():
+<span class="linenr">23: </span>        <span style="color: #8b2252;">"""Draw the game world."""</span>
+<span class="linenr">24: </span>        <span style="color: #a020f0;">pass</span>
+<span class="linenr">25: </span>
+<span class="linenr">26: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>(Game): <span style="color: #b22222;"># </span><span style="color: #b22222;">Subclass(Superclass)</span>
+<span class="linenr">27: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">28: </span>        <span style="color: #a020f0;">self</span>.n = 1
+<span class="linenr">29: </span>        <span style="color: #a020f0;">self</span>.answer_correct = <span style="color: #008b8b;">False</span>
+<span class="linenr">30: </span>        <span style="color: #a020f0;">self</span>.playerinput = <span style="color: #8b2252;">""</span>
+<span class="linenr">31: </span>
+<span class="linenr">32: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">33: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Spiel gestartet"</span>)
+<span class="linenr">34: </span>
+<span class="linenr">35: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.playerinput = <span style="color: #483d8b;">input</span>(<span style="color: #483d8b;">str</span>(<span style="color: #a020f0;">self</span>.n) + <span style="color: #8b2252;">" ? "</span>)
+<span class="linenr">37: </span>
+<span class="linenr">38: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">39: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Evaluating player input</span>
+<span class="linenr">40: </span>        <span style="color: #a0522d;">soll</span> = <span style="color: #a020f0;">self</span>._fizzbuzz(<span style="color: #a020f0;">self</span>.n)
+<span class="linenr">41: </span>        <span style="color: #a020f0;">self</span>.answer_correct = <span style="color: #a020f0;">self</span>.playerinput == <span style="color: #483d8b;">str</span>(soll)        
+<span class="linenr">42: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.answer_correct:
+<span class="linenr">43: </span>            <span style="color: #a020f0;">self</span>.n += 1
+<span class="linenr">44: </span>
+<span class="linenr">45: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Checking winning condition</span>
+<span class="linenr">46: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.n == 6:
+<span class="linenr">47: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Gewonnen!"</span>)
+<span class="linenr">48: </span>            <span style="color: #008b8b;">exit</span>()
+<span class="linenr">49: </span>
+<span class="linenr">50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">51: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.answer_correct:
+<span class="linenr">52: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Richtig :)"</span>)
+<span class="linenr">53: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">54: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Leider Falsch. Probiere es erneut."</span>)
+<span class="linenr">55: </span>
+<span class="linenr">56: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr">57: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">58: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">59: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">60: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">61: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">62: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">63: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">64: </span>            <span style="color: #a020f0;">return</span> i
+<span class="linenr">65: </span>
+<span class="linenr">66: </span>
+<span class="linenr">67: </span><span style="color: #a0522d;">fbs</span> = FizzBuzzGame()
+<span class="linenr">68: </span>fbs.start_game_loop()
 </pre>
 </div>
+
+<p>
+Wir simulieren ein Spiel, indem wir testweise die Eingaben 1, 2 und
+"fizz" an das Spiel senden (Spielereingaben tauchen daher nicht in der
+Ausgabe auf).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">/bin/echo -e <span style="color: #8b2252;">"1\n2\nfizz\n4\nbuzz\n"</span> | python3 fizzbuzz_vererbung.py
+</pre>
+</div>
+
+<pre class="example">
+Spiel gestartet
+1 ? Richtig :)
+2 ? Richtig :)
+3 ? Richtig :)
+4 ? Richtig :)
+5 ? Gewonnen!
+</pre>
 </div>
 </div>
 
@@ -2607,7 +2673,7 @@ Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-21 Fr 11:43</p>
+<p class="date">Created: 2017-04-22 Sa 09:22</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
