@@ -1,4 +1,5 @@
 #+TITLE: FizzBuzz Katas
+#+LANGUAGE: de
 
 FizzBuzz ist ein Zählspiel, bei dem die Zahlen bis 100 aufgezählt
 werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
@@ -2265,3 +2266,6 @@ docker rmi fizzbuzz
 : Deleted: sha256:5ddf7803d3884e39ea8517e3fb1a2200fdf9182726dcd06c1336938e0ddb89ae
 : Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 
+** TODO bei dockerhub hochladen   :noexport:
+
+Ein fertiger Container kann bei dockerhub.com hochgeladen werden.
