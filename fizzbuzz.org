@@ -1475,6 +1475,9 @@ Dies Klasse könnte wie folgt verwendet werden.
 : Eingabe: 2 Ausgabe: 2
 : Eingabe: 15 Ausgabe: fizzbuzz
 
+** TODO Mit Vererbung und Aggregation/Composition		   :noexport:
+
+
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
 Als Client-Bibliothek wird =paho-mqtt=
