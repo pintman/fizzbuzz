@@ -37,7 +37,7 @@ fizz
 Hier ist eine erste einfache Variante.
 
 #+BEGIN_SRC python -n :results output :exports both :cache yes
-  def fizzbuzz_methode(n):
+  def fizzbuzz_method(n):
       for i in range(n):
           if i % 3 == 0 and i % 5 == 0:
               print("fizzbuzz")
@@ -48,10 +48,10 @@ Hier ist eine erste einfache Variante.
           else:
               print(i)
 
-  fizzbuzz_methode(20)
+  fizzbuzz_method(20)
 #+END_SRC
 
-#+RESULTS[e51bb9a5c49b0fe5fdecdab0c7f63ffb9ef872c6]:
+#+RESULTS[bd9026c891e7587925901e332d160d6dc41c6e44]:
 #+begin_example
 fizzbuzz
 1
@@ -79,7 +79,7 @@ Das nächste Beispiel wandelt die obige Variante ab, erzeugt aber
 dieselbe Ausgabe.
 
 #+BEGIN_SRC python -n :results output :cache yes
-  def fizzbuzz_methode2(n):
+  def fizzbuzz_methode(n):
       for i in range(n):
           s = ""
 
@@ -92,11 +92,11 @@ dieselbe Ausgabe.
 
           print(s)
 
-  fizzbuzz_methode2(20)
+  fizzbuzz_methode(20)
 
 #+END_SRC
 
-#+RESULTS[4f2fef1880aab0b123a0d085f92e4650943accfa]:
+#+RESULTS[7808fd97ac67d268e9761f6bdc4a3978acddc867]:
 #+begin_example
 fizzbuzz
 1
@@ -124,11 +124,11 @@ fizz
 
 #+BEGIN_SRC python -n :results output
 
-  def fizzbuzz_rekursiv(i):
+  def fizzbuzz_recursive(i):
       if i == 0:
           return
       else:
-          fizzbuzz_rekursiv(i-1)
+          fizzbuzz_recursive(i-1)
 
           if i % 3 == 0 and i % 5 == 0:
               print("fizzbuzz")
@@ -140,7 +140,7 @@ fizz
               print(i)
 
 
-  fizzbuzz_rekursiv(20)
+  fizzbuzz_recursive(20)
 #+END_SRC
 
 #+RESULTS:
@@ -454,7 +454,7 @@ file:doc/fizzbuzz_gui.png
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
 #+BEGIN_SRC python -n :results output
-  class FizzBuzzerAusgabe:
+  class FizzBuzzerOutput:
       def __init__(self, n):
           self.n = n
       
@@ -469,7 +469,7 @@ file:doc/fizzbuzz_gui.png
               print("buzz")
 
           
-  class NumberAusgabe:
+  class NumberOutput:
       def __init__(self, n):
           self.n = n
           
@@ -477,23 +477,21 @@ file:doc/fizzbuzz_gui.png
           print(self.n)
 
           
-  class FizzBuzzSpiel:
+  class FizzBuzzGame:
       def __init__(self, i):
           if i % 3 == 0 or i % 5 == 0:
-              self.printer = FizzBuzzerAusgabe(i)
+              self.printer = FizzBuzzerOutput(i)
           else:
-              self.printer = NumberAusgabe(i)
+              self.printer = NumberOutput(i)
 
       def print(self):
           self.printer.print()
 
           
-  def fizzbuzz_objektorientiert():
-      for i in range(20):
-          f = FizzBuzzSpiel(i)
-          f.print()
+  for i in range(20):
+      f = FizzBuzzGame(i)
+      f.print()
 
-  fizzbuzz_objektorientiert()
 #+END_SRC
 
 #+RESULTS:
@@ -571,7 +569,7 @@ def fizzbuzz_func(i):
     else:
         return i
 
-def fizzbuzz_funktional():
+def fizzbuzz_functional():
     # apply fizzbuzz_func to numbers
     res = map(fizzbuzz_func, range(20))
 
@@ -583,7 +581,7 @@ def fizzbuzz_funktional():
 
     print(s)
 
-fizzbuzz_funktional()
+fizzbuzz_functional()
 #+END_SRC
 
 #+RESULTS:
@@ -794,37 +792,37 @@ Soll-Wert. In Python geschiet dies über das Paket [[https://docs.python.org/3/l
               return i
 
   class FizzBuzzTest(unittest.TestCase):
-      """Diese Unit-Test-Klasse testet die Klasse FizzBuzz. 
+      """This test class tests the class FizzBuzz. 
 
-      Hierfür testet sie mögliche Eingaben und Ausgaben."""
+      Possible input will be testet against desired outputs."""
 
       def setUp(self):
-          """Wird vor jedem Test aufgerufen."""
+          """Will be invoked before every test."""
           self.fizzbuzz = FizzBuzz()
       
       def test_fizzbuzz(self):
           fb = self.fizzbuzz
 
-          # Wertvergleiche
+          # Comparing values
           self.assertEqual(fb.fizzbuzz(2), 2)
           self.assertEqual(fb.fizzbuzz(15), "fizzbuzz")
           self.assertEqual(fb.fizzbuzz(9), "fizz")
           self.assertEqual(fb.fizzbuzz(10), "buzz")
 
-          # Boolesche Vergleiche
+          # Boolean comparison
           self.assertTrue(fb.fizzbuzz(12) != 12)
           self.assertFalse(fb.fizzbuzz(12) == 12)
 
-          # Typvergleiche
+          # Comparing types
           self.assertIsInstance(fb.fizzbuzz(2), int)
 
-          # Vergleich mit Collection
+          # Comparing with collections
           for i in range(20):
               result = fb.fizzbuzz(i)            
               self.assertIn(result, ['fizz', 'buzz', 'fizzbuzz', i])
 
   def run_unit_tests():
-      # Alle Tests ausführen.
+      # Run all unit tests
       unittest.main()
 
   run_unit_tests()
@@ -842,10 +840,7 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
 
   class FizzBuzz:
       def fizzbuzz(self, i):
-          """Die ist ein Kommentar,der einen Test enthält. Unter Python nennt
-          man dies einen doctest.
-
-          Hier kommt der Test:
+          """This is a comment containing a test. This is called a doctest in Python.
 
           >>> fb = FizzBuzz()
           >>> fb.fizzbuzz(3)
@@ -857,7 +852,7 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
           >>> fb.fizzbuzz(11)
           11
 
-          Nun ein Test, der fehlschlägt:
+          Now a test that creates an error:
 
           >>> fb.fizzbuzz(12)
           12
@@ -878,10 +873,10 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
   run_doc_tests()
 #+END_SRC
 
-#+RESULTS[2b9ac0e47c62d186c289d72c26cfd5fd8f5b2d03]:
+#+RESULTS[755ee17eef7fcc15966a21af1f8e5d1df29c50cc]:
 #+begin_example
 **********************************************************************
-File "<stdin>", line 22, in __main__.FizzBuzz.fizzbuzz
+File "<stdin>", line 19, in __main__.FizzBuzz.fizzbuzz
 Failed example:
     fb.fizzbuzz(12)
 Expected:
@@ -1167,14 +1162,16 @@ rm fizzbuzz.db
 
 * Mit docstring Dokumentation
 #+BEGIN_SRC python -n :results output :exports both :cache yes
-
-  class FizzBuzzSpiel:
-      """Ein Klasse für das FizzBuzzSpiel."""
+  class FizzBuzzGame:
+      """A class for a fizzbuzz game."""
       
-      def fizzbuzz_dokumentiert(n):
-          """Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
-          wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
-          und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""
+      def fizzbuzz_documented(n):
+          """This method runs through all numbers from 0 to n-1.  
+
+          It prints 'fizz' if the number is divisible by 3, 'buzz' if it
+          is divisble by 5, 'fizzbuzz' if it is divisible 3 and 5 and
+          the number itseld otherwise.
+          """
 
           for i in range(n):
               if i % 3 == 0 and i % 5 == 0:
@@ -1186,22 +1183,24 @@ rm fizzbuzz.db
               else:
                   print(i)
 
-  help(FizzBuzzSpiel)
+  help(FizzBuzzGame)
 #+END_SRC
 
-#+RESULTS[227b7460276203ab5534ca4786baa3b6f5ab2e7d]:
+#+RESULTS[dc976453b9072344005b4088cb09785e4e845df1]:
 #+begin_example
-Help on class FizzBuzzSpiel in module __main__:
+Help on class FizzBuzzGame in module __main__:
 
-class FizzBuzzSpiel(builtins.object)
- |  Ein Klasse für das FizzBuzzSpiel.
+class FizzBuzzGame(builtins.object)
+ |  A class for a fizzbuzz game.
  |  
  |  Methods defined here:
  |  
- |  fizzbuzz_dokumentiert(n)
- |      Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
- |      wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
- |      und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+ |  fizzbuzz_documented(n)
+ |      This method runs through all numbers from 0 to n-1.  
+ |      
+ |      It prints 'fizz' if the number is divisible by 3, 'buzz' if it
+ |      is divisble by 5, 'fizzbuzz' if it is divisible 3 and 5 and
+ |      the number itseld otherwise.
  |  
  |  ----------------------------------------------------------------------
  |  Data descriptors defined here:
@@ -1279,7 +1278,7 @@ from sopel import module
 @module.commands('fizzbuzz')
 def echo(bot, trigger):
     # to everybody:   bot.say("...")
-    # to querstioner: bot.reply("...")
+    # to questioner: bot.reply("...")
 
     # take and convert argument
     i = int(trigger.group(2))
@@ -1740,8 +1739,8 @@ Auswerten der Datei:
   config = configparser.ConfigParser()
   config.read("fizzbuzz.ini")
 
-  beschreibung = config["informationen"]["beschreibung"]
-  print("Beschreibung:", beschreibung)
+  description = config["informationen"]["beschreibung"]
+  print("Beschreibung:", description)
 
   conf_num = config["default"]["max_wert"]
   num = int(conf_num)
@@ -1750,7 +1749,7 @@ Auswerten der Datei:
 
 #+END_SRC
 
-#+RESULTS[87f9b7644932e5f4182f2d64b3a916f6f5cf2e4b]:
+#+RESULTS[5349ceadb52b9c296d067f5096a8b0d941338999]:
 #+begin_example
 Beschreibung: Ein Zählspiel
 fizzbuzz
@@ -2022,7 +2021,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
       def is_clicked(self):
           """Check whether this Ball has been clicked."""
           x,y = pygame.mouse.get_pos()
-          # Coordinate system with (0,0) at top left
+          # Coordinate system starts with (0,0) at top left
           return (self.rect.left < x < self.rect.right and
                   self.rect.top < y < self.rect.bottom)
 
@@ -2138,6 +2137,16 @@ Die in dem Dockerfile referenzierte Datei =fizzbuzz_docker.py= hat
 folgenden Inhalt.
 
 #+INCLUDE: "fizzbuzz_docker.py" src python -n
+
+Wie prüfen, ob das Containerimage korrekt angelegt wurde.
+
+#+BEGIN_SRC sh :results output :exports both :cache yes
+docker images fizzbuzz
+#+END_SRC
+
+#+RESULTS[4fa59ed6dc72ff6a0c6c829d3dbf640aac7378b3]:
+: REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+: fizzbuzz            latest              cf7d486f6a37        22 hours ago        60.58 MB
 
 Nun kann der Container gestartet werden. Mit der Option =--rm= wird
 der Container nach Beendigung der Ausführung direkt gelöscht.

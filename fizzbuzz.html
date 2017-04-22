@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-22 Sa 09:22 -->
+<!-- 2017-04-22 Sa 09:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -224,7 +224,7 @@ Hier ist eine erste einfache Variante.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_methode</span>(n):
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_method</span>(n):
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 4: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
@@ -235,7 +235,7 @@ Hier ist eine erste einfache Variante.
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">10: </span>            <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">11: </span>
-<span class="linenr">12: </span>fizzbuzz_methode(20)
+<span class="linenr">12: </span>fizzbuzz_method(20)
 </pre>
 </div>
 
@@ -269,7 +269,7 @@ dieselbe Ausgabe.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_methode2</span>(n):
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_methode</span>(n):
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 3: </span>        <span style="color: #a0522d;">s</span> = <span style="color: #8b2252;">""</span>
 <span class="linenr"> 4: </span>
@@ -282,7 +282,7 @@ dieselbe Ausgabe.
 <span class="linenr">11: </span>
 <span class="linenr">12: </span>        <span style="color: #a020f0;">print</span>(s)
 <span class="linenr">13: </span>
-<span class="linenr">14: </span>fizzbuzz_methode2(20)
+<span class="linenr">14: </span>fizzbuzz_methode(20)
 </pre>
 </div>
 </div>
@@ -293,11 +293,11 @@ dieselbe Ausgabe.
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_rekursiv</span>(i):
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_recursive</span>(i):
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">if</span> i == 0:
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">return</span>
 <span class="linenr"> 4: </span>    <span style="color: #a020f0;">else</span>:
-<span class="linenr"> 5: </span>        fizzbuzz_rekursiv(i-1)
+<span class="linenr"> 5: </span>        fizzbuzz_recursive(i-1)
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
@@ -309,7 +309,7 @@ dieselbe Ausgabe.
 <span class="linenr">14: </span>            <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">15: </span>
 <span class="linenr">16: </span>
-<span class="linenr">17: </span>fizzbuzz_rekursiv(20)
+<span class="linenr">17: </span>fizzbuzz_recursive(20)
 </pre>
 </div>
 </div>
@@ -652,7 +652,7 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerAusgabe</span>:
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerOutput</span>:
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.n = n
 <span class="linenr"> 4: </span>
@@ -667,7 +667,7 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <span class="linenr">13: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
 <span class="linenr">14: </span>
 <span class="linenr">15: </span>
-<span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberAusgabe</span>:
+<span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberOutput</span>:
 <span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
 <span class="linenr">18: </span>        <span style="color: #a020f0;">self</span>.n = n
 <span class="linenr">19: </span>
@@ -675,23 +675,20 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <span class="linenr">21: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
 <span class="linenr">22: </span>
 <span class="linenr">23: </span>
-<span class="linenr">24: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzSpiel</span>:
+<span class="linenr">24: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
 <span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">26: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">or</span> i % 5 == 0:
-<span class="linenr">27: </span>            <span style="color: #a020f0;">self</span>.printer = FizzBuzzerAusgabe(i)
+<span class="linenr">27: </span>            <span style="color: #a020f0;">self</span>.printer = FizzBuzzerOutput(i)
 <span class="linenr">28: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">29: </span>            <span style="color: #a020f0;">self</span>.printer = NumberAusgabe(i)
+<span class="linenr">29: </span>            <span style="color: #a020f0;">self</span>.printer = NumberOutput(i)
 <span class="linenr">30: </span>
 <span class="linenr">31: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">32: </span>        <span style="color: #a020f0;">self</span>.printer.<span style="color: #a020f0;">print</span>()
 <span class="linenr">33: </span>
 <span class="linenr">34: </span>
-<span class="linenr">35: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_objektorientiert</span>():
-<span class="linenr">36: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">37: </span>        <span style="color: #a0522d;">f</span> = FizzBuzzSpiel(i)
-<span class="linenr">38: </span>        f.<span style="color: #a020f0;">print</span>()
-<span class="linenr">39: </span>
-<span class="linenr">40: </span>fizzbuzz_objektorientiert()
+<span class="linenr">35: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">36: </span>    <span style="color: #a0522d;">f</span> = FizzBuzzGame(i)
+<span class="linenr">37: </span>    f.<span style="color: #a020f0;">print</span>()
 </pre>
 </div>
 </div>
@@ -830,7 +827,7 @@ Spiel gestartet
 <span class="linenr">18: </span>    <span style="color: #a020f0;">else</span>:
 <span class="linenr">19: </span>        <span style="color: #a020f0;">return</span> i
 <span class="linenr">20: </span>
-<span class="linenr">21: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_funktional</span>():
+<span class="linenr">21: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_functional</span>():
 <span class="linenr">22: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">apply fizzbuzz_func to numbers</span>
 <span class="linenr">23: </span>    <span style="color: #a0522d;">res</span> = <span style="color: #483d8b;">map</span>(fizzbuzz_func, <span style="color: #483d8b;">range</span>(20))
 <span class="linenr">24: </span>
@@ -842,7 +839,7 @@ Spiel gestartet
 <span class="linenr">30: </span>
 <span class="linenr">31: </span>    <span style="color: #a020f0;">print</span>(s)
 <span class="linenr">32: </span>
-<span class="linenr">33: </span>fizzbuzz_funktional()
+<span class="linenr">33: </span>fizzbuzz_functional()
 </pre>
 </div>
 </div>
@@ -1009,37 +1006,37 @@ Soll-Wert. In Python geschiet dies über das Paket <a href="https://docs.python.
 <span class="linenr">12: </span>            <span style="color: #a020f0;">return</span> i
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzTest</span>(unittest.TestCase):
-<span class="linenr">15: </span>    <span style="color: #8b2252;">"""Diese Unit-Test-Klasse testet die Klasse FizzBuzz. </span>
+<span class="linenr">15: </span>    <span style="color: #8b2252;">"""This test class tests the class FizzBuzz. </span>
 <span class="linenr">16: </span>
-<span class="linenr">17: </span><span style="color: #8b2252;">    Hierf&#252;r testet sie m&#246;gliche Eingaben und Ausgaben."""</span>
+<span class="linenr">17: </span><span style="color: #8b2252;">    Possible input will be testet against desired outputs."""</span>
 <span class="linenr">18: </span>
 <span class="linenr">19: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setUp</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">20: </span>        <span style="color: #8b2252;">"""Wird vor jedem Test aufgerufen."""</span>
+<span class="linenr">20: </span>        <span style="color: #8b2252;">"""Will be invoked before every test."""</span>
 <span class="linenr">21: </span>        <span style="color: #a020f0;">self</span>.fizzbuzz = FizzBuzz()
 <span class="linenr">22: </span>
 <span class="linenr">23: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">24: </span>        <span style="color: #a0522d;">fb</span> = <span style="color: #a020f0;">self</span>.fizzbuzz
 <span class="linenr">25: </span>
-<span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Wertvergleiche</span>
+<span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Comparing values</span>
 <span class="linenr">27: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(2), 2)
 <span class="linenr">28: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(15), <span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr">29: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(9), <span style="color: #8b2252;">"fizz"</span>)
 <span class="linenr">30: </span>        <span style="color: #a020f0;">self</span>.assertEqual(fb.fizzbuzz(10), <span style="color: #8b2252;">"buzz"</span>)
 <span class="linenr">31: </span>
-<span class="linenr">32: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Boolesche Vergleiche</span>
+<span class="linenr">32: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Boolean comparison</span>
 <span class="linenr">33: </span>        <span style="color: #a020f0;">self</span>.assertTrue(fb.fizzbuzz(12) != 12)
 <span class="linenr">34: </span>        <span style="color: #a020f0;">self</span>.assertFalse(fb.fizzbuzz(12) == 12)
 <span class="linenr">35: </span>
-<span class="linenr">36: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Typvergleiche</span>
+<span class="linenr">36: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Comparing types</span>
 <span class="linenr">37: </span>        <span style="color: #a020f0;">self</span>.assertIsInstance(fb.fizzbuzz(2), <span style="color: #483d8b;">int</span>)
 <span class="linenr">38: </span>
-<span class="linenr">39: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Vergleich mit Collection</span>
+<span class="linenr">39: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Comparing with collections</span>
 <span class="linenr">40: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr">41: </span>            <span style="color: #a0522d;">result</span> = fb.fizzbuzz(i)            
 <span class="linenr">42: </span>            <span style="color: #a020f0;">self</span>.assertIn(result, [<span style="color: #8b2252;">'fizz'</span>, <span style="color: #8b2252;">'buzz'</span>, <span style="color: #8b2252;">'fizzbuzz'</span>, i])
 <span class="linenr">43: </span>
 <span class="linenr">44: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_unit_tests</span>():
-<span class="linenr">45: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Alle Tests ausf&#252;hren.</span>
+<span class="linenr">45: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Run all unit tests</span>
 <span class="linenr">46: </span>    unittest.main()
 <span class="linenr">47: </span>
 <span class="linenr">48: </span>run_unit_tests()
@@ -1058,46 +1055,43 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
 <span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
-<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Die ist ein Kommentar,der einen Test enth&#228;lt. Unter Python nennt</span>
-<span class="linenr"> 6: </span><span style="color: #8b2252;">        man dies einen doctest.</span>
-<span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span><span style="color: #8b2252;">        Hier kommt der Test:</span>
-<span class="linenr"> 9: </span>
-<span class="linenr">10: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb = FizzBuzz()</span>
-<span class="linenr">11: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(3)</span>
-<span class="linenr">12: </span><span style="color: #8b2252;">        'fizz'</span>
-<span class="linenr">13: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(5)</span>
-<span class="linenr">14: </span><span style="color: #8b2252;">        'buzz'</span>
-<span class="linenr">15: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(10)</span>
-<span class="linenr">16: </span><span style="color: #8b2252;">        'buzz'</span>
-<span class="linenr">17: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(11)</span>
-<span class="linenr">18: </span><span style="color: #8b2252;">        11</span>
-<span class="linenr">19: </span>
-<span class="linenr">20: </span><span style="color: #8b2252;">        Nun ein Test, der fehlschl&#228;gt:</span>
+<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""This is a comment containing a test. This is called a doctest in Python.</span>
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb = FizzBuzz()</span>
+<span class="linenr"> 8: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(3)</span>
+<span class="linenr"> 9: </span><span style="color: #8b2252;">        'fizz'</span>
+<span class="linenr">10: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(5)</span>
+<span class="linenr">11: </span><span style="color: #8b2252;">        'buzz'</span>
+<span class="linenr">12: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(10)</span>
+<span class="linenr">13: </span><span style="color: #8b2252;">        'buzz'</span>
+<span class="linenr">14: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(11)</span>
+<span class="linenr">15: </span><span style="color: #8b2252;">        11</span>
+<span class="linenr">16: </span>
+<span class="linenr">17: </span><span style="color: #8b2252;">        Now a test that creates an error:</span>
+<span class="linenr">18: </span>
+<span class="linenr">19: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(12)</span>
+<span class="linenr">20: </span><span style="color: #8b2252;">        12</span>
 <span class="linenr">21: </span>
-<span class="linenr">22: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb.fizzbuzz(12)</span>
-<span class="linenr">23: </span><span style="color: #8b2252;">        12</span>
-<span class="linenr">24: </span>
-<span class="linenr">25: </span><span style="color: #8b2252;">        """</span>
-<span class="linenr">26: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">27: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr">28: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">29: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr">30: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">31: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">32: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">33: </span>            <span style="color: #a020f0;">return</span> i
+<span class="linenr">22: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr">23: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">24: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">25: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">26: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">27: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">28: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">29: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">30: </span>            <span style="color: #a020f0;">return</span> i
+<span class="linenr">31: </span>
+<span class="linenr">32: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_doc_tests</span>():
+<span class="linenr">33: </span>    doctest.testmod()
 <span class="linenr">34: </span>
-<span class="linenr">35: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_doc_tests</span>():
-<span class="linenr">36: </span>    doctest.testmod()
-<span class="linenr">37: </span>
-<span class="linenr">38: </span>run_doc_tests()
+<span class="linenr">35: </span>run_doc_tests()
 </pre>
 </div>
 
 <pre class="example">
 **********************************************************************
-File "&lt;stdin&gt;", line 22, in __main__.FizzBuzz.fizzbuzz
+File "&lt;stdin&gt;", line 19, in __main__.FizzBuzz.fizzbuzz
 Failed example:
     fb.fizzbuzz(12)
 Expected:
@@ -1376,40 +1370,45 @@ Nach dem Versuch entsteht eine Datei <code>fizzbuzz.db</code>, die man mit
 <div class="outline-text-2" id="text-18">
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzSpiel</span>:
-<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""Ein Klasse f&#252;r das FizzBuzzSpiel."""</span>
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
+<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""A class for a fizzbuzz game."""</span>
 <span class="linenr"> 3: </span>
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_dokumentiert</span>(n):
-<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""Diese Methode durchl&#228;uft die Zahlen 1 bis n. Sie gibt 'fizz' aus,</span>
-<span class="linenr"> 6: </span><span style="color: #8b2252;">        wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist</span>
-<span class="linenr"> 7: </span><span style="color: #8b2252;">        und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist."""</span>
-<span class="linenr"> 8: </span>
-<span class="linenr"> 9: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
-<span class="linenr">10: </span>            <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">11: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">12: </span>            <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">13: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">14: </span>            <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">15: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">16: </span>            <span style="color: #a020f0;">else</span>:
-<span class="linenr">17: </span>                <span style="color: #a020f0;">print</span>(i)
-<span class="linenr">18: </span>
-<span class="linenr">19: </span><span style="color: #483d8b;">help</span>(FizzBuzzSpiel)
+<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_documented</span>(n):
+<span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""This method runs through all numbers from 0 to n-1.  </span>
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #8b2252;">        It prints 'fizz' if the number is divisible by 3, 'buzz' if it</span>
+<span class="linenr"> 8: </span><span style="color: #8b2252;">        is divisble by 5, 'fizzbuzz' if it is divisible 3 and 5 and</span>
+<span class="linenr"> 9: </span><span style="color: #8b2252;">        the number itseld otherwise.</span>
+<span class="linenr">10: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr">11: </span>
+<span class="linenr">12: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr">13: </span>            <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">14: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">15: </span>            <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">16: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">17: </span>            <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">18: </span>                <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">19: </span>            <span style="color: #a020f0;">else</span>:
+<span class="linenr">20: </span>                <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">21: </span>
+<span class="linenr">22: </span><span style="color: #483d8b;">help</span>(FizzBuzzGame)
 </pre>
 </div>
 
 <pre class="example">
-Help on class FizzBuzzSpiel in module __main__:
+Help on class FizzBuzzGame in module __main__:
 
-class FizzBuzzSpiel(builtins.object)
- |  Ein Klasse für das FizzBuzzSpiel.
+class FizzBuzzGame(builtins.object)
+ |  A class for a fizzbuzz game.
  |  
  |  Methods defined here:
  |  
- |  fizzbuzz_dokumentiert(n)
- |      Diese Methode durchläuft die Zahlen 1 bis n. Sie gibt 'fizz' aus,
- |      wenn die Zahl durch 3 ist, 'buzz', wenn sie durch 5 teilbar ist
- |      und 'fizzbuzz', wenn sie durch 3 und 5 teilbar ist.
+ |  fizzbuzz_documented(n)
+ |      This method runs through all numbers from 0 to n-1.  
+ |      
+ |      It prints 'fizz' if the number is divisible by 3, 'buzz' if it
+ |      is divisble by 5, 'fizzbuzz' if it is divisible 3 and 5 and
+ |      the number itseld otherwise.
  |  
  |  ----------------------------------------------------------------------
  |  Data descriptors defined here:
@@ -1512,7 +1511,7 @@ Eigenen Bot in <code>~/.sopel/modules/fizzbuzz.py</code> erstellen
 <span class="linenr"> 3: </span><span style="color: #228b22;">@module.commands</span>(<span style="color: #8b2252;">'fizzbuzz'</span>)
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">echo</span>(bot, trigger):
 <span class="linenr"> 5: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">to everybody:   bot.say("...")</span>
-<span class="linenr"> 6: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">to querstioner: bot.reply("...")</span>
+<span class="linenr"> 6: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">to questioner: bot.reply("...")</span>
 <span class="linenr"> 7: </span>
 <span class="linenr"> 8: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">take and convert argument</span>
 <span class="linenr"> 9: </span>    <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(trigger.group(2))
@@ -2017,8 +2016,8 @@ Auswerten der Datei:
 <span class="linenr">14: </span><span style="color: #a0522d;">config</span> = configparser.ConfigParser()
 <span class="linenr">15: </span>config.read(<span style="color: #8b2252;">"fizzbuzz.ini"</span>)
 <span class="linenr">16: </span>
-<span class="linenr">17: </span><span style="color: #a0522d;">beschreibung</span> = config[<span style="color: #8b2252;">"informationen"</span>][<span style="color: #8b2252;">"beschreibung"</span>]
-<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Beschreibung:"</span>, beschreibung)
+<span class="linenr">17: </span><span style="color: #a0522d;">description</span> = config[<span style="color: #8b2252;">"informationen"</span>][<span style="color: #8b2252;">"beschreibung"</span>]
+<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Beschreibung:"</span>, description)
 <span class="linenr">19: </span>
 <span class="linenr">20: </span><span style="color: #a0522d;">conf_num</span> = config[<span style="color: #8b2252;">"default"</span>][<span style="color: #8b2252;">"max_wert"</span>]
 <span class="linenr">21: </span><span style="color: #a0522d;">num</span> = <span style="color: #483d8b;">int</span>(conf_num)
@@ -2353,7 +2352,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">is_clicked</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">21: </span>        <span style="color: #8b2252;">"""Check whether this Ball has been clicked."""</span>
 <span class="linenr">22: </span>        <span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">y</span> = pygame.mouse.get_pos()
-<span class="linenr">23: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Coordinate system with (0,0) at top left</span>
+<span class="linenr">23: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Coordinate system starts with (0,0) at top left</span>
 <span class="linenr">24: </span>        <span style="color: #a020f0;">return</span> (<span style="color: #a020f0;">self</span>.rect.left &lt; x &lt; <span style="color: #a020f0;">self</span>.rect.right <span style="color: #a020f0;">and</span>
 <span class="linenr">25: </span>                <span style="color: #a020f0;">self</span>.rect.top &lt; y &lt; <span style="color: #a020f0;">self</span>.rect.bottom)
 <span class="linenr">26: </span>
@@ -2455,13 +2454,13 @@ werden kann.
 <pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">We us alpine as base image, since it is very small</span>
 FROM alpine
 
-<span style="color: #b22222;"># </span><span style="color: #b22222;">apk is alpine package manager</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">apk is alpines package manager</span>
 RUN apk add --no-cache python3
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Copy the script in the root folder</span>
 COPY fizzbuzz_docker.py /
 
-<span style="color: #b22222;"># </span><span style="color: #b22222;">Run command</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Run this command when the container is started</span>
 CMD [<span style="color: #8b2252;">"python3"</span>, <span style="color: #8b2252;">"/fizzbuzz_docker.py"</span>, <span style="color: #8b2252;">"20"</span>]
 </pre>
 </div>
@@ -2532,6 +2531,21 @@ folgenden Inhalt.
 <span class="linenr">28: </span>    <span style="color: #a020f0;">print</span>(fizzbuzz(i))
 </pre>
 </div>
+
+<p>
+Wie prüfen, ob das Containerimage korrekt angelegt wurde.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker images fizzbuzz
+</pre>
+</div>
+
+<pre class="example">
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+fizzbuzz            latest              cf7d486f6a37        22 hours ago        60.58 MB
+</pre>
 
 <p>
 Nun kann der Container gestartet werden. Mit der Option <code>--rm</code> wird
@@ -2673,7 +2687,7 @@ Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marco Bakera</p>
-<p class="date">Created: 2017-04-22 Sa 09:22</p>
+<p class="date">Created: 2017-04-22 Sa 09:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
