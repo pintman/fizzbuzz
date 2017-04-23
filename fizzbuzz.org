@@ -1477,7 +1477,6 @@ Dies Klasse könnte wie folgt verwendet werden.
 
 ** TODO Mit Vererbung und Aggregation/Composition		   :noexport:
 
-
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
 Als Client-Bibliothek wird =paho-mqtt=
@@ -2272,3 +2271,68 @@ docker rmi fizzbuzz
 ** TODO bei dockerhub hochladen   :noexport:
 
 Ein fertiger Container kann bei dockerhub.com hochgeladen werden.
+* Mit Fehlerbehandlung
+
+[[https://docs.python.org/3/tutorial/errors.html][Errors und Exceptions]] in Python.
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  class FizzBuzzException(Exception):
+      """An exception for the FizzBuzz game."""
+      def __init__(self, errormessage, val):
+          """Create the exception with the given message and the problematic value."""
+          self.errormessage = errormessage
+          self.value = val
+
+  class FizzBuzzSpiel:
+      def fizzbuzz(self, i):
+          if i < 0:
+              # Raise an Exception and stop execution if the parameter is negative
+              raise FizzBuzzException("Das Argument muss positiv sein!", i)
+          
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
+          else:
+              print(i)
+
+              
+  fb = FizzBuzzSpiel()
+  for i in range(-5, 5):
+
+      # trying to run the code
+      try:
+          print("Probiere", i)
+          fb.fizzbuzz(i)
+          
+      except FizzBuzzException as ex:
+          # Whenever an exception is raised, jump to this code block
+          print("[Fehler]", ex.errormessage, ex.value)
+#+END_SRC
+
+#+RESULTS[01eda6d61d11851d167f3216d67b5b8861a6c668]:
+#+begin_example
+Probiere -5
+[Fehler] Das Argument muss positiv sein! -5
+Probiere -4
+[Fehler] Das Argument muss positiv sein! -4
+Probiere -3
+[Fehler] Das Argument muss positiv sein! -3
+Probiere -2
+[Fehler] Das Argument muss positiv sein! -2
+Probiere -1
+[Fehler] Das Argument muss positiv sein! -1
+Probiere 0
+fizzbuzz
+Probiere 1
+1
+Probiere 2
+2
+Probiere 3
+fizz
+Probiere 4
+4
+#+end_example
+
