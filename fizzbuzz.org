@@ -1085,6 +1085,8 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 
 #+end_example
 
+** TODO Beispiel mit gpiozero ergänzen 				   :noexport:
+
 * Mit Anbindung an eine Datenbank
 
 #+BEGIN_SRC python -n :results output
@@ -1317,6 +1319,8 @@ Punkt):
 <fizzbuzz_owner> .fizzbuzz 15
 <FizzBuzzBot>    fizzbuzz_owner: fizzbuzz
 #+END_EXAMPLE
+
+** TODO XMPP-Bot Beispiel 					   :noexport:
 
 * Auf einem Cluster (mit GNU parallel)
 
