@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>60</y>
+      <w>150</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>FizzBuzzGame
+--
+- number: int
+--
++ __init__(n: int)
++ fizzbuzz():object</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

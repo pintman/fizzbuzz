@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>240</y>
+      <w>150</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>FizzBuzzGame
+--
+-number: int
+--
++__init__(n: int)
++fizzbuzz():object</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>60</y>
+      <w>180</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+
+--
++setup(): void
++handle_input():void
++update(): void
++draw(): void
++start_game_loop()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>190</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+</diagram>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-23 So 16:32 -->
+<!-- 2017-04-26 Mi 21:10 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -1668,9 +1668,15 @@ ist eine Zahl oder ein String.
 <div class="outline-text-2" id="text-23">
 
 <div class="figure">
-<p><img src="doc/fizzbuzz-klassendiagramm.png" alt="fizzbuzz-klassendiagramm.png" />
+<p><img src="doc/fizzbuzz_klassendiagramm.png" alt="fizzbuzz_klassendiagramm.png" />
 </p>
 </div>
+
+<p>
+Attribute und Methoden sind mit einer <i>Sichtbarkeit</i> (+=public,
+#=proteced, -=private) und einem <i>Rückgabewert bzw. Typ</i>
+gekennzeichnet.
+</p>
 
 <p>
 Dies Klasse könnte wie folgt verwendet werden.
@@ -1678,24 +1684,25 @@ Dies Klasse könnte wie folgt verwendet werden.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
 <span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.num = n
-<span class="linenr"> 4: </span>
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr"> 6: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.num % 3 == 0 <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
-<span class="linenr"> 7: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr"> 8: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.num % 3 == 0:
-<span class="linenr"> 9: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr">10: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
-<span class="linenr">11: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">12: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">13: </span>            <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.num
-<span class="linenr">14: </span>
-<span class="linenr">15: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(2)
-<span class="linenr">16: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 2, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
-<span class="linenr">17: </span><span style="color: #a0522d;">fb</span> = FizzBuzz(15)
-<span class="linenr">18: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 15, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
+<span class="linenr"> 3: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">proteced/private attributes marked with one/two underscores</span>
+<span class="linenr"> 4: </span>        <span style="color: #a020f0;">self</span>.__number = n
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.__number % 3 == 0 <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">self</span>.__number % 5 == 0:
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.__number % 3 == 0:
+<span class="linenr">10: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">11: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.__number % 5 == 0:
+<span class="linenr">12: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">13: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">14: </span>            <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.__number
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #a0522d;">fb</span> = FizzBuzzGame(2)
+<span class="linenr">17: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 2, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
+<span class="linenr">18: </span><span style="color: #a0522d;">fb</span> = FizzBuzzGame(15)
+<span class="linenr">19: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Eingabe:"</span>, 15, <span style="color: #8b2252;">"Ausgabe:"</span>, fb.fizzbuzz())
 </pre>
 </div>
 
@@ -1703,6 +1710,30 @@ Dies Klasse könnte wie folgt verwendet werden.
 Eingabe: 2 Ausgabe: 2
 Eingabe: 15 Ausgabe: fizzbuzz
 </pre>
+
+<p>
+Da es sich bei fizzbuzz um ein Spiel handelt, bietet es sich an,
+Vererbung an dieser Stelle zu nutzen. Der Pfeil zwischen den Klassen
+wird in Pfeilrichtung als "ist ein" gelesen.
+</p>
+
+
+<div class="figure">
+<p><img src="doc/fizzbuzz_klassendiagramm-vererbung.png" alt="fizzbuzz_klassendiagramm-vererbung.png" />
+</p>
+</div>
+
+<p>
+Da das Spiel gewöhnlich von einem Spieler gespielt wird, kann dies als
+eine "hat"-Beziehung durch eine <a href="https://de.wikipedia.org/wiki/Assoziation_(UML)#Aggregation_und_Komposition">Aggregation-Beziehung</a> mit einer nicht
+ausgefüllten Raute dargestellt werden.
+</p>
+
+
+<div class="figure">
+<p><img src="doc/fizzbuzz_klassendiagramm-komp-aggr.png" alt="fizzbuzz_klassendiagramm-komp-aggr.png" />
+</p>
+</div>
 </div>
 </div>
 
@@ -2758,7 +2789,7 @@ Probiere 4
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-04-23 So 16:32</p>
+<p class="date">Created: 2017-04-26 Mi 21:10</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

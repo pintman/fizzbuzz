@@ -1450,36 +1450,51 @@ end
 
 * In einem UML-Klassendiagramm
 
-file:doc/fizzbuzz-klassendiagramm.png
+file:doc/fizzbuzz_klassendiagramm.png
+
+Attribute und Methoden sind mit einer /Sichtbarkeit/ (+=public,
+#=proteced, -=private) und einem /Rückgabewert bzw. Typ/
+gekennzeichnet.
 
 Dies Klasse könnte wie folgt verwendet werden.
 
 #+BEGIN_SRC python -n :results output :exports both :cache yes
-  class FizzBuzz:
+  class FizzBuzzGame:
       def __init__(self, n):
-          self.num = n
+          # proteced/private attributes marked with one/two underscores
+          self.__number = n
 
       def fizzbuzz(self):
-          if self.num % 3 == 0 and self.num % 5 == 0:
+          if self.__number % 3 == 0 and self.__number % 5 == 0:
               return "fizzbuzz"
-          elif self.num % 3 == 0:
+          elif self.__number % 3 == 0:
               return "fizz"
-          elif self.num % 5 == 0:
+          elif self.__number % 5 == 0:
               return "buzz"
           else:
-              return self.num
+              return self.__number
 
-  fb = FizzBuzz(2)
+  fb = FizzBuzzGame(2)
   print("Eingabe:", 2, "Ausgabe:", fb.fizzbuzz())
-  fb = FizzBuzz(15)
+  fb = FizzBuzzGame(15)
   print("Eingabe:", 15, "Ausgabe:", fb.fizzbuzz())
 #+END_SRC
 
-#+RESULTS[72e8deaa5f8f1d0abf0348e137bceb645c4b2cfd]:
+#+RESULTS[f9da9149f8904a46c326ae2fb0b38601c5d8aaab]:
 : Eingabe: 2 Ausgabe: 2
 : Eingabe: 15 Ausgabe: fizzbuzz
 
-** TODO Mit Vererbung und Aggregation/Composition		   :noexport:
+Da es sich bei fizzbuzz um ein Spiel handelt, bietet es sich an,
+Vererbung an dieser Stelle zu nutzen. Der Pfeil zwischen den Klassen
+wird in Pfeilrichtung als "ist ein" gelesen.
+
+file:doc/fizzbuzz_klassendiagramm-vererbung.png
+
+Da das Spiel gewöhnlich von einem Spieler gespielt wird, kann dies als
+eine "hat"-Beziehung durch eine [[https://de.wikipedia.org/wiki/Assoziation_(UML)#Aggregation_und_Komposition][Aggregation-Beziehung]] mit einer nicht
+ausgefüllten Raute dargestellt werden.
+
+file:doc/fizzbuzz_klassendiagramm-komp-aggr.png
 
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
