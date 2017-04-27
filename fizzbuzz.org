@@ -1408,7 +1408,6 @@ pip install sleekxmpp
       xmpp.process(block=True)
 #+END_SRC
 
-
 * Auf einem Cluster (mit GNU parallel)
 
 Hierfür bedienen wir uns des Programmes GNU parallel. Es muss auf dem
@@ -2440,5 +2439,205 @@ Probiere 3
 fizz
 Probiere 4
 4
+#+end_example
+
+* Mit einem neuronalen Netz					   :noexport:
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  import random
+
+  # along http://natureofcode.com/book/chapter-10-neural-networks/
+
+  class Perceptron:
+      """
+      >>> p = Perceptron(3)
+      >>> point = [50,-12,1]
+      >>> res = p.feedforward(point)
+      """
+      def __init__(self, num_inputs):
+          self.c = 0.01 # koeffizient, der die Lernrate bestimmt
+
+          # zufällige Werte aus [-1;+1] für die Gewichte.
+          self.weights = [random.randint(-100,100)/100 for i in range(num_inputs)]
+          
+      def feedforward(self, inputs):
+          assert len(self.weights) == len(inputs)
+          sum = 0
+          
+          for i in range(len(self.weights)):
+              sum += inputs[i] * self.weights[i]
+
+          return self.activate(sum)
+
+      def activate(self, sum):
+          if sum > 0:
+              return +1
+          else:
+              return -1
+
+      def train(self, inputs, desired, debug=False):
+          assert len(inputs) == len(self.weights)
+          
+          guess = self.feedforward(inputs)
+          error = desired - guess
+          if debug:
+              print("in",inputs, "des", desired, "g", guess, "err", error)
+
+          for i in range(len(self.weights)):
+              self.weights[i] += self.c * error * inputs[i]
+
+  class Trainer:
+      """Ein Trainer speichert die Eingabe und die korrekte Antwort."""
+      
+      def __init__(self, num_inputs, num, a):
+          self.inputs = [0] * num_inputs
+          self.inputs[num] = 1
+          self.answer = a
+
+  def f(x):
+    return 2*x+1
+
+  def setup(training):
+      anzahl = 2000
+      
+      for i in range(anzahl):
+          x = random.randint(-100, 100)
+          y = random.randint(-100, 100)
+          answer = 1
+          if y < f(x):
+              answer = -1
+
+          #print(x,y, answer)
+          training.append(Trainer(x,y,answer))
+
+  def training_network(training, ptron):    
+      count = 0 #TODO
+      while count < len(training):
+          ptron.train(training[count].inputs, training[count].answer)
+          count = (count + 1) # % len(training)
+
+  def main():
+      training = []
+      ptron = Perceptron(3)
+
+      setup(training)
+      for i in range(10):
+          training_network(training, ptron)
+
+      # Prüfen der Ergebnisse
+      print("Gewichte", ptron.weights)
+      for i in range(10):
+          x = random.randint(-100, 100)
+          y = random.randint(-100, 100)
+          answer = 1
+          if y < f(x):
+              answer = -1
+
+      for i in range(100):
+          x = random.randint(-100, 100)
+          y = random.randint(-100, 100)
+          answer = 1
+          if y < f(x):
+              answer = -1
+          res = ptron.feedforward([x,y,1])        
+          print(x,y,"a", answer, "ptron", res, "error", abs(answer-res))
+
+
+  def fizzbuzz_nn():
+      max_val = 20
+      fizz = max_val + 1
+      buzz = max_val + 2
+      fizzbuzz = max_val + 3
+      rounds = 100
+
+      # Creating a network of one peceptron per number
+      # adding 3 perceptrons for fizz, buzz and fizzbuzz
+      #
+      # o-- is a perceptron
+      # x   fully meshed
+      #      
+      # 0  x  o--
+      # 1  x  o--
+      # 2  x  o--
+      # 3  x  o--
+      #    x  o--  (fizz) 
+      #    x  o--  (buzz) 
+      #    x  o--  (fizzbuzz) 
+      ptrons = []
+      for p in range(max_val + 3): # 1-n, fizz, buzz, fizzbuzz
+          ptrons.append(Perceptron(max_val))
+      print("Anzahl Perceptrons", len(ptrons))        
+
+      # Training the neural network
+      for j in range(rounds):
+          for i in range(max_val):
+              # all inputs are zero except the current number
+              inputs = [0] * max_val
+              inputs[i] = 1
+
+              # answer a is 1 for the right perceptron, -1 otherwise
+              for pi in range(len(ptrons)):
+                  if i%3==0 and i%5==0 and pi==fizzbuzz:
+                      a = 1
+                  elif i%3==0 and pi==fizz:
+                      a = 1
+                  elif i%5==0 and pi==buzz:
+                      a = 1
+                  elif i==pi:
+                      a = 1
+                  else:
+                      a = -1
+
+                  ptrons[pi].train(inputs, a, False)
+                  
+      # Checking trained network
+      for j in range(max_val):
+          inputs = [0] * max_val
+          inputs[j] = 1
+
+          print(j, ":", end='')
+          for pi in range(len(ptrons)):
+              val = ptrons[pi].feedforward(inputs)
+              if val == -1:
+                  continue
+              if pi == fizz:
+                  pi="fizz"
+              if pi == buzz:
+                  pi="buzz"
+              if pi == fizzbuzz:
+                  pi = "fizzbuzz"
+                  
+              print("{} ({})".format(pi, val), end='')
+              
+          print()
+
+  fizzbuzz_nn()
+  #main()
+
+#+END_SRC
+
+#+RESULTS[97225ac2e112464b0f3f55abe5fa6db93d621ad7]:
+#+begin_example
+Anzahl Perceptrons 23
+0 :0 (1)fizz (1)buzz (1)
+1 :1 (1)
+2 :2 (1)
+3 :3 (1)fizz (1)
+4 :4 (1)
+5 :5 (1)buzz (1)
+6 :6 (1)fizz (1)
+7 :7 (1)
+8 :8 (1)
+9 :9 (1)fizz (1)
+10 :10 (1)buzz (1)
+11 :11 (1)
+12 :12 (1)fizz (1)
+13 :13 (1)
+14 :14 (1)
+15 :15 (1)fizz (1)buzz (1)
+16 :16 (1)
+17 :17 (1)
+18 :18 (1)fizz (1)
+19 :19 (1)
 #+end_example
 
