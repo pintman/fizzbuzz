@@ -1323,6 +1323,8 @@ Punkt):
 ** TODO XMPP-Bot Beispiel 					   :noexport:
 z.B. https://dev.gajim.org/gajim/python-nbxmpp/
 
+oder errbot.op: http://errbot.io/en/latest/features.html
+
 https://github.com/fritzy/SleekXMPP Beispiel aus einem OReilly Buch
 
 Die Bibliothek [[https://github.com/fritzy/SleekXMPP][SleekXMPP]] kann über einen Paket-Manager der
@@ -2443,6 +2445,10 @@ Probiere 4
 
 * Mit einem neuronalen Netz					   :noexport:
 
+[[http://natureofcode.com/book/chapter-10-neural-networks/][Kapitel 10: Neural Networks]] beschreibt die Funktionsweise eines
+neuronalen Netzwerkes. Das folgende neuronale Netz, soll das
+fizzbuzz-Problem lösen.
+
 #+BEGIN_SRC python -n :results output :exports both :cache yes
   import random
 
@@ -2486,6 +2492,26 @@ Probiere 4
           for i in range(len(self.weights)):
               self.weights[i] += self.c * error * inputs[i]
 
+  class Network:
+      def __init__(self, num_ptrons):
+          self.ptrons = []
+          for i in range(num_ptrons):
+              self.ptrons.append(Perceptron(num_ptrons))
+
+      def train(self, inputs, outputs):
+          assert len(outputs) == len(self.ptrons)
+          
+          for pi in len(self.ptrons):
+              self.ptrons[pi].train(inputs, outputs[pi])
+
+      def ask(self, inputs):
+          answer = []
+          for p in self.ptrons:
+              a = p.feedforward(inputs)
+              answer.append(a)
+
+          return answer
+          
   class Trainer:
       """Ein Trainer speichert die Eingabe und die korrekte Antwort."""
       
@@ -2494,54 +2520,38 @@ Probiere 4
           self.inputs[num] = 1
           self.answer = a
 
-  def f(x):
-    return 2*x+1
 
-  def setup(training):
-      anzahl = 2000
-      
-      for i in range(anzahl):
-          x = random.randint(-100, 100)
-          y = random.randint(-100, 100)
-          answer = 1
-          if y < f(x):
-              answer = -1
+  def fizzbuzz_nn2():
+      max_val = 20
+      fizz = max_val + 1
+      buzz = max_val + 2
+      fizzbuzz = max_val + 3
+      rounds = 100
 
-          #print(x,y, answer)
-          training.append(Trainer(x,y,answer))
+      # training the neural network
+      nn = Network(max_val + 3)
+      for r in range(rounds):
+          for i in range(max_val):
+              inputs = [0] * max_val
+              outputs = [-1] * (max_val+4)            
+              inputs[i] = 1
+              #print(i, fizzbuzz, len(outputs))
+              
+              # answer a is 1 for the right perceptron, -1 otherwise
+              if i%3==0 and i%5==0:                
+                  outputs[fizzbuzz] = 1
+              elif i%3==0:
+                  outputs[fizz] = 1
+              elif i%5==0:
+                  outputs[buzz] = 1
+              else: 
+                  outputs[i] = 1
 
-  def training_network(training, ptron):    
-      count = 0 #TODO
-      while count < len(training):
-          ptron.train(training[count].inputs, training[count].answer)
-          count = (count + 1) # % len(training)
+              nn.train(inputs, outputs)
 
-  def main():
-      training = []
-      ptron = Perceptron(3)
-
-      setup(training)
-      for i in range(10):
-          training_network(training, ptron)
-
-      # Prüfen der Ergebnisse
-      print("Gewichte", ptron.weights)
-      for i in range(10):
-          x = random.randint(-100, 100)
-          y = random.randint(-100, 100)
-          answer = 1
-          if y < f(x):
-              answer = -1
-
-      for i in range(100):
-          x = random.randint(-100, 100)
-          y = random.randint(-100, 100)
-          answer = 1
-          if y < f(x):
-              answer = -1
-          res = ptron.feedforward([x,y,1])        
-          print(x,y,"a", answer, "ptron", res, "error", abs(answer-res))
-
+      # asking the trained network
+      for i in range(max_val):
+          print(i, nn.ask(i))
 
   def fizzbuzz_nn():
       max_val = 20
@@ -2611,33 +2621,10 @@ Probiere 4
               
           print()
 
-  fizzbuzz_nn()
-  #main()
+  #fizzbuzz_nn()
+  fizzbuzz_nn2()
 
 #+END_SRC
 
-#+RESULTS[97225ac2e112464b0f3f55abe5fa6db93d621ad7]:
-#+begin_example
-Anzahl Perceptrons 23
-0 :0 (1)fizz (1)buzz (1)
-1 :1 (1)
-2 :2 (1)
-3 :3 (1)fizz (1)
-4 :4 (1)
-5 :5 (1)buzz (1)
-6 :6 (1)fizz (1)
-7 :7 (1)
-8 :8 (1)
-9 :9 (1)fizz (1)
-10 :10 (1)buzz (1)
-11 :11 (1)
-12 :12 (1)fizz (1)
-13 :13 (1)
-14 :14 (1)
-15 :15 (1)fizz (1)buzz (1)
-16 :16 (1)
-17 :17 (1)
-18 :18 (1)fizz (1)
-19 :19 (1)
-#+end_example
+#+RESULTS[fcd950f6226887b4ffd37fda2465b1331f061747]:
 
