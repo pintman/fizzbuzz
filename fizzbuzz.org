@@ -1971,6 +1971,8 @@ file:doc/mvc.png
 eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
 (zum Beispiel über einen [[https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)][Beobachter]]).
 
+file:doc/fizzbuzz_mvc.svg
+
 #+BEGIN_SRC python -n :results output :exports both :cache yes
   class FizzBuzzModel:
       def __init__(self):
