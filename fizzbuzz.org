@@ -2443,37 +2443,41 @@ Probiere 4
 4
 #+end_example
 
-* Mit einem neuronalen Netz					   :noexport:
+* Mit einem neuronalen Netzwerk
 
-[[http://natureofcode.com/book/chapter-10-neural-networks/][Kapitel 10: Neural Networks]] beschreibt die Funktionsweise eines
+Der Artikel [[http://natureofcode.com/book/chapter-10-neural-networks/][Neural Networks]] beschreibt die Funktionsweise eines
 neuronalen Netzwerkes. Das folgende neuronale Netz, soll das
 fizzbuzz-Problem lösen.
 
+Hierfür wird ein Netwerk aus 23 Perceptrons erstellt: 20 davon bilden
+die Zahlen 0-19 ab, die restlichen drei die Fällen =fizz=, =buzz= und
+=fizzbuzz=. Ein Input =i= wird kodiert, indem die Zahl am Eingang =i=
+auf 1, an allen anderen Eingängen auf -1 gelegt wird. Zum Schluss wird
+das Perceptron mit dem höchsten Wert gewählt. Das Netzwerk wird in
+immer mehr Trainingsrunden verbessert.
+
 #+BEGIN_SRC python -n :results output :exports both :cache yes
   import random
-
-  # along http://natureofcode.com/book/chapter-10-neural-networks/
 
   class Perceptron:
       def __init__(self, num_inputs):
           self.c = 0.01 # coefficient that determines learning speed.
 
           # random values weights in [-1;+1]
-          self.weights = [random.randint(-100,100)/100 for i in
-                          range(num_inputs)]
+          self.weights = [random.randint(-100,100)/100 for i in range(num_inputs)]
           
       def feedforward(self, inputs):
           """Ask a trained perceptron for output on given input."""
           assert len(self.weights) == len(inputs)
-          sum = 0
-          
+
+          sum = 0        
           for i in range(len(self.weights)):
               sum += inputs[i] * self.weights[i]
 
           return self.activate(sum)
 
       def activate(self, sum):
-          """Activation function determines when the perceptron fires."""
+          """Activation function determines when the perceptron fires - if output is positive."""
           if sum > 0:
               return +1
           else:
@@ -2489,19 +2493,18 @@ fizzbuzz-Problem lösen.
           for i in range(len(self.weights)):
               self.weights[i] += self.c * error * inputs[i]
 
-  class Network:
+              
+  class NeuralNetwork:
       def __init__(self, num_inputs, num_outputs):
-          """Create a neural network. 
+          """Create a neural network of perceptrons. 
 
           num_inputs denotes the number of inputs per Perceptron, while
-          num_outputs denotes the number of perceptrons.
+          num_outputs denotes the number of perceptrons and therefore
+          the number of outputs.
           """
           self.ptrons = []
           for i in range(num_outputs):
-              self.ptrons.append(Perceptron(num_inputs))
-              
-          print("network: num inputs:", num_inputs, "num ptrons",
-                len(self.ptrons))
+              self.ptrons.append(Perceptron(num_inputs))            
 
       def train(self, inputs, desired_outputs):
           """Train the network by training all perceptrons in it."""
@@ -2512,15 +2515,17 @@ fizzbuzz-Problem lösen.
               self.ptrons[pi].train(inputs, desired_outputs[pi])
 
       def ask(self, inputs):
-          """Ask the network for an answer."""
-          answer = []
+          """Ask the network for an answer. It will return the index and value
+          of the perceptron with the maximum value.
+          """
+          answers = []
           for p in self.ptrons:
               a = p.feedforward(inputs)
-              answer.append(a)
+              answers.append(a)
 
           # determine maximum output value
-          maxval = [0, answer[0]]
-          for (i,a) in enumerate(answer):
+          maxval = [0, answers[0]]
+          for (i,a) in enumerate(answers):
               if a > maxval[1]:
                   maxval = [i, a]
 
@@ -2533,120 +2538,142 @@ fizzbuzz-Problem lösen.
 
       def num_outputs(self):
           return len(self.ptrons)
-              
+
+
+  class FizzbuzzNetwork(NeuralNetwork):
+      def __init__(self, numbers):
+          # adding 3 outputs for fizz, buzz and fizzbuzz
+          super().__init__(numbers, numbers+3)
           
-  def fizzbuzz_nn2():
-      max_val = 20 # 0-(max_val-1)
-      fizz = max_val
-      buzz = max_val + 1
-      fizzbuzz = max_val + 2
-      rounds = 100
+          self.numbers = numbers
+          self.fizz = numbers
+          self.buzz = numbers + 1
+          self.fizzbuzz = numbers + 2
+      
+      def train_rounds(self, training_rounds):
+          for _ in range(training_rounds):
+              for i in range(self.numbers):
+                  inputs = self.code_input(i)
 
-      # training the neural network
-      nn = Network(max_val, max_val + 3)
-      for r in range(rounds):
-          for i in range(max_val):
-              inputs = [0] * max_val
-              inputs[i] = 1
-              
-              # answer a is 1 for the right perceptron, -1 otherwise
-              outputs = [-1] * (max_val+3)
-              if i%3==0 and i%5==0:                
-                  outputs[fizzbuzz] = 1
-              elif i%3==0:
-                  outputs[fizz] = 1
-              elif i%5==0:
-                  outputs[buzz] = 1
-              else:
-                  outputs[i] = 1
-
-              nn.train(inputs, outputs)
-
-      # asking the trained network
-      for i in range(max_val):
-          inputs = [0] * max_val
-          inputs[i] = 1
-          idx, answer = nn.ask(inputs)
-          if idx == fizz:
-              idx = "fizz"
-          elif idx == buzz:
-              idx = "buzz"
-          elif idx == fizzbuzz:
-              idx = "fizzbuzz"
-          print(i, idx)
-
-  def fizzbuzz_nn():
-      max_val = 20
-      fizz = max_val + 1
-      buzz = max_val + 2
-      fizzbuzz = max_val + 3
-      rounds = 100
-
-      # Creating a network of one peceptron per number
-      # adding 3 perceptrons for fizz, buzz and fizzbuzz
-      #
-      # o-- is a perceptron
-      # x   fully meshed
-      #      
-      # 0  x  o--
-      # 1  x  o--
-      # 2  x  o--
-      # 3  x  o--
-      #    x  o--  (fizz) 
-      #    x  o--  (buzz) 
-      #    x  o--  (fizzbuzz) 
-      ptrons = []
-      for p in range(max_val + 3): # 1-n, fizz, buzz, fizzbuzz
-          ptrons.append(Perceptron(max_val))
-      print("Anzahl Perceptrons", len(ptrons))        
-
-      # Training the neural network
-      for j in range(rounds):
-          for i in range(max_val):
-              # all inputs are zero except the current number
-              inputs = [0] * max_val
-              inputs[i] = 1
-
-              # answer a is 1 for the right perceptron, -1 otherwise
-              for pi in range(len(ptrons)):
-                  if i%3==0 and i%5==0 and pi==fizzbuzz:
-                      a = 1
-                  elif i%3==0 and pi==fizz:
-                      a = 1
-                  elif i%5==0 and pi==buzz:
-                      a = 1
-                  elif i==pi:
-                      a = 1
+                  # answer a is 1 for the right perceptron, -1 otherwise
+                  outputs = [-1] * (self.numbers + 3)
+                  if i%3==0 and i%5==0:                
+                      outputs[self.fizzbuzz] = 1
+                  elif i%3==0:
+                      outputs[self.fizz] = 1
+                  elif i%5==0:
+                      outputs[self.buzz] = 1
                   else:
-                      a = -1
+                      outputs[i] = 1
 
-                  ptrons[pi].train(inputs, a, False)
-                  
-      # Checking trained network
-      for j in range(max_val):
-          inputs = [0] * max_val
-          inputs[j] = 1
+                  self.train(inputs, outputs)
 
-          #print(str(j) + ":", end='')
-          for pi in range(len(ptrons)):
-              val = ptrons[pi].feedforward(inputs)
-              if val == -1:
-                  continue
-              if pi == fizz:
-                  pi="fizz"
-              if pi == buzz:
-                  pi="buzz"
-              if pi == fizzbuzz:
-                  pi = "fizzbuzz"
-                  
-              print("{} ({})".format(pi, val), end='')
+      def code_input(self, num):
+          assert num < self.numbers
+          
+          inputs = [0] * self.numbers
+          inputs[num] = 1
+          return inputs
+
+      def ask(self, inputs):
+          idx, value = super().ask(inputs)
+          
+          if idx == self.fizz:
+              idx = "fizz"
+          elif idx == self.buzz:
+              idx = "buzz"
+          elif idx == self.fizzbuzz:
+              idx = "fizzbuzz"
               
-          print()
+          return idx, value
 
-  #fizzbuzz_nn()
-  fizzbuzz_nn2()
+      
+  def fizzbuzz_nn():
+      numbers = 20    
+
+      # training the network several times
+      for rounds in [10, 45, 100]:
+          print("training", rounds, "rounds")
+          
+          nn = FizzbuzzNetwork(numbers)
+          nn.train_rounds(rounds)
+
+          # asking the trained network
+          for i in range(numbers):
+              inputs = nn.code_input(i)        
+              idx, answer = nn.ask(inputs)
+              print(i, idx)
+      
+      
+
+  fizzbuzz_nn()
 
 #+END_SRC
 
-#+RESULTS[1c6ffa0158b4eff79a7123c0def1983b6acb06f8]:
+#+RESULTS[be8320eb8c4a4fd1c91847503e8692c6234ddf5b]:
+#+begin_example
+training 10 rounds
+0 4
+1 1
+2 2
+3 0
+4 3
+5 3
+6 1
+7 3
+8 1
+9 1
+10 0
+11 1
+12 0
+13 0
+14 2
+15 0
+16 0
+17 0
+18 5
+19 2
+training 45 rounds
+0 5
+1 1
+2 2
+3 7
+4 4
+5 8
+6 15
+7 6
+8 8
+9 fizz
+10 0
+11 2
+12 10
+13 2
+14 1
+15 fizzbuzz
+16 0
+17 4
+18 fizz
+19 17
+training 100 rounds
+0 fizzbuzz
+1 1
+2 2
+3 fizz
+4 4
+5 buzz
+6 fizz
+7 7
+8 8
+9 fizz
+10 buzz
+11 11
+12 fizz
+13 13
+14 14
+15 fizzbuzz
+16 16
+17 17
+18 fizz
+19 19
+#+end_example
 

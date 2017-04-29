@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-26 Mi 21:10 -->
+<!-- 2017-04-29 Sa 08:12 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -173,6 +173,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-29">29. Als Spiel (mit pygame)</a></li>
 <li><a href="#sec-30">30. In einem docker Container</a></li>
 <li><a href="#sec-31">31. Mit Fehlerbehandlung</a></li>
+<li><a href="#sec-32">32. Mit einem neuronalen Netzwerk</a></li>
 </ul>
 </div>
 </div>
@@ -2786,10 +2787,251 @@ Probiere 4
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-32" class="outline-2">
+<h2 id="sec-32"><span class="section-number-2">32</span> Mit einem neuronalen Netzwerk</h2>
+<div class="outline-text-2" id="text-32">
+<p>
+Der Artikel <a href="http://natureofcode.com/book/chapter-10-neural-networks/">Neural Networks</a> beschreibt die Funktionsweise eines
+neuronalen Netzwerkes. Das folgende neuronale Netz, soll das
+fizzbuzz-Problem lösen.
+</p>
+
+<p>
+Hierfür wird ein Netwerk aus 23 Perceptrons erstellt: 20 davon bilden
+die Zahlen 0-19 ab, die restlichen drei die Fällen <code>fizz</code>, <code>buzz</code> und
+<code>fizzbuzz</code>. Ein Input <code>i</code> wird kodiert, indem die Zahl am Eingang <code>i</code>
+auf 1, an allen anderen Eingängen auf -1 gelegt wird. Zum Schluss wird
+das Perceptron mit dem höchsten Wert gewählt. Das Netzwerk wird in
+immer mehr Trainingsrunden verbessert.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr">  1: </span><span style="color: #a020f0;">import</span> random
+<span class="linenr">  2: </span>
+<span class="linenr">  3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Perceptron</span>:
+<span class="linenr">  4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs):
+<span class="linenr">  5: </span>        <span style="color: #a020f0;">self</span>.c = 0.01 <span style="color: #b22222;"># </span><span style="color: #b22222;">coefficient that determines learning speed.</span>
+<span class="linenr">  6: </span>
+<span class="linenr">  7: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">random values weights in [-1;+1]</span>
+<span class="linenr">  8: </span>        <span style="color: #a020f0;">self</span>.weights = [random.randint(-100,100)/100 <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(num_inputs)]
+<span class="linenr">  9: </span>
+<span class="linenr"> 10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">feedforward</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr"> 11: </span>        <span style="color: #8b2252;">"""Ask a trained perceptron for output on given input."""</span>
+<span class="linenr"> 12: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights) == <span style="color: #483d8b;">len</span>(inputs)
+<span class="linenr"> 13: </span>
+<span class="linenr"> 14: </span>        <span style="color: #483d8b;">sum</span> = 0        
+<span class="linenr"> 15: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights)):
+<span class="linenr"> 16: </span>            <span style="color: #483d8b;">sum</span> += inputs[i] * <span style="color: #a020f0;">self</span>.weights[i]
+<span class="linenr"> 17: </span>
+<span class="linenr"> 18: </span>        <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.activate(<span style="color: #483d8b;">sum</span>)
+<span class="linenr"> 19: </span>
+<span class="linenr"> 20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">activate</span>(<span style="color: #a020f0;">self</span>, <span style="color: #483d8b;">sum</span>):
+<span class="linenr"> 21: </span>        <span style="color: #8b2252;">"""Activation function determines when the perceptron fires - if output is positive."""</span>
+<span class="linenr"> 22: </span>        <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">sum</span> &gt; 0:
+<span class="linenr"> 23: </span>            <span style="color: #a020f0;">return</span> +1
+<span class="linenr"> 24: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr"> 25: </span>            <span style="color: #a020f0;">return</span> -1
+<span class="linenr"> 26: </span>
+<span class="linenr"> 27: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired):
+<span class="linenr"> 28: </span>        <span style="color: #8b2252;">"""Train for inputs and desired result."""</span>
+<span class="linenr"> 29: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(inputs) == <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights)
+<span class="linenr"> 30: </span>
+<span class="linenr"> 31: </span>        <span style="color: #a0522d;">guess</span> = <span style="color: #a020f0;">self</span>.feedforward(inputs)
+<span class="linenr"> 32: </span>        <span style="color: #a0522d;">error</span> = desired - guess
+<span class="linenr"> 33: </span>
+<span class="linenr"> 34: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights)):
+<span class="linenr"> 35: </span>            <span style="color: #a020f0;">self</span>.weights[i] += <span style="color: #a020f0;">self</span>.c * error * inputs[i]
+<span class="linenr"> 36: </span>
+<span class="linenr"> 37: </span>
+<span class="linenr"> 38: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NeuralNetwork</span>:
+<span class="linenr"> 39: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs, num_outputs):
+<span class="linenr"> 40: </span>        <span style="color: #8b2252;">"""Create a neural network of perceptrons. </span>
+<span class="linenr"> 41: </span>
+<span class="linenr"> 42: </span><span style="color: #8b2252;">        num_inputs denotes the number of inputs per Perceptron, while</span>
+<span class="linenr"> 43: </span><span style="color: #8b2252;">        num_outputs denotes the number of perceptrons and therefore</span>
+<span class="linenr"> 44: </span><span style="color: #8b2252;">        the number of outputs.</span>
+<span class="linenr"> 45: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr"> 46: </span>        <span style="color: #a020f0;">self</span>.ptrons = []
+<span class="linenr"> 47: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(num_outputs):
+<span class="linenr"> 48: </span>            <span style="color: #a020f0;">self</span>.ptrons.append(Perceptron(num_inputs))            
+<span class="linenr"> 49: </span>
+<span class="linenr"> 50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired_outputs):
+<span class="linenr"> 51: </span>        <span style="color: #8b2252;">"""Train the network by training all perceptrons in it."""</span>
+<span class="linenr"> 52: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(inputs) == <span style="color: #a020f0;">self</span>.num_inputs()
+<span class="linenr"> 53: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(desired_outputs) == <span style="color: #a020f0;">self</span>.num_outputs()
+<span class="linenr"> 54: </span>
+<span class="linenr"> 55: </span>        <span style="color: #a020f0;">for</span> pi <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons)):
+<span class="linenr"> 56: </span>            <span style="color: #a020f0;">self</span>.ptrons[pi].train(inputs, desired_outputs[pi])
+<span class="linenr"> 57: </span>
+<span class="linenr"> 58: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr"> 59: </span>        <span style="color: #8b2252;">"""Ask the network for an answer. It will return the index and value</span>
+<span class="linenr"> 60: </span><span style="color: #8b2252;">        of the perceptron with the maximum value.</span>
+<span class="linenr"> 61: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr"> 62: </span>        <span style="color: #a0522d;">answers</span> = []
+<span class="linenr"> 63: </span>        <span style="color: #a020f0;">for</span> p <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>.ptrons:
+<span class="linenr"> 64: </span>            <span style="color: #a0522d;">a</span> = p.feedforward(inputs)
+<span class="linenr"> 65: </span>            answers.append(a)
+<span class="linenr"> 66: </span>
+<span class="linenr"> 67: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">determine maximum output value</span>
+<span class="linenr"> 68: </span>        <span style="color: #a0522d;">maxval</span> = [0, answers[0]]
+<span class="linenr"> 69: </span>        <span style="color: #a020f0;">for</span> (i,a) <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">enumerate</span>(answers):
+<span class="linenr"> 70: </span>            <span style="color: #a020f0;">if</span> a &gt; maxval[1]:
+<span class="linenr"> 71: </span>                <span style="color: #a0522d;">maxval</span> = [i, a]
+<span class="linenr"> 72: </span>
+<span class="linenr"> 73: </span>        <span style="color: #a020f0;">return</span> maxval
+<span class="linenr"> 74: </span>
+<span class="linenr"> 75: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_inputs</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 76: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons) &gt; 0
+<span class="linenr"> 77: </span>
+<span class="linenr"> 78: </span>        <span style="color: #a020f0;">return</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons[0].weights)
+<span class="linenr"> 79: </span>
+<span class="linenr"> 80: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_outputs</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 81: </span>        <span style="color: #a020f0;">return</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons)
+<span class="linenr"> 82: </span>
+<span class="linenr"> 83: </span>
+<span class="linenr"> 84: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzNetwork</span>(NeuralNetwork):
+<span class="linenr"> 85: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, numbers):
+<span class="linenr"> 86: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">adding 3 outputs for fizz, buzz and fizzbuzz</span>
+<span class="linenr"> 87: </span>        <span style="color: #483d8b;">super</span>().__init__(numbers, numbers+3)
+<span class="linenr"> 88: </span>
+<span class="linenr"> 89: </span>        <span style="color: #a020f0;">self</span>.numbers = numbers
+<span class="linenr"> 90: </span>        <span style="color: #a020f0;">self</span>.fizz = numbers
+<span class="linenr"> 91: </span>        <span style="color: #a020f0;">self</span>.buzz = numbers + 1
+<span class="linenr"> 92: </span>        <span style="color: #a020f0;">self</span>.fizzbuzz = numbers + 2
+<span class="linenr"> 93: </span>
+<span class="linenr"> 94: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train_rounds</span>(<span style="color: #a020f0;">self</span>, training_rounds):
+<span class="linenr"> 95: </span>        <span style="color: #a020f0;">for</span> _ <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(training_rounds):
+<span class="linenr"> 96: </span>            <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #a020f0;">self</span>.numbers):
+<span class="linenr"> 97: </span>                <span style="color: #a0522d;">inputs</span> = <span style="color: #a020f0;">self</span>.code_input(i)
+<span class="linenr"> 98: </span>
+<span class="linenr"> 99: </span>                <span style="color: #b22222;"># </span><span style="color: #b22222;">answer a is 1 for the right perceptron, -1 otherwise</span>
+<span class="linenr">100: </span>                <span style="color: #a0522d;">outputs</span> = [-1] * (<span style="color: #a020f0;">self</span>.numbers + 3)
+<span class="linenr">101: </span>                <span style="color: #a020f0;">if</span> i%3==0 <span style="color: #a020f0;">and</span> i%5==0:                
+<span class="linenr">102: </span>                    <span style="color: #a0522d;">outputs</span>[<span style="color: #a020f0;">self</span>.fizzbuzz] = 1
+<span class="linenr">103: </span>                <span style="color: #a020f0;">elif</span> i%3==0:
+<span class="linenr">104: </span>                    <span style="color: #a0522d;">outputs</span>[<span style="color: #a020f0;">self</span>.fizz] = 1
+<span class="linenr">105: </span>                <span style="color: #a020f0;">elif</span> i%5==0:
+<span class="linenr">106: </span>                    <span style="color: #a0522d;">outputs</span>[<span style="color: #a020f0;">self</span>.buzz] = 1
+<span class="linenr">107: </span>                <span style="color: #a020f0;">else</span>:
+<span class="linenr">108: </span>                    <span style="color: #a0522d;">outputs</span>[i] = 1
+<span class="linenr">109: </span>
+<span class="linenr">110: </span>                <span style="color: #a020f0;">self</span>.train(inputs, outputs)
+<span class="linenr">111: </span>
+<span class="linenr">112: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">code_input</span>(<span style="color: #a020f0;">self</span>, num):
+<span class="linenr">113: </span>        <span style="color: #a020f0;">assert</span> num &lt; <span style="color: #a020f0;">self</span>.numbers
+<span class="linenr">114: </span>
+<span class="linenr">115: </span>        <span style="color: #a0522d;">inputs</span> = [0] * <span style="color: #a020f0;">self</span>.numbers
+<span class="linenr">116: </span>        <span style="color: #a0522d;">inputs</span>[num] = 1
+<span class="linenr">117: </span>        <span style="color: #a020f0;">return</span> inputs
+<span class="linenr">118: </span>
+<span class="linenr">119: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr">120: </span>        <span style="color: #a0522d;">idx</span>, <span style="color: #a0522d;">value</span> = <span style="color: #483d8b;">super</span>().ask(inputs)
+<span class="linenr">121: </span>
+<span class="linenr">122: </span>        <span style="color: #a020f0;">if</span> idx == <span style="color: #a020f0;">self</span>.fizz:
+<span class="linenr">123: </span>            <span style="color: #a0522d;">idx</span> = <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr">124: </span>        <span style="color: #a020f0;">elif</span> idx == <span style="color: #a020f0;">self</span>.buzz:
+<span class="linenr">125: </span>            <span style="color: #a0522d;">idx</span> = <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr">126: </span>        <span style="color: #a020f0;">elif</span> idx == <span style="color: #a020f0;">self</span>.fizzbuzz:
+<span class="linenr">127: </span>            <span style="color: #a0522d;">idx</span> = <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">128: </span>
+<span class="linenr">129: </span>        <span style="color: #a020f0;">return</span> idx, value
+<span class="linenr">130: </span>
+<span class="linenr">131: </span>
+<span class="linenr">132: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_nn</span>():
+<span class="linenr">133: </span>    <span style="color: #a0522d;">numbers</span> = 20    
+<span class="linenr">134: </span>
+<span class="linenr">135: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">training the network several times</span>
+<span class="linenr">136: </span>    <span style="color: #a020f0;">for</span> rounds <span style="color: #a020f0;">in</span> [10, 45, 100]:
+<span class="linenr">137: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"training"</span>, rounds, <span style="color: #8b2252;">"rounds"</span>)
+<span class="linenr">138: </span>
+<span class="linenr">139: </span>        <span style="color: #a0522d;">nn</span> = FizzbuzzNetwork(numbers)
+<span class="linenr">140: </span>        nn.train_rounds(rounds)
+<span class="linenr">141: </span>
+<span class="linenr">142: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">asking the trained network</span>
+<span class="linenr">143: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(numbers):
+<span class="linenr">144: </span>            <span style="color: #a0522d;">inputs</span> = nn.code_input(i)        
+<span class="linenr">145: </span>            <span style="color: #a0522d;">idx</span>, <span style="color: #a0522d;">answer</span> = nn.ask(inputs)
+<span class="linenr">146: </span>            <span style="color: #a020f0;">print</span>(i, idx)
+<span class="linenr">147: </span>
+<span class="linenr">148: </span>
+<span class="linenr">149: </span>
+<span class="linenr">150: </span>fizzbuzz_nn()
+</pre>
+</div>
+
+<pre class="example">
+training 10 rounds
+0 4
+1 1
+2 2
+3 0
+4 3
+5 3
+6 1
+7 3
+8 1
+9 1
+10 0
+11 1
+12 0
+13 0
+14 2
+15 0
+16 0
+17 0
+18 5
+19 2
+training 45 rounds
+0 5
+1 1
+2 2
+3 7
+4 4
+5 8
+6 15
+7 6
+8 8
+9 fizz
+10 0
+11 2
+12 10
+13 2
+14 1
+15 fizzbuzz
+16 0
+17 4
+18 fizz
+19 17
+training 100 rounds
+0 fizzbuzz
+1 1
+2 2
+3 fizz
+4 4
+5 buzz
+6 fizz
+7 7
+8 8
+9 fizz
+10 buzz
+11 11
+12 fizz
+13 13
+14 14
+15 fizzbuzz
+16 16
+17 17
+18 fizz
+19 19
+</pre>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-04-26 Mi 21:10</p>
+<p class="date">Created: 2017-04-29 Sa 08:12</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
