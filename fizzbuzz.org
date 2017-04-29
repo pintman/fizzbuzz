@@ -2553,7 +2553,7 @@ immer mehr Trainingsrunden verbessert.
       def train_rounds(self, training_rounds):
           for _ in range(training_rounds):
               for i in range(self.numbers):
-                  inputs = self.code_input(i)
+                  inputs = self.encode_input(i)
 
                   # answer a is 1 for the right perceptron, -1 otherwise
                   outputs = [-1] * (self.numbers + 3)
@@ -2568,7 +2568,7 @@ immer mehr Trainingsrunden verbessert.
 
                   self.train(inputs, outputs)
 
-      def code_input(self, num):
+      def encode_input(self, num):
           assert num < self.numbers
           
           inputs = [0] * self.numbers
@@ -2600,60 +2600,59 @@ immer mehr Trainingsrunden verbessert.
 
           # asking the trained network
           for i in range(numbers):
-              inputs = nn.code_input(i)        
+              inputs = nn.encode_input(i)        
               idx, answer = nn.ask(inputs)
               print(i, idx)
-      
-      
+   
 
   fizzbuzz_nn()
 
 #+END_SRC
 
-#+RESULTS[be8320eb8c4a4fd1c91847503e8692c6234ddf5b]:
+#+RESULTS[98215b493c59ca95f863fcd8f9767949024514ea]:
 #+begin_example
 training 10 rounds
-0 4
-1 1
-2 2
-3 0
-4 3
-5 3
-6 1
-7 3
+0 0
+1 0
+2 5
+3 2
+4 0
+5 4
+6 3
+7 0
 8 1
-9 1
+9 8
 10 0
-11 1
-12 0
+11 2
+12 4
 13 0
-14 2
+14 1
 15 0
 16 0
 17 0
-18 5
-19 2
+18 0
+19 3
 training 45 rounds
-0 5
-1 1
-2 2
-3 7
+0 1
+1 16
+2 1
+3 fizz
 4 4
-5 8
-6 15
-7 6
+5 7
+6 2
+7 0
 8 8
-9 fizz
-10 0
-11 2
-12 10
-13 2
-14 1
+9 6
+10 buzz
+11 8
+12 fizz
+13 7
+14 14
 15 fizzbuzz
-16 0
-17 4
-18 fizz
-19 17
+16 16
+17 16
+18 1
+19 19
 training 100 rounds
 0 fizzbuzz
 1 1
