@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-29 Sa 08:12 -->
+<!-- 2017-04-29 Sa 12:53 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -2797,6 +2797,12 @@ neuronalen Netzwerkes. Das folgende neuronale Netz, soll das
 fizzbuzz-Problem lösen.
 </p>
 
+
+<div class="figure">
+<p><img src="doc/fizzbuzz_neuralnet.svg" alt="fizzbuzz_neuralnet.svg" />
+</p>
+</div>
+
 <p>
 Hierfür wird ein Netwerk aus 23 Perceptrons erstellt: 20 davon bilden
 die Zahlen 0-19 ab, die restlichen drei die Fällen <code>fizz</code>, <code>buzz</code> und
@@ -2904,7 +2910,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 94: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train_rounds</span>(<span style="color: #a020f0;">self</span>, training_rounds):
 <span class="linenr"> 95: </span>        <span style="color: #a020f0;">for</span> _ <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(training_rounds):
 <span class="linenr"> 96: </span>            <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #a020f0;">self</span>.numbers):
-<span class="linenr"> 97: </span>                <span style="color: #a0522d;">inputs</span> = <span style="color: #a020f0;">self</span>.code_input(i)
+<span class="linenr"> 97: </span>                <span style="color: #a0522d;">inputs</span> = <span style="color: #a020f0;">self</span>.encode_input(i)
 <span class="linenr"> 98: </span>
 <span class="linenr"> 99: </span>                <span style="color: #b22222;"># </span><span style="color: #b22222;">answer a is 1 for the right perceptron, -1 otherwise</span>
 <span class="linenr">100: </span>                <span style="color: #a0522d;">outputs</span> = [-1] * (<span style="color: #a020f0;">self</span>.numbers + 3)
@@ -2919,7 +2925,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr">109: </span>
 <span class="linenr">110: </span>                <span style="color: #a020f0;">self</span>.train(inputs, outputs)
 <span class="linenr">111: </span>
-<span class="linenr">112: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">code_input</span>(<span style="color: #a020f0;">self</span>, num):
+<span class="linenr">112: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">encode_input</span>(<span style="color: #a020f0;">self</span>, num):
 <span class="linenr">113: </span>        <span style="color: #a020f0;">assert</span> num &lt; <span style="color: #a020f0;">self</span>.numbers
 <span class="linenr">114: </span>
 <span class="linenr">115: </span>        <span style="color: #a0522d;">inputs</span> = [0] * <span style="color: #a020f0;">self</span>.numbers
@@ -2951,59 +2957,58 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr">141: </span>
 <span class="linenr">142: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">asking the trained network</span>
 <span class="linenr">143: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(numbers):
-<span class="linenr">144: </span>            <span style="color: #a0522d;">inputs</span> = nn.code_input(i)        
+<span class="linenr">144: </span>            <span style="color: #a0522d;">inputs</span> = nn.encode_input(i)        
 <span class="linenr">145: </span>            <span style="color: #a0522d;">idx</span>, <span style="color: #a0522d;">answer</span> = nn.ask(inputs)
 <span class="linenr">146: </span>            <span style="color: #a020f0;">print</span>(i, idx)
 <span class="linenr">147: </span>
 <span class="linenr">148: </span>
-<span class="linenr">149: </span>
-<span class="linenr">150: </span>fizzbuzz_nn()
+<span class="linenr">149: </span>fizzbuzz_nn()
 </pre>
 </div>
 
 <pre class="example">
 training 10 rounds
-0 4
-1 1
-2 2
-3 0
-4 3
-5 3
-6 1
-7 3
+0 0
+1 0
+2 5
+3 2
+4 0
+5 4
+6 3
+7 0
 8 1
-9 1
+9 8
 10 0
-11 1
-12 0
+11 2
+12 4
 13 0
-14 2
+14 1
 15 0
 16 0
 17 0
-18 5
-19 2
+18 0
+19 3
 training 45 rounds
-0 5
-1 1
-2 2
-3 7
+0 1
+1 16
+2 1
+3 fizz
 4 4
-5 8
-6 15
-7 6
+5 7
+6 2
+7 0
 8 8
-9 fizz
-10 0
-11 2
-12 10
-13 2
-14 1
+9 6
+10 buzz
+11 8
+12 fizz
+13 7
+14 14
 15 fizzbuzz
-16 0
-17 4
-18 fizz
-19 17
+16 16
+17 16
+18 1
+19 19
 training 100 rounds
 0 fizzbuzz
 1 1
@@ -3031,7 +3036,7 @@ training 100 rounds
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-04-29 Sa 08:12</p>
+<p class="date">Created: 2017-04-29 Sa 12:53</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

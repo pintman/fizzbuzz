@@ -2449,6 +2449,8 @@ Der Artikel [[http://natureofcode.com/book/chapter-10-neural-networks/][Neural N
 neuronalen Netzwerkes. Das folgende neuronale Netz, soll das
 fizzbuzz-Problem lösen.
 
+file:doc/fizzbuzz_neuralnet.svg
+
 Hierfür wird ein Netwerk aus 23 Perceptrons erstellt: 20 davon bilden
 die Zahlen 0-19 ab, die restlichen drei die Fällen =fizz=, =buzz= und
 =fizzbuzz=. Ein Input =i= wird kodiert, indem die Zahl am Eingang =i=
