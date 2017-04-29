@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-04-29 Sa 12:58 -->
+<!-- 2017-04-29 Sa 13:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -913,22 +913,37 @@ Nach dem Start des Webservers kann die Webseite
 <div class="outline-text-2" id="text-13">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span class="linenr"> 1: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Ein Verzeichnis erstellen und den Quelltext kopieren</span>
+<pre class="src src-sh"><span class="linenr"> 1: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Ein Verzeichnis erstellen und den Quelltext kopieren/erstellen</span>
 <span class="linenr"> 2: </span>mkdir /tmp/fizzbuzz_repo
-<span class="linenr"> 3: </span>cp fizzbuzz.py /tmp/fizzbuzz_repo
-<span class="linenr"> 4: </span><span style="color: #483d8b;">cd</span> /tmp/fizzbuzz_repo
+<span class="linenr"> 3: </span><span style="color: #483d8b;">cd</span> /tmp/fizzbuzz_repo
+<span class="linenr"> 4: </span><span style="color: #483d8b;">echo</span> <span style="color: #8b2252;">'print("Hallo Welt")'</span> &gt; hallo.py
 <span class="linenr"> 5: </span>
 <span class="linenr"> 6: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Repo initialisieren</span>
 <span class="linenr"> 7: </span>git init
 <span class="linenr"> 8: </span>
 <span class="linenr"> 9: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Dateien f&#252;r commit vormerken</span>
-<span class="linenr">10: </span>git add fizzbuzz.py
+<span class="linenr">10: </span>git add hallo.py
 <span class="linenr">11: </span>
 <span class="linenr">12: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Dateien in Repo einchecken</span>
-<span class="linenr">13: </span>git commit -m <span style="color: #8b2252;">"commit fizzbuzz.py"</span> fizzbuzz.py
+<span class="linenr">13: </span>git commit -m <span style="color: #8b2252;">"commit hallo.py"</span> hallo.py
 <span class="linenr">14: </span>
 <span class="linenr">15: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Logfile anschauen</span>
 <span class="linenr">16: </span>git log
+<span class="linenr">17: </span>
+<span class="linenr">18: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Feature branch erzeugen und wechseln</span>
+<span class="linenr">19: </span>git checkout -b new_feature
+<span class="linenr">20: </span>
+<span class="linenr">21: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Dateien &#228;ndern</span>
+<span class="linenr">22: </span><span style="color: #483d8b;">echo</span> <span style="color: #8b2252;">'print("new feature")'</span> &gt;&gt; hallo.py
+<span class="linenr">23: </span>
+<span class="linenr">24: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Einen Commit im neuen Branch erzeugen</span>
+<span class="linenr">25: </span>git commit -m <span style="color: #8b2252;">"added new feature"</span> hallo.py
+<span class="linenr">26: </span>
+<span class="linenr">27: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Zur&#252;ck zum Hauptbranch wechseln</span>
+<span class="linenr">28: </span>git checkout master
+<span class="linenr">29: </span>
+<span class="linenr">30: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Feature-Branch in den Hauptzweig integrieren</span>
+<span class="linenr">31: </span>git merge new_feature
 </pre>
 </div>
 </div>
@@ -3042,7 +3057,7 @@ training 100 rounds
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-04-29 Sa 12:58</p>
+<p class="date">Created: 2017-04-29 Sa 13:16</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -666,33 +666,58 @@ http://localhost:8081/fizzbuzz/20 aufgerufen werden.
 * In git-repo einchecken
 
 #+BEGIN_SRC sh -n :results output
-# Ein Verzeichnis erstellen und den Quelltext kopieren
-mkdir /tmp/fizzbuzz_repo
-cp fizzbuzz.py /tmp/fizzbuzz_repo
-cd /tmp/fizzbuzz_repo
+  # Ein Verzeichnis erstellen und den Quelltext kopieren/erstellen
+  mkdir /tmp/fizzbuzz_repo
+  cd /tmp/fizzbuzz_repo
+  echo 'print("Hallo Welt")' > hallo.py
 
-# Repo initialisieren
-git init
+  # Repo initialisieren
+  git init
 
-# Dateien für commit vormerken
-git add fizzbuzz.py
+  # Dateien für commit vormerken
+  git add hallo.py
 
-# Dateien in Repo einchecken
-git commit -m "commit fizzbuzz.py" fizzbuzz.py
+  # Dateien in Repo einchecken
+  git commit -m "commit hallo.py" hallo.py
 
-# Logfile anschauen
-git log
+  # Logfile anschauen
+  git log
+
+  # Feature branch erzeugen und wechseln
+  git checkout -b new_feature
+
+  # Dateien ändern
+  echo 'print("new feature")' >> hallo.py
+
+  # Einen Commit im neuen Branch erzeugen
+  git commit -m "added new feature" hallo.py
+
+  # Zurück zum Hauptbranch wechseln
+  git checkout master
+
+  # Feature-Branch in den Hauptzweig integrieren
+  git merge new_feature
+
 #+END_SRC
 
 #+RESULTS:
-: Reinitialisierte existierendes Git-Repository in /tmp/fizzbuzz_repo/.git/
-: Auf Branch master
-: nichts zu committen, Arbeitsverzeichnis unverändert
-: commit fcc325165e397deb540afa3ad123c260d5347531
-: Author: Marco Bakera <marco@bakera.de>
-: Date:   Fri Apr 14 09:25:33 2017 +0200
-: 
-:     commit fizzbuzz.py
+#+begin_example
+Initialisierte leeres Git-Repository in /tmp/fizzbuzz_repo/.git/
+[master (Basis-Commit) d2ce6e2] commit hallo.py
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hallo.py
+commit d2ce6e2707dbf7f999459484f26cc6ae283c8f7b
+Author: Marco Bakera <marco@bakera.de>
+Date:   Sat Apr 29 13:16:26 2017 +0200
+
+    commit hallo.py
+[new_feature c2a187a] added new feature
+ 1 file changed, 1 insertion(+)
+Aktualisiere d2ce6e2..c2a187a
+Fast-forward
+ hallo.py | 1 +
+ 1 file changed, 1 insertion(+)
+#+end_example
 
 * Als installierbares Programm
 
