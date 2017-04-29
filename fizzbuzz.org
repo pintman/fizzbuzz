@@ -862,7 +862,7 @@ Soll-Wert. In Python geschiet dies über das Paket [[https://docs.python.org/3/l
 #+RESULTS:
 
 Die Tests können bei Python auch direkt in den Kommentaren stehen. In
-diesem Fall spricht man von einem [[https://docs.python.org/3/library/doctest.html][docttest]]. Die Zeichen "=>>>="
+diesem Fall spricht man von einem [[https://docs.python.org/3/library/doctest.html][doctest]]. Die Zeichen "=>>>="
 beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
 
 #+BEGIN_SRC python -n :results output :exports both :cache yes
@@ -927,6 +927,9 @@ Die Bibliothek =eapi= (https://github.com/pintman/ea_rpi_modul) kann
 #+BEGIN_SRC sh
 pip install eapi
 #+END_SRC
+
+Nun kann es verwendet werden. Die wichtigste Klasse ist
+=eapi.hw.EAModul=.
 
 #+BEGIN_SRC python -n
 
@@ -1531,38 +1534,50 @@ ist eine Zahl oder ein String.
 
 #+BEGIN_SRC plantuml :file doc/fizzbuzz-seqdiag.png :cache yes
 @startuml
-Client -> FizzbuzzServer: fizzbuzz(2)
-FizzbuzzServer --> Client: 2
-Client -> Client: Ausgabe 2
+skinparam sequenceParticipant underline
 
-Client -> FizzbuzzServer: fizzbuzz(3)
-FizzbuzzServer --> Client: "fizz"
-Client -> Client: Ausgabe "fizz"
+activate ":Client"
+":Client" -> ":FizzbuzzServer": fizzbuzz(2)
+activate ":FizzbuzzServer"
+":FizzbuzzServer" --> ":Client": 2
+deactivate ":FizzbuzzServer"
+":Client" -> ":Client": Ausgabe 2
 
-Client -> FizzbuzzServer: fizzbuzz(5)
-FizzbuzzServer --> Client: "buzz"
-Client -> Client: Ausgabe "buzz"
+":Client" -> ":FizzbuzzServer": fizzbuzz(3)
+activate ":FizzbuzzServer"
+":FizzbuzzServer" --> ":Client": "fizz"
+deactivate ":FizzbuzzServer"
+":Client" -> ":Client": Ausgabe "fizz"
 
-Client -> FizzbuzzServer: fizzbuzz(zahl)
+":Client" -> ":FizzbuzzServer": fizzbuzz(5)
+activate ":FizzbuzzServer"
+":FizzbuzzServer" --> ":Client": "buzz"
+deactivate ":FizzbuzzServer"
+":Client" -> ":Client": Ausgabe "buzz"
 
+":Client" -> ":FizzbuzzServer": fizzbuzz(zahl)
+activate ":FizzbuzzServer"
+
+note left: Nun der allgemeine Fall
 alt zahl % 3 == 0 and zahl % 5 == 0
-    FizzbuzzServer --> Client: "fizzbuzz"
-    Client -> Client: Ausgabe "fizzbuzz"
+    ":FizzbuzzServer" --> ":Client": "fizzbuzz"
+    ":Client" -> ":Client": Ausgabe "fizzbuzz"
 else zahl % 3 == 0
-    FizzbuzzServer --> Client: "fizz"
-    Client -> Client: Ausgabe "fizz"
+    ":FizzbuzzServer" --> ":Client": "fizz"
+    ":Client" -> ":Client": Ausgabe "fizz"
 else zahl % 5 == 0
-    FizzbuzzServer --> Client: "buzz"
-    Client -> Client: Ausgabe "buzz"
+    ":FizzbuzzServer" --> ":Client": "buzz"
+    ":Client" -> ":Client": Ausgabe "buzz"
 else sonst
-    FizzbuzzServer --> Client: zahl
-    Client -> Client: Ausgabe zahl
-
+    ":FizzbuzzServer" --> ":Client": zahl
+    ":Client" -> ":Client": Ausgabe zahl
 end
+deactivate ":FizzbuzzServer"
+
 @enduml
 #+END_SRC
 
-#+RESULTS[ce4baf64489ce021c830488dd8ed7060e96fc4c7]:
+#+RESULTS[e8dd3925834077bb61b47aaef123a77ed2e7df2f]:
 [[file:doc/fizzbuzz-seqdiag.png]]
 
 * In einem UML-Klassendiagramm
@@ -1764,6 +1779,8 @@ publisher -> Broker: publish("falscher_kanal/", "2")
 #+end_example
 
 * Mit Kommandozeilenparametern
+
+Kommandozeilenparameter stehen in =sys.argv=.
 
 #+INCLUDE: "fizzbuzz-cli.py" src python -n
 
@@ -2138,6 +2155,8 @@ file:doc/ball.gif
 Bei dem folgenden Beispiel hüpft ein Ball über den Bildschirm. Bei
 jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 "fizzbuzz" auf dem Ball angezeigt.
+
+file:doc/fizzbuzz_game.svg
 
 #+BEGIN_SRC python -n
   import sys, pygame
