@@ -521,10 +521,10 @@ fizz
 
 * Objekt-Orientiert mit Vererbung
 
-Wir verwenden zwei Klassen =Spiel= und =FizzbuzzSpiel=, wobei letztere
+Wir verwenden zwei Klassen =Game= und =FizzBuzzGame=, wobei letztere
 die erstere erweitert und damit alle Attribute und Methoden von dieser
-übernimmt und ggf. um weitere ergänzt. Man kann sagen =FizzbuzzSpiel=
-ist ein =Spiel=. Durch die Vererbung muss nicht jedes neue Spiel die
+übernimmt und ggf. um weitere ergänzt. Man kann sagen =FizzbuzzGame=
+ist ein =Game=. Durch die Vererbung muss nicht jedes neue Spiel die
 Gameloop erneut programmieren, sondern kann diese generische
 Funktionalität übernehmen.
 
