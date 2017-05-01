@@ -452,6 +452,38 @@ file:doc/fizzbuzz_gui.png
 #+RESULTS:
 : None
 
+** TODO Menü ergänzen						   :noexport:
+
+#+BEGIN_SRC python -n
+  import tkinter
+
+  def clicked():
+      print("I have been clicked")
+
+  root = tkinter.Tk()
+
+  # creating menubar 
+  menubar = tkinter.Menu(root)
+  root.config(menu=menubar)
+
+  # adding file-menu to menubar
+  file_menu = tkinter.Menu(menubar)
+  menubar.add_cascade(label="Datei", menu=file_menu)
+  file_menu.add_command(label="Exit", command=clicked)
+
+  # adding sub menu
+  sub_menubar = tkinter.Menu(menubar)
+  menubar.add_cascade(label="submenu", menu=sub_menubar)
+  sub_menu = tkinter.Menu(sub_menubar)
+  sub_menu.add_command(label="sub exit", command=clicked)
+  sub_menubar.add_cascade(label="sub", menu=sub_menu)
+
+  # starting the main event-loop
+  root.mainloop()
+
+
+#+END_SRC
+
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
 #+BEGIN_SRC python -n :results output
