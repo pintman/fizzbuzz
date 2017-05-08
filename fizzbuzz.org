@@ -1662,6 +1662,11 @@ file:doc/fizzbuzz_klassendiagramm-komp-aggr.png
 
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
+[[https://de.wikipedia.org/wiki/MQTT][MQTT]] ist ein u.a. von IBM entwickeltes offenes Protokoll, das auf Port
+1883 und 8883 läuft und für die Übertragung von Sensordaten zwischen
+Maschinen entwickelt wurde. Ein [[https://www.heise.de/developer/artikel/MQTT-Protokoll-fuer-das-Internet-der-Dinge-2168152.html][heise-Artikel]] beschreibt das Protokoll
+ausführlich.
+
 Als Client-Bibliothek wird =paho-mqtt=
 (https://pypi.python.org/pypi/paho-mqtt/) verwendet. Diese lässt
 sich einfach installieren.
