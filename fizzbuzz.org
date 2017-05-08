@@ -1817,11 +1817,14 @@ publisher -> Broker: publish("falscher_kanal/", "2")
 
 ** TODO Beispiel mit EA-Modul					   :noexport:
 
-Das folgende Beispiel verwendet EA-Modul. Hierbei agiert ein Taster
-als Sensor, der beim Drücken in das Topic =taster0/pressed= eine 1
-oder 0 sendet - je nachdem, ob der Taster gedrückt oder losgelassen
-wurde. Eine LED agiert als Sensor, die sich beim Topic registriert und
-auf Nachrichten entsprechend reagiert.
+Das folgende Beispiel verwendet das EA-Modul. 
+
+Hierbei agiert ein Taster als Sensor, der beim Drücken in das Topic
+=taster0/pressed= eine 1 oder 0 sendet - je nachdem, ob der Taster
+gedrückt oder losgelassen wurde. 
+
+Eine LED agiert als Sensor, die sich beim Topic registriert und auf
+Nachrichten entsprechend reagiert.
 
 
 * Mit Kommandozeilenparametern
