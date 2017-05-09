@@ -1828,8 +1828,27 @@ Nachrichten entsprechend reagiert: Wenn die Zahl durch 3 bzw. 5
 teilbar ist, geht die gelbe bzw. rote LED an, ansonsten leuchtet nur
 die grüne LED.
 
-#+INCLUDE: "fizzbuzz_mqtt_eamodul.py" src python -n
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-mqtt-eamodul.png :cache yes
+@startuml
+mqtt_modul -> Broker: connect()
+Broker -> mqtt_modul: on_connect()
+mqtt_modul -> Broker: subscribe("taster0/pressed/")
 
+ea_modul -> mqt_modul: taster_gedrueckt()
+mqtt_modul -> Broker: publish("taster0/pressed/", "1")
+Broker -> mqtt_modul: on_message(1)
+mqtt_modul -> ea_modul: schalte_led(gruen, False)
+mqtt_modul -> ea_modul: schalte_led(gelb, False)
+mqtt_modul -> ea_modul: schalte_led(rot, False)
+
+mqtt_modul -> ea_modul: schalte_led(gruen, True)
+
+@enduml
+#+END_SRC
+
+Es folgt der Quelltext.
+
+#+INCLUDE: "fizzbuzz_mqtt_eamodul.py" src python -n
 
 * Mit Kommandozeilenparametern
 

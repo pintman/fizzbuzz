@@ -9,8 +9,8 @@ class MqttModul():
         self.client.on_message = self.on_message
         self.client.connect(server, port, keepalive=60)
 
-        self.eam = eapi.hw.EAModul()
-        self.eam.taster_event_registrieren(0, self.taster_gedrueckt())
+        self.eamodul = eapi.hw.EAModul()
+        self.eamodul.taster_event_registrieren(0, self.taster_gedrueckt())
 
         self.num = 1
 
@@ -26,16 +26,16 @@ class MqttModul():
         print("[msg reveived] topic:", msg.topic, "payload:", msg.payload)
 
         # turn off all LED
-        self.eam.schalte_led(eapi.hw.EAModul.LED_GRUEN, False)
-        self.eam.schalte_led(eapi.hw.EAModul.LED_GELB, False)
-        self.eam.schalte_led(eapi.hw.EAModul.LED_ROT, False)
+        self.eamodul.schalte_led(eapi.hw.EAModul.LED_GRUEN, False)
+        self.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, False)
+        self.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, False)
 
         if self.num % 3 == 0:
-            self.eam.schalte_led(eapi.hw.EAModul.LED_GELB, True)
+            self.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, True)
         elif self.num % 5 == 0:
-            self.eam.schalte_led(eapi.hw.EAModul.LED_ROT, True)
+            self.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, True)
         else:
-            self.eam.schalte_led(eapi.hw.EAModul.LED_GRUEN, True)
+            self.eamodul.schalte_led(eapi.hw.EAModul.LED_GRUEN, True)
 
         self.num += 1
 
