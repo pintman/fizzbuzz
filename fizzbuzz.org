@@ -1824,7 +1824,11 @@ Hierbei agiert ein Taster als Sensor, der beim Drücken in das Topic
 gedrückt oder losgelassen wurde. 
 
 Eine LED agiert als Sensor, die sich beim Topic registriert und auf
-Nachrichten entsprechend reagiert.
+Nachrichten entsprechend reagiert: Wenn die Zahl durch 3 bzw. 5
+teilbar ist, geht die gelbe bzw. rote LED an, ansonsten leuchtet nur
+die grüne LED.
+
+#+INCLUDE: "fizzbuzz_mqtt_eamodul.py" src python -n
 
 
 * Mit Kommandozeilenparametern
