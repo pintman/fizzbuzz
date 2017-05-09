@@ -1,8 +1,10 @@
 import eapi.hw
 import paho.mqtt.client as mqtt
 
+
 class MqttModul():
-    def __init__(self, ea_modul, server="iot.eclipse.org", port=1883):
+    def __init__(self, server="iot.eclipse.org", port=1883):
+        self.num = 1
         self.client = mqtt.Client()
         self.client.connect(server, port, keepalive=60)
         self.client.on_connect = self.on_connect
@@ -10,30 +12,27 @@ class MqttModul():
         self.client.connect(server, port, keepalive=60)
 
         self.eamodul = eapi.hw.EAModul()
-        self.eamodul.taster_event_registrieren(0, self.taster_gedrueckt())
+        self.eamodul.taster_event_registrieren(0, self.taster_gedrueckt)
 
-        self.num = 1
-
-    def taster_gedrueckt(self):
+    def taster_gedrueckt(self, pin):
         print("[publish]", self.num)
-        self.client.publish("taster0/pressed/", 1)
+        self.client.publish("eamodul/taster0/pressed/", 1)
 
     def on_connect(self, client, userdata, flags, rc):
         print("[connected]")
-        self.client.subscribe("taster0/pressed/")
+        self.client.subscribe("eamodul/taster0/pressed/")
 
     def on_message(self, client, userdata, msg):
         print("[msg reveived] topic:", msg.topic, "payload:", msg.payload)
 
-        # turn off all LED
-        self.eamodul.schalte_led(eapi.hw.EAModul.LED_GRUEN, False)
-        self.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, False)
-        self.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, False)
+        # turn off all LED rot, gelb, grün
+        self.eamodul.schalte_leds(False, False, False)
 
-        if self.num % 3 == 0:
-            self.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, True)
-        elif self.num % 5 == 0:
-            self.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, True)
+        if self.num % 3 == 0 or self.num % 5 == 0:
+            if self.num % 3 == 0:
+                self.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, True)
+            if self.num % 5 == 0:
+                self.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, True)
         else:
             self.eamodul.schalte_led(eapi.hw.EAModul.LED_GRUEN, True)
 

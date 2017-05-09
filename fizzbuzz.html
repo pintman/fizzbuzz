@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-05-08 Mo 14:48 -->
+<!-- 2017-05-09 Di 14:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -613,37 +613,46 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <span class="linenr"> 7: </span>        <span style="color: #a0522d;">root</span> = tkinter.Tk()
 <span class="linenr"> 8: </span>        root.title(<span style="color: #8b2252;">"FizzBuzz"</span>)
 <span class="linenr"> 9: </span>
-<span class="linenr">10: </span>        <span style="color: #a0522d;">btn</span> = tkinter.Button(root, text=<span style="color: #8b2252;">"next"</span>, command=<span style="color: #a020f0;">self</span>.button_click)
-<span class="linenr">11: </span>        btn.pack()
-<span class="linenr">12: </span>
-<span class="linenr">13: </span>        <span style="color: #a020f0;">self</span>.lbl = tkinter.Label(root, text=<span style="color: #8b2252;">"fizzbuzz GUI"</span>)
-<span class="linenr">14: </span>        <span style="color: #a020f0;">self</span>.lbl.pack()
-<span class="linenr">15: </span>        <span style="color: #a020f0;">self</span>.ent = tkinter.Entry(root)
-<span class="linenr">16: </span>        <span style="color: #a020f0;">self</span>.ent.pack()
-<span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">entering main event loop</span>
-<span class="linenr">18: </span>        root.mainloop()
-<span class="linenr">19: </span>
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">button_click</span>(<span style="color: #a020f0;">self</span>):
-<span class="linenr">21: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.i
-<span class="linenr">22: </span>
-<span class="linenr">23: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">update label</span>
-<span class="linenr">24: </span>        <span style="color: #a020f0;">self</span>.lbl.configure(text=<span style="color: #8b2252;">"fizzbuzz von "</span> + <span style="color: #483d8b;">str</span>(i))
-<span class="linenr">25: </span>
-<span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">clear the entry field</span>
-<span class="linenr">27: </span>        <span style="color: #a020f0;">self</span>.ent.delete(0, tkinter.END)
+<span class="linenr">10: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">add menu</span>
+<span class="linenr">11: </span>        <span style="color: #a0522d;">menubar</span> = tkinter.Menu(root)
+<span class="linenr">12: </span>        root.config(menu=menubar)
+<span class="linenr">13: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">adding Tools-menu to menubar</span>
+<span class="linenr">14: </span>        <span style="color: #a0522d;">tools_menu</span> = tkinter.Menu(menubar)
+<span class="linenr">15: </span>        menubar.add_cascade(label=<span style="color: #8b2252;">"Tools"</span>, menu=tools_menu)
+<span class="linenr">16: </span>        tools_menu.add_command(label=<span style="color: #8b2252;">"Next"</span>, command=<span style="color: #a020f0;">self</span>.click)
+<span class="linenr">17: </span>
+<span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">add button</span>
+<span class="linenr">19: </span>        <span style="color: #a0522d;">btn</span> = tkinter.Button(root, text=<span style="color: #8b2252;">"next"</span>, command=<span style="color: #a020f0;">self</span>.click)
+<span class="linenr">20: </span>        btn.pack()
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>        <span style="color: #a020f0;">self</span>.lbl = tkinter.Label(root, text=<span style="color: #8b2252;">"fizzbuzz GUI"</span>)
+<span class="linenr">23: </span>        <span style="color: #a020f0;">self</span>.lbl.pack()
+<span class="linenr">24: </span>        <span style="color: #a020f0;">self</span>.ent = tkinter.Entry(root)
+<span class="linenr">25: </span>        <span style="color: #a020f0;">self</span>.ent.pack()
+<span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">entering main event loop</span>
+<span class="linenr">27: </span>        root.mainloop()
 <span class="linenr">28: </span>
-<span class="linenr">29: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
-<span class="linenr">30: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">31: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
-<span class="linenr">32: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">33: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
-<span class="linenr">34: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">35: </span>        <span style="color: #a020f0;">else</span>:
-<span class="linenr">36: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, i)
+<span class="linenr">29: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">click</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">30: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.i
+<span class="linenr">31: </span>
+<span class="linenr">32: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">update label</span>
+<span class="linenr">33: </span>        <span style="color: #a020f0;">self</span>.lbl.configure(text=<span style="color: #8b2252;">"fizzbuzz von "</span> + <span style="color: #483d8b;">str</span>(i))
+<span class="linenr">34: </span>
+<span class="linenr">35: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">clear the entry field</span>
+<span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.ent.delete(0, tkinter.END)
 <span class="linenr">37: </span>
-<span class="linenr">38: </span>        <span style="color: #a020f0;">self</span>.i += 1
-<span class="linenr">39: </span>
-<span class="linenr">40: </span>GUI()
+<span class="linenr">38: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">39: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">40: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">41: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">42: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">43: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, <span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">44: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">45: </span>            <span style="color: #a020f0;">self</span>.ent.insert(0, i)
+<span class="linenr">46: </span>
+<span class="linenr">47: </span>        <span style="color: #a020f0;">self</span>.i += 1
+<span class="linenr">48: </span>
+<span class="linenr">49: </span>GUI()
 </pre>
 </div>
 </div>
@@ -1779,7 +1788,8 @@ sich einfach installieren.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">pip install paho-mqtt
+<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">&#252;ber pip</span>
+pip install --user paho-mqtt
 </pre>
 </div>
 
@@ -1905,6 +1915,87 @@ Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
 [msg reveived] topic: fizzbuzz/ payload: 19 answer: 19
 [msg reveived] topic: fizzbuzz/ payload: 20 answer: buzz
 </pre>
+
+<p>
+Das folgende Beispiel verwendet das EA-Modul. 
+</p>
+
+<p>
+Hierbei agiert ein Taster als Sensor, der beim Drücken in das Topic
+<code>eamodul/taster0/pressed</code> eine 1 sendet. 
+</p>
+
+<p>
+Eine LED agiert als Sensor, die sich beim Topic registriert und auf
+Nachrichten entsprechend reagiert: Wenn die Zahl durch 3 bzw. 5
+teilbar ist, geht die gelbe bzw. rote LED an, ansonsten leuchtet nur
+die grüne LED.
+</p>
+
+
+<div class="figure">
+<p><img src="doc/fizzbuzz-mqtt-eamodul.png" alt="fizzbuzz-mqtt-eamodul.png" />
+</p>
+</div>
+
+<p>
+Es folgt der Quelltext.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> eapi.hw
+<span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> paho.mqtt.client <span style="color: #a020f0;">as</span> mqtt
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">MqttModul</span>():
+<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.num = 1
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
+<span class="linenr">10: </span>        <span style="color: #a020f0;">self</span>.client.on_connect = <span style="color: #a020f0;">self</span>.on_connect
+<span class="linenr">11: </span>        <span style="color: #a020f0;">self</span>.client.on_message = <span style="color: #a020f0;">self</span>.on_message
+<span class="linenr">12: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>        <span style="color: #a020f0;">self</span>.eamodul = eapi.hw.EAModul()
+<span class="linenr">15: </span>        <span style="color: #a020f0;">self</span>.eamodul.taster_event_registrieren(0, <span style="color: #a020f0;">self</span>.taster_gedrueckt)
+<span class="linenr">16: </span>
+<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">taster_gedrueckt</span>(<span style="color: #a020f0;">self</span>, pin):
+<span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[publish]"</span>, <span style="color: #a020f0;">self</span>.num)
+<span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #8b2252;">"eamodul/taster0/pressed/"</span>, 1)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
+<span class="linenr">22: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[connected]"</span>)
+<span class="linenr">23: </span>        <span style="color: #a020f0;">self</span>.client.subscribe(<span style="color: #8b2252;">"eamodul/taster0/pressed/"</span>)
+<span class="linenr">24: </span>
+<span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
+<span class="linenr">26: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[msg reveived] topic:"</span>, msg.topic, <span style="color: #8b2252;">"payload:"</span>, msg.payload)
+<span class="linenr">27: </span>
+<span class="linenr">28: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">turn off all LED rot, gelb, gr&#252;n</span>
+<span class="linenr">29: </span>        <span style="color: #a020f0;">self</span>.eamodul.schalte_leds(<span style="color: #008b8b;">False</span>, <span style="color: #008b8b;">False</span>, <span style="color: #008b8b;">False</span>)
+<span class="linenr">30: </span>
+<span class="linenr">31: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.num % 3 == 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
+<span class="linenr">32: </span>            <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.num % 3 == 0:
+<span class="linenr">33: </span>                <span style="color: #a020f0;">self</span>.eamodul.schalte_led(eapi.hw.EAModul.LED_GELB, <span style="color: #008b8b;">True</span>)
+<span class="linenr">34: </span>            <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.num % 5 == 0:
+<span class="linenr">35: </span>                <span style="color: #a020f0;">self</span>.eamodul.schalte_led(eapi.hw.EAModul.LED_ROT, <span style="color: #008b8b;">True</span>)
+<span class="linenr">36: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">37: </span>            <span style="color: #a020f0;">self</span>.eamodul.schalte_led(eapi.hw.EAModul.LED_GRUEN, <span style="color: #008b8b;">True</span>)
+<span class="linenr">38: </span>
+<span class="linenr">39: </span>        <span style="color: #a020f0;">self</span>.num += 1
+<span class="linenr">40: </span>
+<span class="linenr">41: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">42: </span>        <span style="color: #a020f0;">self</span>.client.loop_forever()
+<span class="linenr">43: </span>
+<span class="linenr">44: </span>
+<span class="linenr">45: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():
+<span class="linenr">46: </span>    <span style="color: #a0522d;">mqttmod</span> = MqttModul()
+<span class="linenr">47: </span>    mqttmod.start()
+<span class="linenr">48: </span>
+<span class="linenr">49: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">50: </span>    main()
+</pre>
+</div>
 </div>
 </div>
 
@@ -2557,7 +2648,82 @@ im gleichen Verzeichnis sein, in dem sich die Dateien <code>Dockerfile</code> un
 </div>
 
 <pre class="example">
-Sending build context to Docker daemon 557.1 kBSending build context to Docker daemon 1.114 MBSending build context to Docker daemon 1.671 MBSending build context to Docker daemon 2.228 MBSending build context to Docker daemon 2.785 MBSending build context to Docker daemon 3.342 MBSending build context to Docker daemon 3.899 MBSending build context to Docker daemon 4.456 MBSending build context to Docker daemon 5.014 MBSending build context to Docker daemon 5.571 MBSending build context to Docker daemon 6.128 MBSending build context to Docker daemon 6.685 MBSending build context to Docker daemon 7.242 MBSending build context to Docker daemon 7.799 MBSending build context to Docker daemon 8.356 MBSending build context to Docker daemon 8.913 MBSending build context to Docker daemon  9.47 MBSending build context to Docker daemon 10.03 MBSending build context to Docker daemon 10.58 MBSending build context to Docker daemon 11.14 MBSending build context to Docker daemon  11.7 MBSending build context to Docker daemon 12.26 MBSending build context to Docker daemon 12.81 MBSending build context to Docker daemon 13.37 MBSending build context to Docker daemon 13.93 MBSending build context to Docker daemon 14.48 MBSending build context to Docker daemon 15.04 MBSending build context to Docker daemon  15.6 MBSending build context to Docker daemon 16.15 MBSending build context to Docker daemon 16.71 MBSending build context to Docker daemon 17.27 MBSending build context to Docker daemon 17.83 MBSending build context to Docker daemon 18.38 MBSending build context to Docker daemon 18.94 MBSending build context to Docker daemon  19.5 MBSending build context to Docker daemon 20.05 MBSending build context to Docker daemon 20.61 MBSending build context to Docker daemon 21.17 MBSending build context to Docker daemon 21.73 MBSending build context to Docker daemon 22.28 MBSending build context to Docker daemon 22.84 MBSending build context to Docker daemon  23.4 MBSending build context to Docker daemon 23.95 MBSending build context to Docker daemon 24.51 MBSending build context to Docker daemon 25.07 MBSending build context to Docker daemon 25.62 MBSending build context to Docker daemon 26.18 MBSending build context to Docker daemon 26.74 MBSending build context to Docker daemon  27.3 MBSending build context to Docker daemon 27.85 MBSending build context to Docker daemon 28.41 MBSending build context to Docker daemon 28.97 MBSending build context to Docker daemon 29.52 MBSending build context to Docker daemon 30.08 MBSending build context to Docker daemon 30.64 MBSending build context to Docker daemon  31.2 MBSending build context to Docker daemon 31.75 MBSending build context to Docker daemon 32.31 MBSending build context to Docker daemon 32.87 MBSending build context to Docker daemon 33.42 MBSending build context to Docker daemon 33.98 MBSending build context to Docker daemon 34.54 MBSending build context to Docker daemon 35.09 MBSending build context to Docker daemon 35.65 MBSending build context to Docker daemon 36.21 MBSending build context to Docker daemon 36.77 MBSending build context to Docker daemon 37.32 MBSending build context to Docker daemon 37.88 MBSending build context to Docker daemon 38.44 MBSending build context to Docker daemon 38.99 MBSending build context to Docker daemon 39.55 MBSending build context to Docker daemon 40.11 MBSending build context to Docker daemon 40.67 MBSending build context to Docker daemon 41.22 MBSending build context to Docker daemon 41.48 MB
+Sending build context to Docker daemon 557.1 kB
+Sending build context to Docker daemon 1.114 MB
+Sending build context to Docker daemon 1.671 MB
+Sending build context to Docker daemon 2.228 MB
+Sending build context to Docker daemon 2.785 MB
+Sending build context to Docker daemon 3.342 MB
+Sending build context to Docker daemon 3.899 MB
+Sending build context to Docker daemon 4.456 MB
+Sending build context to Docker daemon 5.014 MB
+Sending build context to Docker daemon 5.571 MB
+Sending build context to Docker daemon 6.128 MB
+Sending build context to Docker daemon 6.685 MB
+Sending build context to Docker daemon 7.242 MB
+Sending build context to Docker daemon 7.799 MB
+Sending build context to Docker daemon 8.356 MB
+Sending build context to Docker daemon 8.913 MB
+Sending build context to Docker daemon  9.47 MB
+Sending build context to Docker daemon 10.03 MB
+Sending build context to Docker daemon 10.58 MB
+Sending build context to Docker daemon 11.14 MB
+Sending build context to Docker daemon  11.7 MB
+Sending build context to Docker daemon 12.26 MB
+Sending build context to Docker daemon 12.81 MB
+Sending build context to Docker daemon 13.37 MB
+Sending build context to Docker daemon 13.93 MB
+Sending build context to Docker daemon 14.48 MB
+Sending build context to Docker daemon 15.04 MB
+Sending build context to Docker daemon  15.6 MB
+Sending build context to Docker daemon 16.15 MB
+Sending build context to Docker daemon 16.71 MB
+Sending build context to Docker daemon 17.27 MB
+Sending build context to Docker daemon 17.83 MB
+Sending build context to Docker daemon 18.38 MB
+Sending build context to Docker daemon 18.94 MB
+Sending build context to Docker daemon  19.5 MB
+Sending build context to Docker daemon 20.05 MB
+Sending build context to Docker daemon 20.61 MB
+Sending build context to Docker daemon 21.17 MB
+Sending build context to Docker daemon 21.73 MB
+Sending build context to Docker daemon 22.28 MB
+Sending build context to Docker daemon 22.84 MB
+Sending build context to Docker daemon  23.4 MB
+Sending build context to Docker daemon 23.95 MB
+Sending build context to Docker daemon 24.51 MB
+Sending build context to Docker daemon 25.07 MB
+Sending build context to Docker daemon 25.62 MB
+Sending build context to Docker daemon 26.18 MB
+Sending build context to Docker daemon 26.74 MB
+Sending build context to Docker daemon  27.3 MB
+Sending build context to Docker daemon 27.85 MB
+Sending build context to Docker daemon 28.41 MB
+Sending build context to Docker daemon 28.97 MB
+Sending build context to Docker daemon 29.52 MB
+Sending build context to Docker daemon 30.08 MB
+Sending build context to Docker daemon 30.64 MB
+Sending build context to Docker daemon  31.2 MB
+Sending build context to Docker daemon 31.75 MB
+Sending build context to Docker daemon 32.31 MB
+Sending build context to Docker daemon 32.87 MB
+Sending build context to Docker daemon 33.42 MB
+Sending build context to Docker daemon 33.98 MB
+Sending build context to Docker daemon 34.54 MB
+Sending build context to Docker daemon 35.09 MB
+Sending build context to Docker daemon 35.65 MB
+Sending build context to Docker daemon 36.21 MB
+Sending build context to Docker daemon 36.77 MB
+Sending build context to Docker daemon 37.32 MB
+Sending build context to Docker daemon 37.88 MB
+Sending build context to Docker daemon 38.44 MB
+Sending build context to Docker daemon 38.99 MB
+Sending build context to Docker daemon 39.55 MB
+Sending build context to Docker daemon 40.11 MB
+Sending build context to Docker daemon 40.67 MB
+Sending build context to Docker daemon 41.22 MB
+Sending build context to Docker daemon 41.48 MB
+
 Step 1 : FROM alpine
  ---&gt; 4a415e366388
 Step 2 : RUN apk add --no-cache python3
@@ -3082,7 +3248,7 @@ training 100 rounds
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-05-08 Mo 14:48</p>
+<p class="date">Created: 2017-05-09 Di 14:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
