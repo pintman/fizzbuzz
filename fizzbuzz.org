@@ -415,8 +415,17 @@ file:doc/fizzbuzz_gui.png
 
           root = tkinter.Tk()
           root.title("FizzBuzz")
-          
-          btn = tkinter.Button(root, text="next", command=self.button_click)
+
+          # add menu
+          menubar = tkinter.Menu(root)
+          root.config(menu=menubar)
+          # adding Tools-menu to menubar
+          tools_menu = tkinter.Menu(menubar)
+          menubar.add_cascade(label="Tools", menu=tools_menu)
+          tools_menu.add_command(label="Next", command=self.click)
+
+          # add button
+          btn = tkinter.Button(root, text="next", command=self.click)
           btn.pack()
 
           self.lbl = tkinter.Label(root, text="fizzbuzz GUI")
@@ -426,7 +435,7 @@ file:doc/fizzbuzz_gui.png
           # entering main event loop
           root.mainloop()
 
-      def button_click(self):
+      def click(self):
           i = self.i
 
           # update label
@@ -451,38 +460,6 @@ file:doc/fizzbuzz_gui.png
 
 #+RESULTS:
 : None
-
-** TODO Menü ergänzen						   :noexport:
-
-#+BEGIN_SRC python -n
-  import tkinter
-
-  def clicked():
-      print("I have been clicked")
-
-  root = tkinter.Tk()
-
-  # creating menubar 
-  menubar = tkinter.Menu(root)
-  root.config(menu=menubar)
-
-  # adding file-menu to menubar
-  file_menu = tkinter.Menu(menubar)
-  menubar.add_cascade(label="Datei", menu=file_menu)
-  file_menu.add_command(label="Exit", command=clicked)
-
-  # adding sub menu
-  sub_menubar = tkinter.Menu(menubar)
-  menubar.add_cascade(label="submenu", menu=sub_menubar)
-  sub_menu = tkinter.Menu(sub_menubar)
-  sub_menu.add_command(label="sub exit", command=clicked)
-  sub_menubar.add_cascade(label="sub", menu=sub_menu)
-
-  # starting the main event-loop
-  root.mainloop()
-
-
-#+END_SRC
 
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
@@ -1824,8 +1801,31 @@ Hierbei agiert ein Taster als Sensor, der beim Drücken in das Topic
 gedrückt oder losgelassen wurde. 
 
 Eine LED agiert als Sensor, die sich beim Topic registriert und auf
-Nachrichten entsprechend reagiert.
+Nachrichten entsprechend reagiert: Wenn die Zahl durch 3 bzw. 5
+teilbar ist, geht die gelbe bzw. rote LED an, ansonsten leuchtet nur
+die grüne LED.
 
+#+BEGIN_SRC plantuml :file doc/fizzbuzz-mqtt-eamodul.png :cache yes
+@startuml
+mqtt_modul -> Broker: connect()
+Broker -> mqtt_modul: on_connect()
+mqtt_modul -> Broker: subscribe("taster0/pressed/")
+
+ea_modul -> mqt_modul: taster_gedrueckt()
+mqtt_modul -> Broker: publish("taster0/pressed/", "1")
+Broker -> mqtt_modul: on_message(1)
+mqtt_modul -> ea_modul: schalte_led(gruen, False)
+mqtt_modul -> ea_modul: schalte_led(gelb, False)
+mqtt_modul -> ea_modul: schalte_led(rot, False)
+
+mqtt_modul -> ea_modul: schalte_led(gruen, True)
+
+@enduml
+#+END_SRC
+
+Es folgt der Quelltext.
+
+#+INCLUDE: "fizzbuzz_mqtt_eamodul.py" src python -n
 
 * Mit Kommandozeilenparametern
 
