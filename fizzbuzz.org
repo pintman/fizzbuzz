@@ -415,8 +415,17 @@ file:doc/fizzbuzz_gui.png
 
           root = tkinter.Tk()
           root.title("FizzBuzz")
-          
-          btn = tkinter.Button(root, text="next", command=self.button_click)
+
+          # add menu
+          menubar = tkinter.Menu(root)
+          root.config(menu=menubar)
+          # adding Tools-menu to menubar
+          tools_menu = tkinter.Menu(menubar)
+          menubar.add_cascade(label="Tools", menu=tools_menu)
+          tools_menu.add_command(label="Next", command=self.click)
+
+          # add button
+          btn = tkinter.Button(root, text="next", command=self.click)
           btn.pack()
 
           self.lbl = tkinter.Label(root, text="fizzbuzz GUI")
@@ -426,7 +435,7 @@ file:doc/fizzbuzz_gui.png
           # entering main event loop
           root.mainloop()
 
-      def button_click(self):
+      def click(self):
           i = self.i
 
           # update label
@@ -451,38 +460,6 @@ file:doc/fizzbuzz_gui.png
 
 #+RESULTS:
 : None
-
-** TODO Menü ergänzen						   :noexport:
-
-#+BEGIN_SRC python -n
-  import tkinter
-
-  def clicked():
-      print("I have been clicked")
-
-  root = tkinter.Tk()
-
-  # creating menubar 
-  menubar = tkinter.Menu(root)
-  root.config(menu=menubar)
-
-  # adding file-menu to menubar
-  file_menu = tkinter.Menu(menubar)
-  menubar.add_cascade(label="Datei", menu=file_menu)
-  file_menu.add_command(label="Exit", command=clicked)
-
-  # adding sub menu
-  sub_menubar = tkinter.Menu(menubar)
-  menubar.add_cascade(label="submenu", menu=sub_menubar)
-  sub_menu = tkinter.Menu(sub_menubar)
-  sub_menu.add_command(label="sub exit", command=clicked)
-  sub_menubar.add_cascade(label="sub", menu=sub_menu)
-
-  # starting the main event-loop
-  root.mainloop()
-
-
-#+END_SRC
 
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
