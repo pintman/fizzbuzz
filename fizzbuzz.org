@@ -707,7 +707,7 @@ http://localhost:8081/fizzbuzz/20 aufgerufen werden.
   # Feature-Branch in den Hauptzweig integrieren
   git merge new_feature
 
-  # Wenn alle geklappt hat, kann der Feature Branch gelöscht werden
+  # Wenn alles geklappt hat, kann der Feature Branch gelöscht werden
   git branch -d new_feature
 
 #+END_SRC
