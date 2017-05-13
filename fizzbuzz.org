@@ -672,6 +672,48 @@ pip install bottle
 Nach dem Start des Webservers kann die Webseite
 http://localhost:8081/fizzbuzz/20 aufgerufen werden.
 
+Die Webanwendung kann in einen bestehenden Webserver, wie z.B. apache
+mit Hilfe des Moduls [[http://www.modwsgi.org][mod wsgi]] integriert werden. Die Integration wird
+z.B. in der [[http://bottlepy.org/docs/dev/deployment.html][Dokumentation von bottlepy]] beschrieben.
+
+Zunächst wird das apache2-Modul installiert. Eine Dokumentation
+befindet sich danach unter =/usr/share/doc/libapache2-mod-py3=.
+
+#+BEGIN_SRC sh
+sudo apt install libapache2-mod-py3
+#+END_SRC
+
+Die folgende Datei wird als Einstiegspunkt im Webroot abgelegt -
+z.B. in =/var/www/fizzbuzz/index.wsgi=.
+
+#+INCLUDE: "~/proj/fizzbuzz/fizzbuzz_index.wsgi" src python -n
+
+Anschließend wird die Webserverkonfiguration so angepasst, dass sie
+den neuen Einstiegspunkt verwendet:
+
+#+BEGIN_SRC html
+  <VirtualHost *>
+      ServerName www.example.com
+
+      WSGIDaemonProcess fizzbuzz user=www-data group=www-data processes=1 threads=5
+      WSGIScriptAlias / /var/www/fizzbuzz/index.wsgi
+
+      <Directory /var/www/fizzbuzz>
+          WSGIProcessGroup fizzbuzz
+          WSGIApplicationGroup %{GLOBAL}
+          Require all granted
+      </Directory>
+  </VirtualHost>
+#+END_SRC
+
+Nach einem Neustart des Webservers
+
+#+BEGIN_SRC sh
+sudo service apache2 restart
+#+END_SRC
+
+ist die Seite unter der URL http://localhost/fizzbuzz/20 erreichbar.
+
 * In git-repo einchecken
 
 #+BEGIN_SRC sh -n :results output
@@ -1835,7 +1877,7 @@ mqtt_modul -> ea_modul: schalte_led(gelb, True)
 @enduml
 #+END_SRC
 
-#+RESULTS[af9dd6504606817d2c65694a86ae384c518b9af7]:
+#+RESULTS[dfb4deff4c4c988b0f2edd0864611a87804dd6e3]:
 [[file:doc/fizzbuzz-mqtt-eamodul.png]]
 
 Es folgt der Quelltext.

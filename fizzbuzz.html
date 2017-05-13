@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-05-09 Di 14:23 -->
+<!-- 2017-05-13 Sa 12:14 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -913,6 +913,106 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <p>
 Nach dem Start des Webservers kann die Webseite
 <a href="http://localhost:8081/fizzbuzz/20">http://localhost:8081/fizzbuzz/20</a> aufgerufen werden.
+</p>
+
+<p>
+Die Webanwendung kann in einen bestehenden Webserver, wie z.B. apache
+mit Hilfe des Moduls <a href="http://www.modwsgi.org">mod wsgi</a> integriert werden. Die Integration wird
+z.B. in der <a href="http://bottlepy.org/docs/dev/deployment.html">Dokumentation von bottlepy</a> beschrieben.
+</p>
+
+<p>
+Zunächst wird das apache2-Modul installiert. Eine Dokumentation
+befindet sich danach unter <code>/usr/share/doc/libapache2-mod-py3</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt install libapache2-mod-py3
+</pre>
+</div>
+
+<p>
+Die folgende Datei wird als Einstiegspunkt im Webroot abgelegt -
+z.B. in <code>/var/www/fizzbuzz/index.wsgi</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> os
+<span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> bottle
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">change working directory</span>
+<span class="linenr"> 5: </span>os.chdir(os.path.dirname(__file__))
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">create the app</span>
+<span class="linenr"> 8: </span><span style="color: #a0522d;">application</span> = bottle.Bottle()
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #228b22;">@application.route</span>(<span style="color: #8b2252;">"/&lt;number:int&gt;"</span>)
+<span class="linenr">11: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web_route</span>(number):    
+<span class="linenr">12: </span>    <span style="color: #a0522d;">results</span> = []
+<span class="linenr">13: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
+<span class="linenr">14: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">15: </span>            results.append(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">16: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">17: </span>            results.append(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">18: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">19: </span>            results.append(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">20: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">21: </span>            results.append(i)
+<span class="linenr">22: </span>
+<span class="linenr">23: </span>    <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
+<span class="linenr">24: </span><span style="color: #8b2252;">        &lt;!DOCTYPE html&gt;</span>
+<span class="linenr">25: </span><span style="color: #8b2252;">        &lt;html&gt;</span>
+<span class="linenr">26: </span><span style="color: #8b2252;">          &lt;body&gt;</span>
+<span class="linenr">27: </span><span style="color: #8b2252;">            &lt;h1&gt;FizzBuzz Numbers up to {{max}}&lt;/h1&gt;</span>
+<span class="linenr">28: </span><span style="color: #8b2252;">            &lt;table&gt;</span>
+<span class="linenr">29: </span><span style="color: #8b2252;">            % for r in results:</span>
+<span class="linenr">30: </span><span style="color: #8b2252;">              &lt;tr&gt;&lt;td&gt; {{r}} &lt;/td&gt;&lt;/tr&gt;</span>
+<span class="linenr">31: </span><span style="color: #8b2252;">            %end</span>
+<span class="linenr">32: </span><span style="color: #8b2252;">            &lt;/table&gt;</span>
+<span class="linenr">33: </span><span style="color: #8b2252;">          &lt;/body&gt;</span>
+<span class="linenr">34: </span><span style="color: #8b2252;">        &lt;/html&gt;</span>
+<span class="linenr">35: </span><span style="color: #8b2252;">        """</span>
+<span class="linenr">36: </span>
+<span class="linenr">37: </span>    <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
+</pre>
+</div>
+
+<p>
+Anschließend wird die Webserverkonfiguration so angepasst, dass sie
+den neuen Einstiegspunkt verwendet:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #0000ff;">VirtualHost</span> *&gt;
+    ServerName www.example.com
+
+    WSGIDaemonProcess fizzbuzz user=www-data group=www-data processes=1 threads=5
+    WSGIScriptAlias / /var/www/fizzbuzz/index.wsgi
+
+    &lt;<span style="color: #0000ff;">Directory</span> /var/www/fizzbuzz&gt;
+        WSGIProcessGroup fizzbuzz
+        WSGIApplicationGroup %{GLOBAL}
+        Require all granted
+    &lt;/<span style="color: #0000ff;">Directory</span>&gt;
+&lt;/<span style="color: #0000ff;">VirtualHost</span>&gt;
+</pre>
+</div>
+
+<p>
+Nach einem Neustart des Webservers
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo service apache2 restart
+</pre>
+</div>
+
+<p>
+ist die Seite unter der URL <a href="http://localhost/fizzbuzz/20">http://localhost/fizzbuzz/20</a> erreichbar.
 </p>
 </div>
 </div>
@@ -3248,7 +3348,7 @@ training 100 rounds
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-05-09 Di 14:23</p>
+<p class="date">Created: 2017-05-13 Sa 12:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
