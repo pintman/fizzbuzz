@@ -1635,16 +1635,17 @@ deactivate ":FizzbuzzServer"
 
 file:doc/fizzbuzz_klassendiagramm.png
 
-Attribute und Methoden sind mit einer /Sichtbarkeit/ (+=public,
-#=proteced, -=private) und einem /Rückgabewert bzw. Typ/
-gekennzeichnet.
+Attribute und Methoden sind mit einer /Sichtbarkeit/ (+=public
+(überall zugreifbar), #=protected (aus der Klasse selbst und
+Kindklassen zugreifbar), -=private (nur aus der Klasse selbst
+zugreifbar)) und einem /Rückgabewert bzw. Typ/ gekennzeichnet.
 
 Dies Klasse könnte wie folgt verwendet werden.
 
 #+BEGIN_SRC python -n :results output :exports both :cache yes
   class FizzBuzzGame:
       def __init__(self, n):
-          # proteced/private attributes marked with one/two underscores
+          # protected/private attributes are marked with one/two underscores
           self.__number = n
 
       def fizzbuzz(self):
