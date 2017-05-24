@@ -1664,7 +1664,7 @@ Dies Klasse könnte wie folgt verwendet werden.
   print("Eingabe:", 15, "Ausgabe:", fb.fizzbuzz())
 #+END_SRC
 
-#+RESULTS[f9da9149f8904a46c326ae2fb0b38601c5d8aaab]:
+#+RESULTS[ec4a8a8a3aacfd23d09b3efecffeb862dd26a64c]:
 : Eingabe: 2 Ausgabe: 2
 : Eingabe: 15 Ausgabe: fizzbuzz
 

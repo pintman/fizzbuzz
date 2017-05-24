@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-05-13 Sa 12:18 -->
+<!-- 2017-05-24 Mi 22:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -174,6 +174,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-30">30. In einem docker Container</a></li>
 <li><a href="#sec-31">31. Mit Fehlerbehandlung</a></li>
 <li><a href="#sec-32">32. Mit einem neuronalen Netzwerk</a></li>
+<li><a href="#sec-33">33. Mit logging in ein logfile</a></li>
 </ul>
 </div>
 </div>
@@ -227,7 +228,7 @@ Hier ist eine erste einfache Variante.
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_method</span>(n):
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 4: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -271,8 +272,8 @@ dieselbe Ausgabe.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_methode</span>(n):
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_method</span>(n):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 3: </span>        <span style="color: #a0522d;">s</span> = <span style="color: #8b2252;">""</span>
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0:
@@ -284,7 +285,7 @@ dieselbe Ausgabe.
 <span class="linenr">11: </span>
 <span class="linenr">12: </span>        <span style="color: #a020f0;">print</span>(s)
 <span class="linenr">13: </span>
-<span class="linenr">14: </span>fizzbuzz_methode(20)
+<span class="linenr">14: </span>fizzbuzz_method(20)
 </pre>
 </div>
 </div>
@@ -296,9 +297,9 @@ dieselbe Ausgabe.
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_recursive</span>(i):
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">if</span> i == 0:
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> i == 0:
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">return</span>
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr"> 5: </span>        fizzbuzz_recursive(i-1)
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
@@ -326,18 +327,18 @@ dieselbe Ausgabe.
 <span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> time
 <span class="linenr"> 3: </span>
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_thread</span>(i):    
-<span class="linenr"> 5: </span>    time.sleep(1)
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   time.sleep(1)
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 3 == 0:
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">10: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 5 == 0:
 <span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">12: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">13: </span>        <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">14: </span>
 <span class="linenr">15: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_start_threads</span>():
-<span class="linenr">16: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Creating a thread object that will execute the method above</span>
 <span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">with the given argument i.</span>
 <span class="linenr">19: </span>        <span style="color: #a0522d;">th</span> = threading.Thread(target=fizzbuzz_thread, args=(i,))
@@ -390,18 +391,18 @@ aufgeteilt werden können. Hierfür gibt es das Paket <a href="https://docs.pyth
 <span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> multiprocessing
 <span class="linenr"> 3: </span>
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_process</span>(i):
-<span class="linenr"> 5: </span>    time.sleep(1)
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   time.sleep(1)
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 3 == 0:
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">10: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 5 == 0:
 <span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">12: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">13: </span>        <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">14: </span>
 <span class="linenr">15: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_start_processes</span>():
-<span class="linenr">16: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr">17: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Creating a process that will execute the method above</span>
 <span class="linenr">18: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">with the given argument i.</span>
 <span class="linenr">19: </span>        <span style="color: #a0522d;">pr</span> = multiprocessing.Process(target=fizzbuzz_process, args=(i,))
@@ -502,7 +503,7 @@ Mögliche Sprachen wären:
 <span class="linenr"> 3: </span><span style="color: #a020f0;">import</span> threading
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzHandler</span>(socketserver.BaseRequestHandler):
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 7: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">received bytes from request and take the first one</span>
 <span class="linenr"> 8: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.request.recv(1)[0]        
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
@@ -517,25 +518,25 @@ Mögliche Sprachen wären:
 <span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[server] received:"</span>, i, <span style="color: #8b2252;">"answer:"</span>, answer)
 <span class="linenr">19: </span>
 <span class="linenr">20: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzClient</span>:
-<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, ip, port):
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, ip, port):
 <span class="linenr">22: </span>        <span style="color: #a020f0;">self</span>.socket = (ip, port)
 <span class="linenr">23: </span>
-<span class="linenr">24: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">send</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr">24: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">send</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">25: </span>        <span style="color: #a020f0;">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span style="color: #a020f0;">as</span> sock:
 <span class="linenr">26: </span>            sock.connect(<span style="color: #a020f0;">self</span>.socket)
 <span class="linenr">27: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[client] sending"</span>, i)
 <span class="linenr">28: </span>            sock.sendall(<span style="color: #483d8b;">bytes</span>([i]))
 <span class="linenr">29: </span>
 <span class="linenr">30: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_client_server</span>():
-<span class="linenr">31: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Starting the server in a separate thread</span>
-<span class="linenr">32: </span>    <span style="color: #a0522d;">server_socket</span> = (<span style="color: #8b2252;">"127.0.0.1"</span>, 8081)
-<span class="linenr">33: </span>    <span style="color: #a0522d;">server</span> = socketserver.TCPServer(server_socket, FizzBuzzHandler)
-<span class="linenr">34: </span>    <span style="color: #a0522d;">th</span> = threading.Thread(target=server.serve_forever, daemon=<span style="color: #008b8b;">True</span>)
-<span class="linenr">35: </span>    th.start()
+<span class="linenr">31: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">Starting the server in a separate thread</span>
+<span class="linenr">32: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">server_socket</span> = (<span style="color: #8b2252;">"127.0.0.1"</span>, 8081)
+<span class="linenr">33: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">server</span> = socketserver.TCPServer(server_socket, FizzBuzzHandler)
+<span class="linenr">34: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">th</span> = threading.Thread(target=server.serve_forever, daemon=<span style="color: #008b8b;">True</span>)
+<span class="linenr">35: </span><span style="background-color: #f2f2f2;"> </span>   th.start()
 <span class="linenr">36: </span>
-<span class="linenr">37: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">starting the client</span>
-<span class="linenr">38: </span>    <span style="color: #a0522d;">cl</span> = FizzBuzzClient(*server_socket)
-<span class="linenr">39: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">37: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">starting the client</span>
+<span class="linenr">38: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">cl</span> = FizzBuzzClient(*server_socket)
+<span class="linenr">39: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr">40: </span>        cl.send(i)
 <span class="linenr">41: </span>
 <span class="linenr">42: </span>fizzbuzz_client_server()
@@ -607,7 +608,7 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> tkinter
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">GUI</span>:
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">self</span>.i = 0
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span>        <span style="color: #a0522d;">root</span> = tkinter.Tk()
@@ -632,7 +633,7 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">entering main event loop</span>
 <span class="linenr">27: </span>        root.mainloop()
 <span class="linenr">28: </span>
-<span class="linenr">29: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">click</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">29: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">click</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">30: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.i
 <span class="linenr">31: </span>
 <span class="linenr">32: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">update label</span>
@@ -664,10 +665,10 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzerOutput</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.n = n
 <span class="linenr"> 4: </span>
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 6: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #a020f0;">self</span>.n
 <span class="linenr"> 7: </span>
 <span class="linenr"> 8: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
@@ -679,27 +680,27 @@ GUIs mitgeliefert. Eine ausführliche Dokumentation ist unter
 <span class="linenr">14: </span>
 <span class="linenr">15: </span>
 <span class="linenr">16: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NumberOutput</span>:
-<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
 <span class="linenr">18: </span>        <span style="color: #a020f0;">self</span>.n = n
 <span class="linenr">19: </span>
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">20: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">21: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>.n)
 <span class="linenr">22: </span>
 <span class="linenr">23: </span>
 <span class="linenr">24: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
-<span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">26: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">or</span> i % 5 == 0:
 <span class="linenr">27: </span>            <span style="color: #a020f0;">self</span>.printer = FizzBuzzerOutput(i)
 <span class="linenr">28: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">29: </span>            <span style="color: #a020f0;">self</span>.printer = NumberOutput(i)
 <span class="linenr">30: </span>
-<span class="linenr">31: </span>    <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">31: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #a020f0;">print</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">32: </span>        <span style="color: #a020f0;">self</span>.printer.<span style="color: #a020f0;">print</span>()
 <span class="linenr">33: </span>
 <span class="linenr">34: </span>
 <span class="linenr">35: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
-<span class="linenr">36: </span>    <span style="color: #a0522d;">f</span> = FizzBuzzGame(i)
-<span class="linenr">37: </span>    f.<span style="color: #a020f0;">print</span>()
+<span class="linenr">36: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">f</span> = FizzBuzzGame(i)
+<span class="linenr">37: </span><span style="background-color: #f2f2f2;"> </span>   f.<span style="color: #a020f0;">print</span>()
 </pre>
 </div>
 </div>
@@ -720,7 +721,7 @@ Funktionalität übernehmen.
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Game</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 3: </span>        <span style="color: #8b2252;">"""Starting the gameloop of the game."""</span>
 <span class="linenr"> 4: </span>        <span style="color: #a020f0;">self</span>.setup()
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">while</span> <span style="color: #008b8b;">True</span>:
@@ -728,35 +729,35 @@ Funktionalität übernehmen.
 <span class="linenr"> 7: </span>            <span style="color: #a020f0;">self</span>.update()
 <span class="linenr"> 8: </span>            <span style="color: #a020f0;">self</span>.draw()
 <span class="linenr"> 9: </span>
-<span class="linenr">10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>():
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>():
 <span class="linenr">11: </span>        <span style="color: #8b2252;">"""Will be invoked once at the beginning of a game."""</span>
 <span class="linenr">12: </span>        <span style="color: #a020f0;">pass</span>
 <span class="linenr">13: </span>
-<span class="linenr">14: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>():
+<span class="linenr">14: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>():
 <span class="linenr">15: </span>        <span style="color: #8b2252;">"""Evaluate inputs of the player."""</span>
 <span class="linenr">16: </span>        <span style="color: #a020f0;">pass</span>
 <span class="linenr">17: </span>
-<span class="linenr">18: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>():
+<span class="linenr">18: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>():
 <span class="linenr">19: </span>        <span style="color: #8b2252;">"""Updating all game objects and game values."""</span>
 <span class="linenr">20: </span>        <span style="color: #a020f0;">pass</span>
 <span class="linenr">21: </span>
-<span class="linenr">22: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>():
+<span class="linenr">22: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>():
 <span class="linenr">23: </span>        <span style="color: #8b2252;">"""Draw the game world."""</span>
 <span class="linenr">24: </span>        <span style="color: #a020f0;">pass</span>
 <span class="linenr">25: </span>
 <span class="linenr">26: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>(Game): <span style="color: #b22222;"># </span><span style="color: #b22222;">Subclass(Superclass)</span>
-<span class="linenr">27: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">27: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">28: </span>        <span style="color: #a020f0;">self</span>.n = 1
 <span class="linenr">29: </span>        <span style="color: #a020f0;">self</span>.answer_correct = <span style="color: #008b8b;">False</span>
 <span class="linenr">30: </span>        <span style="color: #a020f0;">self</span>.playerinput = <span style="color: #8b2252;">""</span>
 <span class="linenr">31: </span>
-<span class="linenr">32: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">32: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setup</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">33: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Spiel gestartet"</span>)
 <span class="linenr">34: </span>
-<span class="linenr">35: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">35: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">handle_input</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.playerinput = <span style="color: #483d8b;">input</span>(<span style="color: #483d8b;">str</span>(<span style="color: #a020f0;">self</span>.n) + <span style="color: #8b2252;">" ? "</span>)
 <span class="linenr">37: </span>
-<span class="linenr">38: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">38: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">39: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Evaluating player input</span>
 <span class="linenr">40: </span>        <span style="color: #a0522d;">soll</span> = <span style="color: #a020f0;">self</span>._fizzbuzz(<span style="color: #a020f0;">self</span>.n)
 <span class="linenr">41: </span>        <span style="color: #a020f0;">self</span>.answer_correct = <span style="color: #a020f0;">self</span>.playerinput == <span style="color: #483d8b;">str</span>(soll)        
@@ -768,13 +769,13 @@ Funktionalität übernehmen.
 <span class="linenr">47: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Gewonnen!"</span>)
 <span class="linenr">48: </span>            <span style="color: #008b8b;">exit</span>()
 <span class="linenr">49: </span>
-<span class="linenr">50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">50: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">draw</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">51: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.answer_correct:
 <span class="linenr">52: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Richtig :)"</span>)
 <span class="linenr">53: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">54: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Leider Falsch. Probiere es erneut."</span>)
 <span class="linenr">55: </span>
-<span class="linenr">56: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr">56: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">57: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr">58: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr">59: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -821,34 +822,34 @@ Spiel gestartet
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> functools
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">by</span>(number):
-<span class="linenr"> 4: </span>    <span style="color: #8b2252;">"""Return a function to prove divisibility by number."""</span>
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">return</span> (<span style="color: #a020f0;">lambda</span> i: i % number == 0)
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #8b2252;">"""Return a function to prove divisibility by number."""</span>
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> (<span style="color: #a020f0;">lambda</span> i: i % number == 0)
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_func</span>(i):
-<span class="linenr"> 8: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">create two functions to test for divisibility</span>
-<span class="linenr"> 9: </span>    <span style="color: #a0522d;">by5</span> = by(5)
-<span class="linenr">10: </span>    <span style="color: #a0522d;">by3</span> = by(3)
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">create two functions to test for divisibility</span>
+<span class="linenr"> 9: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">by5</span> = by(5)
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">by3</span> = by(3)
 <span class="linenr">11: </span>
-<span class="linenr">12: </span>    <span style="color: #a020f0;">if</span> by5(i) <span style="color: #a020f0;">and</span> by3(i):
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> by5(i) <span style="color: #a020f0;">and</span> by3(i):
 <span class="linenr">13: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr">14: </span>    <span style="color: #a020f0;">elif</span> by3(i):
+<span class="linenr">14: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> by3(i):
 <span class="linenr">15: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr">16: </span>    <span style="color: #a020f0;">elif</span> by5(i):
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> by5(i):
 <span class="linenr">17: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">18: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">18: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">19: </span>        <span style="color: #a020f0;">return</span> i
 <span class="linenr">20: </span>
 <span class="linenr">21: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_functional</span>():
-<span class="linenr">22: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">apply fizzbuzz_func to numbers</span>
-<span class="linenr">23: </span>    <span style="color: #a0522d;">res</span> = <span style="color: #483d8b;">map</span>(fizzbuzz_func, <span style="color: #483d8b;">range</span>(20))
+<span class="linenr">22: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">apply fizzbuzz_func to numbers</span>
+<span class="linenr">23: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">res</span> = <span style="color: #483d8b;">map</span>(fizzbuzz_func, <span style="color: #483d8b;">range</span>(20))
 <span class="linenr">24: </span>
-<span class="linenr">25: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">reduce the result into a string</span>
-<span class="linenr">26: </span>    <span style="color: #a0522d;">s</span> = functools.<span style="color: #483d8b;">reduce</span>(
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">reduce the result into a string</span>
+<span class="linenr">26: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">s</span> = functools.<span style="color: #483d8b;">reduce</span>(
 <span class="linenr">27: </span>        <span style="color: #a020f0;">lambda</span> acc, i: acc + <span style="color: #483d8b;">str</span>(i) + <span style="color: #8b2252;">"\n"</span>, <span style="color: #b22222;"># </span><span style="color: #b22222;">updating function</span>
 <span class="linenr">28: </span>        res, <span style="color: #b22222;"># </span><span style="color: #b22222;">values to be reduced</span>
 <span class="linenr">29: </span>        <span style="color: #8b2252;">""</span>) <span style="color: #b22222;"># </span><span style="color: #b22222;">initial value</span>
 <span class="linenr">30: </span>
-<span class="linenr">31: </span>    <span style="color: #a020f0;">print</span>(s)
+<span class="linenr">31: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(s)
 <span class="linenr">32: </span>
 <span class="linenr">33: </span>fizzbuzz_functional()
 </pre>
@@ -876,8 +877,8 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #228b22;">@bottle.route</span>(<span style="color: #8b2252;">"/fizzbuzz/&lt;number:int&gt;"</span>)
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web_route</span>(number):    
-<span class="linenr"> 5: </span>    <span style="color: #a0522d;">results</span> = []
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">results</span> = []
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 8: </span>            results.append(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -887,7 +888,7 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr">13: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">14: </span>            results.append(i)
 <span class="linenr">15: </span>
-<span class="linenr">16: </span>    <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
 <span class="linenr">17: </span><span style="color: #8b2252;">        &lt;!DOCTYPE html&gt;</span>
 <span class="linenr">18: </span><span style="color: #8b2252;">        &lt;html&gt;</span>
 <span class="linenr">19: </span><span style="color: #8b2252;">          &lt;body&gt;</span>
@@ -901,10 +902,10 @@ Bottle (<a href="https://bottlepy.org">https://bottlepy.org</a>) ist ein Webfram
 <span class="linenr">27: </span><span style="color: #8b2252;">        &lt;/html&gt;</span>
 <span class="linenr">28: </span><span style="color: #8b2252;">        """</span>
 <span class="linenr">29: </span>
-<span class="linenr">30: </span>    <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
+<span class="linenr">30: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
 <span class="linenr">31: </span>
 <span class="linenr">32: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web</span>():
-<span class="linenr">33: </span>    bottle.run(host=<span style="color: #8b2252;">"127.0.0.1"</span>, port=8081)
+<span class="linenr">33: </span><span style="background-color: #f2f2f2;"> </span>   bottle.run(host=<span style="color: #8b2252;">"127.0.0.1"</span>, port=8081)
 <span class="linenr">34: </span>
 <span class="linenr">35: </span>fizzbuzz_web()
 </pre>
@@ -950,8 +951,8 @@ z.B. in <code>/var/www/fizzbuzz/index.wsgi</code>.
 <span class="linenr"> 9: </span>
 <span class="linenr">10: </span><span style="color: #228b22;">@application.route</span>(<span style="color: #8b2252;">"/&lt;number:int&gt;"</span>)
 <span class="linenr">11: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_web_route</span>(number):    
-<span class="linenr">12: </span>    <span style="color: #a0522d;">results</span> = []
-<span class="linenr">13: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">results</span> = []
+<span class="linenr">13: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(number):
 <span class="linenr">14: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr">15: </span>            results.append(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr">16: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -961,7 +962,7 @@ z.B. in <code>/var/www/fizzbuzz/index.wsgi</code>.
 <span class="linenr">20: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">21: </span>            results.append(i)
 <span class="linenr">22: </span>
-<span class="linenr">23: </span>    <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
+<span class="linenr">23: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">html</span> = <span style="color: #8b2252;">"""</span>
 <span class="linenr">24: </span><span style="color: #8b2252;">        &lt;!DOCTYPE html&gt;</span>
 <span class="linenr">25: </span><span style="color: #8b2252;">        &lt;html&gt;</span>
 <span class="linenr">26: </span><span style="color: #8b2252;">          &lt;body&gt;</span>
@@ -975,7 +976,7 @@ z.B. in <code>/var/www/fizzbuzz/index.wsgi</code>.
 <span class="linenr">34: </span><span style="color: #8b2252;">        &lt;/html&gt;</span>
 <span class="linenr">35: </span><span style="color: #8b2252;">        """</span>
 <span class="linenr">36: </span>
-<span class="linenr">37: </span>    <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
+<span class="linenr">37: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> bottle.template(html, <span style="color: #483d8b;">max</span>=number, results=results)
 </pre>
 </div>
 
@@ -1074,10 +1075,10 @@ folgenden Inhalt haben:
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #a020f0;">from</span> setuptools <span style="color: #a020f0;">import</span> setup, find_packages
 <span class="linenr">2: </span>
 <span class="linenr">3: </span>setup(
-<span class="linenr">4: </span>    name = <span style="color: #8b2252;">"fizzbuzz_katas"</span>,
-<span class="linenr">5: </span>    version = <span style="color: #8b2252;">"0.1"</span>,
-<span class="linenr">6: </span>    description = <span style="color: #8b2252;">"Exercises with the famous FizzBuzz-Game."</span>,
-<span class="linenr">7: </span>    packages = find_packages()
+<span class="linenr">4: </span><span style="background-color: #f2f2f2;"> </span>   name = <span style="color: #8b2252;">"fizzbuzz_katas"</span>,
+<span class="linenr">5: </span><span style="background-color: #f2f2f2;"> </span>   version = <span style="color: #8b2252;">"0.1"</span>,
+<span class="linenr">6: </span><span style="background-color: #f2f2f2;"> </span>   description = <span style="color: #8b2252;">"Exercises with the famous FizzBuzz-Game."</span>,
+<span class="linenr">7: </span><span style="background-color: #f2f2f2;"> </span>   packages = find_packages()
 <span class="linenr">8: </span>)
 </pre>
 </div>
@@ -1124,7 +1125,7 @@ Soll-Wert. In Python geschiet dies über das Paket <a href="https://docs.python.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> unittest
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 6: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -1135,15 +1136,15 @@ Soll-Wert. In Python geschiet dies über das Paket <a href="https://docs.python.
 <span class="linenr">12: </span>            <span style="color: #a020f0;">return</span> i
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzTest</span>(unittest.TestCase):
-<span class="linenr">15: </span>    <span style="color: #8b2252;">"""This test class tests the class FizzBuzz. </span>
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #8b2252;">"""This test class tests the class FizzBuzz. </span>
 <span class="linenr">16: </span>
-<span class="linenr">17: </span><span style="color: #8b2252;">    Possible input will be testet against desired outputs."""</span>
+<span class="linenr">17: </span><span style="color: #8b2252; background-color: #f2f2f2;"> </span><span style="color: #8b2252;">   Possible input will be testet against desired outputs."""</span>
 <span class="linenr">18: </span>
-<span class="linenr">19: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setUp</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">19: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">setUp</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">20: </span>        <span style="color: #8b2252;">"""Will be invoked before every test."""</span>
 <span class="linenr">21: </span>        <span style="color: #a020f0;">self</span>.fizzbuzz = FizzBuzz()
 <span class="linenr">22: </span>
-<span class="linenr">23: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">23: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">24: </span>        <span style="color: #a0522d;">fb</span> = <span style="color: #a020f0;">self</span>.fizzbuzz
 <span class="linenr">25: </span>
 <span class="linenr">26: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Comparing values</span>
@@ -1165,8 +1166,8 @@ Soll-Wert. In Python geschiet dies über das Paket <a href="https://docs.python.
 <span class="linenr">42: </span>            <span style="color: #a020f0;">self</span>.assertIn(result, [<span style="color: #8b2252;">'fizz'</span>, <span style="color: #8b2252;">'buzz'</span>, <span style="color: #8b2252;">'fizzbuzz'</span>, i])
 <span class="linenr">43: </span>
 <span class="linenr">44: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_unit_tests</span>():
-<span class="linenr">45: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Run all unit tests</span>
-<span class="linenr">46: </span>    unittest.main()
+<span class="linenr">45: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">Run all unit tests</span>
+<span class="linenr">46: </span><span style="background-color: #f2f2f2;"> </span>   unittest.main()
 <span class="linenr">47: </span>
 <span class="linenr">48: </span>run_unit_tests()
 </pre>
@@ -1183,7 +1184,7 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> doctest
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzz</span>:
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""This is a comment containing a test. This is called a doctest in Python.</span>
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span><span style="color: #8b2252;">        &gt;&gt;&gt; fb = FizzBuzz()</span>
@@ -1212,7 +1213,7 @@ beschreiben die Eingabe, direkt darunter kommt die erwartete Ausgabe.
 <span class="linenr">30: </span>            <span style="color: #a020f0;">return</span> i
 <span class="linenr">31: </span>
 <span class="linenr">32: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">run_doc_tests</span>():
-<span class="linenr">33: </span>    doctest.testmod()
+<span class="linenr">33: </span><span style="background-color: #f2f2f2;"> </span>   doctest.testmod()
 <span class="linenr">34: </span>
 <span class="linenr">35: </span>run_doc_tests()
 </pre>
@@ -1259,7 +1260,7 @@ Nun kann es verwendet werden. Die wichtigste Klasse ist
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> eapi.hw 
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzEAModul</span>:
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">self</span>.i = 0
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span>        <span style="color: #a0522d;">eam</span> = eapi.hw.EAModul()
@@ -1272,7 +1273,7 @@ Nun kann es verwendet werden. Die wichtigste Klasse ist
 <span class="linenr">14: </span>        <span style="color: #a020f0;">while</span> <span style="color: #008b8b;">True</span>:
 <span class="linenr">15: </span>            <span style="color: #a020f0;">pass</span>
 <span class="linenr">16: </span>
-<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">taster0_gedrueckt</span>(<span style="color: #a020f0;">self</span>, pin):
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">taster0_gedrueckt</span>(<span style="color: #a020f0;">self</span>, pin):
 <span class="linenr">18: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.i % 3 == 0 <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">self</span>.i % 5 == 0:
 <span class="linenr">19: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr">20: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.i % 3 == 0:
@@ -1450,11 +1451,11 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sqlite3
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_insert_into_db</span>():
-<span class="linenr"> 4: </span>    <span style="color: #a0522d;">conn</span> = sqlite3.connect(<span style="color: #8b2252;">"fizzbuzz.db"</span>)
-<span class="linenr"> 5: </span>    <span style="color: #a0522d;">c</span> = conn.cursor()
-<span class="linenr"> 6: </span>    c.execute(<span style="color: #8b2252;">"CREATE TABLE IF NOT EXISTS fizzbuzz(nr int, ergebnis text)"</span>)
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">conn</span> = sqlite3.connect(<span style="color: #8b2252;">"fizzbuzz.db"</span>)
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">c</span> = conn.cursor()
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   c.execute(<span style="color: #8b2252;">"CREATE TABLE IF NOT EXISTS fizzbuzz(nr int, ergebnis text)"</span>)
 <span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr"> 9: </span>        <span style="color: #a0522d;">erg</span> = <span style="color: #8b2252;">""</span>
 <span class="linenr">10: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr">11: </span>            <span style="color: #a0522d;">erg</span> = <span style="color: #8b2252;">"fizzbuzz"</span>
@@ -1467,19 +1468,19 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 <span class="linenr">18: </span>
 <span class="linenr">19: </span>        c.execute(<span style="color: #8b2252;">"INSERT INTO fizzbuzz VALUES(?,?)"</span>, (i,erg))
 <span class="linenr">20: </span>
-<span class="linenr">21: </span>    conn.commit()
-<span class="linenr">22: </span>    conn.close()
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   conn.commit()
+<span class="linenr">22: </span><span style="background-color: #f2f2f2;"> </span>   conn.close()
 <span class="linenr">23: </span>
 <span class="linenr">24: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_select_from_db</span>():
-<span class="linenr">25: </span>    <span style="color: #a0522d;">conn</span> = sqlite3.connect(<span style="color: #8b2252;">"fizzbuzz.db"</span>)
-<span class="linenr">26: </span>    <span style="color: #a0522d;">c</span> = conn.cursor()
-<span class="linenr">27: </span>    <span style="color: #a0522d;">rows</span> = c.execute(<span style="color: #8b2252;">"SELECT nr, ergebnis FROM fizzbuzz"</span>)
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">conn</span> = sqlite3.connect(<span style="color: #8b2252;">"fizzbuzz.db"</span>)
+<span class="linenr">26: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">c</span> = conn.cursor()
+<span class="linenr">27: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">rows</span> = c.execute(<span style="color: #8b2252;">"SELECT nr, ergebnis FROM fizzbuzz"</span>)
 <span class="linenr">28: </span>
-<span class="linenr">29: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Nr.\tErgebnis"</span>)
-<span class="linenr">30: </span>    <span style="color: #a020f0;">for</span> i,erg <span style="color: #a020f0;">in</span> rows:
+<span class="linenr">29: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Nr.\tErgebnis"</span>)
+<span class="linenr">30: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i,erg <span style="color: #a020f0;">in</span> rows:
 <span class="linenr">31: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"    "</span>, erg)
 <span class="linenr">32: </span>
-<span class="linenr">33: </span>    conn.close()
+<span class="linenr">33: </span><span style="background-color: #f2f2f2;"> </span>   conn.close()
 <span class="linenr">34: </span>
 <span class="linenr">35: </span>fizzbuzz_insert_into_db()
 <span class="linenr">36: </span>fizzbuzz_select_from_db()
@@ -1505,9 +1506,9 @@ Nach dem Versuch entsteht eine Datei <code>fizzbuzz.db</code>, die man mit
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
-<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""A class for a fizzbuzz game."""</span>
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #8b2252;">"""A class for a fizzbuzz game."""</span>
 <span class="linenr"> 3: </span>
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_documented</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_documented</span>(n):
 <span class="linenr"> 5: </span>        <span style="color: #8b2252;">"""This method runs through all numbers from 0 to n-1.  </span>
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span><span style="color: #8b2252;">        It prints 'fizz' if the number is divisible by 3, 'buzz' if it</span>
@@ -1644,19 +1645,19 @@ Eigenen Bot in <code>~/.sopel/modules/fizzbuzz.py</code> erstellen
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #228b22;">@module.commands</span>(<span style="color: #8b2252;">'fizzbuzz'</span>)
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">echo</span>(bot, trigger):
-<span class="linenr"> 5: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">to everybody:   bot.say("...")</span>
-<span class="linenr"> 6: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">to questioner: bot.reply("...")</span>
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">to everybody:   bot.say("...")</span>
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">to questioner: bot.reply("...")</span>
 <span class="linenr"> 7: </span>
-<span class="linenr"> 8: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">take and convert argument</span>
-<span class="linenr"> 9: </span>    <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(trigger.group(2))
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">take and convert argument</span>
+<span class="linenr"> 9: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(trigger.group(2))
 <span class="linenr">10: </span>
-<span class="linenr">11: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">11: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr">12: </span>        bot.reply(<span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr">13: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">13: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 3 == 0:
 <span class="linenr">14: </span>        bot.reply(<span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">15: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 5 == 0:
 <span class="linenr">16: </span>        bot.reply(<span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">17: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">18: </span>        bot.reply(i)
 </pre>
 </div>
@@ -1714,15 +1715,15 @@ Wir nutzen die folgende Datei <code>fizzbuzz.py</code>.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_cluster</span>():
-<span class="linenr"> 4: </span>    <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span> (sys.argv[1])
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span> (sys.argv[1])
 <span class="linenr"> 5: </span>
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizzbuzz"</span>)
-<span class="linenr"> 8: </span>    <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 3 == 0:
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"fizz"</span>)
-<span class="linenr">10: </span>    <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> i % 5 == 0:
 <span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(i, <span style="color: #8b2252;">"buzz"</span>)
-<span class="linenr">12: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">13: </span>        <span style="color: #a020f0;">print</span>(i, i)
 <span class="linenr">14: </span>
 <span class="linenr">15: </span>fizzbuzz_cluster()
@@ -1806,9 +1807,10 @@ ist eine Zahl oder ein String.
 </div>
 
 <p>
-Attribute und Methoden sind mit einer <i>Sichtbarkeit</i> (+=public,
-#=proteced, -=private) und einem <i>Rückgabewert bzw. Typ</i>
-gekennzeichnet.
+Attribute und Methoden sind mit einer <i>Sichtbarkeit</i> (+=public
+(überall zugreifbar), #=protected (aus der Klasse selbst und
+Kindklassen zugreifbar), -=private (nur aus der Klasse selbst
+zugreifbar)) und einem <i>Rückgabewert bzw. Typ</i> gekennzeichnet.
 </p>
 
 <p>
@@ -1818,11 +1820,11 @@ Dies Klasse könnte wie folgt verwendet werden.
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
-<span class="linenr"> 3: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">proteced/private attributes marked with one/two underscores</span>
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr"> 3: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">protected/private attributes are marked with one/two underscores</span>
 <span class="linenr"> 4: </span>        <span style="color: #a020f0;">self</span>.__number = n
 <span class="linenr"> 5: </span>
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.__number % 3 == 0 <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">self</span>.__number % 5 == 0:
 <span class="linenr"> 8: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> <span style="color: #a020f0;">self</span>.__number % 3 == 0:
@@ -1911,30 +1913,30 @@ Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
 <span class="linenr"> 3: </span><span style="color: #a020f0;">import</span> time
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzPublisher</span>:
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
 <span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
 <span class="linenr"> 9: </span>
-<span class="linenr">10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">publish</span>(<span style="color: #a020f0;">self</span>, payload):
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">publish</span>(<span style="color: #a020f0;">self</span>, payload):
 <span class="linenr">11: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[publish]"</span>, payload)
 <span class="linenr">12: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #8b2252;">"fizzbuzz/"</span>, payload)
 <span class="linenr">13: </span>
 <span class="linenr">14: </span>
 <span class="linenr">15: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzSubscriber</span>:
-<span class="linenr">16: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
 <span class="linenr">17: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
 <span class="linenr">18: </span>        <span style="color: #a020f0;">self</span>.client.on_connect = <span style="color: #a020f0;">self</span>.on_connect
 <span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>.client.on_message = <span style="color: #a020f0;">self</span>.on_message
 <span class="linenr">20: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
 <span class="linenr">21: </span>
-<span class="linenr">22: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">22: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">23: </span>        <span style="color: #a020f0;">self</span>.client.loop_forever()
 <span class="linenr">24: </span>
-<span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
 <span class="linenr">26: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[connected]"</span>)
 <span class="linenr">27: </span>        <span style="color: #a020f0;">self</span>.client.subscribe(<span style="color: #8b2252;">"fizzbuzz/"</span>)
 <span class="linenr">28: </span>
-<span class="linenr">29: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
+<span class="linenr">29: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
 <span class="linenr">30: </span>        <span style="color: #a0522d;">i</span> = <span style="color: #483d8b;">int</span>(msg.payload)
 <span class="linenr">31: </span>
 <span class="linenr">32: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
@@ -1962,9 +1964,9 @@ Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
 <span class="linenr">54: </span><span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[start publishing]"</span>)
 <span class="linenr">55: </span><span style="color: #a0522d;">pub</span> = FizzbuzzPublisher()
 <span class="linenr">56: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(1,21):
-<span class="linenr">57: </span>    pub.publish(i)
-<span class="linenr">58: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">waiting some time and give the subscribed client time to do the job.</span>
-<span class="linenr">59: </span>    time.sleep(0.1)
+<span class="linenr">57: </span><span style="background-color: #f2f2f2;"> </span>   pub.publish(i)
+<span class="linenr">58: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">waiting some time and give the subscribed client time to do the job.</span>
+<span class="linenr">59: </span><span style="background-color: #f2f2f2;"> </span>   time.sleep(0.1)
 <span class="linenr">60: </span>
 <span class="linenr">61: </span>time.sleep(1)
 </pre>
@@ -2049,7 +2051,7 @@ Es folgt der Quelltext.
 <span class="linenr"> 3: </span>
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">MqttModul</span>():
-<span class="linenr"> 6: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, server=<span style="color: #8b2252;">"iot.eclipse.org"</span>, port=1883):
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.num = 1
 <span class="linenr"> 8: </span>        <span style="color: #a020f0;">self</span>.client = mqtt.Client()
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">self</span>.client.connect(server, port, keepalive=60)
@@ -2060,15 +2062,15 @@ Es folgt der Quelltext.
 <span class="linenr">14: </span>        <span style="color: #a020f0;">self</span>.eamodul = eapi.hw.EAModul()
 <span class="linenr">15: </span>        <span style="color: #a020f0;">self</span>.eamodul.taster_event_registrieren(0, <span style="color: #a020f0;">self</span>.taster_gedrueckt)
 <span class="linenr">16: </span>
-<span class="linenr">17: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">taster_gedrueckt</span>(<span style="color: #a020f0;">self</span>, pin):
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">taster_gedrueckt</span>(<span style="color: #a020f0;">self</span>, pin):
 <span class="linenr">18: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[publish]"</span>, <span style="color: #a020f0;">self</span>.num)
 <span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>.client.publish(<span style="color: #8b2252;">"eamodul/taster0/pressed/"</span>, 1)
 <span class="linenr">20: </span>
-<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_connect</span>(<span style="color: #a020f0;">self</span>, client, userdata, flags, rc):
 <span class="linenr">22: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[connected]"</span>)
 <span class="linenr">23: </span>        <span style="color: #a020f0;">self</span>.client.subscribe(<span style="color: #8b2252;">"eamodul/taster0/pressed/"</span>)
 <span class="linenr">24: </span>
-<span class="linenr">25: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">on_message</span>(<span style="color: #a020f0;">self</span>, client, userdata, msg):
 <span class="linenr">26: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[msg reveived] topic:"</span>, msg.topic, <span style="color: #8b2252;">"payload:"</span>, msg.payload)
 <span class="linenr">27: </span>
 <span class="linenr">28: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">turn off all LED rot, gelb, gr&#252;n</span>
@@ -2084,16 +2086,16 @@ Es folgt der Quelltext.
 <span class="linenr">38: </span>
 <span class="linenr">39: </span>        <span style="color: #a020f0;">self</span>.num += 1
 <span class="linenr">40: </span>
-<span class="linenr">41: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">41: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">42: </span>        <span style="color: #a020f0;">self</span>.client.loop_forever()
 <span class="linenr">43: </span>
 <span class="linenr">44: </span>
 <span class="linenr">45: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():
-<span class="linenr">46: </span>    <span style="color: #a0522d;">mqttmod</span> = MqttModul()
-<span class="linenr">47: </span>    mqttmod.start()
+<span class="linenr">46: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">mqttmod</span> = MqttModul()
+<span class="linenr">47: </span><span style="background-color: #f2f2f2;"> </span>   mqttmod.start()
 <span class="linenr">48: </span>
 <span class="linenr">49: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
-<span class="linenr">50: </span>    main()
+<span class="linenr">50: </span><span style="background-color: #f2f2f2;"> </span>   main()
 </pre>
 </div>
 </div>
@@ -2111,7 +2113,7 @@ Kommandozeilenparameter stehen in <code>sys.argv</code>.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -2122,13 +2124,13 @@ Kommandozeilenparameter stehen in <code>sys.argv</code>.
 <span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
-<span class="linenr">15: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Evaluating command line:"</span>, sys.argv)
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Evaluating command line:"</span>, sys.argv)
 <span class="linenr">16: </span>
-<span class="linenr">17: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">sys.argv contains all parameters, program name at position 0.</span>
-<span class="linenr">18: </span>    <span style="color: #a0522d;">num_arg</span> = sys.argv[1]
-<span class="linenr">19: </span>    <span style="color: #a0522d;">number</span> = <span style="color: #483d8b;">int</span>(num_arg)
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">sys.argv contains all parameters, program name at position 0.</span>
+<span class="linenr">18: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">num_arg</span> = sys.argv[1]
+<span class="linenr">19: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">number</span> = <span style="color: #483d8b;">int</span>(num_arg)
 <span class="linenr">20: </span>
-<span class="linenr">21: </span>    fizzbuzz(number)
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   fizzbuzz(number)
 </pre>
 </div>
 
@@ -2177,7 +2179,7 @@ von Kommandozeilenparametern manchmal vereinfacht.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> argparse
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -2188,12 +2190,12 @@ von Kommandozeilenparametern manchmal vereinfacht.
 <span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(i)
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
-<span class="linenr">15: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Using class ArgumentParser to help handling parameters</span>
-<span class="linenr">16: </span>    <span style="color: #a0522d;">parser</span> = argparse.ArgumentParser(description=<span style="color: #8b2252;">"FizzBuzz Spiel"</span>)
-<span class="linenr">17: </span>    parser.add_argument(<span style="color: #8b2252;">"--max_wert"</span>, <span style="color: #483d8b;">type</span>=<span style="color: #483d8b;">int</span>, default=20,
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">Using class ArgumentParser to help handling parameters</span>
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">parser</span> = argparse.ArgumentParser(description=<span style="color: #8b2252;">"FizzBuzz Spiel"</span>)
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   parser.add_argument(<span style="color: #8b2252;">"--max_wert"</span>, <span style="color: #483d8b;">type</span>=<span style="color: #483d8b;">int</span>, default=20,
 <span class="linenr">18: </span>                        <span style="color: #483d8b;">help</span>=<span style="color: #8b2252;">"Bis zu diesem Wert wird gez&#228;hlt"</span>)
-<span class="linenr">19: </span>    <span style="color: #a0522d;">args</span> = parser.parse_args()
-<span class="linenr">20: </span>    fizzbuzz(args.max_wert)
+<span class="linenr">19: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">args</span> = parser.parse_args()
+<span class="linenr">20: </span><span style="background-color: #f2f2f2;"> </span>   fizzbuzz(args.max_wert)
 </pre>
 </div>
 
@@ -2261,7 +2263,7 @@ Auswerten der Datei:
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> configparser
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -2333,8 +2335,8 @@ ausgestattet.
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> hug
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_results</span>(n):
-<span class="linenr"> 4: </span>    <span style="color: #a0522d;">results</span> = {}
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">results</span> = {}
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
 <span class="linenr"> 6: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
 <span class="linenr"> 7: </span>            <span style="color: #a0522d;">results</span>[i] = <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr"> 8: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
@@ -2344,13 +2346,13 @@ ausgestattet.
 <span class="linenr">12: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">13: </span>            <span style="color: #a0522d;">results</span>[i] = i
 <span class="linenr">14: </span>
-<span class="linenr">15: </span>    <span style="color: #a020f0;">return</span> results
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> results
 <span class="linenr">16: </span>
 <span class="linenr">17: </span><span style="color: #228b22;">@hug.get</span>(<span style="color: #8b2252;">'/fizzbuzz'</span>) <span style="color: #b22222;"># </span><span style="color: #b22222;">respond to get-requests</span>
 <span class="linenr">18: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_get</span>(max_number):
-<span class="linenr">19: </span>    <span style="color: #8b2252;">"""Return fizzbuzz up to the given number."""</span>
-<span class="linenr">20: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(max_number)
-<span class="linenr">21: </span>    <span style="color: #a020f0;">return</span> fizzbuzz_results(n)
+<span class="linenr">19: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #8b2252;">"""Return fizzbuzz up to the given number."""</span>
+<span class="linenr">20: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(max_number)
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">return</span> fizzbuzz_results(n)
 </pre>
 </div>
 
@@ -2449,14 +2451,14 @@ eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzModel</span>:
-<span class="linenr"> 2: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 3: </span>        <span style="color: #a020f0;">self</span>.results = {}
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">a list of observers that react to modifications</span>
 <span class="linenr"> 6: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">they must implement a method model_changed(added_value)</span>
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.observers = []
 <span class="linenr"> 8: </span>
-<span class="linenr"> 9: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value</span>(<span style="color: #a020f0;">self</span>, val):        
+<span class="linenr"> 9: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value</span>(<span style="color: #a020f0;">self</span>, val):        
 <span class="linenr">10: </span>        <span style="color: #a020f0;">if</span> val % 3 == 0 <span style="color: #a020f0;">and</span> val % 5 == 0:
 <span class="linenr">11: </span>            <span style="color: #a020f0;">self</span>.results[val] = <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr">12: </span>        <span style="color: #a020f0;">elif</span> val % 3 == 0:
@@ -2468,53 +2470,53 @@ eine direkte Assoziation, eine gestrichelte eine indirekte Assoziation
 <span class="linenr">18: </span>
 <span class="linenr">19: </span>        <span style="color: #a020f0;">self</span>._notify_observers(val)
 <span class="linenr">20: </span>
-<span class="linenr">21: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_observer</span>(<span style="color: #a020f0;">self</span>, observer):
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_observer</span>(<span style="color: #a020f0;">self</span>, observer):
 <span class="linenr">22: </span>        <span style="color: #a020f0;">self</span>.observers.append(observer)
 <span class="linenr">23: </span>
-<span class="linenr">24: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_notify_observers</span>(<span style="color: #a020f0;">self</span>, added_val):
+<span class="linenr">24: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_notify_observers</span>(<span style="color: #a020f0;">self</span>, added_val):
 <span class="linenr">25: </span>        <span style="color: #a020f0;">for</span> o <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>.observers:
 <span class="linenr">26: </span>            o.model_changed(added_val)
 <span class="linenr">27: </span>
 <span class="linenr">28: </span>
 <span class="linenr">29: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzView</span>:
-<span class="linenr">30: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model):
+<span class="linenr">30: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model):
 <span class="linenr">31: </span>        <span style="color: #a020f0;">self</span>.model = model
 <span class="linenr">32: </span>
-<span class="linenr">33: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">33: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">34: </span>        <span style="color: #a020f0;">for</span> r <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>.model.results:
 <span class="linenr">35: </span>            <span style="color: #a020f0;">print</span>(r, <span style="color: #a020f0;">self</span>.model.results[r])
 <span class="linenr">36: </span>
 <span class="linenr">37: </span>
 <span class="linenr">38: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzController</span>:
-<span class="linenr">39: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model, view):
+<span class="linenr">39: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, model, view):
 <span class="linenr">40: </span>        <span style="color: #a020f0;">self</span>.model = model
 <span class="linenr">41: </span>        <span style="color: #a020f0;">self</span>.model.add_observer(<span style="color: #a020f0;">self</span>)
 <span class="linenr">42: </span>        <span style="color: #a020f0;">self</span>.view = view
 <span class="linenr">43: </span>
-<span class="linenr">44: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value_to_model</span>(<span style="color: #a020f0;">self</span>, new_val):
+<span class="linenr">44: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">add_value_to_model</span>(<span style="color: #a020f0;">self</span>, new_val):
 <span class="linenr">45: </span>        <span style="color: #a020f0;">self</span>.model.add_value(new_val)
 <span class="linenr">46: </span>
-<span class="linenr">47: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">notify_view</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">47: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">notify_view</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">48: </span>        <span style="color: #a020f0;">self</span>.view.model_changed()
 <span class="linenr">49: </span>
-<span class="linenr">50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">model_changed</span>(<span style="color: #a020f0;">self</span>, added_value):
+<span class="linenr">50: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">model_changed</span>(<span style="color: #a020f0;">self</span>, added_value):
 <span class="linenr">51: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[controller] model changed. Added"</span>, added_value)
 <span class="linenr">52: </span>
-<span class="linenr">53: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show_view</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">53: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">show_view</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">54: </span>        <span style="color: #a020f0;">self</span>.view.show()
 <span class="linenr">55: </span>
 <span class="linenr">56: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():
-<span class="linenr">57: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">creating and connecting model, view, and controller</span>
-<span class="linenr">58: </span>    <span style="color: #a0522d;">model</span> = FizzBuzzModel()
-<span class="linenr">59: </span>    <span style="color: #a0522d;">view</span> = FizzBuzzView(model)
-<span class="linenr">60: </span>    <span style="color: #a0522d;">controller</span> = FizzBuzzController(model, view)
+<span class="linenr">57: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">creating and connecting model, view, and controller</span>
+<span class="linenr">58: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">model</span> = FizzBuzzModel()
+<span class="linenr">59: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">view</span> = FizzBuzzView(model)
+<span class="linenr">60: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">controller</span> = FizzBuzzController(model, view)
 <span class="linenr">61: </span>
-<span class="linenr">62: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Adding values via controller to model"</span>)
-<span class="linenr">63: </span>    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
+<span class="linenr">62: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Adding values via controller to model"</span>)
+<span class="linenr">63: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(20):
 <span class="linenr">64: </span>        controller.add_value_to_model(i)
 <span class="linenr">65: </span>
-<span class="linenr">66: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Showing view of the model via controller"</span>)
-<span class="linenr">67: </span>    controller.show_view()
+<span class="linenr">66: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"# Showing view of the model via controller"</span>)
+<span class="linenr">67: </span><span style="background-color: #f2f2f2;"> </span>   controller.show_view()
 <span class="linenr">68: </span>
 <span class="linenr">69: </span>
 <span class="linenr">70: </span>main()
@@ -2603,7 +2605,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> sys, pygame
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Ball</span>(pygame.sprite.Sprite):
-<span class="linenr"> 4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, screen_width, screen_height):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, screen_width, screen_height):
 <span class="linenr"> 5: </span>        <span style="color: #483d8b;">super</span>().__init__()
 <span class="linenr"> 6: </span>        <span style="color: #a020f0;">self</span>.image = pygame.image.load(<span style="color: #8b2252;">"doc/ball.gif"</span>)
 <span class="linenr"> 7: </span>        <span style="color: #a020f0;">self</span>.rect = <span style="color: #a020f0;">self</span>.image.get_rect()
@@ -2611,7 +2613,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr"> 9: </span>        <span style="color: #a020f0;">self</span>.screen_width = screen_width
 <span class="linenr">10: </span>        <span style="color: #a020f0;">self</span>.screen_height = screen_height
 <span class="linenr">11: </span>
-<span class="linenr">12: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">12: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">update</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">13: </span>        <span style="color: #8b2252;">"""Update called by the update of the Group method."""</span>
 <span class="linenr">14: </span>        <span style="color: #a020f0;">self</span>.rect = <span style="color: #a020f0;">self</span>.rect.move(<span style="color: #a020f0;">self</span>.speed)
 <span class="linenr">15: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.rect.left &lt; 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.rect.right &gt; <span style="color: #a020f0;">self</span>.screen_width:
@@ -2619,7 +2621,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr">17: </span>        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>.rect.top &lt; 0 <span style="color: #a020f0;">or</span> <span style="color: #a020f0;">self</span>.rect.bottom &gt; <span style="color: #a020f0;">self</span>.screen_height:
 <span class="linenr">18: </span>            <span style="color: #a020f0;">self</span>.speed[1] = -<span style="color: #a020f0;">self</span>.speed[1]
 <span class="linenr">19: </span>
-<span class="linenr">20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">is_clicked</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">20: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">is_clicked</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">21: </span>        <span style="color: #8b2252;">"""Check whether this Ball has been clicked."""</span>
 <span class="linenr">22: </span>        <span style="color: #a0522d;">x</span>,<span style="color: #a0522d;">y</span> = pygame.mouse.get_pos()
 <span class="linenr">23: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Coordinate system starts with (0,0) at top left</span>
@@ -2628,7 +2630,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr">26: </span>
 <span class="linenr">27: </span>
 <span class="linenr">28: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzGame</span>:
-<span class="linenr">29: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, width, height):
+<span class="linenr">29: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, width, height):
 <span class="linenr">30: </span>        pygame.init()
 <span class="linenr">31: </span>
 <span class="linenr">32: </span>        <span style="color: #a020f0;">self</span>.width, <span style="color: #a020f0;">self</span>.height = width, height
@@ -2637,7 +2639,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr">35: </span>        <span style="color: #a020f0;">self</span>.ball = Ball(width, height)
 <span class="linenr">36: </span>        <span style="color: #a020f0;">self</span>.font = pygame.font.SysFont(<span style="color: #8b2252;">"Arial"</span>, 16)
 <span class="linenr">37: </span>
-<span class="linenr">38: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, n):
+<span class="linenr">38: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, n):
 <span class="linenr">39: </span>        <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
 <span class="linenr">40: </span>            <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
 <span class="linenr">41: </span>        <span style="color: #a020f0;">elif</span> n % 3 == 0:
@@ -2647,7 +2649,7 @@ jedem Mausklick auf den Ball wird eine Zahl, "fizz", "buzz" oder
 <span class="linenr">45: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr">46: </span>            <span style="color: #a020f0;">return</span> n
 <span class="linenr">47: </span>
-<span class="linenr">48: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr">48: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">start_game_loop</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr">49: </span>        <span style="color: #a0522d;">clock</span> = pygame.time.Clock()
 <span class="linenr">50: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">group all sprites (here only one)</span>
 <span class="linenr">51: </span>        <span style="color: #a0522d;">allsprites</span> = pygame.sprite.Group((<span style="color: #a020f0;">self</span>.ball))
@@ -2850,30 +2852,30 @@ folgenden Inhalt.
 <span class="linenr"> 2: </span><span style="color: #a020f0;">import</span> os
 <span class="linenr"> 3: </span>
 <span class="linenr"> 4: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
-<span class="linenr"> 5: </span>    <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
+<span class="linenr"> 5: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
 <span class="linenr"> 6: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
-<span class="linenr"> 7: </span>    <span style="color: #a020f0;">elif</span> n % 3 == 0:
+<span class="linenr"> 7: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> n % 3 == 0:
 <span class="linenr"> 8: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
-<span class="linenr"> 9: </span>    <span style="color: #a020f0;">elif</span> n % 5 == 0:
+<span class="linenr"> 9: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> n % 5 == 0:
 <span class="linenr">10: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
-<span class="linenr">11: </span>    <span style="color: #a020f0;">else</span>:
+<span class="linenr">11: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:
 <span class="linenr">12: </span>        <span style="color: #a020f0;">return</span> n
 <span class="linenr">13: </span>
 <span class="linenr">14: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">determine parameter for fizzbuzz: environment variable, commandline,</span>
 <span class="linenr">15: </span><span style="color: #b22222;"># </span><span style="color: #b22222;">or default value.</span>
 <span class="linenr">16: </span><span style="color: #a020f0;">if</span> <span style="color: #8b2252;">"FIZZBUZZ"</span> <span style="color: #a020f0;">in</span> os.environ:
-<span class="linenr">17: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using environment variable as parameter]"</span>)
-<span class="linenr">18: </span>    <span style="color: #a0522d;">n</span> = os.environ[<span style="color: #8b2252;">"FIZZBUZZ"</span>]
-<span class="linenr">19: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(n)    
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using environment variable as parameter]"</span>)
+<span class="linenr">18: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">n</span> = os.environ[<span style="color: #8b2252;">"FIZZBUZZ"</span>]
+<span class="linenr">19: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(n)    
 <span class="linenr">20: </span><span style="color: #a020f0;">elif</span> <span style="color: #483d8b;">len</span>(sys.argv) &gt; 1:
-<span class="linenr">21: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using command line parameter]"</span>)
-<span class="linenr">22: </span>    <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(sys.argv[1])
+<span class="linenr">21: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using command line parameter]"</span>)
+<span class="linenr">22: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">n</span> = <span style="color: #483d8b;">int</span>(sys.argv[1])
 <span class="linenr">23: </span><span style="color: #a020f0;">else</span>:
-<span class="linenr">24: </span>    <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using default value as parameter]"</span>)
-<span class="linenr">25: </span>    <span style="color: #a0522d;">n</span> = 20   
+<span class="linenr">24: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[using default value as parameter]"</span>)
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">n</span> = 20   
 <span class="linenr">26: </span>
 <span class="linenr">27: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
-<span class="linenr">28: </span>    <span style="color: #a020f0;">print</span>(fizzbuzz(i))
+<span class="linenr">28: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">print</span>(fizzbuzz(i))
 </pre>
 </div>
 
@@ -3039,14 +3041,14 @@ Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 <div class="org-src-container">
 
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzException</span>(<span style="color: #228b22;">Exception</span>):
-<span class="linenr"> 2: </span>    <span style="color: #8b2252;">"""An exception for the FizzBuzz game."""</span>
-<span class="linenr"> 3: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, errormessage, val):
+<span class="linenr"> 2: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #8b2252;">"""An exception for the FizzBuzz game."""</span>
+<span class="linenr"> 3: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, errormessage, val):
 <span class="linenr"> 4: </span>        <span style="color: #8b2252;">"""Create the exception with the given message and the problematic value."""</span>
 <span class="linenr"> 5: </span>        <span style="color: #a020f0;">self</span>.errormessage = errormessage
 <span class="linenr"> 6: </span>        <span style="color: #a020f0;">self</span>.value = val
 <span class="linenr"> 7: </span>
 <span class="linenr"> 8: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzBuzzSpiel</span>:
-<span class="linenr"> 9: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr"> 9: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
 <span class="linenr">10: </span>        <span style="color: #a020f0;">if</span> i &lt; 0:
 <span class="linenr">11: </span>            <span style="color: #b22222;"># </span><span style="color: #b22222;">Raise an Exception and stop execution if the parameter is negative</span>
 <span class="linenr">12: </span>            <span style="color: #a020f0;">raise</span> FizzBuzzException(<span style="color: #8b2252;">"Das Argument muss positiv sein!"</span>, i)
@@ -3064,12 +3066,12 @@ Deleted: sha256:26d94ce55f7cd7c4d84b4bdb6d64d114cac80b07b775e7420ddc81ab8d471ac2
 <span class="linenr">24: </span><span style="color: #a0522d;">fb</span> = FizzBuzzSpiel()
 <span class="linenr">25: </span><span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(-5, 5):
 <span class="linenr">26: </span>
-<span class="linenr">27: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">trying to run the code</span>
-<span class="linenr">28: </span>    <span style="color: #a020f0;">try</span>:
+<span class="linenr">27: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">trying to run the code</span>
+<span class="linenr">28: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">try</span>:
 <span class="linenr">29: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"Probiere"</span>, i)
 <span class="linenr">30: </span>        fb.fizzbuzz(i)
 <span class="linenr">31: </span>
-<span class="linenr">32: </span>    <span style="color: #a020f0;">except</span> FizzBuzzException <span style="color: #a020f0;">as</span> ex:
+<span class="linenr">32: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">except</span> FizzBuzzException <span style="color: #a020f0;">as</span> ex:
 <span class="linenr">33: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">Whenever an exception is raised, jump to this code block</span>
 <span class="linenr">34: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"[Fehler]"</span>, ex.errormessage, ex.value)
 </pre>
@@ -3129,13 +3131,13 @@ immer mehr Trainingsrunden verbessert.
 <pre class="src src-python"><span class="linenr">  1: </span><span style="color: #a020f0;">import</span> random
 <span class="linenr">  2: </span>
 <span class="linenr">  3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">Perceptron</span>:
-<span class="linenr">  4: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs):
+<span class="linenr">  4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs):
 <span class="linenr">  5: </span>        <span style="color: #a020f0;">self</span>.c = 0.01 <span style="color: #b22222;"># </span><span style="color: #b22222;">coefficient that determines learning speed.</span>
 <span class="linenr">  6: </span>
 <span class="linenr">  7: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">random values weights in [-1;+1]</span>
 <span class="linenr">  8: </span>        <span style="color: #a020f0;">self</span>.weights = [random.randint(-100,100)/100 <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(num_inputs)]
 <span class="linenr">  9: </span>
-<span class="linenr"> 10: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">feedforward</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr"> 10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">feedforward</span>(<span style="color: #a020f0;">self</span>, inputs):
 <span class="linenr"> 11: </span>        <span style="color: #8b2252;">"""Ask a trained perceptron for output on given input."""</span>
 <span class="linenr"> 12: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights) == <span style="color: #483d8b;">len</span>(inputs)
 <span class="linenr"> 13: </span>
@@ -3145,14 +3147,14 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 17: </span>
 <span class="linenr"> 18: </span>        <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>.activate(<span style="color: #483d8b;">sum</span>)
 <span class="linenr"> 19: </span>
-<span class="linenr"> 20: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">activate</span>(<span style="color: #a020f0;">self</span>, <span style="color: #483d8b;">sum</span>):
+<span class="linenr"> 20: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">activate</span>(<span style="color: #a020f0;">self</span>, <span style="color: #483d8b;">sum</span>):
 <span class="linenr"> 21: </span>        <span style="color: #8b2252;">"""Activation function determines when the perceptron fires - if output is positive."""</span>
 <span class="linenr"> 22: </span>        <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">sum</span> &gt; 0:
 <span class="linenr"> 23: </span>            <span style="color: #a020f0;">return</span> +1
 <span class="linenr"> 24: </span>        <span style="color: #a020f0;">else</span>:
 <span class="linenr"> 25: </span>            <span style="color: #a020f0;">return</span> -1
 <span class="linenr"> 26: </span>
-<span class="linenr"> 27: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired):
+<span class="linenr"> 27: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired):
 <span class="linenr"> 28: </span>        <span style="color: #8b2252;">"""Train for inputs and desired result."""</span>
 <span class="linenr"> 29: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(inputs) == <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.weights)
 <span class="linenr"> 30: </span>
@@ -3164,7 +3166,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 36: </span>
 <span class="linenr"> 37: </span>
 <span class="linenr"> 38: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">NeuralNetwork</span>:
-<span class="linenr"> 39: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs, num_outputs):
+<span class="linenr"> 39: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, num_inputs, num_outputs):
 <span class="linenr"> 40: </span>        <span style="color: #8b2252;">"""Create a neural network of perceptrons. </span>
 <span class="linenr"> 41: </span>
 <span class="linenr"> 42: </span><span style="color: #8b2252;">        num_inputs denotes the number of inputs per Perceptron, while</span>
@@ -3175,7 +3177,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 47: </span>        <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(num_outputs):
 <span class="linenr"> 48: </span>            <span style="color: #a020f0;">self</span>.ptrons.append(Perceptron(num_inputs))            
 <span class="linenr"> 49: </span>
-<span class="linenr"> 50: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired_outputs):
+<span class="linenr"> 50: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train</span>(<span style="color: #a020f0;">self</span>, inputs, desired_outputs):
 <span class="linenr"> 51: </span>        <span style="color: #8b2252;">"""Train the network by training all perceptrons in it."""</span>
 <span class="linenr"> 52: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(inputs) == <span style="color: #a020f0;">self</span>.num_inputs()
 <span class="linenr"> 53: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(desired_outputs) == <span style="color: #a020f0;">self</span>.num_outputs()
@@ -3183,7 +3185,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 55: </span>        <span style="color: #a020f0;">for</span> pi <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons)):
 <span class="linenr"> 56: </span>            <span style="color: #a020f0;">self</span>.ptrons[pi].train(inputs, desired_outputs[pi])
 <span class="linenr"> 57: </span>
-<span class="linenr"> 58: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr"> 58: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
 <span class="linenr"> 59: </span>        <span style="color: #8b2252;">"""Ask the network for an answer. It will return the index and value</span>
 <span class="linenr"> 60: </span><span style="color: #8b2252;">        of the perceptron with the maximum value.</span>
 <span class="linenr"> 61: </span><span style="color: #8b2252;">        """</span>
@@ -3200,17 +3202,17 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 72: </span>
 <span class="linenr"> 73: </span>        <span style="color: #a020f0;">return</span> maxval
 <span class="linenr"> 74: </span>
-<span class="linenr"> 75: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_inputs</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 75: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_inputs</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 76: </span>        <span style="color: #a020f0;">assert</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons) &gt; 0
 <span class="linenr"> 77: </span>
 <span class="linenr"> 78: </span>        <span style="color: #a020f0;">return</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons[0].weights)
 <span class="linenr"> 79: </span>
-<span class="linenr"> 80: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_outputs</span>(<span style="color: #a020f0;">self</span>):
+<span class="linenr"> 80: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">num_outputs</span>(<span style="color: #a020f0;">self</span>):
 <span class="linenr"> 81: </span>        <span style="color: #a020f0;">return</span> <span style="color: #483d8b;">len</span>(<span style="color: #a020f0;">self</span>.ptrons)
 <span class="linenr"> 82: </span>
 <span class="linenr"> 83: </span>
 <span class="linenr"> 84: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzNetwork</span>(NeuralNetwork):
-<span class="linenr"> 85: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, numbers):
+<span class="linenr"> 85: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, numbers):
 <span class="linenr"> 86: </span>        <span style="color: #b22222;"># </span><span style="color: #b22222;">adding 3 outputs for fizz, buzz and fizzbuzz</span>
 <span class="linenr"> 87: </span>        <span style="color: #483d8b;">super</span>().__init__(numbers, numbers+3)
 <span class="linenr"> 88: </span>
@@ -3219,7 +3221,7 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr"> 91: </span>        <span style="color: #a020f0;">self</span>.buzz = numbers + 1
 <span class="linenr"> 92: </span>        <span style="color: #a020f0;">self</span>.fizzbuzz = numbers + 2
 <span class="linenr"> 93: </span>
-<span class="linenr"> 94: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train_rounds</span>(<span style="color: #a020f0;">self</span>, training_rounds):
+<span class="linenr"> 94: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">train_rounds</span>(<span style="color: #a020f0;">self</span>, training_rounds):
 <span class="linenr"> 95: </span>        <span style="color: #a020f0;">for</span> _ <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(training_rounds):
 <span class="linenr"> 96: </span>            <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(<span style="color: #a020f0;">self</span>.numbers):
 <span class="linenr"> 97: </span>                <span style="color: #a0522d;">inputs</span> = <span style="color: #a020f0;">self</span>.encode_input(i)
@@ -3237,14 +3239,14 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr">109: </span>
 <span class="linenr">110: </span>                <span style="color: #a020f0;">self</span>.train(inputs, outputs)
 <span class="linenr">111: </span>
-<span class="linenr">112: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">encode_input</span>(<span style="color: #a020f0;">self</span>, num):
+<span class="linenr">112: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">encode_input</span>(<span style="color: #a020f0;">self</span>, num):
 <span class="linenr">113: </span>        <span style="color: #a020f0;">assert</span> num &lt; <span style="color: #a020f0;">self</span>.numbers
 <span class="linenr">114: </span>
 <span class="linenr">115: </span>        <span style="color: #a0522d;">inputs</span> = [0] * <span style="color: #a020f0;">self</span>.numbers
 <span class="linenr">116: </span>        <span style="color: #a0522d;">inputs</span>[num] = 1
 <span class="linenr">117: </span>        <span style="color: #a020f0;">return</span> inputs
 <span class="linenr">118: </span>
-<span class="linenr">119: </span>    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
+<span class="linenr">119: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">ask</span>(<span style="color: #a020f0;">self</span>, inputs):
 <span class="linenr">120: </span>        <span style="color: #a0522d;">idx</span>, <span style="color: #a0522d;">value</span> = <span style="color: #483d8b;">super</span>().ask(inputs)
 <span class="linenr">121: </span>
 <span class="linenr">122: </span>        <span style="color: #a020f0;">if</span> idx == <span style="color: #a020f0;">self</span>.fizz:
@@ -3258,10 +3260,10 @@ immer mehr Trainingsrunden verbessert.
 <span class="linenr">130: </span>
 <span class="linenr">131: </span>
 <span class="linenr">132: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_nn</span>():
-<span class="linenr">133: </span>    <span style="color: #a0522d;">numbers</span> = 20    
+<span class="linenr">133: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">numbers</span> = 20    
 <span class="linenr">134: </span>
-<span class="linenr">135: </span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">training the network several times</span>
-<span class="linenr">136: </span>    <span style="color: #a020f0;">for</span> rounds <span style="color: #a020f0;">in</span> [10, 45, 100]:
+<span class="linenr">135: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">training the network several times</span>
+<span class="linenr">136: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> rounds <span style="color: #a020f0;">in</span> [10, 45, 100]:
 <span class="linenr">137: </span>        <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"training"</span>, rounds, <span style="color: #8b2252;">"rounds"</span>)
 <span class="linenr">138: </span>
 <span class="linenr">139: </span>        <span style="color: #a0522d;">nn</span> = FizzbuzzNetwork(numbers)
@@ -3345,10 +3347,108 @@ training 100 rounds
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-33" class="outline-2">
+<h2 id="sec-33"><span class="section-number-2">33</span> Mit logging in ein logfile</h2>
+<div class="outline-text-2" id="text-33">
+<p>
+Logging wird in Python über das gleichnamige Modul <a href="https://docs.python.org/3/library/logging.html">logging</a> realisiert.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> logging
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">class</span> <span style="color: #228b22;">FizzbuzzLogged</span>:
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>):        
+<span class="linenr"> 5: </span>        logging.info(<span style="color: #8b2252;">"Logger initialized!"</span>)
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(<span style="color: #a020f0;">self</span>, i):
+<span class="linenr"> 8: </span>        <span style="color: #a020f0;">if</span> i &lt; 0:
+<span class="linenr"> 9: </span>            logging.warn(<span style="color: #8b2252;">"ignoring %s"</span>, i)
+<span class="linenr">10: </span>            <span style="color: #a020f0;">return</span>
+<span class="linenr">11: </span>
+<span class="linenr">12: </span>        logging.info(<span style="color: #8b2252;">"value %s"</span>, i)
+<span class="linenr">13: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr">14: </span>            logging.info(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr">15: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr">16: </span>            logging.info(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr">17: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">18: </span>            logging.info(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">19: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">20: </span>            logging.info(i)
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>
+<span class="linenr">23: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">24: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">configuring logging: using log-level DEBUG and above</span>
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   logging.basicConfig(filename=<span style="color: #8b2252;">"fizzbuzz.log"</span>, level=logging.DEBUG)
+<span class="linenr">26: </span>
+<span class="linenr">27: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">fb</span> = FizzbuzzLogged()
+<span class="linenr">28: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(-5, 20):
+<span class="linenr">29: </span>        fb.fizzbuzz(i)
+</pre>
+</div>
+
+<p>
+Das Programm schreibt Ausgaben nun in ein Logfile:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">INFO:root:Logger initialized!
+WARNING:root:ignoring -5
+WARNING:root:ignoring -4
+WARNING:root:ignoring -3
+WARNING:root:ignoring -2
+WARNING:root:ignoring -1
+INFO:root:value 0
+INFO:root:fizzbuzz
+INFO:root:value 1
+INFO:root:1
+INFO:root:value 2
+INFO:root:2
+INFO:root:value 3
+INFO:root:fizz
+INFO:root:value 4
+INFO:root:4
+INFO:root:value 5
+INFO:root:buzz
+INFO:root:value 6
+INFO:root:fizz
+INFO:root:value 7
+INFO:root:7
+INFO:root:value 8
+INFO:root:8
+INFO:root:value 9
+INFO:root:fizz
+INFO:root:value 10
+INFO:root:buzz
+INFO:root:value 11
+INFO:root:11
+INFO:root:value 12
+INFO:root:fizz
+INFO:root:value 13
+INFO:root:13
+INFO:root:value 14
+INFO:root:14
+INFO:root:value 15
+INFO:root:fizzbuzz
+INFO:root:value 16
+INFO:root:16
+INFO:root:value 17
+INFO:root:17
+INFO:root:value 18
+INFO:root:fizz
+INFO:root:value 19
+INFO:root:19
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-05-13 Sa 12:18</p>
+<p class="date">Created: 2017-05-24 Mi 22:51</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
