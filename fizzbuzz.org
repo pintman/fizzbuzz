@@ -80,7 +80,7 @@ Das nächste Beispiel wandelt die obige Variante ab, erzeugt aber
 dieselbe Ausgabe.
 
 #+BEGIN_SRC python -n :results output :cache yes
-  def fizzbuzz_methode(n):
+  def fizzbuzz_method(n):
       for i in range(n):
           s = ""
 
@@ -93,11 +93,11 @@ dieselbe Ausgabe.
 
           print(s)
 
-  fizzbuzz_methode(20)
+  fizzbuzz_method(20)
 
 #+END_SRC
 
-#+RESULTS[7808fd97ac67d268e9761f6bdc4a3978acddc867]:
+#+RESULTS[60e4ba3bc73e7c7497bff8c7d82470fa38697060]:
 #+begin_example
 fizzbuzz
 1
@@ -123,7 +123,7 @@ fizz
 
 * Ohne Verwendung einer Schleife (rekursiv)
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
 
   def fizzbuzz_recursive(i):
       if i == 0:
@@ -144,7 +144,7 @@ fizz
   fizzbuzz_recursive(20)
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[4e74b55d5e3fa6c36faea833b7bcbeb649389a84]:
 #+begin_example
 1
 2
@@ -463,7 +463,7 @@ file:doc/fizzbuzz_gui.png
 
 * Objekt-Orientiert: Klassen und Objekte verwenden
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
   class FizzBuzzerOutput:
       def __init__(self, n):
           self.n = n
@@ -504,7 +504,7 @@ file:doc/fizzbuzz_gui.png
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[49c326f6182319119be1400b452d68c26a4fa4f9]:
 #+begin_example
 fizzbuzz
 1
@@ -557,7 +557,7 @@ Ausgabe auf).
 
 * Funktional mit map, reduce und lambda-Ausdrücken
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
 
 import functools
 
@@ -594,7 +594,7 @@ def fizzbuzz_functional():
 fizzbuzz_functional()
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[2f953abf5889cd92a67b6daec94983a487e3fa37]:
 #+begin_example
 fizzbuzz
 1
@@ -686,7 +686,7 @@ sudo apt install libapache2-mod-py3
 Die folgende Datei wird als Einstiegspunkt im Webroot abgelegt -
 z.B. in =/var/www/fizzbuzz/index.wsgi=.
 
-#+INCLUDE: "~/proj/fizzbuzz/fizzbuzz_index.wsgi" src python -n
+#+INCLUDE: "fizzbuzz_index.wsgi" src python -n
 
 Anschließend wird die Webserverkonfiguration so angepasst, dass sie
 den neuen Einstiegspunkt verwendet:
@@ -779,7 +779,7 @@ Branch new_feature entfernt (war 11ca286).
 Zunächst muss eine Datei =setup.py= angelegt werden. Sie könnte
 folgenden Inhalt haben:
 
-#+INCLUDE: "~/proj/fizzbuzz/setup.py" src python -n
+#+INCLUDE: "setup.py" src python -n
 
 Das Programm kann dann mit folgenden Befehlen installiert oder
 erstellt werden:
@@ -858,7 +858,7 @@ Bei einem UnitTest testet eine Testklasse die Methoden einer anderen
 Klasse und prüft einen erhaltenen Ist-Wert gegen den erwarteten
 Soll-Wert. In Python geschiet dies über das Paket [[https://docs.python.org/3/library/unittest.html][unittest]].
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
   import unittest
 
   class FizzBuzz:
@@ -910,7 +910,7 @@ Soll-Wert. In Python geschiet dies über das Paket [[https://docs.python.org/3/l
 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[80916782c7749f32280c40953cf2dce9cb75af45]:
 
 Die Tests können bei Python auch direkt in den Kommentaren stehen. In
 diesem Fall spricht man von einem [[https://docs.python.org/3/library/doctest.html][doctest]]. Die Zeichen "=>>>="
@@ -1172,7 +1172,7 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 
 * Mit Anbindung an eine Datenbank
 
-#+BEGIN_SRC python -n :results output
+#+BEGIN_SRC python -n :results output :cache yes
 
 import sqlite3
 
@@ -1212,7 +1212,7 @@ fizzbuzz_insert_into_db()
 fizzbuzz_select_from_db()
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[f98d739032eb8ea2eca501d6758ddc8c12070d66]:
 #+begin_example
 Nr.	Ergebnis
 0      fizzbuzz
@@ -2910,7 +2910,47 @@ training 100 rounds
 19 19
 #+end_example
 
-* TODO Mit logging 						   :noexport:
+* Mit logging in ein logfile
 
-Logging wird in Python ...
+Logging wird in Python über das gleichnamige Modul [[https://docs.python.org/3/library/logging.html][logging]] realisiert.
+
+#+BEGIN_SRC python -n :results output :cache yes
+  import logging
+
+  class FizzbuzzLogged:
+      def __init__(self):        
+          logging.info("Logger initialized!")
+
+      def fizzbuzz(self, i):
+          if i < 0:
+              logging.warn("ignoring %s", i)
+              return
+
+          logging.info("value %s", i)
+          if i % 3 == 0 and i % 5 == 0:
+              logging.info("fizzbuzz")
+          elif i % 3 == 0:
+              logging.info("fizz")
+          elif i % 5 == 0:
+              logging.info("buzz")
+          else:
+              logging.info(i)
+
+
+  if __name__ == "__main__":
+      # configuring logging: using log-level DEBUG and above
+      logging.basicConfig(filename="fizzbuzz.log", level=logging.DEBUG)
+      
+      fb = FizzbuzzLogged()
+      for i in range(-5, 20):
+          fb.fizzbuzz(i)
+      
+
+#+END_SRC
+
+#+RESULTS[71709335377a5c0f96c611edeecf8eeb5e9b02a7]:
+
+Das Programm schreibt Ausgaben nun in ein Logfile:
+
+#+INCLUDE: fizzbuzz.log src sh
 

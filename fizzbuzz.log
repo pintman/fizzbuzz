@@ -1,0 +1,46 @@
+INFO:root:Logger initialized!
+WARNING:root:ignoring -5
+WARNING:root:ignoring -4
+WARNING:root:ignoring -3
+WARNING:root:ignoring -2
+WARNING:root:ignoring -1
+INFO:root:value 0
+INFO:root:fizzbuzz
+INFO:root:value 1
+INFO:root:1
+INFO:root:value 2
+INFO:root:2
+INFO:root:value 3
+INFO:root:fizz
+INFO:root:value 4
+INFO:root:4
+INFO:root:value 5
+INFO:root:buzz
+INFO:root:value 6
+INFO:root:fizz
+INFO:root:value 7
+INFO:root:7
+INFO:root:value 8
+INFO:root:8
+INFO:root:value 9
+INFO:root:fizz
+INFO:root:value 10
+INFO:root:buzz
+INFO:root:value 11
+INFO:root:11
+INFO:root:value 12
+INFO:root:fizz
+INFO:root:value 13
+INFO:root:13
+INFO:root:value 14
+INFO:root:14
+INFO:root:value 15
+INFO:root:fizzbuzz
+INFO:root:value 16
+INFO:root:16
+INFO:root:value 17
+INFO:root:17
+INFO:root:value 18
+INFO:root:fizz
+INFO:root:value 19
+INFO:root:19
