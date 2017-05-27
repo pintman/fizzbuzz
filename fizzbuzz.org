@@ -305,7 +305,7 @@ Mögliche Sprachen wären:
 - Bash
 - Smalltalk
 - Clojure
-- eine Esoterische Programmiersprache (der Vortrag [[https://www.youtube.com/watch?v%3DiGdyB1thW6o][Esoterische
+- eine Esoterische Programmiersprache (der Vortrag [[https://media.ccc.de/v/gpn17-8545-esoterische_programmiersprachen][Esoterische
   Programmiersprachen]] stellt ein paar Vertreter vor)
 
 * Als Client-Server Anwendung
