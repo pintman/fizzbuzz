@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-06-05 Mo 11:49 -->
+<!-- 2017-06-12 Mo 17:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -175,6 +175,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-31">31. Mit Fehlerbehandlung</a></li>
 <li><a href="#sec-32">32. Mit einem neuronalen Netzwerk</a></li>
 <li><a href="#sec-33">33. Mit logging in ein logfile</a></li>
+<li><a href="#sec-34">34. Mit einem Profiler</a></li>
 </ul>
 </div>
 </div>
@@ -3448,10 +3449,94 @@ INFO:root:19
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-34" class="outline-2">
+<h2 id="sec-34"><span class="section-number-2">34</span> Mit einem Profiler</h2>
+<div class="outline-text-2" id="text-34">
+<p>
+Python-Programme können mit dem Paket <a href="https://docs.python.org/3/library/profile.html">profile</a> auf ihre Geschwindigkeit
+untersucht werden.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> cProfile
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz_method</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n):
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">if</span> i % 3 == 0 <span style="color: #a020f0;">and</span> i % 5 == 0:
+<span class="linenr"> 6: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizzbuzz"</span>)
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">elif</span> i % 3 == 0:
+<span class="linenr"> 8: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"fizz"</span>)
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">elif</span> i % 5 == 0:
+<span class="linenr">10: </span>            <span style="color: #a020f0;">print</span>(<span style="color: #8b2252;">"buzz"</span>)
+<span class="linenr">11: </span>        <span style="color: #a020f0;">else</span>:
+<span class="linenr">12: </span>            <span style="color: #a020f0;">print</span>(i)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">running the profiler for the given method invocation</span>
+<span class="linenr">16: </span><span style="background-color: #f2f2f2;"> </span>   cProfile.run(<span style="color: #8b2252;">"fizzbuzz_method(20)"</span>)
+</pre>
+</div>
+
+<pre class="example">
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+         24 function calls in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 &lt;stdin&gt;:3(fizzbuzz_method)
+        1    0.000    0.000    0.000    0.000 &lt;string&gt;:1(&lt;module&gt;)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+       20    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+</pre>
+
+<p>
+Das Ergebnis fasst die Zeiten für jeden Funktionsaufruf zusammen. 
+</p>
+
+<ul class="org-ul">
+<li><code>ncalls</code> ist die Anzahl der Aufrufe.
+</li>
+<li><code>totime</code> ist die Gesamtzeit in der Methode (ohne Aufrufe von
+Unterfunktionen).
+</li>
+<li><code>percall</code> ist der Quotient aus <code>totime</code> und <code>ncalls</code>.
+</li>
+<li><code>cumtime</code> ist die aufsummierte Zeit, die insgesamt von der Funktion
+benötigt wurde.
+</li>
+<li><code>percall</code> ist der Quotient aus <code>cumtime</code> und der Aufrufe von
+primitiven Funktionen.
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-06-05 Mo 11:49</p>
+<p class="date">Created: 2017-06-12 Mo 17:34</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

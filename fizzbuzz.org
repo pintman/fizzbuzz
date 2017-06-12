@@ -2956,3 +2956,75 @@ Das Programm schreibt Ausgaben nun in ein Logfile:
 
 #+INCLUDE: fizzbuzz.log src sh
 
+* Mit einem Profiler
+
+Python-Programme können mit dem Paket [[https://docs.python.org/3/library/profile.html][profile]] auf ihre Geschwindigkeit
+untersucht werden.
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  import cProfile
+
+  def fizzbuzz_method(n):
+      for i in range(n):
+          if i % 3 == 0 and i % 5 == 0:
+              print("fizzbuzz")
+          elif i % 3 == 0:
+              print("fizz")
+          elif i % 5 == 0:
+              print("buzz")
+          else:
+              print(i)
+
+  if __name__ == "__main__":
+      # running the profiler for the given method invocation
+      cProfile.run("fizzbuzz_method(20)")
+
+#+END_SRC
+
+#+RESULTS[cb062b106f92a10e5375f63ea3bc894f2bf89c04]:
+#+begin_example
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+fizz
+19
+         24 function calls in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <stdin>:3(fizzbuzz_method)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+       20    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+#+end_example
+
+Das Ergebnis fasst die Zeiten für jeden Funktionsaufruf zusammen. 
+
+- =ncalls= ist die Anzahl der Aufrufe.
+- =totime= ist die Gesamtzeit in der Methode (ohne Aufrufe von
+  Unterfunktionen).
+- =percall= ist der Quotient aus =totime= und =ncalls=.
+- =cumtime= ist die aufsummierte Zeit, die insgesamt von der Funktion
+  benötigt wurde.
+- =percall= ist der Quotient aus =cumtime= und der Aufrufe von
+  primitiven Funktionen.
+
