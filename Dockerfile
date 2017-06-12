@@ -1,7 +1,7 @@
-# We us alpine as base image, since it is very small
+# We use alpine as base image, since it has a small footprint
 FROM alpine
 
-# apk is alpines package manager
+# apk is alpines package manager - invoked with RUN
 RUN apk add --no-cache python3
 
 # Copy the script in the root folder
