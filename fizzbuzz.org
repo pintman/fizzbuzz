@@ -974,6 +974,9 @@ Got:
 
 * Mit einem EA-Modul ansteuern
 
+#+attr_html: :width 500px
+file:doc/ea_modul_an_pi.jpg
+
 Die Bibliothek =eapi= (https://github.com/pintman/ea_rpi_modul) kann
 über =pip= installiert werden.
 
@@ -1171,7 +1174,7 @@ eapi.hw.EAModul = class EAModul(builtins.object)
 #+end_example
 
 ** TODO Beispiel mit gpiozero ergänzen 				   :noexport:
-
+   
 * Mit Anbindung an eine Datenbank
 
 #+BEGIN_SRC python -n :results output :cache yes
