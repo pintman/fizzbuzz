@@ -6,5 +6,3 @@ fizzbuzz-ve/
 dist/
 fizzbuzz_katas.egg-info/
 
-# on the webserver this links to fizzbuzz.html
-index.html
