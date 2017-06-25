@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-06-12 Mo 17:51 -->
+<!-- 2017-06-25 So 14:14 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -1887,21 +1887,19 @@ ausgefüllten Raute dargestellt werden.
 <div class="outline-text-2" id="text-24">
 <p>
 <a href="https://de.wikipedia.org/wiki/MQTT">MQTT</a> ist ein u.a. von IBM entwickeltes offenes Protokoll, das auf Port
-1883 und 8883 läuft und für die Übertragung von Sensordaten zwischen
-Maschinen entwickelt wurde. Ein <a href="https://heise.de/-2168152">Artikel bei heise</a> und ein <a href="https://dzone.com/articles/mqtt-the-nerve-system-of-iot">Artikel bei
-dzone</a> beschreiben das Protokoll ausführlich.
+1883 und 8883 (mit Verschlüsselung) läuft und für die Übertragung von
+Sensordaten zwischen Maschinen entwickelt wurde. Ein <a href="https://heise.de/-2168152">Artikel bei heise</a>
+und ein <a href="https://dzone.com/articles/mqtt-the-nerve-system-of-iot">Artikel bei dzone</a> beschreiben das Protokoll ausführlich.
 </p>
 
 <p>
-Als Client-Bibliothek wird <code>paho-mqtt</code>
-(<a href="https://pypi.python.org/pypi/paho-mqtt/">https://pypi.python.org/pypi/paho-mqtt/</a>) verwendet. Diese lässt
-sich einfach installieren.
+Als Client-Bibliothek wird <a href="https://pypi.python.org/pypi/paho-mqtt/">paho-mqtt</a> verwendet. Diese lässt sich
+einfach installieren.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">&#252;ber pip</span>
-pip install --user paho-mqtt
+<pre class="src src-sh">pip install --user paho-mqtt
 </pre>
 </div>
 
@@ -2027,6 +2025,12 @@ Eine mögliche Kommunikation zwischen zwei Clients und dem Broker.
 [msg reveived] topic: fizzbuzz/ payload: 19 answer: 19
 [msg reveived] topic: fizzbuzz/ payload: 20 answer: buzz
 </pre>
+
+<p>
+Das obige Beispiel nutzt einen Testserver unter der Adresse
+<code>iot.eclipse.org</code>. Bei github gibt es eine <a href="https://github.com/mqtt/mqtt.github.io/wiki/servers">Übersicht mit MQTT
+Servern</a>.
+</p>
 
 <p>
 Das folgende Beispiel verwendet das EA-Modul. 
@@ -3542,7 +3546,7 @@ primitiven Funktionen.
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-06-12 Mo 17:51</p>
+<p class="date">Created: 2017-06-25 So 14:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -1688,16 +1688,14 @@ file:doc/fizzbuzz_klassendiagramm-komp-aggr.png
 * Als IOT-Anwendung mit einem Message-Broker (MQTT)
 
 [[https://de.wikipedia.org/wiki/MQTT][MQTT]] ist ein u.a. von IBM entwickeltes offenes Protokoll, das auf Port
-1883 und 8883 läuft und für die Übertragung von Sensordaten zwischen
-Maschinen entwickelt wurde. Ein [[https://heise.de/-2168152][Artikel bei heise]] und ein [[https://dzone.com/articles/mqtt-the-nerve-system-of-iot][Artikel bei
-dzone]] beschreiben das Protokoll ausführlich.
+1883 und 8883 (mit Verschlüsselung) läuft und für die Übertragung von
+Sensordaten zwischen Maschinen entwickelt wurde. Ein [[https://heise.de/-2168152][Artikel bei heise]]
+und ein [[https://dzone.com/articles/mqtt-the-nerve-system-of-iot][Artikel bei dzone]] beschreiben das Protokoll ausführlich.
 
-Als Client-Bibliothek wird =paho-mqtt=
-(https://pypi.python.org/pypi/paho-mqtt/) verwendet. Diese lässt
-sich einfach installieren.
+Als Client-Bibliothek wird [[https://pypi.python.org/pypi/paho-mqtt/][paho-mqtt]] verwendet. Diese lässt sich
+einfach installieren.
 
 #+BEGIN_SRC sh
-# über pip
 pip install --user paho-mqtt
 #+END_SRC
 
@@ -1840,6 +1838,10 @@ publisher -> Broker: publish("falscher_kanal/", "2")
 [msg reveived] topic: fizzbuzz/ payload: 19 answer: 19
 [msg reveived] topic: fizzbuzz/ payload: 20 answer: buzz
 #+end_example
+
+Das obige Beispiel nutzt einen Testserver unter der Adresse
+=iot.eclipse.org=. Bei github gibt es eine [[https://github.com/mqtt/mqtt.github.io/wiki/servers][Übersicht mit MQTT
+Servern]].
 
 Das folgende Beispiel verwendet das EA-Modul. 
 
