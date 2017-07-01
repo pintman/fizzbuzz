@@ -1,5 +1,6 @@
 #+TITLE: FizzBuzz Katas
 #+LANGUAGE: de
+#+HTML_HEAD: <link rel="stylesheet" href="styles/org.css" type="text/css" />
 
 FizzBuzz ist ein Zählspiel, bei dem die Zahlen bis 100 aufgezählt
 werden. Ist die Zahl durch 3 teilbar, wird "fizz" gesagt. Ist sie
