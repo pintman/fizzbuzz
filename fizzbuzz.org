@@ -719,6 +719,8 @@ ist die Seite unter der URL http://localhost/fizzbuzz/20 erreichbar.
 
 * In git-repo einchecken
 
+Ein typischer Ablauf wird z.B. bei [[https://guides.github.com/introduction/flow/][github]] vorgestellt.
+
 #+BEGIN_SRC sh -n :results output
   # Ein Verzeichnis erstellen und den Quelltext kopieren/erstellen
   mkdir /tmp/fizzbuzz_repo
