@@ -3070,9 +3070,10 @@ einer Datei abgespeichert.
 
       # clear all figures
       plt.clf()
-      # turn on the grid
+      # turn on the grid and set title
       plt.grid(True)
       plt.title("Fizzbuzz")
+      # create a plot made of x and y values and save as image
       plt.plot(xs, ys, "r.")
       plt.savefig("doc/fizzbuzz-plot.png")
 
@@ -3082,7 +3083,7 @@ einer Datei abgespeichert.
 
 #+END_SRC
 
-#+RESULTS[142f9f2e28353c909124df789e63b0fd453f2a54]:
+#+RESULTS[bbcc83918b08a30d885751e5bd37ff7992f6b4a6]:
 
 Das Ergebnis könnte wie folgt aussehen.
 
