@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
 <title>FizzBuzz Katas</title>
-<!-- 2017-07-02 So 20:23 -->
+<!-- 2017-08-13 So 18:12 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Marco Bakera" />
@@ -177,6 +177,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-32">32. Mit einem neuronalen Netzwerk</a></li>
 <li><a href="#sec-33">33. Mit logging in ein logfile</a></li>
 <li><a href="#sec-34">34. Mit einem Profiler</a></li>
+<li><a href="#sec-35">35. Mit einer geplotteten Visualisierung</a></li>
 </ul>
 </div>
 </div>
@@ -3549,10 +3550,68 @@ primitiven Funktionen.
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-35" class="outline-2">
+<h2 id="sec-35"><span class="section-number-2">35</span> Mit einer geplotteten Visualisierung</h2>
+<div class="outline-text-2" id="text-35">
+<p>
+Zur Visualisierung von Daten hat sich für Python die Bibliothek
+<a href="https://matplotlib.org">matplotlib</a> etabliert. In dem folgenden Beispiel wird die
+fizzbuzz-Methode benutzt, um einen Datenpunkt (x|y) an jeder Stelle zu
+setzen, wo die Methode einen Wert y zurückgibt. Das Ergebnis wird in
+einer Datei abgespeichert.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #a020f0;">import</span> matplotlib.pyplot <span style="color: #a020f0;">as</span> plt
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">fizzbuzz</span>(n):
+<span class="linenr"> 4: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">if</span> n % 3 == 0:
+<span class="linenr"> 5: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizz"</span>
+<span class="linenr"> 6: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> n % 5 == 0:
+<span class="linenr"> 7: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"buzz"</span>
+<span class="linenr"> 8: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">elif</span> n % 3 == 0 <span style="color: #a020f0;">and</span> n % 5 == 0:
+<span class="linenr"> 9: </span>        <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">"fizzbuzz"</span>
+<span class="linenr">10: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">else</span>:    
+<span class="linenr">11: </span>        <span style="color: #a020f0;">return</span> n
+<span class="linenr">12: </span>
+<span class="linenr">13: </span><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():
+<span class="linenr">14: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">xs</span> = []
+<span class="linenr">15: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a0522d;">ys</span> = []
+<span class="linenr">16: </span>
+<span class="linenr">17: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(100):
+<span class="linenr">18: </span>        <span style="color: #a0522d;">res</span> = fizzbuzz(x)
+<span class="linenr">19: </span>        <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">isinstance</span>(res, <span style="color: #483d8b;">int</span>):
+<span class="linenr">20: </span>            xs.append(x)
+<span class="linenr">21: </span>            ys.append(res)
+<span class="linenr">22: </span>
+<span class="linenr">23: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">clear all figures</span>
+<span class="linenr">24: </span><span style="background-color: #f2f2f2;"> </span>   plt.clf()
+<span class="linenr">25: </span><span style="background-color: #f2f2f2;"> </span>   <span style="color: #b22222;"># </span><span style="color: #b22222;">turn on the grid</span>
+<span class="linenr">26: </span><span style="background-color: #f2f2f2;"> </span>   plt.grid(<span style="color: #008b8b;">True</span>)
+<span class="linenr">27: </span><span style="background-color: #f2f2f2;"> </span>   plt.title(<span style="color: #8b2252;">"Fizzbuzz"</span>)
+<span class="linenr">28: </span><span style="background-color: #f2f2f2;"> </span>   plt.plot(xs, ys, <span style="color: #8b2252;">"r."</span>)
+<span class="linenr">29: </span><span style="background-color: #f2f2f2;"> </span>   plt.savefig(<span style="color: #8b2252;">"doc/fizzbuzz-plot.png"</span>)
+<span class="linenr">30: </span>
+<span class="linenr">31: </span><span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
+<span class="linenr">32: </span><span style="background-color: #f2f2f2;"> </span>   main()
+</pre>
+</div>
+
+<p>
+Das Ergebnis könnte wie folgt aussehen.
+</p>
+
+<p>
+<img src="doc/fizzbuzz-plot.png" alt="fizzbuzz-plot.png" />" 
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marco Bakera</p>
-<p class="date">Created: 2017-07-02 So 20:23</p>
+<p class="date">Created: 2017-08-13 So 18:12</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

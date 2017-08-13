@@ -3037,3 +3037,54 @@ Das Ergebnis fasst die Zeiten für jeden Funktionsaufruf zusammen.
 - =percall= ist der Quotient aus =cumtime= und der Aufrufe von
   primitiven Funktionen.
 
+* Mit einer geplotteten Visualisierung
+
+Zur Visualisierung von Daten hat sich für Python die Bibliothek
+[[https://matplotlib.org][matplotlib]] etabliert. In dem folgenden Beispiel wird die
+fizzbuzz-Methode benutzt, um einen Datenpunkt (x|y) an jeder Stelle zu
+setzen, wo die Methode einen Wert y zurückgibt. Das Ergebnis wird in
+einer Datei abgespeichert.
+
+#+BEGIN_SRC python -n :results output :exports both :cache yes
+  import matplotlib.pyplot as plt
+
+  def fizzbuzz(n):
+      if n % 3 == 0:
+          return "fizz"
+      elif n % 5 == 0:
+          return "buzz"
+      elif n % 3 == 0 and n % 5 == 0:
+          return "fizzbuzz"
+      else:    
+          return n
+
+  def main():
+      xs = []
+      ys = []
+
+      for x in range(100):
+          res = fizzbuzz(x)
+          if isinstance(res, int):
+              xs.append(x)
+              ys.append(res)
+
+      # clear all figures
+      plt.clf()
+      # turn on the grid
+      plt.grid(True)
+      plt.title("Fizzbuzz")
+      plt.plot(xs, ys, "r.")
+      plt.savefig("doc/fizzbuzz-plot.png")
+
+  if __name__ == "__main__":
+      main()
+
+
+#+END_SRC
+
+#+RESULTS[72d52d7f9340a657e620865de85d0102fb79b627]:
+
+Das Ergebnis könnte wie folgt aussehen.
+
+file:doc/fizzbuzz-plot.png" 
+
