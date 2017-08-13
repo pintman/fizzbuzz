@@ -3049,12 +3049,12 @@ einer Datei abgespeichert.
   import matplotlib.pyplot as plt
 
   def fizzbuzz(n):
-      if n % 3 == 0:
+      if n % 3 == 0 and n % 5 == 0:
+          return "fizzbuzz"
+      elif n % 3 == 0:
           return "fizz"
       elif n % 5 == 0:
           return "buzz"
-      elif n % 3 == 0 and n % 5 == 0:
-          return "fizzbuzz"
       else:    
           return n
 
@@ -3082,7 +3082,7 @@ einer Datei abgespeichert.
 
 #+END_SRC
 
-#+RESULTS[72d52d7f9340a657e620865de85d0102fb79b627]:
+#+RESULTS[142f9f2e28353c909124df789e63b0fd453f2a54]:
 
 Das Ergebnis könnte wie folgt aussehen.
 
