@@ -1337,7 +1337,9 @@ python -m pydoc -p 8080
 * Als Chatbot 
 
 Wir verwenden hier sopel als Web-Framework (https://sopel.chat/ und
-https://github.com/sopel-irc/sopel/wiki).
+https://github.com/sopel-irc/sopel/wiki). 
+
+Andere Bots sind etwa [[http://errbot.io/][err]] oder der [[https://github.com/python-telegram-bot/python-telegram-bot][pyton-telegram-bot]].
 
 Installation
 #+BEGIN_SRC sh :results output
