@@ -3067,6 +3067,7 @@ einer Datei abgespeichert.
       for x in range(100):
           res = fizzbuzz(x)
           if isinstance(res, int):
+              # the result was a number - not 'fizz', 'buzz' or 'fizzbuzz'.
               xs.append(x)
               ys.append(res)
 
@@ -3085,7 +3086,7 @@ einer Datei abgespeichert.
 
 #+END_SRC
 
-#+RESULTS[bbcc83918b08a30d885751e5bd37ff7992f6b4a6]:
+#+RESULTS[e0e454ab59d233aaa2ee307fd37868ce036c54e5]:
 
 Das Ergebnis könnte wie folgt aussehen.
 
