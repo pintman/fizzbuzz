@@ -782,6 +782,9 @@ Branch new_feature entfernt (war 11ca286).
 
 * Als installierbares Programm
 
+Eine ausführliche Beschreibung befindet sich im [[https://packaging.python.org/][Python Packaging User
+Guide]].
+
 Zunächst muss eine Datei =setup.py= angelegt werden. Sie könnte
 folgenden Inhalt haben:
 
