@@ -3092,3 +3092,5 @@ Das Ergebnis könnte wie folgt aussehen.
 
 file:doc/fizzbuzz-plot.png" 
 
+Eine ausführliche Beschreibung mit Beispielen findet sich im Artikel
+[[http://pbpython.com/effective-matplotlib.html][Effectively Using Matplotlib]].
