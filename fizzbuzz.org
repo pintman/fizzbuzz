@@ -3097,3 +3097,8 @@ file:doc/fizzbuzz-plot.png"
 
 Eine ausführliche Beschreibung mit Beispielen findet sich im Artikel
 [[http://pbpython.com/effective-matplotlib.html][Effectively Using Matplotlib]].
+
+* So schnell wie möglich
+
+Die Anfrage [High Throughput FizzBuzz](https://codegolf.stackexchange.com/questions/215216/high-throughput-fizz-buzz)
+beschreibt eine Implementierung, die möglichst schnell laufen soll.
